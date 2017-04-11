@@ -69,7 +69,7 @@
  };
 </script>
 
-<style lang="scss" scoped>
+<style rel="stylesheet/sass" lang="scss">
  @import '~assets/scss/variables';
 
  [tabs] > .tab-content {
@@ -93,7 +93,11 @@
      .nav-tabs > li > a {
          border-color: transparent;
          padding-left: 0;
-         margin-right: $spacing-b;
+         margin-right: $spacing;
+         @media (min-width: @screen-xs-min) {
+             margin-right: $spacing-b;
+         }
+
          padding-right: 0;
          padding-bottom: $spacing * 2;
          span {

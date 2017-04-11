@@ -10,7 +10,7 @@
          buttons: {default: false},
          justified: {type: Boolean, default: false},
          type: {type: String, default: 'default'},
-         value: {default: null},
+         value: {type: Array, default: []},
          vertical: {type: Boolean, default: false},
      },
      data() {
@@ -22,6 +22,11 @@
      watch: {
          val(val) {
              this.$emit('input', val);
+         },
+         value(val) {
+             if (this.val !== val) {
+                 this.val = val;
+             }
          },
      },
  };

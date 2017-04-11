@@ -77,14 +77,14 @@
              }
              if (this.ingroup) {
                  id = this.$parent.tabs.indexOf(this);
-                 if (~id) {
+                 if (id !== -1) {
                      this.$parent.tabs.splice(id, 1);
                  }
              }
          }
          if (this.tabs) {
              id = this.tabs.tabs.indexOf(this);
-             if (~id) {
+             if (id !== -1) {
                  this.tabs.tabs.splice(id, 1);
              }
          }

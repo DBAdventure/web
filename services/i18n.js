@@ -79,7 +79,7 @@ export default class I18N {
     /**
      * Load the javascript file that contain
      * the wanted translations.
-     * (located in ./locales/[locale]/common.js)
+     * (located in ./locales/[locale]/*.js)
      * return an empty object of not found.
      * @returns {{}}
      */
@@ -94,8 +94,10 @@ export default class I18N {
                 // here we need to make a dynamic import,
                 // so we need to disable global-require and no-dynamic-require
                 const common = require(`../locales/${locale}/common.js`) || {};
+                const building = require(`../locales/${locale}/building.js`) || {};
                 /* eslint-enable global-require, import/no-dynamic-require */
                 resources[locale].common = common;
+                resources[locale].building = building;
 
                 return resources[locale].common;
             });

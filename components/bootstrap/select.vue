@@ -102,6 +102,7 @@
                  return this.list;
              }
 
+
              return this.list.filter(
                  el => el[this.optionsLabel].toLowerCase().search(search) !== -1,
              );
@@ -323,7 +324,7 @@
  };
 </script>
 
-<style lang="scss" scoped>
+<style rel="stylesheet/sass" lang="scss">
  @import '~assets/scss/variables';
 
  .input-select {
@@ -331,17 +332,17 @@
          cursor:pointer;
      }
      .form-control.dropdown-toggle {
-         height: @input-height-base + 2;
+         height: $input-height-base + 2;
          padding-right: $spacing + 3;
          padding-top: $spacing + 3;
          .btn-content {
-             color: @input-color;
+             color: $input-color;
              opacity: 0.3
          }
          .icon-select {
              padding-left: $spacing-b;
              padding-top: $spacing-s;
-             font-size: @font-size-small;
+             font-size: $font-size-small;
          }
          > .close {
              margin-left: $spacing-s;
@@ -369,8 +370,8 @@
      .bs-searchbox input:focus,
      .form-control.dropdown-toggle:focus {
          outline: 0;
-         border-color: @input-border !important;
-         box-shadow: inset 0 1px 1px @gray-lighter,0 0 8px @input-border;
+         border-color: $input-border !important;
+         box-shadow: inset 0 1px 1px $gray-lighter,0 0 8px $input-border;
      }
 
      .secret {
@@ -392,9 +393,9 @@
              margin: 0 2%;
              min-height: 26px;
              padding: 3px $spacing-s;
-             background: @dropdown-link-hover-bg;
-             border: 1px solid @dropdown-border;
-             box-shadow: inset 0 1px 1px @gray-darker;
+             background: $dropdown-link-hover-bg;
+             border: 1px solid $dropdown-border;
+             box-shadow: inset 0 1px 1px $gray-darker;
              pointer-events: none;
          }
          >div {

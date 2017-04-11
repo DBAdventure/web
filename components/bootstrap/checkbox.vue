@@ -42,7 +42,9 @@
      },
      data() {
          return {
-             checked: (this.value === this.trueValue),
+             checked: (
+                 this.value === this.trueValue
+             ),
          };
      },
      computed: {
@@ -55,6 +57,9 @@
          isTrue() {
              return this.value === this.trueValue;
          },
+         parentValue() {
+             return this.inGroup && this.$parent.val;
+         },
          typeColor() {
              return (this.type || (this.$parent && this.$parent.type)) || 'default';
          },
@@ -65,6 +70,12 @@
              this.$emit('checked', val);
              this.$emit('input', value);
              this.eval();
+         },
+         parentValue(val) {
+             const checked = val === this.trueValue;
+             if (this.checked !== checked) {
+                 this.checked = checked;
+             }
          },
          value(val) {
              const checked = val === this.trueValue;
@@ -86,7 +97,7 @@
      },
      mounted() {
          if (!this.$parent.isCheckboxGroup || typeof this.value === 'boolean') {
-             return false;
+             return;
          }
 
          if (this.$parent.val.length) {
@@ -94,16 +105,15 @@
          } else if (this.checked) {
              this.$parent.val.push(this.value);
          }
-
-         return true;
      },
      methods: {
          eval() {
              if (this.inGroup) {
                  const index = this.$parent.val.indexOf(this.value);
                  if (this.checked && index === -1) {
-                     this.$parent.val.push(this.value);
+                     this.$parent.val.push(this.trueValue);
                  }
+
                  if (!this.checked && index !== -1) {
                      this.$parent.val.splice(index, 1);
                  }
@@ -118,7 +128,7 @@
  };
 </script>
 
-<style lang="scss" scoped>
+<style rel="stylesheet/sass" lang="scss">
  @import '~assets/scss/variables';
 
  label.checkbox {

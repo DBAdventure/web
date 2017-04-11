@@ -33,14 +33,13 @@ runNuxt(generalConfig.NODE_ENV === 'local').then((nuxt) => {
     const pro = proxy({
         target: generalConfig.API_DOMAIN,
         changeOrigin: true,
-        xfwd: true,
+        xfwd: false,
         headers: {
-            Authorization: `Token ${generalConfig.API_TOKEN}`,
             Accept: 'application/json',
         },
     });
 
-    app.use('/v1', pro);
+    app.use('/api', pro);
     app.use('/media', pro);
     app.use(logger);
     app.use(bodyParser.json());

@@ -1,3 +1,4 @@
+
 <template>
     <transition name="fade">
         <div v-show="val" :class="['alert', 'alert-'+type, placement]" :style="{width:width}" role="alert">
@@ -67,8 +68,8 @@
  };
 </script>
 
-<style lang="scss" scoped>
- @import '~assets/scss/variables.scss';
+<style rel="stylesheet/sass" lang="scss">
+ @import '~assets/scss/variables';
 
  .fade-enter-active,
  .fade-leave-active {

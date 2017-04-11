@@ -56,17 +56,18 @@
 </template>
 
 <script type="text/ecmascript-6">
- export default {
-     methods: {
-         logout() {
-             this.$store.dispatch('logout');
-             this.$router.push('/');
-         },
-     },
-     data() {
-         return {
-             player: $store.state.player,
-         };
-     },
- };
+export default {
+    methods: {
+        logout() {
+            this.$store.dispatch('logout');
+            this.$router.push('/');
+        },
+    },
+    data() {
+        return {
+            player: this.$store.state.player,
+            onlinePlayers: 0,
+        };
+    },
+};
 </script>

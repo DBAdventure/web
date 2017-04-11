@@ -54,13 +54,13 @@
      },
      data() {
          return {
-             showModal: false,
+             showModal: this.show,
          };
      },
  };
 </script>
 
-<style lang="scss" scoped>
+<style rel="stylesheet/sass" lang="scss">
  @import '~assets/scss/variables';
 
  .modal-mask {
@@ -75,14 +75,13 @@
  }
 
  .modal-container {
-     width: 900px;
      margin: $spacing-b * 2 auto 0;
      padding: $spacing-b ($spacing-b + $spacing);
      background-color: @color-light;
      border-radius: 2px;
      box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
      transition: all .3s ease;
-     font-family: @font-family-base;
+     font-family: $font-family-base;
  }
 
  .modal-outer {
@@ -90,11 +89,12 @@
      margin: $spacing auto 0;
      padding: 15px;
      transition: all .3s ease;
-     font-family: @font-family-base;
+     font-family: $font-family-base;
  }
 
  .modal-body {
-     margin: $spacing-b 0;
+     margin: 0;
+     padding: 0;
  }
 
  .modal-enter, .modal-leave {

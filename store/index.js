@@ -10,13 +10,14 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
         player: new Player(),
+        game: {},
         style: null,
         settings: {
             locale: 'en-US',
         },
     },
     actions: {
-        nuxtServerInit({commit}, {req}) {
+        nuxtServerInit({commit, dispatch}, {req}) {
             commit('SET_PLAYER', req.session.player);
             if (req.session && req.session.player) {
                 commit('SET_PLAYER', req.session.player);
@@ -32,6 +33,15 @@ const store = new Vuex.Store({
 
                 commit('SET_LOCALE', locale);
             }
+
+            commit('SET_STYLE', Math.floor(Math.random() * 20) + 1);
+            dispatch('fetchGameData');
+        },
+
+        fetchGameData(context) {
+            api.getGameData().then((res) => {
+                context.commit('SET_GAME_DATA', res.data);
+            }).catch(() => {});
         },
 
         retrievePlayer(context) {
@@ -80,8 +90,11 @@ const store = new Vuex.Store({
         SET_PLAYER(state, user) {
             state.player = new Player(user);
         },
+        SET_GAME_DATA(state, data) {
+            state.game = data;
+        },
         SET_STYLE(state, style) {
-            state.style = `theme-${Math.random(1, 20)}` ;
+            state.style = `theme-${style}`;
         },
         SET_LOCALE(state, locale) {
             state.settings.locale = locale;

@@ -2,6 +2,7 @@
     <div v-if="messages.length">
         <bs-alert
             v-for="message in messages"
+            v-bind:key="message.idx"
             class="col-lg-6"
             placement="top"
             duration="message.timeout"

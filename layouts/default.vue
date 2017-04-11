@@ -1,36 +1,40 @@
 
 <template>
     <nuxt-container>
-        <dba-header></dba-header>
+        <div id="main">
+            <dba-header></dba-header>
 
-        <div id="middle" class="container-fluid" :class="$store.state.style">
-            <div id="menu">
-                {% include "DbaGameBundle::menu.html.twig" %}
-            </div>
-
-            <div id="content">
-                <div class="border-top">&nbsp;</div>
-                <div class="body">
-                    <nuxt/>
+            <div class="middle container-fluid" :class="$store.state.style">
+                <div id="menu">
+                    <dba-menu></dba-menu>
                 </div>
-                <div class="border-bottom">&nbsp;</div>
-            </div>
-            <div class="clearfix">&nbsp;</div>
-        </div>
 
-        <dba-footer></dba-footer>
+                <div id="content">
+                    <div class="border-top">&nbsp;</div>
+                    <div class="body">
+                        <nuxt/>
+                    </div>
+                    <div class="border-bottom">&nbsp;</div>
+                </div>
+                <div class="clearfix">&nbsp;</div>
+            </div>
+
+            <dba-footer></dba-footer>
+        </div>
         <alert></alert>
     </nuxt-container>
 </template>
 
 <script type="text/ecmascript-6">
  import DbaHeader from '~components/header.vue';
+ import DbaMenu from '~components/menu.vue';
  import DbaFooter from '~components/footer.vue';
  import Alert from '~/components/custom/alert.vue';
 
  export default {
      components: {
          DbaHeader,
+         DbaMenu,
          DbaFooter,
          Alert,
      },

@@ -162,15 +162,15 @@
             <div>
                 <table class="table-apparence">
                     <tr>
-                        <td align="center" width="75" height="75" background="{{ asset('/bundles/dbagame/images/map/day/grass_0.png" >
+                        <td align="center" width="75" height="75" background="{{ asset('/images/map/day/grass_0.png" >
                             <img class="perso-images" type="image" src="/images/avatars/players/S.png" border="0">
                         </td>
                         <td align="center" width="10" height="75"></td>
-                        <td align="center" width="75" height="75" background="{{ asset('/bundles/dbagame/images/map/day/sand_0.png" >
+                        <td align="center" width="75" height="75" background="{{ asset('/images/map/day/sand_0.png" >
                             <img class="perso-images" type="image" src="/images/avatars/players/S.png" border="0">
                         </td>
                         <td align="center" width="10" height="75"></td>
-                        <td align="center" width="75" height="75" background="{{ asset('/bundles/dbagame/images/map/day/ground_0.png" >
+                        <td align="center" width="75" height="75" background="{{ asset('/images/map/day/ground_0.png" >
                             <img class="perso-images" type="image" src="/images/avatars/players/S.png" border="0">
                         </td>
                     </tr>
@@ -417,12 +417,6 @@
      },
      data() {
          return {
-             newsList: [],
-             nbObjects: 0,
-             nbBuildings: 0,
-             nbActivePlayers: 0,
-             nbActiveNpc: 0,
-             nbGuilds: 0,
          };
      },
  };

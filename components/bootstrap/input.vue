@@ -347,7 +347,7 @@
  };
 </script>
 
-<style lang="scss" scoped>
+<style rel="stylesheet/sass" lang="scss">
  @import '~assets/scss/variables';
 
  .form-group {
@@ -378,7 +378,7 @@
      right: 20px;
  }
  .with-counter {
-     font-size: @font-size-small;
-     padding-top: @padding-large-vertical;
+     font-size: $font-size-small;
+     padding-top: $padding-large-vertical;
  }
 </style>

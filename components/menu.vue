@@ -47,9 +47,9 @@
             <form role="form" @submit.prevent="login">
                 <div class="text-center">
                     <label for="login">{{ $trans('login.text') }}</label>
-                    <bs-input class="form-control" name="username" :placeholder="$trans('login.text')" required type="text"/>
+                    <bs-input name="username" :placeholder="$trans('login.text')" required type="text"/>
                     <label for="password">{{ $trans('password') }}</label>
-                    <bs-input class="form-control" name="password" :placeholder="$trans('password')" required type="password"/>
+                    <bs-input name="password" :placeholder="$trans('password')" required type="password"/>
                 </div>
 
                 <div class="form-group last">
@@ -65,10 +65,10 @@
             <ul class="list-group">
                 <template v-if="!$store.state.player.connected">
                     <li>
-                        <a title="{{ $trans('register.text') }}" href="{{ path('register' )}}">{{ $trans('register.text') }}</a>
+                        <router-link :title="$trans('register.text')" to="/register">{{ $trans('register.text') }}</router-link>
                     </li>
                     <li>
-                        <a title="{{ $trans('forgot.password') }}" href="{{ path('account.lostpassword' )}}">{{ $trans('forgot.password') }}</a>
+                        <router-link :title="$trans('forgot.password')" to="/account/lost-password"">{{ $trans('forgot.password') }}</router-link>
                     </li>
                     <li>&nbsp;</li>
                 </template>
@@ -156,6 +156,7 @@
              error: null,
              password: null,
              username: null,
+             game: {},
          };
      },
  };

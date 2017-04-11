@@ -1,8 +1,6 @@
 /* eslint-env es6 */
 import axios from 'axios';
 
-const API_VERSION = 'v1';
-
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
 /**
@@ -11,7 +9,7 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
  * @returns {Promise}
  */
 const makeGetRequest = path => new Promise((resolve, reject) => {
-    axios.get(`/${API_VERSION}${path}`).then((result) => {
+    axios.get(`/api${path}`).then((result) => {
         resolve(result);
     }).catch((err) => {
         reject(err);
@@ -25,7 +23,7 @@ const makeGetRequest = path => new Promise((resolve, reject) => {
  * @returns {Promise}
  */
 const makePostRequest = (path, postData, config = {}) => new Promise((resolve, reject) => {
-    axios.post(`/${API_VERSION}${path}`, postData, config).then((result) => {
+    axios.post(`/api${path}`, postData, config).then((result) => {
         resolve(result);
     }).catch((err) => {
         reject(err);
@@ -33,17 +31,23 @@ const makePostRequest = (path, postData, config = {}) => new Promise((resolve, r
 });
 
 const api = {
-    getUser() {
-        return makeGetRequest('/user');
+    getPlayer() {
+        return makeGetRequest('/player');
+    },
+    getNews() {
+        return makeGetRequest('/news');
     },
     registration(postData) {
-        return makePostRequest('/user/register', postData);
+        return makePostRequest('/register', postData);
     },
     login(postData) {
-        return makePostRequest('/user/login', postData);
+        return makePostRequest('/login', postData);
     },
     logout() {
-        return makeGetRequest('/user/logout');
+        return makeGetRequest('/logout');
+    },
+    getGameData() {
+        return makeGetRequest('/game/data');
     },
 };
 

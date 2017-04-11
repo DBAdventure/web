@@ -1,5 +1,4 @@
 @import 'variables';
-@import 'styles/good';
 @import '../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
 
 a:hover,
@@ -20,7 +19,7 @@ body {
 }
 
 #main {
-    background-image: url($image-path + '/shadow.png');
+    background-image: url('/images/styles/shadow.png');
     height: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -29,7 +28,7 @@ body {
     width: 940px;
 }
 
-#header {
+.header {
     height: 300px;
     width: 900px;
     position: relative;
@@ -72,7 +71,7 @@ body {
     }
 }
 
-#middle {
+.middle {
     background-repeat: no-repeat;
     width: 900px;
 }
@@ -589,3 +588,5 @@ body {
         padding:0;
     }
 }
+
+@import 'theme';
