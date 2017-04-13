@@ -39,7 +39,7 @@
          Alert,
      },
      mounted() {
-         this.$store.dispatch('retrievePlayer');
+         this.$store.dispatch('fetchPlayer');
      },
  };
 </script>

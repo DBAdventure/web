@@ -47,7 +47,7 @@ const api = {
         return makeGetRequest('/logout');
     },
     getGameData() {
-        return makeGetRequest('/game/data');
+        return makeGetRequest('/data');
     },
 };
 

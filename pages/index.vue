@@ -6,7 +6,7 @@
                 <dd v-html="$trans('home.edito.text')"></dd>
                 <dt>{{ $trans('home.info.title') }}</dt>
                 <dd>
-                    <ul v-if="$store.state.game">
+                    <ul>
                         <li>{{ $trans('home.list.nb.objects', {nbObjects: $store.state.game.nbObjects}) }}</li>
                         <li>{{ $trans('home.list.nb.buildings', {nbBuildings: $store.state.game.nbBuildings}) }}</li>
                         <li>{{ $trans('home.list.nb.activePlayers', {nbActivePlayers: $store.state.game.nbActivePlayers}) }}</li>
@@ -22,11 +22,11 @@
                 <template v-for="news in newsList">
                     <dt>
                         <strong>{{ $trans(news.subject) }}</strong>
-                        {{ $trans('home.news.created.by', {by: news.createdBy.name, date: news.createdAt}) }}
+                        {{ $trans('home.news.created.by', {by: news.created_by.name, date: news.created_at}) }}
                     </dt>
                     <dd>
                         <img :src="news.image" :alt="$trans(news.subject)" class="news-image"/>
-                        <template v-html="news.message"></template>
+                        <div v-html="news.message"></div>
                         <div class="clearfix"></div>
                     </dd>
                 </template>

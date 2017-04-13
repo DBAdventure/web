@@ -44,7 +44,7 @@ const store = new Vuex.Store({
             }).catch(() => {});
         },
 
-        retrievePlayer(context) {
+        fetchPlayer(context) {
             api.getPlayer().then((res) => {
                 axios.post('/session/save', {
                     data: res.data,
@@ -61,7 +61,7 @@ const store = new Vuex.Store({
                 email,
                 password,
             }).then(() => {
-                context.dispatch('retrievePlayer');
+                context.dispatch('fetchPlayer');
             }).catch((error) => {
                 if (error.response.status === 400) {
                     throw new Error('error.bad.credentials');
