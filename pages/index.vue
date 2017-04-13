@@ -7,11 +7,11 @@
                 <dt>{{ $trans('home.info.title') }}</dt>
                 <dd>
                     <ul>
-                        <li>{{ $trans('home.list.nb.objects', {nbObjects: $store.state.game.nbObjects}) }}</li>
-                        <li>{{ $trans('home.list.nb.buildings', {nbBuildings: $store.state.game.nbBuildings}) }}</li>
-                        <li>{{ $trans('home.list.nb.activePlayers', {nbActivePlayers: $store.state.game.nbActivePlayers}) }}</li>
-                        <li>{{ $trans('home.list.nb.activeNpc', {nbActiveNpc: $store.state.game.nbNpc}) }}</li>
-                        <li>{{ $trans('home.list.nb.guilds', {nbGuilds: $store.state.game.nbGuilds}) }}</li>
+                        <li>{{ $trans('home.list.nb.objects', {nbObjects: $store.state.game.data.nbObjects}) }}</li>
+                        <li>{{ $trans('home.list.nb.buildings', {nbBuildings: $store.state.game.data.nbBuildings}) }}</li>
+                        <li>{{ $trans('home.list.nb.activePlayers', {nbActivePlayers: $store.state.game.data.nbActivePlayers}) }}</li>
+                        <li>{{ $trans('home.list.nb.activeNpc', {nbActiveNpc: $store.state.game.data.nbNpc}) }}</li>
+                        <li>{{ $trans('home.list.nb.guilds', {nbGuilds: $store.state.game.data.nbGuilds}) }}</li>
                     </ul>
                 </dd>
             </dl>
@@ -22,7 +22,7 @@
                 <template v-for="news in newsList">
                     <dt>
                         <strong>{{ $trans(news.subject) }}</strong>
-                        {{ $trans('home.news.created.by', {by: news.created_by.name, date: news.created_at}) }}
+                        {{ $trans('home.news.created.by', {by: news.created_by.name, date: $moment(news.created_at).format('ll')}) }}
                     </dt>
                     <dd>
                         <img :src="news.image" :alt="$trans(news.subject)" class="news-image"/>

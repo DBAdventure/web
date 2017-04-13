@@ -94,10 +94,12 @@ export default class I18N {
                 // here we need to make a dynamic import,
                 // so we need to disable global-require and no-dynamic-require
                 const common = require(`../locales/${locale}/common.js`) || {};
-                const building = require(`../locales/${locale}/building.js`) || {};
+                const buildings = require(`../locales/${locale}/buildings.js`) || {};
+                const objects = require(`../locales/${locale}/objects.js`) || {};
                 /* eslint-enable global-require, import/no-dynamic-require */
                 resources[locale].common = common;
-                resources[locale].building = building;
+                resources[locale].objects = objects;
+                resources[locale].buildings = buildings;
 
                 return resources[locale].common;
             });

@@ -27,7 +27,7 @@
                         <router-link to="/guild">{{ $trans('menu.guild.text') }}</router-link>
                     </li>
                     <li class="list-group-item">
-                        <router-link to="/inbox">{{ $trans('menu.inbox') }} <span class="badge">{{ game.unreadMessages }}</span></router-link>
+                        <router-link to="/inbox">{{ $trans('menu.inbox') }} <span class="badge">{{ $store.state.game.data.unreadMessages }}</span></router-link>
                     </li>
                 </ul>
             </div>
@@ -74,47 +74,47 @@
                 </template>
 
                 <li class="list-group-item">
-                    <span class="badge">{{ game.nbActivePlayers }}</span>
+                    <span class="badge">{{ $store.state.game.data.nbActivePlayers }}</span>
                     {{ $trans('stats.players.active') }}
                 </li>
                 <li class="list-group-item">
-                    <span class="badge good">{{ game.nbGoodGuys }}</span>
+                    <span class="badge good">{{ $store.state.game.data.nbGoodGuys }}</span>
                     {{ $trans('stats.players.good') }}
                 </li>
                 <li class="list-group-item">
-                    <span class="badge bad">{{ game.nbBadGuys }}</span>
+                    <span class="badge bad">{{ $store.state.game.data.nbBadGuys }}</span>
                     {{ $trans('stats.players.bad') }}
                 </li>
                 <li class="list-group-item">
-                    <span class="badge saiyajin">{{ game.nbSaiyajins }}</span>
+                    <span class="badge saiyajin">{{ $store.state.game.data.nbSaiyajins }}</span>
                     {{ $trans('saiyajins') }}
                 </li>
                 <li class="list-group-item">
-                    <span class="badge human-saiyajin">{{ game.nbHumanSaiyajins }}</span>
+                    <span class="badge human-saiyajin">{{ $store.state.game.data.nbHumanSaiyajins }}</span>
                     {{ $trans('human-saiyajins') }}
                 </li>
                 <li class="list-group-item">
-                    <span class="badge human">{{ game.nbHumans }}</span>
+                    <span class="badge human">{{ $store.state.game.data.nbHumans }}</span>
                     {{ $trans('humans') }}
                 </li>
                 <li class="list-group-item">
-                    <span class="badge namekian">{{ game.nbNamekians }}</span>
+                    <span class="badge namekian">{{ $store.state.game.data.nbNamekians }}</span>
                     {{ $trans('namekians') }}
                 </li>
                 <li class="list-group-item">
-                    <span class="badge dragon">{{ game.nbDragons }}</span>
+                    <span class="badge dragon">{{ $store.state.game.data.nbDragons }}</span>
                     {{ $trans('dragons') }}
                 </li>
                 <li class="list-group-item">
-                    <span class="badge alien">{{ game.nbAliens }}</span>
+                    <span class="badge alien">{{ $store.state.game.data.nbAliens }}</span>
                     {{ $trans('aliens') }}
                 </li>
                 <li class="list-group-item">
-                    <span class="badge cyborg">{{ game.nbCyborgs }}</span>
+                    <span class="badge cyborg">{{ $store.state.game.data.nbCyborgs }}</span>
                     {{ $trans('cyborgs') }}
                 </li>
                 <li class="list-group-item">
-                    <span class="badge majin">{{ game.nbMajins }}</span>
+                    <span class="badge majin">{{ $store.state.game.data.nbMajins }}</span>
                     {{ $trans('majins') }}
                 </li>
             </ul>
@@ -125,9 +125,6 @@
 
 <script type="text/ecmascript-6">
  import BsInput from '~components/bootstrap/input.vue';
- import api from '../services/api';
-
- const entries = require('~/lib/utils').entries;
 
  export default {
      components: {
@@ -156,7 +153,6 @@
              error: null,
              password: null,
              username: null,
-             game: {},
          };
      },
  };

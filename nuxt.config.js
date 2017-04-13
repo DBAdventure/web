@@ -21,6 +21,7 @@ module.exports = {
         vendor: [
             'axios',
             'i18next',
+            'moment',
             'vuex-router-sync',
             'vue-cookie',
         ],
@@ -33,6 +34,6 @@ module.exports = {
     plugins: [
         '~plugins/vue-cookie',
         '~plugins/vue-translate',
-        '~plugins/mime-icon',
+        '~plugins/date',
     ],
 };

@@ -1,5 +1,5 @@
 <template>
-    <header class="header" :class="$store.state.style">
+    <header class="header" :class="$store.state.game.style">
         <ul class="nav navbar-nav">
             <li class="dropdown" v-if="$store.state.player.connected">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">

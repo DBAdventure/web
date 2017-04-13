@@ -7,7 +7,7 @@ import settings from '../config/general.config';
 
 sync(store, router);
 
-const AkTranslatePlugin = {};
+const DbaTranslatePlugin = {};
 
 const i18nService = I18N.getInstance();
 i18nService.init(settings.languages, settings.languages[0]);
@@ -19,7 +19,7 @@ i18nService.init(settings.languages, settings.languages[0]);
  * Create a Vue plugin to support i18next translate function
  * @param Vue
  */
-AkTranslatePlugin.install = (Vue) => {
+DbaTranslatePlugin.install = (Vue) => {
     /**
      * Global Translate Function
      * @param key
@@ -40,4 +40,4 @@ AkTranslatePlugin.install = (Vue) => {
 };
 /* eslint-ensable no-shadow, no-unused-vars, no-param-reassign */
 
-Vue.use(AkTranslatePlugin);
+Vue.use(DbaTranslatePlugin);

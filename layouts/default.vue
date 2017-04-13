@@ -4,7 +4,7 @@
         <div id="main">
             <dba-header></dba-header>
 
-            <div class="middle container-fluid" :class="$store.state.style">
+            <div class="middle container-fluid" :class="$store.state.game.style">
                 <div id="menu">
                     <dba-menu></dba-menu>
                 </div>
@@ -26,20 +26,21 @@
 </template>
 
 <script type="text/ecmascript-6">
- import DbaHeader from '~components/header.vue';
- import DbaMenu from '~components/menu.vue';
- import DbaFooter from '~components/footer.vue';
- import Alert from '~/components/custom/alert.vue';
+import DbaHeader from '~components/header.vue';
+import DbaMenu from '~components/menu.vue';
+import DbaFooter from '~components/footer.vue';
+import Alert from '~/components/custom/alert.vue';
 
- export default {
-     components: {
-         DbaHeader,
-         DbaMenu,
-         DbaFooter,
-         Alert,
-     },
-     mounted() {
-         this.$store.dispatch('fetchPlayer');
-     },
- };
+export default {
+    components: {
+        DbaHeader,
+        DbaMenu,
+        DbaFooter,
+        Alert,
+    },
+    mounted() {
+        this.$store.dispatch('fetchGameData');
+        this.$store.dispatch('fetchPlayer');
+    },
+};
 </script>

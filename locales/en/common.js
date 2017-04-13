@@ -2,8 +2,12 @@
 // This is a translation file, so, to improve editing comfort, we need to allow double quotes
 // for large paragraphs and sentences that have simple quotes in there.
 module.exports = {
-    'pilaf.island': 'Pilaf\'s Island',
-    'bear.den': 'Den of the bear',
+    pilaf: {
+        island: 'Pilaf\'s Island',
+    },
+    bear: {
+        den: 'Den of the bear',
+    },
     search: 'Search',
     edit: 'Edit',
     delete: 'Delete',
@@ -87,13 +91,17 @@ module.exports = {
     },
     header: {
         profile: 'Profile',
-        'training.room': 'Training Room',
+        training: {
+            room: 'Training Room',
+        },
         logout: 'Logout',
         appearance: 'Appearance',
         admin: 'Admin',
         connected: '<strong>{{ nb }}</strong> online player(s)',
     },
-    'nav.toggle': 'Toggle navigation',
+    nav: {
+        toggle: 'Toggle navigation',
+    },
     form: {
         add: {
             recipient: 'Add Recipient',
@@ -104,9 +112,9 @@ module.exports = {
         price: 'Price',
         remove: 'Remove',
         password: 'Password',
-        'password.confirm': 'Password confirm',
+        passwordConfirm: 'Password confirm',
         email: 'Email',
-        'email.confirm': 'Email confirm',
+        emailConfirm: 'Email confirm',
         login: 'Login',
         name: 'Name',
         image: 'Image',
@@ -132,7 +140,7 @@ module.exports = {
         intro: 'Nous allons faire ensemble la création de ton personnage, ne néglige donc surtout pas cette étape.',
         personalinfo: 'Personnal informations',
         speciality: 'Specialty of the character',
-        'speciality.intro': 'Au cours du jeu, tu affronteras des joueurs divers et variés. Certain seront des mages pour attaquer de loin, d\'autre des soigneurs pour protéger leurs amis etc. Et pour ton personnage, quelle sera sa spécialité ? Retrouve ci-dessous la liste des classes officielles de Dbadventure V3 et fais ton choix. Il te sera possible de combiner plusieurs classes ou bien changer d\'orientation en cours de jeu mais ça ne sera pas facile. Choisis l\'orientation initiale de ton personnage pour améliorer certaines de ses compétences de départ.',
+        specialityIntro: 'Au cours du jeu, tu affronteras des joueurs divers et variés. Certain seront des mages pour attaquer de loin, d\'autre des soigneurs pour protéger leurs amis etc. Et pour ton personnage, quelle sera sa spécialité ? Retrouve ci-dessous la liste des classes officielles de Dbadventure V3 et fais ton choix. Il te sera possible de combiner plusieurs classes ou bien changer d\'orientation en cours de jeu mais ça ne sera pas facile. Choisis l\'orientation initiale de ton personnage pour améliorer certaines de ses compétences de départ.',
         advantages: 'Advantages',
         weakness: 'Weakness',
         stats: 'Statistics',
@@ -191,11 +199,11 @@ module.exports = {
         },
         refresh: 'Refresh',
         distance: 'is on {{ x }}/{{ y }}, at a distance of {{ distance }}.',
-        'near.you': 'is near you.',
-        'no.one': 'You see no one',
+        nearYou: 'is near you.',
+        noOne: 'You see no one',
         player: {
             distance: 'is on {{ x }}/{{ y }}, he\'s at level {{ level }}, at a distance of {{ distance }}.',
-            'near.you': 'is near you, he\'s at level {{ level }}',
+            nearYou: 'is near you, he\'s at level {{ level }}',
             info: '<span class="{{ sideClass }}">{{ side }}</span> | <span class="{{ raceClass }}">{{ race }}</span> {{ class }}',
         },
         building: {
@@ -363,9 +371,11 @@ module.exports = {
         weapon: 'Weapon',
         shoes: 'Shoes',
         weight: 'Weight of the inventory: {{ weight }} / {{ maxWeight }}',
-        'use.cant': 'You can\'t use this object.',
-        'equip.cant': 'You can\'t equip this object.',
-        'drop.cant': 'You can\'t drop this object.',
+        cant: {
+            use: 'You can\'t use this object.',
+            equip: 'You can\'t equip this object.',
+            drop: 'You can\'t drop this object.',
+        },
     },
     training: {
         room: 'Training room',
@@ -436,9 +446,9 @@ module.exports = {
         action: {
             spell: {
                 dodge: 'cast a spell you but you dodge it',
-                'really.failed': 'really failed his spell, but you lose {{ damages }} points of life',
+                reallyFailed: 'really failed his spell, but you lose {{ damages }} points of life',
                 failed: 'failed his spell, but you lose {{ damages }} points of life',
-                'moderately.succeeded': 'moderately succeeded his spell, but you lose {{ damages }} points of life',
+                moderatelySucceeded: 'moderately succeeded his spell, but you lose {{ damages }} points of life',
                 succeeded: 'succeeded his spell and you lose {{ damages }} points of life',
                 nice: 'made a nice hit and you lose {{ damages }} points of life',
                 critic: 'made a critical hit and you lose {{ damages }} points of life',
@@ -446,9 +456,9 @@ module.exports = {
             },
             attack: {
                 dodge: 'attacked you but you dodge it',
-                'really.failed': 'really failed his attack, but you lose {{ damages }} points of life',
+                reallyFailed: 'really failed his attack, but you lose {{ damages }} points of life',
                 failed: 'failed his attack, but you lose {{ damages }} points of life',
-                'moderately.succeeded': 'moderately succeeded his attack, but you lose {{ damages }} points of life',
+                moderatelySucceeded: 'moderately succeeded his attack, but you lose {{ damages }} points of life',
                 succeeded: 'succeeded his attack and you lose {{ damages }} points of life',
                 nice: 'made a nice hit and you lose {{ damages }} points of life',
                 critic: 'made a critical hit and you lose {{ damages }} points of life',
@@ -457,22 +467,22 @@ module.exports = {
                 npc: 'made an attack and you lose {{ damages }} points of life',
             },
             steal: {
-                'completely.missed': 'has completely missed his steal, you lose {{ zenisLost }} Zenis',
+                completelyMissed: 'has completely missed his steal, you lose {{ zenisLost }} Zenis',
                 missed: 'has missed his steal, you lose {{ zenisLost }} Zenis',
-                'moderately.successful': 'has moderately successful his steal, you lose {{ zenisLost }} Zenis',
+                moderatelySuccessful: 'has moderately successful his steal, you lose {{ zenisLost }} Zenis',
                 successful: 'has successfully his steal, you lose {{ zenisLost }} Zenis',
-                'well.successful': 'has did well his steal, you lose {{ zenisLost }} Zenis',
-                'very.well': 'has very well steal you, you lose {{ zenisLost }} Zenis',
+                wellSuccessful: 'has did well his steal, you lose {{ zenisLost }} Zenis',
+                veryWell: 'has very well steal you, you lose {{ zenisLost }} Zenis',
                 perfectly: 'has perfectly steal you, you lose {{ zenisLost }} Zenis',
             },
             heal: {
                 fatigue: 'has decreased your fatigue by {{ fatiguePoints }}',
-                'completely.missed': 'has completely missed his heal, but you gain {{ healPoints }} points of life',
+                completelyMissed: 'has completely missed his heal, but you gain {{ healPoints }} points of life',
                 missed: 'has missed his heal, but you gain {{ healPoints }} points of life',
-                'moderately.successful': 'has moderately successful his heal, but you gain {{ healPoints }} points of life',
+                moderatelySuccessful: 'has moderately successful his heal, but you gain {{ healPoints }} points of life',
                 successful: 'has successfully his heal, you gain {{ healPoints }} points of life',
-                'well.successful': 'has did well his heal, you gain {{ healPoints }} points of life',
-                'very.well': 'has very well heal you, you gain {{ healPoints }} points of life',
+                wellSuccessful: 'has did well his heal, you gain {{ healPoints }} points of life',
+                veryWell: 'has very well heal you, you gain {{ healPoints }} points of life',
                 perfectly: 'has perfectly heal you, you gain {{ healPoints }} points of life',
             },
             slap: {
@@ -487,7 +497,7 @@ module.exports = {
     },
     action: {
         convert: 'Convert 20 AP to 40 MP',
-        'head.price': 'You\'ve just killed someone whose head was prices, you won {{ headPrice }} Zenis',
+        headPrice: 'You\'ve just killed someone whose head was prices, you won {{ headPrice }} Zenis',
         betray: 'You betray your camp. You risk losing all your side points.',
         revenge: 'You take revenge. You will not gain any side points',
         betrayPoints: 'For having betrayed your camp, you gain 1 betrayal point.',
@@ -502,7 +512,7 @@ module.exports = {
         spell: {
             cast: 'You cast {{ name }}',
             dodge: 'Spell dodge!',
-            'really.failed': 'Spell really failed',
+            reallyFailed: 'Spell really failed',
             failed: 'Spell failed',
             mediocre: 'Mediocre spell',
             successful: 'Successful hit',
@@ -513,7 +523,7 @@ module.exports = {
         },
         attack: {
             dodge: 'Hit dodge!',
-            'really.failed': 'Hit really failed',
+            reallyFailed: 'Hit really failed',
             failed: 'Hit failed',
             mediocre: 'Mediocre stroke',
             successful: 'Successful hit',
@@ -528,12 +538,12 @@ module.exports = {
             battlePoints: 'You earn 10 battle points for killing him by this way.',
         },
         steal: {
-            'completely.missed': 'You completely missed',
+            completelyMissed: 'You completely missed',
             missed: 'You missed',
-            'moderately.successful': 'You moderately succeeded',
+            moderatelySuccessful: 'You moderately succeeded',
             successful: 'You succeeded',
-            'well.successful': 'You did it well',
-            'very.well': 'You did it very well',
+            wellSuccessful: 'You did it well',
+            veryWell: 'You did it very well',
             perfectly: 'You perfectly steal',
             zeni: {
                 added: 'You gain {{ zenisAdded }} Zenis.',
@@ -545,12 +555,12 @@ module.exports = {
                 disappear: 'Fatigue disappeared',
             },
             restore: 'You restore {{ healPoints }} points of life',
-            'completely.missed': 'You completely missed your heal',
+            completelyMissed: 'You completely missed your heal',
             missed: 'You missed your heal',
-            'moderately.successful': 'You moderately succeeded your heal',
+            moderatelySuccessful: 'You moderately succeeded your heal',
             successful: 'You succeeded your heal',
-            'well.successful': 'You did it well',
-            'very.well': 'You did it very well',
+            wellSuccessful: 'You did it well',
+            veryWell: 'You did it very well',
             perfectly: 'You perfectly heal',
         },
         analysis: {
@@ -570,11 +580,11 @@ module.exports = {
             ki: 'Ki',
             class: 'Class',
             catastrophic: 'Catastrophic evaluation',
-            'really.failed': 'Really failed evaluation',
+            reallyFailed: 'Really failed evaluation',
             failed: 'Failed evaluation',
-            'moderately.successful': 'Moderately successful evaluation',
+            moderatelySuccessful: 'Moderately successful evaluation',
             successful: 'Evaluation successful',
-            'well.successful': 'Evaluation very well',
+            wellSuccessful: 'Evaluation very well',
             excellent: 'Excellent evaluation',
         },
         battle: {
@@ -606,7 +616,7 @@ module.exports = {
     ranking: {
         title: 'Ranking',
         text: 'This page allow you to view the rank of all players on the island.',
-        'player.search': 'To search someone, click on the raking type and type his name in the field above.',
+        playerSearch: 'To search someone, click on the raking type and type his name in the field above.',
         search: 'Search',
         rankBy: 'Ranking by:',
         battlePoints: 'Battle Points',
@@ -639,36 +649,35 @@ module.exports = {
         },
     },
     player: {
-        class:
-        {
+        class: {
             warrior: 'Warrior',
             champion: 'Champion',
-            'lord.plains': 'Lord of the plains',
+            lordPlains: 'Lord of the plains',
             berserker: 'Berserker',
             templar: 'Templar',
             paladin: 'Paladin',
             gladiator: 'Gladiator',
-            'imperial.guard': 'Imperial guard',
+            imperialGuard: 'Imperial guard',
             magus: 'Magus',
             medium: 'Medium',
             illusionist: 'Illusionist',
-            'imperial.magus': 'Imperial magus',
+            imperialMagus: 'Imperial magus',
             sage: 'Sage',
-            'war.magus': 'War magus',
+            warMagus: 'War magus',
             healer: 'Healer',
-            'black.magus': 'Black magus',
+            blackMagus: 'Black magus',
             thief: 'Thief',
-            'imperial.ninja': 'Imperial ninja',
-            'medical.ninja': 'Medical ninja',
+            imperialNinja: 'Imperial ninja',
+            medicalNinja: 'Medical ninja',
             scout: 'Scout',
             specialist: 'Specialist',
-            'soldier.stone': 'Soldier of stone',
-            'imperial.healer': 'Imperial healer',
+            soldierStone: 'Soldier of stone',
+            imperialHealer: 'Imperial healer',
             priest: 'Priest',
-            'plains.healer': 'Healer of the plains',
-            'high.healer': 'High healer',
+            plainsHealer: 'Healer of the plains',
+            highHealer: 'High healer',
             bishop: 'Bishop',
-            'high.researcher': 'High researcher',
+            highResearcher: 'High researcher',
             none: '',
         },
     },
@@ -705,21 +714,21 @@ module.exports = {
         events: 'Events',
         create: 'Create',
         view: 'View all guilds',
-        'no-guild': 'You currently don\'t have a guild.',
         shortName: 'Short name',
         name: 'Name',
         created: 'Guild has been created, but you must wait for a validation by an administrator.',
-        'send.message': 'Send message to all members of the guild',
+        sendMessage: 'Send message to all members of the guild',
         ranking: {
             intra: 'Browse intra-guild ranking',
         },
         not: {
             enabled: 'Guild is not enabled yet.',
+            guilded: 'You currently don\'t have a guild.',
         },
         rank: 'Guild rank',
         stats: {
             location: 'Location',
-            'last.connection': 'Last connection',
+            lastConnection: 'Last connection',
             zeni: 'Zenis collected',
             killed: {
                 good: 'Good killed', bad: 'Bad killed', npc: 'Npc killed',
@@ -739,7 +748,7 @@ module.exports = {
             bad: 'Bad killed:',
             npc: 'Npc killed:',
         },
-        'last.connection': 'Last connection',
+        lastConnection: 'Last connection',
     },
     inbox: {
         title: 'Inbox',
@@ -786,8 +795,7 @@ module.exports = {
         },
     },
     home: {
-        list:
-        {
+        list: {
             nb: {
                 objects: 'Number of objects: {{ nbObjects }}',
                 buildings: 'Number of buildings: {{ nbBuildings }}',
@@ -796,8 +804,7 @@ module.exports = {
                 guilds: 'Number of guilds: {{ nbGuilds }}',
             },
         },
-        edito:
-        {
+        edito: {
             title: 'Game master\'s note:',
             text: 'DBAdventure est un jeu massivement multijoueur gratuit qui n\'a besoin que de ton navigateur web pour marcher.<br /> Pénètre ces terres créées par l\'infâme pilaf, et choisis un camp ainsi qu\'une race.<br /> Seras tu gentil, méchant ?<br /> Un Humain, un Namek, un Saïyen, un Humain-Saïyen, un Alien, un Cyborg, un Dragon, ou encore un Majin ?<br />Choisis bien avant de te mettre au combat, car l\'aventure ne fait que commencer...<br />',
         },
@@ -805,7 +812,9 @@ module.exports = {
             title: 'Some information about the game:',
         },
         news: {
-            'created.by': 'by {{ by }} on {{ date }}',
+            created: {
+                by: 'by {{ by }} on {{ date }}',
+            },
         },
     },
     choice: {
@@ -822,9 +831,8 @@ module.exports = {
         rank: 'Rank:',
         class: 'Class:',
         target: 'You target is:',
-        'head.price': 'Your head is priced to:',
-        player:
-        {
+        headPrice: 'Your head is priced to:',
+        player: {
             health: 'Health: {{ h }} / {{ maxH }}',
             ap: 'Action points: {{ ap }} / {{ maxAp }}',
             ki: 'Ki points: {{ ki }} / {{ maxKi }}',
