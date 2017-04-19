@@ -1,7 +1,7 @@
 /**
  * This is the nuxt configuration file.
  */
-const styles = require('./config/styles.config').styles;
+const styles = require('./styles.config').styles;
 const autoprefixer = require('autoprefixer');
 
 module.exports = {

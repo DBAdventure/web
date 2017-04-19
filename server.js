@@ -4,7 +4,7 @@ const session = require('cookie-session');
 const proxy = require('http-proxy-middleware');
 const Nuxt = require('nuxt');
 const morgan = require('morgan');
-const nuxtConfig = require('./nuxt.config');
+const nuxtConfig = require('./config/nuxt.config');
 const generalConfig = require('./config/general.config');
 
 const app = express();
@@ -65,8 +65,9 @@ runNuxt(generalConfig.NODE_ENV === 'local').then((nuxt) => {
 
     app.use(nuxt.render);
 
-    app.listen(process.env.SOCKET_PATH || 3000, () => {
-        console.log(`Running server... on ${process.env.SOCKET_PATH || 3000}`);
+    const listenOn = process.env.SOCKET_PATH || generalConfig.PORT;
+    app.listen(listenOn, () => {
+        console.log(`Running server... on ${listenOn}`);
     });
 }).catch((error) => {
     console.log(error);
