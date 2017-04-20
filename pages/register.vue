@@ -7,153 +7,207 @@
         <form id="register-form" class="form-horizontal" method="post" @submit.prevent="register">
             <h2>{{ $trans('register.personalinfo') }}</h2>
 
-            <bs-input name="name" :placeholder="$trans('form.name')" required type="text" />
-            <bs-input name="username" :placeholder="$trans('form.username')" required type="text" />
-            <bs-input name="password" :placeholder="$trans('form.password')" required type="password" />
-            <bs-input name="email" :placeholder="$trans('form.email')" required type="email" />
+            <bs-input name="name"
+                      :placeholder="$trans('form.name')"
+                      :label="$trans('form.name')"
+                      v-model="player.name"
+                      label-classes="col-sm-2"
+                      container-classes="col-sm-10"
+                      required
+                      type="text" />
+            <bs-input name="login"
+                      :placeholder="$trans('form.login')"
+                      :label="$trans('form.login')"
+                      v-model="player.login"
+                      label-classes="col-sm-2"
+                      container-classes="col-sm-10"
+                      required
+                      type="text" />
+            <bs-input name="password"
+                      :placeholder="$trans('form.password')"
+                      :label="$trans('form.password')"
+                      v-model="player.password"
+                      label-classes="col-sm-2"
+                      container-classes="col-sm-10"
+                      required
+                      type="password" />
+            <bs-input name="password_confirm"
+                      :placeholder="$trans('form.passwordConfirm')"
+                      :label="$trans('form.passwordConfirm')"
+                      :match="player.password"
+                      v-model="player.password_confirm"
+                      label-classes="col-sm-2"
+                      container-classes="col-sm-10"
+                      required
+                      type="password" />
+            <bs-input name="email"
+                      :placeholder="$trans('form.email')"
+                      :label="$trans('form.email')"
+                      v-model="player.email"
+                      label-classes="col-sm-2"
+                      container-classes="col-sm-10"
+                      required
+                      type="email" />
+            <bs-input name="email"
+                      :placeholder="$trans('form.emailConfirm')"
+                      :label="$trans('form.emailConfirm')"
+                      :match="player.email"
+                      v-model="player.email_confirm"
+                      label-classes="col-sm-2"
+                      container-classes="col-sm-10"
+                      required
+                      type="email" />
 
             <h2>{{ $trans('register.speciality') }}</h2>
             <p>{{ $trans('register.specialityIntro') }}</p>
 
             <div class="form-group">
-                <bs-select>
-                    <template v-for="key, value in classes">
-                        <bs-option :value="key">{{ value }}</bs-option>
-                    </template>
-                </bs-select>
-            </div>
-
-            <div class="class-list class-list1">
-                <div class="col-md-3 text-center">
-                    <h3>{{ $trans('warrior') }}</h3>
-                    <img src="/images/avatars/players/M7.png" :title="$trans('warrior')" :alt="$trans('warrior')"/>
-                </div>
-                <div class="col-md-9">
-                    <p>{{ $trans('register.warrior.intro') }}</p>
-                    <dl>
-                        <dt>{{ $trans('register.advantages') }}</dt>
-                        <dd>Efficace contre la plupart des classes</dd>
-                        <dd>Fatigue atténuée</dd>
-                        <dd>Capacité à supporter de lourds équipements et objets consommables</dd>
-                        <dd>Défense</dd>
-
-                        <dt>{{ $trans('register.weakness') }}</dt>
-
-                        <dd>Attaque contre les voleurs</dd>
-                        <dd>Moins efficace dans les un contre un</dd>
-                        <dt>{{ $trans('register.stats') }}</dt>
-                        <dd>770 points de vie, 10 force, 9 précision, 5 résistance, 3 agilité</dd>
-                    </dl>
+                <label class="col-sm-2 control-label required">{{ $trans('class') }}</label>
+                <div class="col-sm-10">
+                    <bs-group justified>
+                        <bs-select
+                            v-model="player.class"
+                            :value.sync="player.class"
+                            :options="classes"
+                            options-value="value"
+                            required>
+                        </bs-select>
+                    </bs-group>
                 </div>
             </div>
 
-            <div class="class-list class-list2 hide">
-                <div class="col-md-3 text-center">
-                    <h3>{{ $trans('magus') }}</h3>
-                    <img src="/images/avatars/players/HS24.png" :title="$trans('magus')" :alt="$trans('magus')"/>
+            <transition name="fade" mode="out-in">
+                <div class="class-list" v-if="player.class === 1" key="1">
+                    <div class="col-md-3 text-center">
+                        <h3>{{ $trans('warrior') }}</h3>
+                        <img src="/images/avatars/players/M7.png" :title="$trans('warrior')" :alt="$trans('warrior')"/>
+                    </div>
+                    <div class="col-md-9">
+                        <p>{{ $trans('register.warrior.intro') }}</p>
+                        <dl>
+                            <dt>{{ $trans('register.advantages') }}</dt>
+                            <dd>Efficace contre la plupart des classes</dd>
+                            <dd>Fatigue atténuée</dd>
+                            <dd>Capacité à supporter de lourds équipements et objets consommables</dd>
+                            <dd>Défense</dd>
+
+                            <dt>{{ $trans('register.weakness') }}</dt>
+
+                            <dd>Attaque contre les voleurs</dd>
+                            <dd>Moins efficace dans les un contre un</dd>
+                            <dt>{{ $trans('register.stats') }}</dt>
+                            <dd>770 points de vie, 10 force, 9 précision, 5 résistance, 3 agilité</dd>
+                        </dl>
+                    </div>
                 </div>
-                <div class="col-md-9">
-                    <p>{{ $trans('register.magus.intro') }}</p>
-                    <dl>
-                        <dt>{{ $trans('register.advantages') }}</dt>
-                        <dd>Attaques magiques variées et puissantes</dd>
-                        <dd>Capacité à toucher à distance</dd>
 
-                        <dt>{{ $trans('register.weakness') }}</dt>
+                <div class="class-list" v-if="player.class === 2" key="2">
+                    <div class="col-md-3 text-center">
+                        <h3>{{ $trans('magus') }}</h3>
+                        <img src="/images/avatars/players/HS24.png" :title="$trans('magus')" :alt="$trans('magus')"/>
+                    </div>
+                    <div class="col-md-9">
+                        <p>{{ $trans('register.magus.intro') }}</p>
+                        <dl>
+                            <dt>{{ $trans('register.advantages') }}</dt>
+                            <dd>Attaques magiques variées et puissantes</dd>
+                            <dd>Capacité à toucher à distance</dd>
 
-                        <dd>Consomment plus d'énergie que les autres classes</dd>
-                        <dd>Défense</dd>
-                        <dt>{{ $trans('register.stats') }}</dt>
-                        <dd>365 points de vie, 15 esprit, 3 analyse, 4 talent, 5 vision, 3 résistance, 15 de Ki + sort de base maîtrisé</dd>
-                    </dl>
+                            <dt>{{ $trans('register.weakness') }}</dt>
+
+                            <dd>Consomment plus d'énergie que les autres classes</dd>
+                            <dd>Défense</dd>
+                            <dt>{{ $trans('register.stats') }}</dt>
+                            <dd>365 points de vie, 15 esprit, 3 analyse, 4 talent, 5 vision, 3 résistance, 15 de Ki + sort de base maîtrisé</dd>
+                        </dl>
+                    </div>
                 </div>
-            </div>
 
-            <div class="class-list class-list3 hide">
-                <div class="col-md-3 text-center">
-                    <h3>{{ $trans('thief') }}</h3>
-                    <img src="/images/avatars/players/HS45.png" :title="$trans('thief')" :alt="$trans('thief')" />
+                <div class="class-list" v-if="player.class === 3" key="3">
+                    <div class="col-md-3 text-center">
+                        <h3>{{ $trans('thief') }}</h3>
+                        <img src="/images/avatars/players/HS45.png" :title="$trans('thief')" :alt="$trans('thief')" />
+                    </div>
+                    <div class="col-md-9">
+                        <p>{{ $trans('register.thief.intro') }}</p>
+                        <dl>
+                            <dt>{{ $trans('register.advantages') }}</dt>
+                            <dd>Capacité à voler pour réapprovisionner les troupes</dd>
+                            <dd>Défense contre les guerriers</dd>
+                            <dd>Infatigable lors de tentative de vols</dd>
+
+                            <dt>{{ $trans('register.weakness') }}</dt>
+
+                            <dd>Puissance</dd>
+                            <dd>Défense magique</dd>
+                            <dt>{{ $trans('register.stats') }}</dt>
+                            <dd>500 points de vie, 15 agilité, 11 précision,  5 force, 2 analyse</dd>
+                        </dl>
+                    </div>
                 </div>
-                <div class="col-md-9">
-                    <p>{{ $trans('register.thief.intro') }}</p>
-                    <dl>
-                        <dt>{{ $trans('register.advantages') }}</dt>
-                        <dd>Capacité à voler pour réapprovisionner les troupes</dd>
-                        <dd>Défense contre les guerriers</dd>
-                        <dd>Infatigable lors de tentative de vols</dd>
 
-                        <dt>{{ $trans('register.weakness') }}</dt>
+                <div class="class-list" v-if="player.class === 4" key="4">
+                    <div class="col-md-3 text-center">
+                        <h3>{{ $trans('healer') }}</h3>
+                        <img src="/images/avatars/players/N2.png" :title="$trans('healer')" :alt="$trans('healer')" />
+                    </div>
+                    <div class="col-md-9">
+                        <p>{{ $trans('register.healer.intro') }}</p>
+                        <dl>
+                            <dt>{{ $trans('register.advantages') }}</dt>
+                            <dd>Excellent soutien en bataille</dd>
+                            <dd>Défense magique</dd>
 
-                        <dd>Puissance</dd>
-                        <dd>Défense magique</dd>
-                        <dt>{{ $trans('register.stats') }}</dt>
-                        <dd>500 points de vie, 15 agilité, 11 précision,  5 force, 2 analyse</dd>
-                    </dl>
+                            <dt>{{ $trans('register.weakness') }}</dt>
+
+                            <dd>Attaque</dd>
+                            <dt>{{ $trans('register.stats') }}</dt>
+                            <dd>500 points de vie, 17 talent, 7 esprit, 4 force et 9 de Ki</dd>
+                        </dl>
+                    </div>
                 </div>
-            </div>
 
-            <div class="class-list class-list4 hide">
-                <div class="col-md-3 text-center">
-                    <h3>{{ $trans('healer') }}</h3>
-                    <img src="/images/avatars/players/N2.png" :title="$trans('healer')" :alt="$trans('healer')" />
+                <div class="class-list" v-if="player.class === 5" key="5">
+                    <div class="col-md-3 text-center">
+                        <h3>{{ $trans('analyst') }}</h3>
+                        <img src="/images/avatars/players/C16.png" :title="$trans('analyst')" :alt="$trans('analyst')" />
+                    </div>
+                    <div class="col-md-9">
+                        <p>{{ $trans('register.analyst.intro') }}</p>
+                        <dl>
+                            <dt>{{ $trans('register.advantages') }}</dt>
+                            <dd>Classe furtive, vous ne laissez aucune trace de votre passage</dd>
+                            <dd>Permet d'élaborer de multiples stratégies menant à la victoire</dd>
+                            <dd>Défense générale</dd>
+                            <dd>Soutien</dd>
+
+                            <dt>{{ $trans('register.weakness') }}</dt>
+
+                            <dd>Attaque</dd>
+                            <dd>Gestion très difficile</dd>
+                            <dt>{{ $trans('register.stats') }}</dt>
+                            <dd>500 points de vie, 15 analyse, 5 vision,  5 force, 3 agilité, 3 résistance et 4 précision</dd>
+                        </dl>
+                    </div>
                 </div>
-                <div class="col-md-9">
-                    <p>{{ $trans('register.healer.intro') }}</p>
-                    <dl>
-                        <dt>{{ $trans('register.advantages') }}</dt>
-                        <dd>Excellent soutien en bataille</dd>
-                        <dd>Défense magique</dd>
 
-                        <dt>{{ $trans('register.weakness') }}</dt>
-
-                        <dd>Attaque</dd>
-                        <dt>{{ $trans('register.stats') }}</dt>
-                        <dd>500 points de vie, 17 talent, 7 esprit, 4 force et 9 de Ki</dd>
-                    </dl>
+                <div class="class-list" v-if="player.class === 6" key="6">
+                    <div class="col-md-3 text-center">
+                        <h3>{{ $trans('ranger') }}</h3>
+                        <img src="/images/avatars/players/C16.png" :title="$trans('ranger')" :alt="$trans('ranger')" />
+                    </div>
+                    <div class="col-md-9">
+                        <p>{{ $trans('register.ranger.intro') }}</p>
+                        <dl>
+                            <dt>{{ $trans('register.advantages') }}</dt>
+                            <dt>{{ $trans('register.weakness') }}</dt>
+                            <dt>{{ $trans('register.stats') }}</dt>
+                            <dd>500 points de vie, 15 vision, 4 agilité, 4 de précision, 6 force, 2 résistance et 4 en esprit</dd>
+                        </dl>
+                    </div>
                 </div>
-            </div>
+            </transition>
 
-            <div class="class-list class-list5 hide">
-                <div class="col-md-3 text-center">
-                    <h3>{{ $trans('analyst') }}</h3>
-                    <img src="/images/avatars/players/C16.png" :title="$trans('analyst')" :alt="$trans('analyst')" />
-                </div>
-                <div class="col-md-9">
-                    <p>{{ $trans('register.analyst.intro') }}</p>
-                    <dl>
-                        <dt>{{ $trans('register.advantages') }}</dt>
-                        <dd>Classe furtive, vous ne laissez aucune trace de votre passage</dd>
-                        <dd>Permet d'élaborer de multiples stratégies menant à la victoire</dd>
-                        <dd>Défense générale</dd>
-                        <dd>Soutien</dd>
-
-                        <dt>{{ $trans('register.weakness') }}</dt>
-
-                        <dd>Attaque</dd>
-                        <dd>Gestion très difficile</dd>
-                        <dt>{{ $trans('register.stats') }}</dt>
-                        <dd>500 points de vie, 15 analyse, 5 vision,  5 force, 3 agilité, 3 résistance et 4 précision</dd>
-                    </dl>
-                </div>
-            </div>
-
-            <div class="class-list class-list6 hide">
-                <div class="col-md-3 text-center">
-                    <h3>{{ $trans('ranger') }}</h3>
-                    <img src="/images/avatars/players/C16.png" :title="$trans('ranger')" :alt="$trans('ranger')" />
-                </div>
-                <div class="col-md-9">
-                    <p>{{ $trans('register.ranger.intro') }}</p>
-                    <dl>
-                        <dt>{{ $trans('register.advantages') }}</dt>
-                        <dt>{{ $trans('register.weakness') }}</dt>
-                        <dt>{{ $trans('register.stats') }}</dt>
-                        <dd>500 points de vie, 15 vision, 4 agilité, 4 de précision, 6 force, 2 résistance et 4 en esprit</dd>
-                    </dl>
-                </div>
-            </div>
-
-            <h2>{{ $trans('register.speciality') }}</h2>
             <div>
                 <p>
                     A présent, choisis la race et l'apparence de ton personnage.
@@ -167,19 +221,21 @@
 
             <div>
                 <table class="table-apparence">
-                    <tr>
-                        <td align="center" width="75" height="75" background="{{ asset('/images/map/day/grass_0.png" >
-                            <img class="perso-images" type="image" src="/images/avatars/players/S.png" border="0">
-                        </td>
-                        <td align="center" width="10" height="75"></td>
-                        <td align="center" width="75" height="75" background="{{ asset('/images/map/day/sand_0.png" >
-                            <img class="perso-images" type="image" src="/images/avatars/players/S.png" border="0">
-                        </td>
-                        <td align="center" width="10" height="75"></td>
-                        <td align="center" width="75" height="75" background="{{ asset('/images/map/day/ground_0.png" >
-                            <img class="perso-images" type="image" src="/images/avatars/players/S.png" border="0">
-                        </td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td align="center" width="75" height="75" background="{{ asset('/images/map/day/grass_0.png" >
+                                <img class="perso-images" type="image" src="/images/avatars/players/S.png" border="0">
+                            </td>
+                            <td align="center" width="10" height="75"></td>
+                            <td align="center" width="75" height="75" background="{{ asset('/images/map/day/sand_0.png" >
+                                <img class="perso-images" type="image" src="/images/avatars/players/S.png" border="0">
+                            </td>
+                            <td align="center" width="10" height="75"></td>
+                            <td align="center" width="75" height="75" background="{{ asset('/images/map/day/ground_0.png" >
+                                <img class="perso-images" type="image" src="/images/avatars/players/S.png" border="0">
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
                 <div>
                     <bs-select>
@@ -412,6 +468,7 @@
 import BsInput from '~components/bootstrap/input.vue';
 import BsSelect from '~components/bootstrap/select.vue';
 import BsOption from '~components/bootstrap/option.vue';
+import BsGroup from '~components/bootstrap/group.vue';
 
 export default {
     head: {
@@ -419,6 +476,7 @@ export default {
     },
     components: {
         BsInput,
+        BsGroup,
         BsSelect,
         BsOption,
     },
@@ -429,13 +487,22 @@ export default {
                 'bad',
                 'good',
             ],
-            classes: {
-                1: 'warrior',
-                2: 'magus',
-                3: 'thief',
-                4: 'healer',
-                5: 'analyst',
-                6: 'ranger',
+            classes: [
+                {value: 1, label: this.$trans('warrior')},
+                {value: 2, label: this.$trans('magus')},
+                {value: 3, label: this.$trans('thief')},
+                {value: 4, label: this.$trans('healer')},
+                {value: 5, label: this.$trans('analyst')},
+                {value: 6, label: this.$trans('ranger')},
+            ],
+            player: {
+                class: 1,
+                name: '',
+                login: '',
+                password: '',
+                password_confirm: '',
+                email: '',
+                email_confirm: '',
             },
         };
     },
