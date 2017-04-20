@@ -92,9 +92,9 @@
                             <dd>Défense</dd>
 
                             <dt>{{ $trans('register.weakness') }}</dt>
-
                             <dd>Attaque contre les voleurs</dd>
                             <dd>Moins efficace dans les un contre un</dd>
+
                             <dt>{{ $trans('register.stats') }}</dt>
                             <dd>770 points de vie, 10 force, 9 précision, 5 résistance, 3 agilité</dd>
                         </dl>
@@ -114,9 +114,9 @@
                             <dd>Capacité à toucher à distance</dd>
 
                             <dt>{{ $trans('register.weakness') }}</dt>
-
                             <dd>Consomment plus d'énergie que les autres classes</dd>
                             <dd>Défense</dd>
+
                             <dt>{{ $trans('register.stats') }}</dt>
                             <dd>365 points de vie, 15 esprit, 3 analyse, 4 talent, 5 vision, 3 résistance, 15 de Ki + sort de base maîtrisé</dd>
                         </dl>
@@ -137,9 +137,9 @@
                             <dd>Infatigable lors de tentative de vols</dd>
 
                             <dt>{{ $trans('register.weakness') }}</dt>
-
                             <dd>Puissance</dd>
                             <dd>Défense magique</dd>
+
                             <dt>{{ $trans('register.stats') }}</dt>
                             <dd>500 points de vie, 15 agilité, 11 précision,  5 force, 2 analyse</dd>
                         </dl>
@@ -159,8 +159,8 @@
                             <dd>Défense magique</dd>
 
                             <dt>{{ $trans('register.weakness') }}</dt>
-
                             <dd>Attaque</dd>
+
                             <dt>{{ $trans('register.stats') }}</dt>
                             <dd>500 points de vie, 17 talent, 7 esprit, 4 force et 9 de Ki</dd>
                         </dl>
@@ -182,9 +182,9 @@
                             <dd>Soutien</dd>
 
                             <dt>{{ $trans('register.weakness') }}</dt>
-
                             <dd>Attaque</dd>
                             <dd>Gestion très difficile</dd>
+
                             <dt>{{ $trans('register.stats') }}</dt>
                             <dd>500 points de vie, 15 analyse, 5 vision,  5 force, 3 agilité, 3 résistance et 4 précision</dd>
                         </dl>
@@ -200,7 +200,9 @@
                         <p>{{ $trans('register.ranger.intro') }}</p>
                         <dl>
                             <dt>{{ $trans('register.advantages') }}</dt>
+
                             <dt>{{ $trans('register.weakness') }}</dt>
+
                             <dt>{{ $trans('register.stats') }}</dt>
                             <dd>500 points de vie, 15 vision, 4 agilité, 4 de précision, 6 force, 2 résistance et 4 en esprit</dd>
                         </dl>
@@ -441,11 +443,20 @@
 
             <div>
                 <h2>{{ $trans('register.various') }}</h2>
-                <bs-select>
-                    <template v-for="race in races">
-                        <bs-option :value="race.id">{{ $trans(race.name) }}</bs-option>
-                    </template>
-                </bs-select>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label required">{{ $trans('side') }}</label>
+                    <div class="col-sm-10">
+                        <bs-group justified>
+                            <bs-select
+                                v-model="player.side"
+                                :value.sync="player.side"
+                                :options="sides"
+                                options-value="value"
+                                required>
+                            </bs-select>
+                        </bs-group>
+                    </div>
+                </div>
 
                 <div class="col-md-12">
                     <p>Afin de t'épauler un peu dès le début de l'aventure, tu auras à ta disposition ces objets ci-dessous dès ta première connexion au jeu :</p>
@@ -484,8 +495,8 @@ export default {
         return {
             races: [],
             sides: [
-                'bad',
-                'good',
+                {value: 1, label: this.$trans('bad')},
+                {value: 2, label: this.$trans('good')},
             ],
             classes: [
                 {value: 1, label: this.$trans('warrior')},
@@ -497,6 +508,7 @@ export default {
             ],
             player: {
                 class: 1,
+                side: 1,
                 name: '',
                 login: '',
                 password: '',
@@ -505,6 +517,10 @@ export default {
                 email_confirm: '',
             },
         };
+    },
+    mounted() {
+        this.player.class = Math.floor((Math.random() * 6) + 1);
+        this.player.side = Math.floor((Math.random() * 2) + 1);
     },
 };
 </script>
