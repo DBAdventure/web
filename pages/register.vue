@@ -69,7 +69,6 @@
                             v-model="player.class"
                             :value.sync="player.class"
                             :options="classes"
-                            options-value="value"
                             required>
                         </bs-select>
                     </bs-group>
@@ -225,29 +224,52 @@
                 <table class="table-apparence">
                     <tbody>
                         <tr>
-                            <td align="center" width="75" height="75" background="{{ asset('/images/map/day/grass_0.png" >
-                                <img class="perso-images" type="image" src="/images/avatars/players/S.png" border="0">
+                            <td align="center" width="75" height="75" background="/media/map/day/grass_0.png">
+                                <img class="perso-images" type="image" :src="selectedImage" border="0">
                             </td>
                             <td align="center" width="10" height="75"></td>
-                            <td align="center" width="75" height="75" background="{{ asset('/images/map/day/sand_0.png" >
-                                <img class="perso-images" type="image" src="/images/avatars/players/S.png" border="0">
+                            <td align="center" width="75" height="75" background="/media/map/day/sand_0.png">
+                                <img class="perso-images" type="image" :src="selectedImage" border="0">
                             </td>
                             <td align="center" width="10" height="75"></td>
-                            <td align="center" width="75" height="75" background="{{ asset('/images/map/day/ground_0.png" >
-                                <img class="perso-images" type="image" src="/images/avatars/players/S.png" border="0">
+                            <td align="center" width="75" height="75" background="/media/map/day/ground_0.png">
+                                <img class="perso-images" type="image" :src="selectedImage" border="0">
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <div>
-                    <bs-select>
-                        <template v-for="race in races">
-                            <bs-option :value="race.id">{{ $trans(race.name) }}</bs-option>
-                        </template>
-                    </bs-select>
 
-                    <!-- {{ form_widget(form.appearance.type) }}
-                         {{ form_widget(form.appearance.image) }} -->
+                <div>
+                    <bs-group justified>
+                        <bs-select
+                            v-model="player.race"
+                            :value.sync="player.race"
+                            :options="races"
+                            :placeholder="$trans('form.choice.appearance')"
+                            required>
+                        </bs-select>
+                    </bs-group>
+
+                    <bs-group justified v-if="player.race !== null">
+                        <bs-select
+                            v-model="appearance.type"
+                            :placeholder="$trans('choice.character')"
+                            required>
+                            <template v-for="value, key in appearances[player.race]">
+                                <bs-option :value="key">{{ key }}</bs-option>
+                            </template>
+                        </bs-select>
+                    </bs-group>
+
+                    <bs-group justified v-if="appearance.type !== null && appearances[player.race]">
+                        <bs-select
+                            v-model="player.image"
+                            required>
+                            <template v-for="value, key in appearances[player.race][appearance.type]">
+                                <bs-option :value="value">{{ key }}</bs-option>
+                            </template>
+                        </bs-select>
+                    </bs-group>
                 </div>
 
                 <div class="race-list race-list1">
@@ -476,10 +498,13 @@
 </template>
 
 <script type="text/ecmascript-6">
+import settings from '~/config/general.config';
 import BsInput from '~components/bootstrap/input.vue';
 import BsSelect from '~components/bootstrap/select.vue';
 import BsOption from '~components/bootstrap/option.vue';
 import BsGroup from '~components/bootstrap/group.vue';
+import api from '../services/api';
+import {isEmpty} from '../lib/utils';
 
 export default {
     head: {
@@ -494,21 +519,17 @@ export default {
     data() {
         return {
             races: [],
-            sides: [
-                {value: 1, label: this.$trans('bad')},
-                {value: 2, label: this.$trans('good')},
-            ],
-            classes: [
-                {value: 1, label: this.$trans('warrior')},
-                {value: 2, label: this.$trans('magus')},
-                {value: 3, label: this.$trans('thief')},
-                {value: 4, label: this.$trans('healer')},
-                {value: 5, label: this.$trans('analyst')},
-                {value: 6, label: this.$trans('ranger')},
-            ],
+            sides: [],
+            classes: [],
+            appearance: {
+                type: null,
+            },
+            appearances: {},
             player: {
                 class: 1,
                 side: 1,
+                race: null,
+                image: null,
                 name: '',
                 login: '',
                 password: '',
@@ -518,9 +539,27 @@ export default {
             },
         };
     },
-    mounted() {
-        this.player.class = Math.floor((Math.random() * 6) + 1);
-        this.player.side = Math.floor((Math.random() * 2) + 1);
+    computed: {
+        selectedImage() {
+            let image = this.player.image;
+            if (isEmpty(image)) {
+                image = 'S.png';
+            }
+            return `/images/avatars/players/${image}`;
+        },
+    },
+    async mounted() {
+        this.races = settings.races;
+        this.sides = settings.sides;
+        this.classes = settings.classes;
+        await api.getAppearanceData().then((res) => {
+            this.appearances = res.data;
+        });
+
+        this.$nextTick(() => {
+            this.player.class = Math.floor((Math.random() * 6) + 1);
+            this.player.side = Math.floor((Math.random() * 2) + 1);
+        });
     },
 };
 </script>

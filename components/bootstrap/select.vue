@@ -14,7 +14,7 @@
 
         <select ref="sel" v-model="val" :name="name" class="secret" :multiple="multiple" :required="required" :readonly="readonly" :disabled="disabled">
             <option v-if="required" value=""></option>
-            <option v-for="option in list" :value="option[optionsValue]">{{ option[optionsLabel] }}</option>
+            <option v-for="option in list" :value="option[optionsValue]">{{ $trans(option[optionsLabel]) }}</option>
         </select>
 
         <ul class="dropdown-menu">
@@ -29,7 +29,7 @@
                 <li v-if="required && !clearButton"><a @mousedown.prevent="clear() && close()">{{ showPlaceholder }}</a></li>
                 <li v-for="option in filteredOptions" :id="option[optionsValue]">
                     <a @mousedown.prevent="select(option[optionsValue])">
-                        <span v-html="option[optionsLabel]"></span>
+                        <span v-html="$trans(option[optionsLabel])"></span>
                         <span class="glyphicon glyphicon-ok check-mark" v-show="isSelected(option[optionsValue])"></span>
                     </a>
                 </li>
@@ -126,7 +126,7 @@ export default {
             return sel.join(', ');
         },
         showPlaceholder() {
-            return this.selected || this.placeholder || this.$trans('strap.notSelected');
+            return this.$trans(this.selected) || this.placeholder || this.$trans('strap.notSelected');
         },
         text() {
             return this.lang;

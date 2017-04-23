@@ -49,6 +49,9 @@ const api = {
     getGameData() {
         return makeGetRequest('/data');
     },
+    getAppearanceData() {
+        return makeGetRequest('/data/appearance');
+    },
 };
 
 export default api;
