@@ -1,6 +1,6 @@
 /* eslint-disable no-shadow, no-param-reassign */
-import * as types from '../mutation-types';
 import api from '~/services/api';
+import * as types from '../mutation-types';
 
 const state = {
     style: null,

@@ -32,12 +32,12 @@ const makePostRequest = (path, postData, config = {}) => new Promise((resolve, r
 
 const api = {
     getPlayer() {
-        return makeGetRequest('/player');
+        return makeGetRequest('/account/player');
     },
     getNews() {
         return makeGetRequest('/news');
     },
-    registration(postData) {
+    register(postData) {
         return makePostRequest('/register', postData);
     },
     login(postData) {

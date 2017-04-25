@@ -1,11 +1,11 @@
 /* eslint-disable no-shadow, no-param-reassign */
 import axios from 'axios';
-import * as types from '../mutation-types';
 import Player from '~/lib/player';
 import api from '~/services/api';
+import * as types from '../mutation-types';
 
 const state = {
-    player: new Player(),
+    auth: new Player(),
 };
 
 const actions = {
@@ -14,21 +14,21 @@ const actions = {
             axios.post('/session/save', {
                 data: res.data,
             }).then(() => {
-                commit('SET_PLAYER', res.data);
+                commit(types.PLAYER, res.data);
             });
         }).catch(() => {
             dispatch('logout');
         });
     },
 
-    login({dispatch}, {email, password}) {
+    login({dispatch}, {username, password}) {
         return api.login({
-            email,
+            username,
             password,
         }).then(() => {
             dispatch('fetchPlayer');
         }).catch((error) => {
-            if (error.response.status === 400) {
+            if (error.response.status === 401) {
                 throw new Error('error.bad.credentials');
             }
 
@@ -39,7 +39,7 @@ const actions = {
     logout({commit}) {
         return api.logout().then(() => {
             axios.post('/session/clear').then(() => {
-                commit('SET_PLAYER', null);
+                commit(types.PLAYER, null);
             });
         });
     },
@@ -47,7 +47,7 @@ const actions = {
 
 const mutations = {
     [types.PLAYER](state, data) {
-        state.player = new Player(data);
+        state.auth = new Player(data);
     },
 };
 

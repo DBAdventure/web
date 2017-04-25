@@ -47,9 +47,9 @@
             <form role="form" @submit.prevent="login">
                 <div class="text-center">
                     <label for="login">{{ $trans('login.text') }}</label>
-                    <bs-input name="username" :placeholder="$trans('login.text')" required type="text"/>
+                    <bs-input name="username" v-model="username" :placeholder="$trans('login.text')" required type="text"/>
                     <label for="password">{{ $trans('password') }}</label>
-                    <bs-input name="password" :placeholder="$trans('password')" required type="password"/>
+                    <bs-input name="password" v-model="password" :placeholder="$trans('password')" required type="password"/>
                 </div>
 
                 <div class="form-group last">
@@ -124,36 +124,34 @@
 </template>
 
 <script type="text/ecmascript-6">
- import BsInput from '~components/bootstrap/input.vue';
+import {manager as msgManager} from '~/lib/messages';
+import BsInput from '~components/bootstrap/input.vue';
 
- export default {
-     components: {
-         BsInput,
-     },
-     methods: {
-         close() {
-             this.clearForm();
-             this.$parent.resetLoginModal();
-             this.showLoginForm = true;
-         },
-         login() {
-             this.$store.dispatch('login', {
-                 username: this.username,
-                 password: this.password,
-             }).then(() => {
-                 this.close();
-             }).catch((err) => {
-                 this.error = this.$trans(err.message);
-                 this.password = '';
-             });
-         },
-     },
-     data() {
-         return {
-             error: null,
-             password: null,
-             username: null,
-         };
-     },
- };
+export default {
+    components: {
+        BsInput,
+    },
+    methods: {
+        login() {
+            this.$store.dispatch('login', {
+                username: this.username,
+                password: this.password,
+            }).then(() => {
+                this.$router.push('/account');
+            }).catch((err) => {
+                msgManager.push(
+                    this.$trans(err.message),
+                    'danger',
+                );
+                this.password = '';
+            });
+        },
+    },
+    data() {
+        return {
+            password: null,
+            username: null,
+        };
+    },
+};
 </script>

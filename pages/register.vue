@@ -252,7 +252,7 @@
 
                     <bs-group justified v-if="player.race !== null">
                         <bs-select
-                            v-model="appearance.type"
+                            v-model="appearanceType"
                             :placeholder="$trans('choice.character')"
                             required>
                             <template v-for="value, key in appearances[player.race]">
@@ -261,11 +261,11 @@
                         </bs-select>
                     </bs-group>
 
-                    <bs-group justified v-if="appearance.type !== null && appearances[player.race]">
+                    <bs-group justified v-if="appearanceType !== null && appearances[player.race]">
                         <bs-select
                             v-model="player.image"
                             required>
-                            <template v-for="value, key in appearances[player.race][appearance.type]">
+                            <template v-for="value, key in appearances[player.race][appearanceType]">
                                 <bs-option :value="value">{{ key }}</bs-option>
                             </template>
                         </bs-select>
@@ -507,6 +507,7 @@ import api from '../services/api';
 import {isEmpty} from '../lib/utils';
 
 export default {
+    middleware: 'anonymous',
     head: {
         title: 'Register',
     },
@@ -521,9 +522,7 @@ export default {
             races: [],
             sides: [],
             classes: [],
-            appearance: {
-                type: null,
-            },
+            appearanceType: null,
             appearances: {},
             player: {
                 class: 1,
@@ -546,6 +545,15 @@ export default {
                 image = 'S.png';
             }
             return `/images/avatars/players/${image}`;
+        },
+    },
+    methods: {
+        async submit() {
+            await api.register(this.player).then(() => {
+
+            }).catch((e) => {
+
+            });
         },
     },
     async mounted() {

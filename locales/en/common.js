@@ -845,8 +845,6 @@ module.exports = {
         target: 'You have suffered',
         player: 'Of which you are the author',
     },
-    'Bad credentials.': 'Your username or password are incorrect.',
-    'User account is disabled.': 'Player account is disabled.',
     bonus: {
         percent: {
             health: 'Restore health percent',
@@ -910,6 +908,11 @@ module.exports = {
     },
     magic: {
         title: 'Magic',
+    },
+    error: {
+        bad: {
+            credentials: 'Your username or password are incorrect.',
+        },
     },
 };
 /* eslint-enable quotes */
