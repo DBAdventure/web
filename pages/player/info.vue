@@ -9,7 +9,7 @@
                     <h1>{{ $trans('miscellaneous.title') }}</h1>
                     <p>{{ $trans('miscellaneous.name', {name: target.displayName}) }}</p>
 
-                    <p v-if="$store.state.player.connected">
+                    <p v-if="$store.state.player.auth.connected">
                         <router-link to="`/inbox/write/${target.id}`">
                             <img :src="target.actionImagePath('write')" :alt="$trans('inbox.write.him')" title="$trans('inbox.write.him')" />
                         </router-link>

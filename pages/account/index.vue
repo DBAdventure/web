@@ -8,13 +8,11 @@
             </h2>
             <table class="table table-filter">
                 <tbody>
-                    <!-- {% for event in user.targetEvents | reverse | slice(0, 10) %}
-                         <tr>
-                         <td>
-                         {{ helper.displayEvent(event, event.player) }}
-                         </td>
-                         </tr>
-                         {% endfor %} -->
+                    <tr v-for="event in events.target">
+                        <td>
+                            <player-event :event="event" :target="event.player" />
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -25,13 +23,11 @@
             </h2>
             <table class="table table-filter">
                 <tbody>
-                    <!-- {% for event in user.playerEvents | reverse | slice(0, 10) %}
-                         <tr>
-                         <td>
-                         {{ helper.displayEvent(event, event.target, true) }}
-                         </td>
-                         </tr>
-                         {% endfor %} -->
+                    <tr v-for="event in events.player">
+                        <td>
+                            <player-event :event="event" :target="event.target" received />
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -39,15 +35,26 @@
 </template>
 
 <script type="text/ecmascript-6">
+import api from '~/services/api';
+import PlayerEvent from '~/components/account/event';
+
 export default {
     middleware: 'auth',
     head: {
         title: 'Account',
     },
+    components: {
+        PlayerEvent,
+    },
     data() {
         return {
             events: {},
         };
+    },
+    mounted() {
+        api.getEvents().then((res) => {
+            this.events = res.data;
+        });
     },
 };
 </script>

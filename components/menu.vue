@@ -1,7 +1,7 @@
 <template>
     <div id="menu"">
         <div class="start"></div>
-        <template v-if="$store.state.player.connected">
+        <template v-if="$store.state.player.auth.connected">
             <div class="player">
                 <h2>{{ $trans('menu.player.text') }}</h2>
                 <div class="player-info">
@@ -32,15 +32,13 @@
                 </ul>
             </div>
 
-            {% if app.request.attributes.get('_route') == 'map' %}
-            <div class="movement">
+            <div class="movement" v-if="$router.history.current.name === 'map'">
                 <h2>{{ $trans('menu.movement.text') }}</h2>
 
                 <div class="movement-info">
                     <player-movement></player-movement>
                 </div>
             </div>
-            {% endif %}
         </template>
         <div class="connection" v-else>
             <h2>{{ $trans('menu.connection.text') }}</h2>
@@ -63,7 +61,7 @@
         <div class="game">
             <h2>{{ $trans('menu.game.text') }}</h2>
             <ul class="list-group">
-                <template v-if="!$store.state.player.connected">
+                <template v-if="!$store.state.player.auth.connected">
                     <li>
                         <router-link :title="$trans('register.text')" to="/register">{{ $trans('register.text') }}</router-link>
                     </li>

@@ -35,7 +35,7 @@ const api = {
         return makeGetRequest('/account/player');
     },
     getNews() {
-        return makeGetRequest('/news');
+        return makeGetRequest('/data/news');
     },
     register(postData) {
         return makePostRequest('/register', postData);
@@ -47,10 +47,13 @@ const api = {
         return makeGetRequest('/logout');
     },
     getGameData() {
-        return makeGetRequest('/data');
+        return makeGetRequest('/data/game');
     },
     getAppearanceData() {
         return makeGetRequest('/data/appearance');
+    },
+    getEvents() {
+        return makeGetRequest('/account/events');
     },
 };
 

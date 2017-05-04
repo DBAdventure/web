@@ -1,9 +1,9 @@
 <template>
     <header class="header" :class="$store.state.game.style">
         <ul class="nav navbar-nav">
-            <li class="dropdown" v-if="$store.state.player.connected">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <img :src="$store.state.player.imagePath" :alt="$store.state.player.name"/> {{ $store.state.player.name }} <b class="caret"></b>
+            <li class="dropdown" v-if="player.connected" :class="{'open': menuOpened}">
+                <a href="#" class="dropdown-toggle" @click.prevent="toggleMenu">
+                    <img :src="player.imagePath" :alt="player.displayedName"/> {{ player.displayedName }} <b class="caret"></b>
                 </a>
 
                 <ul class="dropdown-menu">
@@ -16,7 +16,7 @@
                     <li>
                         <router-link to="/account/training-room">
                             <i class="glyphicon glyphicon-education"></i> {{ $trans('header.training.room') }}
-                            <span class="badge" v-if="$store.state.player.skillPoints > 0">{{ $store.state.player.skillPoints }}</span>
+                            <span class="badge" v-if="player.skillPoints > 0">{{ player.skillPoints }}</span>
                         </router-link>
                     </li>
                     <li>
@@ -25,7 +25,7 @@
                         </router-link>
                     </li>
                     <li class="divider"></li>
-                    <template v-if="$store.state.player.isModo">
+                    <template v-if="player.isModo">
                         <li>
                             <router-link to="/account/appearance">
                                 <router-link to="admin">
@@ -62,11 +62,15 @@ export default {
             this.$store.dispatch('logout');
             this.$router.push('/');
         },
+        toggleMenu() {
+            this.menuOpened = !this.menuOpened;
+        },
     },
     data() {
         return {
-            player: this.$store.state.player,
+            player: this.$store.state.player.auth,
             onlinePlayers: 0,
+            menuOpened: false,
         };
     },
 };
