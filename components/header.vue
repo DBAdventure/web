@@ -3,7 +3,7 @@
         <ul class="nav navbar-nav">
             <li class="dropdown" v-if="player.connected" :class="{'open': menuOpened}">
                 <a href="#" class="dropdown-toggle" @click.prevent="toggleMenu">
-                    <img :src="player.imagePath" :alt="player.displayedName"/> {{ player.displayedName }} <b class="caret"></b>
+                    <img :src="player.getImagePath()" :alt="player.getDisplayName()"/> {{ player.displayedName }} <b class="caret"></b>
                 </a>
 
                 <ul class="dropdown-menu">

@@ -2,16 +2,16 @@
     <table>
         <tr>
             <td>
-                <img :src="target.inventoryImagePath" :alt="target.displayName" :title="target.displayName" />
+                <img :src="target.getInventoryImagePath()" :alt="target.getDisplayName()" :title="target.getDisplayName()" />
             </td>
             <td>
                 <div class="stats">
                     <h1>{{ $trans('miscellaneous.title') }}</h1>
-                    <p>{{ $trans('miscellaneous.name', {name: target.displayName}) }}</p>
+                    <p>{{ $trans('miscellaneous.name', {name: target.getDisplayName()}) }}</p>
 
                     <p v-if="$store.state.player.connected">
                         <router-link to="`/inbox/write/${target.id}`">
-                            <img :src="target.actionImagePath('write')" :alt="$trans('inbox.write.him')" title="$trans('inbox.write.him')" />
+                            <img :src="target.getActionImagePath('write')" :alt="$trans('inbox.write.him')" title="$trans('inbox.write.him')" />
                         </router-link>
                     </p>
 
@@ -21,7 +21,7 @@
 
                     <p v-if="target.target !== null">
                         {{ $trans('miscellaneous.search') }}
-                        <router-link to="`/player/info/${target.target.id}`">{{ target.target.displayName }}</router-link>
+                        <router-link to="`/player/info/${target.target.id}`">{{ target.target.getDisplayName() }}</router-link>
                     </p>
 
                     <p>
@@ -41,14 +41,16 @@
 </template>
 
 <script type="text/ecmascript-6">
- export default {
-     head: {
-         title: 'Player information',
-     },
-     data() {
-         return {
-             target: new Player(),
-         };
-     },
- };
+import Player from '~/lib/player';
+
+export default {
+    head: {
+        title: 'Player information',
+    },
+    data() {
+        return {
+            target: new Player(),
+        };
+    },
+};
 </script>
