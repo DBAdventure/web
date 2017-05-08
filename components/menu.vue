@@ -1,7 +1,7 @@
 <template>
     <div id="menu"">
         <div class="start"></div>
-        <template v-if="$store.state.player.auth.connected">
+        <template v-if="$store.state.player.connected">
             <div class="player">
                 <h2>{{ $trans('menu.player.text') }}</h2>
                 <div class="player-info">
@@ -61,7 +61,7 @@
         <div class="game">
             <h2>{{ $trans('menu.game.text') }}</h2>
             <ul class="list-group">
-                <template v-if="!$store.state.player.auth.connected">
+                <template v-if="!$store.state.player.connected">
                     <li>
                         <router-link :title="$trans('register.text')" to="/register">{{ $trans('register.text') }}</router-link>
                     </li>

@@ -1,5 +1,5 @@
 export default ({store, redirect}) => {
-    if (store.state.player.auth.connected) {
+    if (store.state.player.connected) {
         redirect('/account');
     }
 };

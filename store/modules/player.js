@@ -5,7 +5,8 @@ import api from '~/services/api';
 import * as types from '../mutation-types';
 
 const state = {
-    auth: new Player(),
+    auth: {},
+    connected: false,
 };
 
 const actions = {
@@ -47,7 +48,8 @@ const actions = {
 
 const mutations = {
     [types.PLAYER](state, data) {
-        state.auth = new Player(data);
+        state.auth = data;
+        state.connected = true;
     },
 };
 

@@ -56,6 +56,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+import Player from '~/lib/player';
+
 export default {
     methods: {
         logout() {
@@ -68,7 +70,7 @@ export default {
     },
     data() {
         return {
-            player: this.$store.state.player.auth,
+            player: new Player(this.$store.state.player.auth),
             onlinePlayers: 0,
             menuOpened: false,
         };

@@ -25,7 +25,7 @@
                 <tbody>
                     <tr v-for="event in events.player">
                         <td>
-                            <player-event :event="event" :target="event.target" received />
+                            <player-event :event="event" :target="event.target" is-received />
                         </td>
                     </tr>
                 </tbody>

@@ -1,5 +1,5 @@
 export default ({store, error}) => {
-    if (!store.state.player.auth.connected) {
+    if (!store.state.player.connected) {
         error({
             message: 'error.not.connected',
             statusCode: 403,

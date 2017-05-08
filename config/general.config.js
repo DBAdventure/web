@@ -3,7 +3,7 @@
  * Contain all global variables and stuff like that.
  */
 module.exports = {
-    PORT: process.env.PORT || 3001,
+    PORT: process.env.PORT || 3000,
     NODE_ENV: process.env.NODE_ENV || 'local',
     API_DOMAIN: process.env.API_DOMAIN || 'http://127.0.0.1',
     API_TOKEN: process.env.API_TOKEN,
