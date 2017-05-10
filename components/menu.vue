@@ -5,7 +5,6 @@
             <div class="player">
                 <h2>{{ $trans('menu.player.text') }}</h2>
                 <div class="player-info">
-                    <player-menu></player-menu>
                 </div>
                 <ul class="list-group">
                     <li class="list-group-item">

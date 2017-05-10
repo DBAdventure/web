@@ -503,8 +503,8 @@ import BsInput from '~components/bootstrap/input.vue';
 import BsSelect from '~components/bootstrap/select.vue';
 import BsOption from '~components/bootstrap/option.vue';
 import BsGroup from '~components/bootstrap/group.vue';
-import api from '../services/api';
-import {isEmpty} from '../lib/utils';
+import api from '~/services/api';
+import {isEmpty} from '~/lib/utils';
 
 export default {
     middleware: 'anonymous',

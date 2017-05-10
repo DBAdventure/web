@@ -45,6 +45,10 @@ body {
                 font-size: 16px;
                 padding: 5px 10px;
                 border: 1px solid transparent;
+                &:focus,
+                &:active {
+                    background: none;
+                }
             }
             &.dropdown {
                 img {

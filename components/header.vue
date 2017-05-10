@@ -1,9 +1,9 @@
 <template>
     <header class="header" :class="$store.state.game.style">
         <ul class="nav navbar-nav">
-            <li class="dropdown" v-if="player.connected" :class="{'open': menuOpened}">
+            <li class="dropdown" v-if="this.$store.state.player.connected" :class="{'open': menuOpened}" v-click-outside="closeMenu">
                 <a href="#" class="dropdown-toggle" @click.prevent="toggleMenu">
-                    <img :src="player.getImagePath()" :alt="player.getDisplayName()"/> {{ player.displayedName }} <b class="caret"></b>
+                    <img :src="player.getImagePath()" :alt="player.getDisplayName()"/> {{ player.getDisplayName() }} <b class="caret"></b>
                 </a>
 
                 <ul class="dropdown-menu">
@@ -56,16 +56,25 @@
 </template>
 
 <script type="text/ecmascript-6">
+import api from '~/services/api';
 import Player from '~/lib/player';
+import ClickOutside from '~/directives/click-outside';
 
 export default {
+    directives: {
+        ClickOutside,
+    },
     methods: {
         logout() {
             this.$store.dispatch('logout');
             this.$router.push('/');
+            this.closeMenu();
         },
         toggleMenu() {
             this.menuOpened = !this.menuOpened;
+        },
+        closeMenu() {
+            this.menuOpened = false;
         },
     },
     data() {
@@ -74,6 +83,11 @@ export default {
             onlinePlayers: 0,
             menuOpened: false,
         };
+    },
+    async mounted() {
+        await api.getOnlinePlayers().then((res) => {
+            this.onlinePlayers = res.data.nbOnlinePlayers;
+        });
     },
 };
 </script>

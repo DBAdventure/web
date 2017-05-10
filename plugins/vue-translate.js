@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import {sync} from 'vuex-router-sync';
-import store from '../store';
-import router from '../.nuxt/router';
-import I18N from '../services/i18n';
-import settings from '../config/general.config';
+import store from '~/store';
+import router from '~/.nuxt/router';
+import I18N from '~/services/i18n';
+import settings from '~/config/general.config';
 
 sync(store, router);
 

@@ -55,6 +55,10 @@ const api = {
     getEvents() {
         return makeGetRequest('/account/events');
     },
+
+    getOnlinePlayers() {
+        return makeGetRequest('/data/online');
+    },
 };
 
 export default api;

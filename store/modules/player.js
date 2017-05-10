@@ -1,6 +1,5 @@
 /* eslint-disable no-shadow, no-param-reassign */
 import axios from 'axios';
-import Player from '~/lib/player';
 import api from '~/services/api';
 import * as types from '../mutation-types';
 
@@ -10,8 +9,8 @@ const state = {
 };
 
 const actions = {
-    fetchPlayer({commit, dispatch}) {
-        api.getPlayer().then((res) => {
+    async fetchPlayer({commit, dispatch}) {
+        await api.getPlayer().then((res) => {
             axios.post('/session/save', {
                 data: res.data,
             }).then(() => {
@@ -38,10 +37,9 @@ const actions = {
     },
 
     logout({commit}) {
-        return api.logout().then(() => {
-            axios.post('/session/clear').then(() => {
-                commit(types.PLAYER, null);
-            });
+        api.logout().then(() => {});
+        axios.post('/session/clear').then(() => {
+            commit(types.PLAYER, null);
         });
     },
 };
@@ -49,7 +47,7 @@ const actions = {
 const mutations = {
     [types.PLAYER](state, data) {
         state.auth = data;
-        state.connected = true;
+        state.connected = (data !== null);
     },
 };
 

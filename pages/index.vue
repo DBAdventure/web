@@ -36,6 +36,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+
 import api from '~/services/api';
 
 export default {
