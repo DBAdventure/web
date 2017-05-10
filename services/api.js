@@ -31,12 +31,6 @@ const makePostRequest = (path, postData, config = {}) => new Promise((resolve, r
 });
 
 const api = {
-    getPlayer() {
-        return makeGetRequest('/account/player');
-    },
-    getNews() {
-        return makeGetRequest('/data/news');
-    },
     register(postData) {
         return makePostRequest('/register', postData);
     },
@@ -46,18 +40,38 @@ const api = {
     logout() {
         return makeGetRequest('/logout');
     },
+
+    /**
+     * Data
+     */
     getGameData() {
         return makeGetRequest('/data/game');
     },
+    getNews() {
+        return makeGetRequest('/data/news');
+    },
     getAppearanceData() {
         return makeGetRequest('/data/appearance');
+    },
+    getOnlinePlayers() {
+        return makeGetRequest('/data/online');
+    },
+
+    /**
+     * Account
+     */
+    getPlayer() {
+        return makeGetRequest('/account/player');
     },
     getEvents() {
         return makeGetRequest('/account/events');
     },
 
-    getOnlinePlayers() {
-        return makeGetRequest('/data/online');
+    /**
+     * Map
+     */
+    getMap() {
+        return makeGetRequest('/map/');
     },
 };
 

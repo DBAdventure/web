@@ -59,7 +59,7 @@ export default {
         displayPlayerName(eventPlayer) {
             const player = new Player(eventPlayer);
             return player.getDisplayName();
-        }
-    }
+        },
+    },
 };
 </script>

@@ -53,7 +53,8 @@ export default {
             return this.$parent && this.$parent.isAccordion;
         },
         panelType() {
-            return 'panel-' + (this.type || (this.$parent && this.$parent.type) || 'default');
+            const string = (this.type || (this.$parent && this.$parent.type) || 'default');
+            return `panel-${string}`;
         },
     },
     methods: {

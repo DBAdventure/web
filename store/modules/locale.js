@@ -1,6 +1,6 @@
 /* eslint-disable no-shadow, no-param-reassign */
-import * as types from '../mutation-types';
 import settings from '~/config/general.config';
+import * as types from '../mutation-types';
 
 const state = {
     settings: {
