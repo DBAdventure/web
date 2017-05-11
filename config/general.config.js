@@ -30,4 +30,35 @@ module.exports = {
         {value: 5, label: 'analyst'},
         {value: 6, label: 'ranger'},
     ],
+    player: {
+        TIME_ACTION_POINT: 5,
+        TIME_KI_POINT: 10,
+        TIME_FATIGUE_POINT: 5,
+        TIME_MOVEMENT_POINT: 3,
+
+        MAX_ACTION_POINTS: 100,
+        MAX_MOVEMENT_POINTS: 150,
+        MAX_FATIGUE_POINTS: 200,
+
+        ATTACK_TYPE_BETRAY: 'betray',
+        ATTACK_TYPE_REVENGE: 'revenge',
+        ATTACK_TYPE_SLAP: 'slap',
+
+        HEALTH_POINT: 'HEALTH',
+        KI_POINT: 'KI',
+        ACTION_POINT: 'AP',
+        MOVEMENT_POINT: 'MP',
+        FATIGUE_POINT: 'FP',
+        SKILL_POINT: 'SK',
+
+        SLAP_ACTION: 0,
+        PICKUP_ACTION: 1,
+        GIVE_ACTION: 2,
+        STEAL_ACTION: 3,
+        ANALYSIS_ACTION: 3,
+        HEAL_ACTION: 4,
+        ATTACK_ACTION: 5,
+        SPELL_ACTION: 6,
+        MOVEMENT_ACTION: 5,
+    },
 };

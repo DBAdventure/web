@@ -35,7 +35,43 @@
                 <h2>{{ $trans('menu.movement.text') }}</h2>
 
                 <div class="movement-info">
-                    <player-movement></player-movement>
+                    <ul id="move-block">
+                        <li class="se">
+                            <a href="#" @click.prevent="move('se')" :alt="$trans('movements.points.six')" :title="$trans('movements.points.six')"></a>
+                        </li>
+                        <li class="n">
+                            <a href="#" @click.prevent="move('n')" :alt="$trans('movements.points.five')" :title="$trans('movements.points.five')"></a>
+                        </li>
+                        <li class="s">
+                            <a href="#" @click.prevent="move('s')" :alt="$trans('movements.points.five')" :title="$trans('movements.points.five')"></a>
+                        </li>
+                        <li class="e">
+                            <a href="#" @click.prevent="move('e')" :alt="$trans('movements.points.five')" :title="$trans('movements.points.five')"></a>
+                        </li>
+                        <li class="w">
+                            <a href="#" @click.prevent="move('w')" :alt="$trans('movements.points.five')" :title="$trans('movements.points.five')"></a>
+                        </li>
+
+                        <li class="n">
+                            <a href="#" @click.prevent="move('n')" :alt="$trans('movements.points.six')" :title="$trans('movements.points.six')"></a>
+                        </li>
+                        <li class="ne">
+                            <a href="#" @click.prevent="move('ne')" :alt="$trans('movements.points.six')" :title="$trans('movements.points.six')"></a>
+                        </li>
+                        <li class="nw">
+                            <a href="#" @click.prevent="move('nw')" :alt="$trans('movements.points.six')" :title="$trans('movements.points.six')"></a>
+                        </li>
+                        <li class="sw">
+                            <a href="#" @click.prevent="move('sw')" :alt="$trans('movements.points.five')" :title="$trans('movements.points.five')"></a>
+                        </li>
+                        <li class="se">
+                            <a href="#" @click.prevent="move('se')" :alt="$trans('movements.points.five')" :title="$trans('movements.points.five')"></a>
+                        </li>
+                    </ul>
+
+                    <div class="text-center" v-if="canConvert">
+                        <strong><a href="#" @click.prevent="convert">{{ $trans('action.convert') }}</a></strong>
+                    </div>
                 </div>
             </div>
         </template>
@@ -121,6 +157,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+import settings from '~/config/general.config';
 import {manager as msgManager} from '~/lib/messages';
 import BsInput from '~components/bootstrap/input.vue';
 
@@ -142,6 +179,12 @@ export default {
                 );
                 this.password = '';
             });
+        },
+        canConvert() {
+            const player = this.$store.state.player.auth;
+            return player &&
+                   player.action_points >= 20 &&
+                   player.movement_points + 40 <= settings.player.MAX_MOVEMENT_POINTS;
         },
     },
     data() {

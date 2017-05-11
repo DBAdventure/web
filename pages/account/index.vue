@@ -51,8 +51,8 @@ export default {
             events: {},
         };
     },
-    mounted() {
-        api.getEvents().then((res) => {
+    async mounted() {
+        await api.getEvents().then((res) => {
             this.events = res.data;
         });
     },

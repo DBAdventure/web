@@ -1,15 +1,21 @@
 /* eslint-env es6 */
 import axios from 'axios';
+import settings from '~/config/general.config';
 
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
+let baseUrl = '';
+if (!process.BROWSER_BUILD) {
+    baseUrl = settings.API_DOMAIN;
+}
+
 /**
- * Abstract function that make a GET request to API
+ * Abstract function that make a DELETE request to the U2Guide API
  * @param {string} path
  * @returns {Promise}
  */
-const makeGetRequest = path => new Promise((resolve, reject) => {
-    axios.get(`/api${path}`).then((result) => {
+const makeDeleteRequest = (path, params = {}) => new Promise((resolve, reject) => {
+    axios.delete(`${baseUrl}/api${path}`, {params}).then((result) => {
         resolve(result);
     }).catch((err) => {
         reject(err);
@@ -17,13 +23,26 @@ const makeGetRequest = path => new Promise((resolve, reject) => {
 });
 
 /**
- * Abstract function that make a POST request to API
+ * Abstract function that make a GET request to the U2Guide API
+ * @param {string} path
+ * @returns {Promise}
+ */
+const makeGetRequest = (path, params = {}) => new Promise((resolve, reject) => {
+    axios.get(`${baseUrl}/api${path}`, {params}).then((result) => {
+        resolve(result);
+    }).catch((err) => {
+        reject(err);
+    });
+});
+
+/**
+ * Abstract function that make a POST request to the U2Guide API
  * @param {string} path
  * @param {object} postData
  * @returns {Promise}
  */
 const makePostRequest = (path, postData, config = {}) => new Promise((resolve, reject) => {
-    axios.post(`/api${path}`, postData, config).then((result) => {
+    axios.post(`${baseUrl}/api${path}`, postData, config).then((result) => {
         resolve(result);
     }).catch((err) => {
         reject(err);

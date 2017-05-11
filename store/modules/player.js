@@ -10,24 +10,24 @@ const state = {
 
 const actions = {
     async fetchPlayer({commit, dispatch}) {
-        await api.getPlayer().then((res) => {
+        await api.getPlayer().then(res =>
             axios.post('/session/save', {
                 data: res.data,
-            }).then(() => {
-                commit(types.PLAYER, res.data);
-            });
-        }).catch(() => {
+            }).then(() =>
+                commit(types.PLAYER, res.data),
+            ),
+        ).catch(() => {
             dispatch('logout');
         });
     },
 
-    login({dispatch}, {username, password}) {
-        return api.login({
+    async login({dispatch}, {username, password}) {
+        await api.login({
             username,
             password,
-        }).then(() => {
-            dispatch('fetchPlayer');
-        }).catch((error) => {
+        }).then(
+            () => dispatch('fetchPlayer'),
+        ).catch((error) => {
             if (error.response.status === 401) {
                 throw new Error('error.bad.credentials');
             }
