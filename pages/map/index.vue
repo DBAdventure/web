@@ -45,7 +45,6 @@
         </div>
 
         <div class="search-container container-fluid">
-            <map-elements />
         </div>
     </div>
 </template>
@@ -56,7 +55,6 @@ import Player from '~/lib/player';
 import {isEmpty} from '~/lib/utils';
 import api from '~/services/api';
 import ImageRender from '~/components/map/image-render';
-import MapElements from '~/components/map/elements';
 
 export default {
     middleware: 'auth',
@@ -65,7 +63,6 @@ export default {
     },
     components: {
         ImageRender,
-        MapElements,
     },
     data() {
         return {
@@ -103,7 +100,7 @@ export default {
         groupNames(group) {
             const names = [];
             group.forEach((player) => {
-                names.push(this.getPlayer(player).getDisplayName());
+                names.push(this.getPlayer(player.entity).getDisplayName());
             });
 
             return names.join(', ');
