@@ -5,6 +5,73 @@
             <div class="player">
                 <h2>{{ $trans('menu.player.text') }}</h2>
                 <div class="player-info">
+                    <div class="submenu">
+                        <ul>
+                            <li>{{ $trans('menu.map.name', {"%map_name%": $trans(player.map.name)}) }}</li>
+                            <li>{{ $trans('menu.map.position', {"%x%": player.x, "%y%": player.y}) }}</li>
+                            <li>{{ $trans('menu.map.zeni', {"%zeni%": player.zeni}) }}</li>
+                        </ul>
+                        <div class="bars">
+                            {{ $trans('menu.player.health', {"%h%": player.health, "%max_h%": player.totalMaxHealth}) }}
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-danger"
+                                     role="progressbar"
+                                     :aria-valuenow="hPercent"
+                                     aria-valuemin="0"
+                                     aria-valuemax="100"
+                                     :style="`width: ${hPercent}}%`">
+                                </div>
+                            </div>
+
+                            {{ $trans('menu.player.ki', {"%ki%": player.ki, "%max_ki%": player.totalMaxKi}) }}
+                            {{ $trans('menu.player.plus', {"%time%": player.getTimeRemaining('KI_POINT')}) }}
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-info"
+                                     role="progressbar"
+                                     :aria-valuenow="kiPercent"
+                                     aria-valuemin="0"
+                                     aria-valuemax="100"
+                                     :style="`width: ${kiPercent}}%`">
+                                </div>
+                            </div>
+
+                            {{ $trans('menu.player.ap', {"%ap%": player.actionPoints, "%max_ap%": player.maxActionPoints}) }}
+                            {{ $trans('menu.player.plus', {"%time%": player.getTimeRemaining('ACTION_POINT')}) }}
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-warning"
+                                     role="progressbar"
+                                     :aria-valuenow="apPercent"
+                                     aria-valuemin="0"
+                                     aria-valuemax="100"
+                                     :style="`width: ${apPercent}}%`">
+                                </div>
+                            </div>
+
+                            {{ $trans('menu.player.mp', {"%mp%": player.movementPoints, "%max_mp%": player.maxMovementPoints}) }}
+                            {{ $trans('menu.player.plus', {"%time%": player.getTimeRemaining('MOVEMENT_POINT')}) }}
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-success"
+                                     role="progressbar"
+                                     :aria-valuenow="mpPercent"
+                                     aria-valuemin="0"
+                                     aria-valuemax="100"
+                                     :style="`width: ${mpPercent}}%`">
+                                </div>
+                            </div>
+
+                            {{ $trans('menu.player.fp', {"%fp%": player.fatiguePoints, "%max_fp%": player.maxFatiguePoints}) }}
+                            {{ $trans('menu.player.minus', {"%time%": player.getTimeRemaining('FATIGUE_POINT')}) }}
+                            <div class="progress">
+                                <div class="progress-bar"
+                                     role="progressbar"
+                                     :aria-valuenow="fpPercent"
+                                     aria-valuemin="0"
+                                     aria-valuemax="100"
+                                     :style="`width: ${fpPercent}}%`">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <ul class="list-group">
                     <li class="list-group-item">
@@ -69,7 +136,7 @@
                         </li>
                     </ul>
 
-                    <div class="text-center" v-if="canConvert">
+                    <div class="text-center" v-if="player.canConvert()">
                         <strong><a href="#" @click.prevent="convert">{{ $trans('action.convert') }}</a></strong>
                     </div>
                 </div>
@@ -157,7 +224,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import settings from '~/config/general.config';
+import Player from '~/lib/player';
 import {manager as msgManager} from '~/lib/messages';
 import BsInput from '~components/bootstrap/input.vue';
 
@@ -180,18 +247,44 @@ export default {
                 this.password = '';
             });
         },
-        canConvert() {
-            const player = this.$store.state.player.auth;
-            return player &&
-                   player.action_points >= 20 &&
-                   player.movement_points + 40 <= settings.player.MAX_MOVEMENT_POINTS;
-        },
     },
     data() {
         return {
             password: null,
             username: null,
+            player: new Player(this.$store.state.player.auth),
         };
     },
+    computed: {
+        hPercent() {
+            return Math.floor(
+                (this.player.health * 100) / this.player.total_max_health,
+            );
+        },
+
+        kiPercent() {
+            return Math.floor(
+                (this.player.ki * 100) / this.player.total_ax_ki,
+            );
+        },
+
+        apPercent() {
+            return Math.floor(
+                (this.player.action_points * 100) / this.player.max_action_points,
+            );
+        },
+
+        mpPercent() {
+            return Math.floor(
+                (this.player.movement_points * 100) / this.player.max_movement_points,
+            );
+        },
+
+        fpPercent() {
+            return Math.floor(
+                (this.player.fatigue_points * 100) / this.player.max_fatigue_points,
+            );
+        },
+    }
 };
 </script>
