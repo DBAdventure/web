@@ -36,17 +36,5 @@ export default {
         DbaFooter,
         Alert,
     },
-    methods: {
-        async refreshData() {
-            this.$store.dispatch('fetchGameData');
-            await this.$store.dispatch('fetchPlayer');
-        },
-    },
-    async beforeMount() {
-        await this.refreshData();
-    },
-    async beforeUpdate() {
-        await this.refreshData();
-    },
 };
 </script>

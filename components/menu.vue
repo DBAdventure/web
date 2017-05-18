@@ -7,67 +7,67 @@
                 <div class="player-info">
                     <div class="submenu">
                         <ul>
-                            <li>{{ $trans('menu.map.name', {"%map_name%": $trans(player.map.name)}) }}</li>
-                            <li>{{ $trans('menu.map.position', {"%x%": player.x, "%y%": player.y}) }}</li>
-                            <li>{{ $trans('menu.map.zeni', {"%zeni%": player.zeni}) }}</li>
+                            <li>{{ $trans('menu.map.name', {"mapName": $trans(player.map.name)}) }}</li>
+                            <li>{{ $trans('menu.map.position', {"x": player.x, "y": player.y}) }}</li>
+                            <li>{{ $trans('menu.map.zeni', {"zeni": player.zeni}) }}</li>
                         </ul>
                         <div class="bars">
-                            {{ $trans('menu.player.health', {"%h%": player.health, "%max_h%": player.totalMaxHealth}) }}
+                            {{ $trans('menu.player.health', {"h": player.health, "maxH": player.total_max_health}) }}
                             <div class="progress">
                                 <div class="progress-bar progress-bar-danger"
                                      role="progressbar"
                                      :aria-valuenow="hPercent"
                                      aria-valuemin="0"
                                      aria-valuemax="100"
-                                     :style="`width: ${hPercent}}%`">
+                                     :style="`width: ${hPercent}%`">
                                 </div>
                             </div>
 
-                            {{ $trans('menu.player.ki', {"%ki%": player.ki, "%max_ki%": player.totalMaxKi}) }}
-                            {{ $trans('menu.player.plus', {"%time%": player.getTimeRemaining('KI_POINT')}) }}
+                            {{ $trans('menu.player.ki', {"ki": player.ki, "maxKi": player.total_max_ki}) }}
+                            {{ $trans('menu.player.plus', {"time": player.getTimeRemaining('ki_points')}) }}
                             <div class="progress">
                                 <div class="progress-bar progress-bar-info"
                                      role="progressbar"
                                      :aria-valuenow="kiPercent"
                                      aria-valuemin="0"
                                      aria-valuemax="100"
-                                     :style="`width: ${kiPercent}}%`">
+                                     :style="`width: ${kiPercent}%`">
                                 </div>
                             </div>
 
-                            {{ $trans('menu.player.ap', {"%ap%": player.actionPoints, "%max_ap%": player.maxActionPoints}) }}
-                            {{ $trans('menu.player.plus', {"%time%": player.getTimeRemaining('ACTION_POINT')}) }}
+                            {{ $trans('menu.player.ap', {"ap": player.action_points, "maxAp": player.max_action_points}) }}
+                            {{ $trans('menu.player.plus', {"time": player.getTimeRemaining('action_points')}) }}
                             <div class="progress">
                                 <div class="progress-bar progress-bar-warning"
                                      role="progressbar"
                                      :aria-valuenow="apPercent"
                                      aria-valuemin="0"
                                      aria-valuemax="100"
-                                     :style="`width: ${apPercent}}%`">
+                                     :style="`width: ${apPercent}%`">
                                 </div>
                             </div>
 
-                            {{ $trans('menu.player.mp', {"%mp%": player.movementPoints, "%max_mp%": player.maxMovementPoints}) }}
-                            {{ $trans('menu.player.plus', {"%time%": player.getTimeRemaining('MOVEMENT_POINT')}) }}
+                            {{ $trans('menu.player.mp', {"mp": player.movement_points, "maxMp": player.max_movement_points}) }}
+                            {{ $trans('menu.player.plus', {"time": player.getTimeRemaining('movement_points')}) }}
                             <div class="progress">
                                 <div class="progress-bar progress-bar-success"
                                      role="progressbar"
                                      :aria-valuenow="mpPercent"
                                      aria-valuemin="0"
                                      aria-valuemax="100"
-                                     :style="`width: ${mpPercent}}%`">
+                                     :style="`width: ${mpPercent}%`">
                                 </div>
                             </div>
 
-                            {{ $trans('menu.player.fp', {"%fp%": player.fatiguePoints, "%max_fp%": player.maxFatiguePoints}) }}
-                            {{ $trans('menu.player.minus', {"%time%": player.getTimeRemaining('FATIGUE_POINT')}) }}
+                            {{ $trans('menu.player.fp', {"fp": player.fatigue_points, "maxFp": player.max_fatigue_points}) }}
+                            {{ $trans('menu.player.minus', {"time": player.getTimeRemaining('fatigue_points')}) }}
                             <div class="progress">
                                 <div class="progress-bar"
                                      role="progressbar"
                                      :aria-valuenow="fpPercent"
                                      aria-valuemin="0"
                                      aria-valuemax="100"
-                                     :style="`width: ${fpPercent}}%`">
+                                     :style="`width: ${fpPercent}%`">
                                 </div>
                             </div>
                         </div>
@@ -264,7 +264,7 @@ export default {
 
         kiPercent() {
             return Math.floor(
-                (this.player.ki * 100) / this.player.total_ax_ki,
+                (this.player.ki * 100) / this.player.total_max_ki,
             );
         },
 
@@ -285,6 +285,6 @@ export default {
                 (this.player.fatigue_points * 100) / this.player.max_fatigue_points,
             );
         },
-    }
+    },
 };
 </script>
