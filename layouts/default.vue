@@ -36,9 +36,17 @@ export default {
         DbaFooter,
         Alert,
     },
-    mounted() {
-        this.$store.dispatch('fetchGameData');
-        this.$store.dispatch('fetchPlayer');
+    methods: {
+        async refreshData() {
+            this.$store.dispatch('fetchGameData');
+            await this.$store.dispatch('fetchPlayer');
+        },
+    },
+    async beforeMount() {
+        await this.refreshData();
+    },
+    async beforeUpdate() {
+        await this.refreshData();
     },
 };
 </script>
