@@ -119,10 +119,10 @@ export default {
             const value = this.value;
             const error = [this.error];
             if (!value && this.required) {
-                error.push(`(${this.$trans('strap.required')})`);
+                error.push(`(${this.$t('strap.required')})`);
             }
             if (value && (value.length < this.minlength)) {
-                error.push(`(${this.$trans('strap.minlength')}: ${this.minlength})`);
+                error.push(`(${this.$t('strap.minlength')}: ${this.minlength})`);
             }
             return error.join(' ');
         },
@@ -133,7 +133,7 @@ export default {
 
             const text = [];
             if (this.minlength) {
-                text.push(this.$trans('strap.minCharacters', {value: this.minlength}));
+                text.push(this.$t('strap.minCharacters', {value: this.minlength}));
             }
 
             if (this.maxlength) {
@@ -142,7 +142,7 @@ export default {
                 if (value && value.length) {
                     length -= value.length;
                 }
-                text.push(this.$trans('strap.maxCharacters', {value: length}));
+                text.push(this.$t('strap.maxCharacters', {value: length}));
             }
 
             return text.join(' - ');

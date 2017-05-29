@@ -1,6 +1,6 @@
 <template>
     <div class="account">
-        <h1 class="title title-profile">{{ $trans('header.profile') }}</h1>
+        <h1 class="title title-profile">{{ $t('header.profile') }}</h1>
     </div>
 </template>
 

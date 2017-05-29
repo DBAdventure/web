@@ -1,42 +1,21 @@
 import Vue from 'vue';
-import {sync} from 'vuex-router-sync';
-import store from '~/store';
-import I18N from '~/services/i18n';
-import settings from '~/config/general.config';
+import VueI18n from 'vue-i18n';
+import fr from '~/locales/fr';
+import en from '~/locales/en';
 
-sync(store, Vue.Router);
+Vue.use(VueI18n);
 
-const DbaTranslatePlugin = {};
-
-const i18nService = I18N.getInstance();
-i18nService.init(settings.languages, settings.languages[0]);
-
-/* eslint-disable no-shadow, no-param-reassign */
-// no-shadown because Vue is defined a the top of the file :o
-// no-param-reassign because we need to update the Vue object prototype.
-/**
- * Create a Vue plugin to support i18next translate function
- * @param Vue
- */
-DbaTranslatePlugin.install = (Vue) => {
-    /**
-     * Global Translate Function
-     * @param key
-     * @param options
-     * @returns {*}
-     */
-    Vue.prototype.translate = (key, options) => {
-        const activeLocale = store.getters.activeLocale;
-        return i18nService.translate(key, {locale: activeLocale, ...options});
-    };
-
-    /**
-     * Translate shortcut
-     * @param key
-     * @param options
-     */
-    Vue.prototype.$trans = (key, options) => Vue.prototype.translate(key, options);
+/* eslint-disable no-unused-vars, no-param-reassign */
+export default ({isClient, app, store, route, error, redirect}) => {
+    // Set i18n instance on app
+    // This way we can use it in middleware and pages asyncData/fetch
+    app.i18n = new VueI18n({
+        locale: store.state.locale,
+        fallbackLocale: 'en',
+        messages: {
+            en,
+            fr,
+        },
+    });
 };
-/* eslint-ensable no-shadow, no-unused-vars, no-param-reassign */
-
-Vue.use(DbaTranslatePlugin);
+/* eslint-enable no-unused-vars, no-param-reassign */

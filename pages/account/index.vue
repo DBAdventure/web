@@ -1,10 +1,10 @@
 <template>
     <div>
-        <h1 class="title title-home">{{ $trans('appearance') }}</h1>
+        <h1 class="title title-home">{{ $t('appearance') }}</h1>
 
         <div class="events">
             <h2 class="subtitle text-center">
-                {{ $trans('events.target') }}
+                {{ $t('events.target') }}
             </h2>
             <table class="table table-filter">
                 <tbody>
@@ -19,7 +19,7 @@
 
         <div class="events">
             <h2 class="subtitle text-center">
-                {{ $trans('events.player') }}
+                {{ $t('events.player') }}
             </h2>
             <table class="table table-filter">
                 <tbody>

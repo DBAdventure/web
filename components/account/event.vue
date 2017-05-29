@@ -19,14 +19,14 @@
                         {{ player.getDisplayName() }}
                     </template>
                 </template>
-                <strong v-else-if="event.event_type.name === 'bank'">{{ $trans('game.bank.event.name') }}</strong>
+                <strong v-else-if="event.event_type.name === 'bank'">{{ $t('game.bank.event.name') }}</strong>
             </h4>
             <p class="summary">
                 <template v-if="event.event_type.name === 'player'">
                     {{ displayPlayerName(event.player) }}
                 </template>
 
-                {{ $trans(event.message, event.parameters) }}
+                {{ $t(event.message, event.parameters) }}
             </p>
         </div>
     </div>

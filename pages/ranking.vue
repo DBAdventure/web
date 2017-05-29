@@ -1,6 +1,6 @@
 <template>
     <div class="history">
-        <h1 class="title title-ranking">{{ $trans('history.ranking') }}</h1>
+        <h1 class="title title-ranking">{{ $t('history.ranking') }}</h1>
     </div>
 </template>
 

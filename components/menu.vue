@@ -3,16 +3,16 @@
         <div class="start"></div>
         <template v-if="$store.state.player.connected">
             <div class="player">
-                <h2>{{ $trans('menu.player.text') }}</h2>
+                <h2>{{ $t('menu.player.text') }}</h2>
                 <div class="player-info">
                     <div class="submenu">
                         <ul>
-                            <li>{{ $trans('menu.map.name', {"mapName": $trans(player.map.name)}) }}</li>
-                            <li>{{ $trans('menu.map.position', {"x": player.x, "y": player.y}) }}</li>
-                            <li>{{ $trans('menu.map.zeni', {"zeni": player.zeni}) }}</li>
+                            <li>{{ $t('menu.map.name', {"mapName": $t(player.map.name)}) }}</li>
+                            <li>{{ $t('menu.map.position', {"x": player.x, "y": player.y}) }}</li>
+                            <li>{{ $t('menu.map.zeni', {"zeni": player.zeni}) }}</li>
                         </ul>
                         <div class="bars">
-                            {{ $trans('menu.player.health', {"h": player.health, "maxH": player.total_max_health}) }}
+                            {{ $t('menu.player.health', {"h": player.health, "maxH": player.total_max_health}) }}
                             <div class="progress">
                                 <div class="progress-bar progress-bar-danger"
                                      role="progressbar"
@@ -23,8 +23,8 @@
                                 </div>
                             </div>
 
-                            {{ $trans('menu.player.ki', {"ki": player.ki, "maxKi": player.total_max_ki}) }}
-                            {{ $trans('menu.player.plus', {"time": player.getTimeRemaining('ki_points')}) }}
+                            {{ $t('menu.player.ki', {"ki": player.ki, "maxKi": player.total_max_ki}) }}
+                            {{ $t('menu.player.plus', {"time": player.getTimeRemaining('ki_points')}) }}
                             <div class="progress">
                                 <div class="progress-bar progress-bar-info"
                                      role="progressbar"
@@ -35,8 +35,8 @@
                                 </div>
                             </div>
 
-                            {{ $trans('menu.player.ap', {"ap": player.action_points, "maxAp": player.max_action_points}) }}
-                            {{ $trans('menu.player.plus', {"time": player.getTimeRemaining('action_points')}) }}
+                            {{ $t('menu.player.ap', {"ap": player.action_points, "maxAp": player.max_action_points}) }}
+                            {{ $t('menu.player.plus', {"time": player.getTimeRemaining('action_points')}) }}
                             <div class="progress">
                                 <div class="progress-bar progress-bar-warning"
                                      role="progressbar"
@@ -47,8 +47,8 @@
                                 </div>
                             </div>
 
-                            {{ $trans('menu.player.mp', {"mp": player.movement_points, "maxMp": player.max_movement_points}) }}
-                            {{ $trans('menu.player.plus', {"time": player.getTimeRemaining('movement_points')}) }}
+                            {{ $t('menu.player.mp', {"mp": player.movement_points, "maxMp": player.max_movement_points}) }}
+                            {{ $t('menu.player.plus', {"time": player.getTimeRemaining('movement_points')}) }}
                             <div class="progress">
                                 <div class="progress-bar progress-bar-success"
                                      role="progressbar"
@@ -59,8 +59,8 @@
                                 </div>
                             </div>
 
-                            {{ $trans('menu.player.fp', {"fp": player.fatigue_points, "maxFp": player.max_fatigue_points}) }}
-                            {{ $trans('menu.player.minus', {"time": player.getTimeRemaining('fatigue_points')}) }}
+                            {{ $t('menu.player.fp', {"fp": player.fatigue_points, "maxFp": player.max_fatigue_points}) }}
+                            {{ $t('menu.player.minus', {"time": player.getTimeRemaining('fatigue_points')}) }}
                             <div class="progress">
                                 <div class="progress-bar"
                                      role="progressbar"
@@ -75,147 +75,147 @@
                 </div>
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <router-link to="/account">{{ $trans('menu.dashboard') }}</router-link>
+                        <router-link to="/account">{{ $t('menu.dashboard') }}</router-link>
                     </li>
                     <li class="list-group-item">
-                        <router-link to="/magic">{{ $trans('menu.magic') }}</router-link>
+                        <router-link to="/magic">{{ $t('menu.magic') }}</router-link>
                     </li>
                     <li class="list-group-item">
-                        <router-link to="/map">{{ $trans('menu.map.text') }}</router-link>
+                        <router-link to="/map">{{ $t('menu.map.text') }}</router-link>
                     </li>
                     <li class="list-group-item">
-                        <router-link to="/map/mini">{{ $trans('menu.map.mini') }}</router-link>
+                        <router-link to="/map/mini">{{ $t('menu.map.mini') }}</router-link>
                     </li>
                     <li class="list-group-item">
-                        <router-link to="/inventory">{{ $trans('menu.inventory') }}</router-link>
+                        <router-link to="/inventory">{{ $t('menu.inventory') }}</router-link>
                     </li>
                     <li class="list-group-item">
-                        <router-link to="/guild">{{ $trans('menu.guild.text') }}</router-link>
+                        <router-link to="/guild">{{ $t('menu.guild.text') }}</router-link>
                     </li>
                     <li class="list-group-item">
-                        <router-link to="/inbox">{{ $trans('menu.inbox') }} <span class="badge">{{ $store.state.game.data.unreadMessages }}</span></router-link>
+                        <router-link to="/inbox">{{ $t('menu.inbox') }} <span class="badge">{{ $store.state.game.data.unreadMessages }}</span></router-link>
                     </li>
                 </ul>
             </div>
 
             <div class="movement" v-if="$router.history.current.name === 'map'">
-                <h2>{{ $trans('menu.movement.text') }}</h2>
+                <h2>{{ $t('menu.movement.text') }}</h2>
 
                 <div class="movement-info">
                     <ul id="move-block">
                         <li class="se">
-                            <a href="#" @click.prevent="move('se')" :alt="$trans('movements.points.six')" :title="$trans('movements.points.six')"></a>
+                            <a href="#" @click.prevent="move('se')" :alt="$t('movements.points.six')" :title="$t('movements.points.six')"></a>
                         </li>
                         <li class="n">
-                            <a href="#" @click.prevent="move('n')" :alt="$trans('movements.points.five')" :title="$trans('movements.points.five')"></a>
+                            <a href="#" @click.prevent="move('n')" :alt="$t('movements.points.five')" :title="$t('movements.points.five')"></a>
                         </li>
                         <li class="s">
-                            <a href="#" @click.prevent="move('s')" :alt="$trans('movements.points.five')" :title="$trans('movements.points.five')"></a>
+                            <a href="#" @click.prevent="move('s')" :alt="$t('movements.points.five')" :title="$t('movements.points.five')"></a>
                         </li>
                         <li class="e">
-                            <a href="#" @click.prevent="move('e')" :alt="$trans('movements.points.five')" :title="$trans('movements.points.five')"></a>
+                            <a href="#" @click.prevent="move('e')" :alt="$t('movements.points.five')" :title="$t('movements.points.five')"></a>
                         </li>
                         <li class="w">
-                            <a href="#" @click.prevent="move('w')" :alt="$trans('movements.points.five')" :title="$trans('movements.points.five')"></a>
+                            <a href="#" @click.prevent="move('w')" :alt="$t('movements.points.five')" :title="$t('movements.points.five')"></a>
                         </li>
 
                         <li class="n">
-                            <a href="#" @click.prevent="move('n')" :alt="$trans('movements.points.six')" :title="$trans('movements.points.six')"></a>
+                            <a href="#" @click.prevent="move('n')" :alt="$t('movements.points.six')" :title="$t('movements.points.six')"></a>
                         </li>
                         <li class="ne">
-                            <a href="#" @click.prevent="move('ne')" :alt="$trans('movements.points.six')" :title="$trans('movements.points.six')"></a>
+                            <a href="#" @click.prevent="move('ne')" :alt="$t('movements.points.six')" :title="$t('movements.points.six')"></a>
                         </li>
                         <li class="nw">
-                            <a href="#" @click.prevent="move('nw')" :alt="$trans('movements.points.six')" :title="$trans('movements.points.six')"></a>
+                            <a href="#" @click.prevent="move('nw')" :alt="$t('movements.points.six')" :title="$t('movements.points.six')"></a>
                         </li>
                         <li class="sw">
-                            <a href="#" @click.prevent="move('sw')" :alt="$trans('movements.points.five')" :title="$trans('movements.points.five')"></a>
+                            <a href="#" @click.prevent="move('sw')" :alt="$t('movements.points.five')" :title="$t('movements.points.five')"></a>
                         </li>
                         <li class="se">
-                            <a href="#" @click.prevent="move('se')" :alt="$trans('movements.points.five')" :title="$trans('movements.points.five')"></a>
+                            <a href="#" @click.prevent="move('se')" :alt="$t('movements.points.five')" :title="$t('movements.points.five')"></a>
                         </li>
                     </ul>
 
                     <div class="text-center" v-if="player.canConvert()">
-                        <strong><a href="#" @click.prevent="convert">{{ $trans('action.convert') }}</a></strong>
+                        <strong><a href="#" @click.prevent="convert">{{ $t('action.convert') }}</a></strong>
                     </div>
                 </div>
             </div>
         </template>
         <div class="connection" v-else>
-            <h2>{{ $trans('menu.connection.text') }}</h2>
+            <h2>{{ $t('menu.connection.text') }}</h2>
             <form role="form" @submit.prevent="login">
                 <div class="text-center">
-                    <label for="login">{{ $trans('login.text') }}</label>
-                    <bs-input name="username" v-model="username" :placeholder="$trans('login.text')" required type="text"/>
-                    <label for="password">{{ $trans('password') }}</label>
-                    <bs-input name="password" v-model="password" :placeholder="$trans('password')" required type="password"/>
+                    <label for="login">{{ $t('login.text') }}</label>
+                    <bs-input name="username" v-model="username" :placeholder="$t('login.text')" required type="text"/>
+                    <label for="password">{{ $t('password') }}</label>
+                    <bs-input name="password" v-model="password" :placeholder="$t('password')" required type="password"/>
                 </div>
 
                 <div class="form-group last">
                     <div class="text-center">
-                        <button type="submit" class="btn btn-danger btn-sm">{{ $trans('login.signin') }}</button>
+                        <button type="submit" class="btn btn-danger btn-sm">{{ $t('login.signin') }}</button>
                     </div>
                 </div>
             </form>
         </div>
 
         <div class="game">
-            <h2>{{ $trans('menu.game.text') }}</h2>
+            <h2>{{ $t('menu.game.text') }}</h2>
             <ul class="list-group">
                 <template v-if="!$store.state.player.connected">
                     <li>
-                        <router-link :title="$trans('register.text')" to="/register">{{ $trans('register.text') }}</router-link>
+                        <router-link :title="$t('register.text')" to="/register">{{ $t('register.text') }}</router-link>
                     </li>
                     <li>
-                        <router-link :title="$trans('forgot.password')" to="/account/lost-password"">{{ $trans('forgot.password') }}</router-link>
+                        <router-link :title="$t('forgot.password')" to="/account/lost-password"">{{ $t('forgot.password') }}</router-link>
                     </li>
                     <li>&nbsp;</li>
                 </template>
 
                 <li class="list-group-item">
                     <span class="badge">{{ $store.state.game.data.nbActivePlayers }}</span>
-                    {{ $trans('stats.players.active') }}
+                    {{ $t('stats.players.active') }}
                 </li>
                 <li class="list-group-item">
                     <span class="badge good">{{ $store.state.game.data.nbGoodGuys }}</span>
-                    {{ $trans('stats.players.good') }}
+                    {{ $t('stats.players.good') }}
                 </li>
                 <li class="list-group-item">
                     <span class="badge bad">{{ $store.state.game.data.nbBadGuys }}</span>
-                    {{ $trans('stats.players.bad') }}
+                    {{ $t('stats.players.bad') }}
                 </li>
                 <li class="list-group-item">
                     <span class="badge saiyajin">{{ $store.state.game.data.nbSaiyajins }}</span>
-                    {{ $trans('saiyajins') }}
+                    {{ $t('saiyajins') }}
                 </li>
                 <li class="list-group-item">
                     <span class="badge human-saiyajin">{{ $store.state.game.data.nbHumanSaiyajins }}</span>
-                    {{ $trans('human-saiyajins') }}
+                    {{ $t('human-saiyajins') }}
                 </li>
                 <li class="list-group-item">
                     <span class="badge human">{{ $store.state.game.data.nbHumans }}</span>
-                    {{ $trans('humans') }}
+                    {{ $t('humans') }}
                 </li>
                 <li class="list-group-item">
                     <span class="badge namekian">{{ $store.state.game.data.nbNamekians }}</span>
-                    {{ $trans('namekians') }}
+                    {{ $t('namekians') }}
                 </li>
                 <li class="list-group-item">
                     <span class="badge dragon">{{ $store.state.game.data.nbDragons }}</span>
-                    {{ $trans('dragons') }}
+                    {{ $t('dragons') }}
                 </li>
                 <li class="list-group-item">
                     <span class="badge alien">{{ $store.state.game.data.nbAliens }}</span>
-                    {{ $trans('aliens') }}
+                    {{ $t('aliens') }}
                 </li>
                 <li class="list-group-item">
                     <span class="badge cyborg">{{ $store.state.game.data.nbCyborgs }}</span>
-                    {{ $trans('cyborgs') }}
+                    {{ $t('cyborgs') }}
                 </li>
                 <li class="list-group-item">
                     <span class="badge majin">{{ $store.state.game.data.nbMajins }}</span>
-                    {{ $trans('majins') }}
+                    {{ $t('majins') }}
                 </li>
             </ul>
         </div>
@@ -241,7 +241,7 @@ export default {
                 this.$router.push('/account');
             }).catch((err) => {
                 msgManager.push(
-                    this.$trans(err.message),
+                    this.$t(err.message),
                     'danger',
                 );
                 this.password = '';

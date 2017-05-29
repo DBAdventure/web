@@ -1,5 +1,5 @@
 <template>
     <div class="account">
-        <h1 class="title title-training-room">{{ $trans('training.room') }}</h1>
+        <h1 class="title title-training-room">{{ $t('training.room') }}</h1>
     </div>
 </template>

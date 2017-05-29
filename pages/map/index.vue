@@ -1,13 +1,13 @@
 <template>
     <div class="map">
-        <h1 class="title title-map">{{ $trans('map.title') }}</h1>
+        <h1 class="title title-map">{{ $t('map.title') }}</h1>
 
         <div class="map-container text-center">
             <table class="map" border="0" cellspacing="0" cellpadding="0" :width="(borders.yEnd - borders.yStart) * 100 + 25">
                 <thead>
                     <tr>
                         <th class="map-refresh">
-                            <a href="#" id="refresh" :title="$trans('map.refresh')"></a>
+                            <a href="#" id="refresh" :title="$t('map.refresh')"></a>
                         </th>
                         <th v-for="index in borderXRange">{{ index }}</th>
                     </tr>
@@ -22,21 +22,21 @@
                             :background="`/media/${map[x][y]['file']}`"
                             class="text-center">
                             <template v-for="building in itemsList(items.buildings, x, y)">
-                                <image-render :x="x" :y="y" :image="`/images/${building.entity.image}`" :title="$trans(building.entity.name)"/>
+                                <image-render :x="x" :y="y" :image="`/images/${building.entity.image}`" :title="$t(building.entity.name)"/>
                             </template>
 
                             <template v-if="itemsList(items.players, x, y).length > 2">
-                                <image-render :x="x" :y="y" :image="getPlayer($store.state.player.auth).getImagePath()" :title="$trans(getPlayer($store.state.player.auth).getDisplayName())"/>
+                                <image-render :x="x" :y="y" :image="getPlayer($store.state.player.auth).getImagePath()" :title="$t(getPlayer($store.state.player.auth).getDisplayName())"/>
                                 <image-render :x="x" :y="y" image="/images/avatars/players/group.png" :title="groupNames(itemsList(items.players, x, y))"/>
                             </template>
                             <template v-else>
                                 <template v-for="player in itemsList(items.players, x, y)">
-                                    <image-render :x="x" :y="y" :image="getPlayer(player.entity).getImagePath()" :title="$trans(getPlayer(player.entity).getDisplayName())"/>
+                                    <image-render :x="x" :y="y" :image="getPlayer(player.entity).getImagePath()" :title="$t(getPlayer(player.entity).getDisplayName())"/>
                                 </template>
                             </template>
 
                             <template v-for="object in itemsList(items.objects, x, y)">
-                                <image-render :x="x" :y="y" :image="`/images/objects/map/${object.entity.map_object_type.image}`" :title="$trans(object.entity.map_object_type.name)"/>
+                                <image-render :x="x" :y="y" :image="`/images/objects/map/${object.entity.map_object_type.image}`" :title="$t(object.entity.map_object_type.name)"/>
                             </template>
                         </td>
                     </tr>

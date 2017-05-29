@@ -7,20 +7,20 @@
              @keydown.space.stop.prevent="toggle"
              @keydown.enter.stop.prevent="toggle"
         >
-            <span class="btn-content" v-html="loading ? $trans('strap.loading') : (showPlaceholder || selected)"></span>
+            <span class="btn-content" v-html="loading ? $t('strap.loading') : (showPlaceholder || selected)"></span>
             <i class="icon-select pull-right"></i>
             <span v-if="clearButton && values.length" class="close" @click="clear()">&times;</span>
         </div>
 
         <select ref="sel" v-model="val" :name="name" class="secret" :multiple="multiple" :required="required" :readonly="readonly" :disabled="disabled">
             <option v-if="required" value=""></option>
-            <option v-for="option in list" :value="option[optionsValue]">{{ $trans(option[optionsLabel]) }}</option>
+            <option v-for="option in list" :value="option[optionsValue]">{{ $t(option[optionsLabel]) }}</option>
         </select>
 
         <ul class="dropdown-menu">
             <template v-if="list.length">
                 <li v-if="canSearch" class="bs-searchbox">
-                    <input type="text" :placeholder="searchText||$trans('strap.search')" class="form-control" autocomplete="off" ref="search"
+                    <input type="text" :placeholder="searchText||$t('strap.search')" class="form-control" autocomplete="off" ref="search"
                            v-model="searchValue"
                            @keyup.esc="close"
                     />
@@ -29,7 +29,7 @@
                 <li v-if="required && !clearButton"><a @mousedown.prevent="clear() && close()">{{ showPlaceholder }}</a></li>
                 <li v-for="option in filteredOptions" :id="option[optionsValue]">
                     <a @mousedown.prevent="select(option[optionsValue])">
-                        <span v-html="$trans(option[optionsLabel])"></span>
+                        <span v-html="$t(option[optionsLabel])"></span>
                         <span class="glyphicon glyphicon-ok check-mark" v-show="isSelected(option[optionsValue])"></span>
                     </a>
                 </li>
@@ -107,7 +107,7 @@ export default {
             );
         },
         limitText() {
-            return this.$trans('strap.limit', {limit: this.limit});
+            return this.$t('strap.limit', {limit: this.limit});
         },
         selected() {
             if (this.list.length === 0) {
@@ -126,7 +126,7 @@ export default {
             return sel.join(', ');
         },
         showPlaceholder() {
-            return this.$trans(this.selected) || this.placeholder || this.$trans('strap.notSelected');
+            return this.$t(this.selected) || this.placeholder || this.$t('strap.notSelected');
         },
         text() {
             return this.lang;

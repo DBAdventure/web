@@ -2,16 +2,16 @@
     <div>
         <div id="home-edito">
             <dl>
-                <dt>{{ $trans('home.edito.title') }}</dt>
-                <dd v-html="$trans('home.edito.text')"></dd>
-                <dt>{{ $trans('home.info.title') }}</dt>
+                <dt>{{ $t('home.edito.title') }}</dt>
+                <dd v-html="$t('home.edito.text')"></dd>
+                <dt>{{ $t('home.info.title') }}</dt>
                 <dd>
                     <ul>
-                        <li>{{ $trans('home.list.nb.objects', {nbObjects: $store.state.game.data.nbObjects}) }}</li>
-                        <li>{{ $trans('home.list.nb.buildings', {nbBuildings: $store.state.game.data.nbBuildings}) }}</li>
-                        <li>{{ $trans('home.list.nb.activePlayers', {nbActivePlayers: $store.state.game.data.nbActivePlayers}) }}</li>
-                        <li>{{ $trans('home.list.nb.activeNpc', {nbActiveNpc: $store.state.game.data.nbNpc}) }}</li>
-                        <li>{{ $trans('home.list.nb.guilds', {nbGuilds: $store.state.game.data.nbGuilds}) }}</li>
+                        <li>{{ $t('home.list.nb.objects', {nbObjects: $store.state.game.data.nbObjects}) }}</li>
+                        <li>{{ $t('home.list.nb.buildings', {nbBuildings: $store.state.game.data.nbBuildings}) }}</li>
+                        <li>{{ $t('home.list.nb.activePlayers', {nbActivePlayers: $store.state.game.data.nbActivePlayers}) }}</li>
+                        <li>{{ $t('home.list.nb.activeNpc', {nbActiveNpc: $store.state.game.data.nbNpc}) }}</li>
+                        <li>{{ $t('home.list.nb.guilds', {nbGuilds: $store.state.game.data.nbGuilds}) }}</li>
                     </ul>
                 </dd>
             </dl>
@@ -21,11 +21,11 @@
             <dl>
                 <template v-for="news in newsList">
                     <dt>
-                        <strong>{{ $trans(news.subject) }}</strong>
-                        {{ $trans('home.news.created.by', {by: news.created_by.name, date: $moment(news.created_at).format('ll')}) }}
+                        <strong>{{ $t(news.subject) }}</strong>
+                        {{ $t('home.news.created.by', {by: news.created_by.name, date: $moment(news.created_at).format('ll')}) }}
                     </dt>
                     <dd>
-                        <img :src="news.image" :alt="$trans(news.subject)" class="news-image"/>
+                        <img :src="news.image" :alt="$t(news.subject)" class="news-image"/>
                         <div v-html="news.message"></div>
                         <div class="clearfix"></div>
                     </dd>

@@ -1,39 +1,39 @@
 <template>
     <div>
-        <h1 class="title title-register">{{ $trans('register.text') }}</h1>
-        <p>{{ $trans('register.welcome') }}</p>
-        <p>{{ $trans('register.intro') }}</p>
+        <h1 class="title title-register">{{ $t('register.text') }}</h1>
+        <p>{{ $t('register.welcome') }}</p>
+        <p>{{ $t('register.intro') }}</p>
 
         <form id="register-form" class="form-horizontal" method="post" @submit.prevent="register">
-            <h2>{{ $trans('register.personalinfo') }}</h2>
+            <h2>{{ $t('register.personalinfo') }}</h2>
 
             <bs-input name="name"
-                      :placeholder="$trans('form.name')"
-                      :label="$trans('form.name')"
+                      :placeholder="$t('form.name')"
+                      :label="$t('form.name')"
                       v-model="player.name"
                       label-classes="col-sm-2"
                       container-classes="col-sm-10"
                       required
                       type="text" />
             <bs-input name="login"
-                      :placeholder="$trans('form.login')"
-                      :label="$trans('form.login')"
+                      :placeholder="$t('form.login')"
+                      :label="$t('form.login')"
                       v-model="player.login"
                       label-classes="col-sm-2"
                       container-classes="col-sm-10"
                       required
                       type="text" />
             <bs-input name="password"
-                      :placeholder="$trans('form.password')"
-                      :label="$trans('form.password')"
+                      :placeholder="$t('form.password')"
+                      :label="$t('form.password')"
                       v-model="player.password"
                       label-classes="col-sm-2"
                       container-classes="col-sm-10"
                       required
                       type="password" />
             <bs-input name="password_confirm"
-                      :placeholder="$trans('form.passwordConfirm')"
-                      :label="$trans('form.passwordConfirm')"
+                      :placeholder="$t('form.passwordConfirm')"
+                      :label="$t('form.passwordConfirm')"
                       :match="player.password"
                       v-model="player.password_confirm"
                       label-classes="col-sm-2"
@@ -41,16 +41,16 @@
                       required
                       type="password" />
             <bs-input name="email"
-                      :placeholder="$trans('form.email')"
-                      :label="$trans('form.email')"
+                      :placeholder="$t('form.email')"
+                      :label="$t('form.email')"
                       v-model="player.email"
                       label-classes="col-sm-2"
                       container-classes="col-sm-10"
                       required
                       type="email" />
             <bs-input name="email"
-                      :placeholder="$trans('form.emailConfirm')"
-                      :label="$trans('form.emailConfirm')"
+                      :placeholder="$t('form.emailConfirm')"
+                      :label="$t('form.emailConfirm')"
                       :match="player.email"
                       v-model="player.email_confirm"
                       label-classes="col-sm-2"
@@ -58,11 +58,11 @@
                       required
                       type="email" />
 
-            <h2>{{ $trans('register.speciality') }}</h2>
-            <p>{{ $trans('register.specialityIntro') }}</p>
+            <h2>{{ $t('register.speciality') }}</h2>
+            <p>{{ $t('register.specialityIntro') }}</p>
 
             <div class="form-group">
-                <label class="col-sm-2 control-label required">{{ $trans('class') }}</label>
+                <label class="col-sm-2 control-label required">{{ $t('class') }}</label>
                 <div class="col-sm-10">
                     <bs-group justified>
                         <bs-select
@@ -78,23 +78,23 @@
             <transition name="fade" mode="out-in">
                 <div class="class-list" v-if="player.class === 1" key="1">
                     <div class="col-md-3 text-center">
-                        <h3>{{ $trans('warrior') }}</h3>
-                        <img src="/images/avatars/players/M7.png" :title="$trans('warrior')" :alt="$trans('warrior')"/>
+                        <h3>{{ $t('warrior') }}</h3>
+                        <img src="/images/avatars/players/M7.png" :title="$t('warrior')" :alt="$t('warrior')"/>
                     </div>
                     <div class="col-md-9">
-                        <p>{{ $trans('register.warrior.intro') }}</p>
+                        <p>{{ $t('register.warrior.intro') }}</p>
                         <dl>
-                            <dt>{{ $trans('register.advantages') }}</dt>
+                            <dt>{{ $t('register.advantages') }}</dt>
                             <dd>Efficace contre la plupart des classes</dd>
                             <dd>Fatigue atténuée</dd>
                             <dd>Capacité à supporter de lourds équipements et objets consommables</dd>
                             <dd>Défense</dd>
 
-                            <dt>{{ $trans('register.weakness') }}</dt>
+                            <dt>{{ $t('register.weakness') }}</dt>
                             <dd>Attaque contre les voleurs</dd>
                             <dd>Moins efficace dans les un contre un</dd>
 
-                            <dt>{{ $trans('register.stats') }}</dt>
+                            <dt>{{ $t('register.stats') }}</dt>
                             <dd>770 points de vie, 10 force, 9 précision, 5 résistance, 3 agilité</dd>
                         </dl>
                     </div>
@@ -102,21 +102,21 @@
 
                 <div class="class-list" v-if="player.class === 2" key="2">
                     <div class="col-md-3 text-center">
-                        <h3>{{ $trans('magus') }}</h3>
-                        <img src="/images/avatars/players/HS24.png" :title="$trans('magus')" :alt="$trans('magus')"/>
+                        <h3>{{ $t('magus') }}</h3>
+                        <img src="/images/avatars/players/HS24.png" :title="$t('magus')" :alt="$t('magus')"/>
                     </div>
                     <div class="col-md-9">
-                        <p>{{ $trans('register.magus.intro') }}</p>
+                        <p>{{ $t('register.magus.intro') }}</p>
                         <dl>
-                            <dt>{{ $trans('register.advantages') }}</dt>
+                            <dt>{{ $t('register.advantages') }}</dt>
                             <dd>Attaques magiques variées et puissantes</dd>
                             <dd>Capacité à toucher à distance</dd>
 
-                            <dt>{{ $trans('register.weakness') }}</dt>
+                            <dt>{{ $t('register.weakness') }}</dt>
                             <dd>Consomment plus d'énergie que les autres classes</dd>
                             <dd>Défense</dd>
 
-                            <dt>{{ $trans('register.stats') }}</dt>
+                            <dt>{{ $t('register.stats') }}</dt>
                             <dd>365 points de vie, 15 esprit, 3 analyse, 4 talent, 5 vision, 3 résistance, 15 de Ki + sort de base maîtrisé</dd>
                         </dl>
                     </div>
@@ -124,22 +124,22 @@
 
                 <div class="class-list" v-if="player.class === 3" key="3">
                     <div class="col-md-3 text-center">
-                        <h3>{{ $trans('thief') }}</h3>
-                        <img src="/images/avatars/players/HS45.png" :title="$trans('thief')" :alt="$trans('thief')" />
+                        <h3>{{ $t('thief') }}</h3>
+                        <img src="/images/avatars/players/HS45.png" :title="$t('thief')" :alt="$t('thief')" />
                     </div>
                     <div class="col-md-9">
-                        <p>{{ $trans('register.thief.intro') }}</p>
+                        <p>{{ $t('register.thief.intro') }}</p>
                         <dl>
-                            <dt>{{ $trans('register.advantages') }}</dt>
+                            <dt>{{ $t('register.advantages') }}</dt>
                             <dd>Capacité à voler pour réapprovisionner les troupes</dd>
                             <dd>Défense contre les guerriers</dd>
                             <dd>Infatigable lors de tentative de vols</dd>
 
-                            <dt>{{ $trans('register.weakness') }}</dt>
+                            <dt>{{ $t('register.weakness') }}</dt>
                             <dd>Puissance</dd>
                             <dd>Défense magique</dd>
 
-                            <dt>{{ $trans('register.stats') }}</dt>
+                            <dt>{{ $t('register.stats') }}</dt>
                             <dd>500 points de vie, 15 agilité, 11 précision,  5 force, 2 analyse</dd>
                         </dl>
                     </div>
@@ -147,20 +147,20 @@
 
                 <div class="class-list" v-if="player.class === 4" key="4">
                     <div class="col-md-3 text-center">
-                        <h3>{{ $trans('healer') }}</h3>
-                        <img src="/images/avatars/players/N2.png" :title="$trans('healer')" :alt="$trans('healer')" />
+                        <h3>{{ $t('healer') }}</h3>
+                        <img src="/images/avatars/players/N2.png" :title="$t('healer')" :alt="$t('healer')" />
                     </div>
                     <div class="col-md-9">
-                        <p>{{ $trans('register.healer.intro') }}</p>
+                        <p>{{ $t('register.healer.intro') }}</p>
                         <dl>
-                            <dt>{{ $trans('register.advantages') }}</dt>
+                            <dt>{{ $t('register.advantages') }}</dt>
                             <dd>Excellent soutien en bataille</dd>
                             <dd>Défense magique</dd>
 
-                            <dt>{{ $trans('register.weakness') }}</dt>
+                            <dt>{{ $t('register.weakness') }}</dt>
                             <dd>Attaque</dd>
 
-                            <dt>{{ $trans('register.stats') }}</dt>
+                            <dt>{{ $t('register.stats') }}</dt>
                             <dd>500 points de vie, 17 talent, 7 esprit, 4 force et 9 de Ki</dd>
                         </dl>
                     </div>
@@ -168,23 +168,23 @@
 
                 <div class="class-list" v-if="player.class === 5" key="5">
                     <div class="col-md-3 text-center">
-                        <h3>{{ $trans('analyst') }}</h3>
-                        <img src="/images/avatars/players/C16.png" :title="$trans('analyst')" :alt="$trans('analyst')" />
+                        <h3>{{ $t('analyst') }}</h3>
+                        <img src="/images/avatars/players/C16.png" :title="$t('analyst')" :alt="$t('analyst')" />
                     </div>
                     <div class="col-md-9">
-                        <p>{{ $trans('register.analyst.intro') }}</p>
+                        <p>{{ $t('register.analyst.intro') }}</p>
                         <dl>
-                            <dt>{{ $trans('register.advantages') }}</dt>
+                            <dt>{{ $t('register.advantages') }}</dt>
                             <dd>Classe furtive, vous ne laissez aucune trace de votre passage</dd>
                             <dd>Permet d'élaborer de multiples stratégies menant à la victoire</dd>
                             <dd>Défense générale</dd>
                             <dd>Soutien</dd>
 
-                            <dt>{{ $trans('register.weakness') }}</dt>
+                            <dt>{{ $t('register.weakness') }}</dt>
                             <dd>Attaque</dd>
                             <dd>Gestion très difficile</dd>
 
-                            <dt>{{ $trans('register.stats') }}</dt>
+                            <dt>{{ $t('register.stats') }}</dt>
                             <dd>500 points de vie, 15 analyse, 5 vision,  5 force, 3 agilité, 3 résistance et 4 précision</dd>
                         </dl>
                     </div>
@@ -192,17 +192,17 @@
 
                 <div class="class-list" v-if="player.class === 6" key="6">
                     <div class="col-md-3 text-center">
-                        <h3>{{ $trans('ranger') }}</h3>
-                        <img src="/images/avatars/players/C16.png" :title="$trans('ranger')" :alt="$trans('ranger')" />
+                        <h3>{{ $t('ranger') }}</h3>
+                        <img src="/images/avatars/players/C16.png" :title="$t('ranger')" :alt="$t('ranger')" />
                     </div>
                     <div class="col-md-9">
-                        <p>{{ $trans('register.ranger.intro') }}</p>
+                        <p>{{ $t('register.ranger.intro') }}</p>
                         <dl>
-                            <dt>{{ $trans('register.advantages') }}</dt>
+                            <dt>{{ $t('register.advantages') }}</dt>
 
-                            <dt>{{ $trans('register.weakness') }}</dt>
+                            <dt>{{ $t('register.weakness') }}</dt>
 
-                            <dt>{{ $trans('register.stats') }}</dt>
+                            <dt>{{ $t('register.stats') }}</dt>
                             <dd>500 points de vie, 15 vision, 4 agilité, 4 de précision, 6 force, 2 résistance et 4 en esprit</dd>
                         </dl>
                     </div>
@@ -245,7 +245,7 @@
                             v-model="player.race"
                             :value.sync="player.race"
                             :options="races"
-                            :placeholder="$trans('form.choice.appearance')"
+                            :placeholder="$t('form.choice.appearance')"
                             required>
                         </bs-select>
                     </bs-group>
@@ -253,7 +253,7 @@
                     <bs-group justified v-if="player.race !== null">
                         <bs-select
                             v-model="appearanceType"
-                            :placeholder="$trans('choice.character')"
+                            :placeholder="$t('choice.character')"
                             required>
                             <template v-for="value, key in appearances[player.race]">
                                 <bs-option :value="key">{{ key }}</bs-option>
@@ -274,23 +274,23 @@
 
                 <div class="race-list race-list1">
                     <div class="col-md-3 text-center">
-                        <h3>{{ $trans('humans') }}</h3>
+                        <h3>{{ $t('humans') }}</h3>
                         <p>
-                            <img v-for="image in ['H2', 'H1', 'H5', 'H3', 'H']" :src="`/images/avatars/players/${image}.png`" :title="$trans('humans')" :alt="$trans('humans')" />
+                            <img v-for="image in ['H2', 'H1', 'H5', 'H3', 'H']" :src="`/images/avatars/players/${image}.png`" :title="$t('humans')" :alt="$t('humans')" />
                         </p>
                         <p>
                             <a href="infos_race.php?race=1" target="_blank">Voir les sorts</a>
                         </p>
                     </div>
                     <div class="col-md-9">
-                        <p>{{ $trans('register.humans.intro') }}</p>
+                        <p>{{ $t('register.humans.intro') }}</p>
                         <dl>
-                            <dt>{{ $trans('register.advantages') }}</dt>
+                            <dt>{{ $t('register.advantages') }}</dt>
                             <dd>Race équilibrée</dd>
                             <dd>Sorts spéciaux variés</dd>
                             <dd>Sort de défense et combinable avec les cyborgs</dd>
                             <dd>Soutien exceptionnel</dd>
-                            <dt>{{ $trans('register.weakness') }}</dt>
+                            <dt>{{ $t('register.weakness') }}</dt>
                             <dd>Derniers sorts trop classiques</dd>
                         </dl>
                     </div>
@@ -298,21 +298,21 @@
 
                 <div class="race-list race-list2 hide">
                     <div class="col-md-3 text-center">
-                        <h3>{{ $trans('human-saiyajins') }}</h3>
+                        <h3>{{ $t('human-saiyajins') }}</h3>
                         <p>
-                            <img v-for="image in ['HS27', 'HS33', 'HS35', 'HS41', 'HS42']" :src="`/images/avatars/players/${image}.png`" :title="$trans('human-saiyajins')" :alt="$trans('human-saiyajins')" />
+                            <img v-for="image in ['HS27', 'HS33', 'HS35', 'HS41', 'HS42']" :src="`/images/avatars/players/${image}.png`" :title="$t('human-saiyajins')" :alt="$t('human-saiyajins')" />
                         </p>
                         <p>
                             <a href="infos_race.php?race=2" target="_blank">Voir les sorts</a>
                         </p>
                     </div>
                     <div class="col-md-9">
-                        <p>{{ $trans('register.human-saiyajins.intro') }}</p>
+                        <p>{{ $t('register.human-saiyajins.intro') }}</p>
                         <dl>
-                            <dt>{{ $trans('register.advantages') }}</dt>
+                            <dt>{{ $t('register.advantages') }}</dt>
                             <dd>3 sorts de transformation</dd>
                             <dd>Sorts spéciaux dévastateurs</dd>
-                            <dt>{{ $trans('register.weakness') }}</dt>
+                            <dt>{{ $t('register.weakness') }}</dt>
                             <dd>Aucun sort de soutien</dd>
                         </dl>
                     </div>
@@ -320,23 +320,23 @@
 
                 <div class="race-list race-list3 hide">
                     <div class="col-md-3 text-center">
-                        <h3>{{ $trans('namekians') }}</h3>
+                        <h3>{{ $t('namekians') }}</h3>
                         <p>
-                            <img v-for="image in ['N', 'N3', 'N2', 'N8', 'N5']" :src="`/images/avatars/players/${image}.png`" :title="$trans('namekians')" :alt="$trans('namekians')" />
+                            <img v-for="image in ['N', 'N3', 'N2', 'N8', 'N5']" :src="`/images/avatars/players/${image}.png`" :title="$t('namekians')" :alt="$t('namekians')" />
                         </p>
                         <p>
                             <a href="infos_race.php?race=3" target="_blank">Voir les sorts</a>
                         </p>
                     </div>
                     <div class="col-md-9">
-                        <p>{{ $trans('register.namekians.intro') }}</p>
+                        <p>{{ $t('register.namekians.intro') }}</p>
                         <dl>
-                            <dt>{{ $trans('register.advantages') }}</dt>
+                            <dt>{{ $t('register.advantages') }}</dt>
                             <dd>Economie des points de mouvements</dd>
                             <dd>Sorts spéciaux remarquables</dd>
                             <dd>Capable d'imiter d'autres classes</dd>
                             <dd>Sort ultime dévastateur</dd>
-                            <dt>{{ $trans('register.weakness') }}</dt>
+                            <dt>{{ $t('register.weakness') }}</dt>
                             <dd>Aucun</dd>
                         </dl>
                     </div>
@@ -344,22 +344,22 @@
 
                 <div class="race-list race-list4 hide">
                     <div class="col-md-3 text-center">
-                        <h3>{{ $trans('saiyajins') }}</h3>
+                        <h3>{{ $t('saiyajins') }}</h3>
                         <p>
-                            <img v-for="image in ['S6', 'S24', 'S10', 'S18', 'S16']" :src="`/images/avatars/players/${image}.png`" :title="$trans('saiyajins')" :alt="$trans('saiyajins')" />
+                            <img v-for="image in ['S6', 'S24', 'S10', 'S18', 'S16']" :src="`/images/avatars/players/${image}.png`" :title="$t('saiyajins')" :alt="$t('saiyajins')" />
                         </p>
                         <p>
                             <a href="infos_race.php?race=4" target="_blank">Voir les sorts</a>
                         </p>
                     </div>
                     <div class="col-md-9">
-                        <p>{{ $trans('register.saiyajins.intro') }}</p>
+                        <p>{{ $t('register.saiyajins.intro') }}</p>
                         <dl>
-                            <dt>{{ $trans('register.advantages') }}</dt>
+                            <dt>{{ $t('register.advantages') }}</dt>
                             <dd>4 sorts de transformation</dd>
                             <dd>Sorts mystérieux au potentiel caché</dd>
                             <dd>1 sort spécial</dd>
-                            <dt>{{ $trans('register.weakness') }}</dt>
+                            <dt>{{ $t('register.weakness') }}</dt>
                             <dd>Aucun sort de soutien</dd>
                         </dl>
                     </div>
@@ -367,22 +367,22 @@
 
                 <div class="race-list race-list5 hide">
                     <div class="col-md-3 text-center">
-                        <h3>{{ $trans('aliens') }}</h3>
+                        <h3>{{ $t('aliens') }}</h3>
                         <p>
-                            <img v-for="image in ['A17', 'A20', 'A15', 'A14', 'A23']" :src="`/images/avatars/players/${image}.png`" :title="$trans('aliens')" :alt="$trans('aliens')" />
+                            <img v-for="image in ['A17', 'A20', 'A15', 'A14', 'A23']" :src="`/images/avatars/players/${image}.png`" :title="$t('aliens')" :alt="$t('aliens')" />
                         </p>
                         <p>
                             <a href="infos_race.php?race=5" target="_blank">Voir les sorts</a>
                         </p>
                     </div>
                     <div class="col-md-9">
-                        <p>{{ $trans('register.aliens.intro') }}</p>
+                        <p>{{ $t('register.aliens.intro') }}</p>
                         <dl>
-                            <dt>{{ $trans('register.advantages') }}</dt>
+                            <dt>{{ $t('register.advantages') }}</dt>
                             <dd>Sorts très variés et handicapant sérieusement l'adversaire</dd>
                             <dd>Défense</dd>
                             <dd>2 transformations</dd>
-                            <dt>{{ $trans('register.weakness') }}</dt>
+                            <dt>{{ $t('register.weakness') }}</dt>
                             <dd>Aucun</dd>
                         </dl>
                     </div>
@@ -390,23 +390,23 @@
 
                 <div class="race-list race-list6 hide">
                     <div class="col-md-3 text-center">
-                        <h3>{{ $trans('cyborgs') }}</h3>
+                        <h3>{{ $t('cyborgs') }}</h3>
                         <p>
-                            <img v-for="image in ['C2', 'C3', 'C1', 'C4', 'C8']" :src="`/images/avatars/players/${image}.png`" :title="$trans('cyborgs')" :alt="$trans('cyborgs')" />
+                            <img v-for="image in ['C2', 'C3', 'C1', 'C4', 'C8']" :src="`/images/avatars/players/${image}.png`" :title="$t('cyborgs')" :alt="$t('cyborgs')" />
                         </p>
                         <p>
                             <a href="infos_race.php?race=6" target="_blank">Voir les sorts</a>
                         </p>
                     </div>
                     <div class="col-md-9">
-                        <p>{{ $trans('register.cyborgs.intro') }}</p>
+                        <p>{{ $t('register.cyborgs.intro') }}</p>
                         <dl>
-                            <dt>{{ $trans('register.advantages') }}</dt>
+                            <dt>{{ $t('register.advantages') }}</dt>
                             <dd>Défense</dd>
                             <dd>Soutien</dd>
                             <dd>Sorts spéciaux</dd>
                             <dd>Consommation de Ki fortement réduite</dd>
-                            <dt>{{ $trans('register.weakness') }}</dt>
+                            <dt>{{ $t('register.weakness') }}</dt>
                             <dd>Diversité des sorts</dd>
                         </dl>
                     </div>
@@ -414,24 +414,24 @@
 
                 <div class="race-list race-list7 hide">
                     <div class="col-md-3 text-center">
-                        <h3>{{ $trans('majins') }}</h3>
+                        <h3>{{ $t('majins') }}</h3>
                         <p>
-                            <img v-for="image in ['M9', 'M3', 'M2', 'M4', 'M10']" :src="`/images/avatars/players/${image}.png`" :title="$trans('majins')" :alt="$trans('majins')" />
+                            <img v-for="image in ['M9', 'M3', 'M2', 'M4', 'M10']" :src="`/images/avatars/players/${image}.png`" :title="$t('majins')" :alt="$t('majins')" />
                         </p>
                         <p>
                             <a href="infos_race.php?race=7" target="_blank">Voir les sorts</a>
                         </p>
                     </div>
                     <div class="col-md-9">
-                        <p>{{ $trans('register.majins.intro') }}</p>
+                        <p>{{ $t('register.majins.intro') }}</p>
                         <dl>
-                            <dt>{{ $trans('register.advantages') }}</dt>
+                            <dt>{{ $t('register.advantages') }}</dt>
                             <dd>Race équilibrée</dd>
                             <dd>Potentiel offensif infini</dd>
                             <dd>Réssurection</dd>
                             <dd>Economie de points de mouvements</dd>
                             <dd>Soutien grâce au contrôle de Babidi</dd>
-                            <dt>{{ $trans('register.weakness') }}</dt>
+                            <dt>{{ $t('register.weakness') }}</dt>
                             <dd>Défense</dd>
                         </dl>
                     </div>
@@ -439,23 +439,23 @@
 
                 <div class="race-list race-list8 hide">
                     <div class="col-md-3 text-center">
-                        <h3>{{ $trans('dragons') }}</h3>
+                        <h3>{{ $t('dragons') }}</h3>
                         <p>
-                            <img v-for="image in ['D4', 'D3', 'D13', 'D6', 'D8']" :src="`/images/avatars/players/${image}.png`" :title="$trans('dragons')" :alt="$trans('dragons')" />
+                            <img v-for="image in ['D4', 'D3', 'D13', 'D6', 'D8']" :src="`/images/avatars/players/${image}.png`" :title="$t('dragons')" :alt="$t('dragons')" />
                         </p>
                         <p>
                             <a href="infos_race.php?race=8" target="_blank">Voir les sorts</a>
                         </p>
                     </div>
                     <div class="col-md-9">
-                        <p>{{ $trans('register.dragons.intro') }}</p>
+                        <p>{{ $t('register.dragons.intro') }}</p>
                         <dl>
-                            <dt>{{ $trans('register.advantages') }}</dt>
+                            <dt>{{ $t('register.advantages') }}</dt>
                             <dd>Un total de 13 sorts !</dd>
                             <dd>Sort de soutien protecteur</dd>
                             <dd>Sorts spéciaux nombreux, très puissants, variés et inégalables</dd>
                             <dd>Capable d'accroitre sa puissance grâce aux Dragon Ball</dd>
-                            <dt>{{ $trans('register.weakness') }}</dt>
+                            <dt>{{ $t('register.weakness') }}</dt>
                             <dd>Consommation de Ki la plus élevée de toutes les races</dd>
                         </dl>
                     </div>
@@ -464,9 +464,9 @@
             </div>
 
             <div>
-                <h2>{{ $trans('register.various') }}</h2>
+                <h2>{{ $t('register.various') }}</h2>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label required">{{ $trans('side') }}</label>
+                    <label class="col-sm-2 control-label required">{{ $t('side') }}</label>
                     <div class="col-sm-10">
                         <bs-group justified>
                             <bs-select
@@ -490,7 +490,7 @@
                 </div>
 
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">{{ $trans('register.text') }}</button>
+                    <button type="submit" class="btn btn-default">{{ $t('register.text') }}</button>
                 </div>
             </div>
         </form>

@@ -1,6 +1,6 @@
 <template>
     <dvi>
-        <h1 class="title title-appearance">{{ $trans('appearance') }}</h1>
+        <h1 class="title title-appearance">{{ $t('appearance') }}</h1>
     </dvi>
 </template>
 

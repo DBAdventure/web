@@ -1,6 +1,6 @@
 <template>
     <div class="faq">
-        <h1 class="title title-faq">{{ $trans('menu.faq') }}</h1>
+        <h1 class="title title-faq">{{ $t('menu.faq') }}</h1>
 
         <bs-accordion >
             <bs-panel is-open header="Le jeu est il payant ?">

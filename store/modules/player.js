@@ -1,4 +1,5 @@
 /* eslint-disable no-shadow, no-param-reassign */
+import {isEmpty} from '~/lib/utils';
 import axios from 'axios';
 import api from '~/services/api';
 import * as types from '../mutation-types';
@@ -47,7 +48,7 @@ const actions = {
 const mutations = {
     [types.PLAYER](state, data) {
         state.auth = data;
-        state.connected = (data !== null);
+        state.connected = !isEmpty(data);
     },
 };
 
