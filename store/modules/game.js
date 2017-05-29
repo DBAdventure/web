@@ -2,10 +2,10 @@
 import api from '~/services/api';
 import * as types from '../mutation-types';
 
-const state = {
+const state = () => ({
     style: null,
     data: {},
-};
+});
 
 const actions = {
     fetchGameData({commit}) {

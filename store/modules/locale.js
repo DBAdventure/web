@@ -2,11 +2,11 @@
 import settings from '~/config/general.config';
 import * as types from '../mutation-types';
 
-const state = {
+const state = () => ({
     settings: {
         locale: 'en',
     },
-};
+});
 
 const actions = {
     setLocale({commit}, {req}) {
@@ -27,7 +27,8 @@ const getters = {
     activeLocale: state => state.settings.locale,
 };
 
-const mutations = {
+const
+mutations = {
     [types.LOCALE](state, locale) {
         state.settings.locale = locale;
     },

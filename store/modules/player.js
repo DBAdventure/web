@@ -3,10 +3,10 @@ import axios from 'axios';
 import api from '~/services/api';
 import * as types from '../mutation-types';
 
-const state = {
+const state = () => ({
     auth: {},
     connected: false,
-};
+});
 
 const actions = {
     async fetchPlayer({commit, dispatch}) {

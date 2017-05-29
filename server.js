@@ -8,18 +8,11 @@ const nuxtConfig = require('./config/nuxt.config');
 const generalConfig = require('./config/general.config');
 
 const app = express();
+const isDev = generalConfig.NODE_ENV === 'local';
 
-function runNuxt(dev) {
-    nuxtConfig.dev = dev;
-
-    if (dev) {
-        return new Nuxt(nuxtConfig).build();
-    }
-
-    return new Promise((resolve) => {
-        const nuxt = new Nuxt(nuxtConfig);
-        resolve(nuxt);
-    });
+function runNuxt() {
+    nuxtConfig.dev = isDev;
+    return new Nuxt(nuxtConfig);
 }
 
 /**
@@ -27,19 +20,20 @@ function runNuxt(dev) {
  * the Vue.js Server Side Rendering.
  * This is here that we set all the middlewares and stuff like that.
  */
-runNuxt(generalConfig.NODE_ENV === 'local').then((nuxt) => {
-    const morganMode = generalConfig.NODE_ENV === 'local' ? 'dev' : 'combined';
+runNuxt().then((nuxt) => {
+    const morganMode = isDev ? 'dev' : 'combined';
     const logger = morgan(morganMode);
     const pro = proxy({
         target: generalConfig.API_DOMAIN,
         changeOrigin: true,
-        xfwd: false,
+        xfwd: true,
         headers: {
+            Authorization: `Token ${generalConfig.API_TOKEN}`,
             Accept: 'application/json',
         },
     });
 
-    app.use('/api', pro);
+    app.use('/v1', pro);
     app.use('/media', pro);
     app.use(logger);
     app.use(bodyParser.json());
@@ -53,21 +47,23 @@ runNuxt(generalConfig.NODE_ENV === 'local').then((nuxt) => {
 
     /* eslint-disable no-param-reassign */
     app.post('/session/save', (req, res) => {
-        req.session.authPlayer = req.body.data;
+        req.session.authUser = req.body.data;
         return res.json(req.body.data);
     });
 
     app.post('/session/clear', (req, res) => {
-        req.session.authPlayer = null;
+        req.session.authUser = null;
         return res.json({});
     });
     /* eslint-enable no-param-reassign */
 
+    if (isDev) {
+        nuxt.build();
+    }
     app.use(nuxt.render);
 
-    const listenOn = process.env.SOCKET_PATH || generalConfig.PORT;
-    app.listen(listenOn, () => {
-        console.log(`Running server... on ${listenOn}`);
+    app.listen(process.env.SOCKET_PATH || 3000, () => {
+        console.log(`Running server... on ${process.env.SOCKET_PATH || 3000}`);
     });
 }).catch((error) => {
     console.log(error);

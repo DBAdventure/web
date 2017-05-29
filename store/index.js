@@ -4,12 +4,13 @@ import * as actions from './actions';
 import locale from './modules/locale';
 import player from './modules/player';
 import game from './modules/game';
+import settings from '~/config/general.config';
 
 Vue.use(Vuex);
 
-const debug = process.env.NODE_ENV !== 'production';
+const debug = settings.NODE_ENV === 'local';
 
-const store = new Vuex.Store({
+const createStore = () => new Vuex.Store({
     actions,
     modules: {
         game,
@@ -19,4 +20,4 @@ const store = new Vuex.Store({
     strict: debug,
 });
 
-export default store;
+export default createStore;
