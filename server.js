@@ -33,7 +33,7 @@ runNuxt().then((nuxt) => {
         },
     });
 
-    app.use('/v1', pro);
+    app.use('/api', pro);
     app.use('/media', pro);
     app.use(logger);
     app.use(bodyParser.json());
