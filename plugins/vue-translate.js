@@ -5,12 +5,12 @@ import en from '~/locales/en';
 
 Vue.use(VueI18n);
 
-/* eslint-disable no-unused-vars, no-param-reassign */
-export default ({isClient, app, store, route, error, redirect}) => {
+/* eslint-disable no-param-reassign */
+export default ({app, store}) => {
     // Set i18n instance on app
     // This way we can use it in middleware and pages asyncData/fetch
     app.i18n = new VueI18n({
-        locale: store.state.locale,
+        locale: store.state.locale.locale,
         fallbackLocale: 'en',
         messages: {
             en,
@@ -18,4 +18,4 @@ export default ({isClient, app, store, route, error, redirect}) => {
         },
     });
 };
-/* eslint-enable no-unused-vars, no-param-reassign */
+/* eslint-enable  no-param-reassign */

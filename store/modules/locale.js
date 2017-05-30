@@ -2,10 +2,9 @@
 import settings from '~/config/general.config';
 import * as types from '../mutation-types';
 
-const state = () => ({
-    settings: {
-        locale: 'en',
-    },
+export const state = () => ({
+    locales: ['en', 'fr'],
+    locale: 'en',
 });
 
 const actions = {
@@ -24,13 +23,15 @@ const actions = {
 };
 
 const getters = {
-    activeLocale: state => state.settings.locale,
+    activeLocale: state => state.locale,
 };
 
 const
 mutations = {
     [types.LOCALE](state, locale) {
-        state.settings.locale = locale;
+        if (state.locales.indexOf(locale) !== -1) {
+            state.locale = locale;
+        }
     },
 };
 

@@ -20,7 +20,7 @@ module.exports = {
     build: {
         vendor: [
             'axios',
-            'i18next',
+            'vue-i18n',
             'moment',
             'vuex-router-sync',
             'vue-cookie',
