@@ -62,7 +62,7 @@ runNuxt().then((nuxt) => {
     }
     app.use(nuxt.render);
 
-    app.listen(process.env.SOCKET_PATH || 3000, () => {
+    app.listen(process.env.SOCKET_PATH || generalConfig.PORT, () => {
         console.log(`Running server... on ${process.env.SOCKET_PATH || 3000}`);
     });
 }).catch((error) => {

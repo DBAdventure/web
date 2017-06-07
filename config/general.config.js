@@ -30,6 +30,11 @@ module.exports = {
         {value: 5, label: 'analyst'},
         {value: 6, label: 'ranger'},
     ],
+    map: {
+        TYPE_DEFAULT: 0,
+        TYPE_IMPASSABLE: 1,
+        TYPE_RESPAWN: 2,
+    },
     player: {
         TIME_ACTION_POINT: 5,
         TIME_KI_POINT: 10,
