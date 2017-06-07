@@ -1,6 +1,6 @@
 <template>
     <a href="#" @click.prevent="runAction">
-        <img :src="imagePath" :alt="$t(`map.action.{what}`, {'AP': action})" :title="$t(`map.action.{what}`, {'AP': action})"  />
+        <img :src="imagePath" :alt="$t(`map.action.${what}`, {'AP': action})" :title="$t(`map.action.${what}`, {'AP': action})"  />
     </a>
 </template>
 

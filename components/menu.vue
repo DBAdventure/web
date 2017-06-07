@@ -1,7 +1,7 @@
 <template>
     <div id="menu"">
         <div class="start"></div>
-        <template v-if="$store.state.player.connected">
+        <template v-if="$store.state.player.connected && player.isPlayer()">
             <div class="player">
                 <h2>{{ $t('menu.player.text') }}</h2>
                 <div class="player-info">
@@ -98,7 +98,7 @@
                 </ul>
             </div>
 
-            <div class="movement" v-if="$router.history.current.name === 'map'">
+            <div class="movement" v-if="$route.name === 'map'">
                 <h2>{{ $t('menu.movement.text') }}</h2>
 
                 <div class="movement-info">
@@ -238,6 +238,7 @@ export default {
                 username: this.username,
                 password: this.password,
             }).then(() => {
+                this.player = new Player(this.$store.state.player.auth);
                 this.$router.push('/account');
             }).catch((err) => {
                 msgManager.push(

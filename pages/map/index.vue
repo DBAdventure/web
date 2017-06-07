@@ -44,18 +44,18 @@
             </table>
         </div>
 
-        <div class="search-container container-fluid">
-            <a href="#" @click.prevent="runAction('heal', player.id)"  v-if="player.health < player.total_max_health && player.action_points >= settings.player.HEAL_ACTION">
-                <img :src="player.getActionImagePath('heal')" :alt="$t('map.action.heal', {'AP': settings.player.HEAL_ACTION})" :title="$t('map.action.heal', {'AP': settings.player.HEAL_ACTION})" />
-            </a>
+        <a href="#" @click.prevent="runAction('heal', player.id)"  v-if="player.health < player.total_max_health && player.action_points >= settings.player.HEAL_ACTION">
+            <img :src="player.getActionImagePath('heal')" :alt="$t('map.action.heal', {'AP': settings.player.HEAL_ACTION})" :title="$t('map.action.heal', {'AP': settings.player.HEAL_ACTION})" />
+        </a>
 
-            <template v-for="distance, objects in itemsByDistance(items.objects)">
+        <div class="search-container container-fluid">
+            <template v-for="objects, distance in itemsByDistance(items.objects)">
                 <div class="row row-object" v-for="object in objects">
                     <div class="col-lg-2 text-center">
-                        <image-render :x="x" :y="y" :image="`/images/objects/map/${object.entity.map_object_type.image}`" :title="$t(object.entity.map_object_type.name)"/>
+                        <image-render :x="object.x" :y="object.y" :image="`/images/objects/map/${object.map_object_type.image}`" :title="$t(object.map_object_type.name)"/>
                     </div>
                     <div class="col-lg-10">
-                        {{ $t(object.entity.map_object_type.name) }}
+                        {{ $t(object.map_object_type.name) }}
                         <template v-if="distance === 0">
                             {{ $t('map.near.you') }}
                         </template>
@@ -72,13 +72,13 @@
                 </div>
             </template>
 
-            <template v-for="distance, buildings in itemsByDistance(items.buildings)">
+            <template v-for="buildings, distance in itemsByDistance(items.buildings)">
                 <div class="row row-object" v-for="building in buildings">
                     <div class="col-lg-2 text-center">
-                        <image-render :x="x" :y="y" :image="`/images/${building.entity.image}`" :title="$t(building.entity.name)"/>
+                        <image-render :x="building.x" :y="building.y" :image="`/images/${building.image}`" :title="$t(building.name)"/>
                     </div>
                     <div class="col-lg-10">
-                        {{ $t(building.entity.name) }}
+                        {{ $t(building.name) }}
                         <template v-if="distance === 0">
                             {{ $t('map.near.you') }}
                         </template>
@@ -103,20 +103,19 @@
                 </div>
             </template>
 
-            <template v-for="distance, players in itemsByDistance(items.players)">
+            <template v-for="players, distance in itemsByDistance(items.players, true)">
                 <div class="row row-object" v-for="enemy in players" v-if="enemy.id != player.id">
-                    { const enemy = getPlayer(enemy.entity) }
                     <div class="col-lg-2 text-center">
-                        <image-render :x="x" :y="y" :image="enemy.getImagePath()" :title="$t(enemy.getDisplayName())"/>
+                        <image-render :x="enemy.x" :y="enemy.y" :image="enemy.getImagePath()" :title="$t(enemy.getDisplayName())"/>
                     </div>
                     <div class="col-lg-10">
                         <strong>
-                            <router-link v-if="enemy.isPlayer()" to="`/player/info/${enemy.id}`">{{ enemy.getDisplayName() }}</router-link>
-                            <template v-else>{{ player.displayName }}</template>
+                            <router-link v-if="enemy.isPlayer()" :to="`/player/info/${enemy.id}`">{{ enemy.getDisplayName() }}</router-link>
+                            <template v-else>{{ enemy.getDisplayName() }}</template>
                         </strong>
                         <br/>
 
-                        <span v-html="$t('map.player.info', {"sideClass": enemy.side.name, "raceClass": enemy.race.name, "side": $t(enemy.side.name), "race": $t(player.race.name), "class": $t(player.class)})"></span>
+                        <!-- <span v-html="$t('map.player.info', {'sideClass': enemy.side.name, 'raceClass': enemy.race.name, 'side': $t(enemy.side.name), 'race': $t(player.race.name), 'class': $t(player.class)})"></span> -->
 
                         <template v-if="distance === 0">
                             {{ $t('map.player.near.you', {"level": enemy.level}) }}
@@ -126,8 +125,8 @@
                         </template>
 
                         <div class="actions">
-                            <router-link to="`/inbox/write/${enemy.id}`" v-if="enemy.isPlayer()">
-                                <img :src="target.getActionImagePath('write')" :alt="$t('inbox.write.him')" title="$t('inbox.write.him')" />
+                            <router-link :to="`/inbox/write/${enemy.id}`" v-if="enemy.isPlayer()">
+                                <img :src="enemy.getActionImagePath('write')" :alt="$t('inbox.write.him')" title="$t('inbox.write.him')" />
                             </router-link>
 
                             <template v-if="distance === 0">
@@ -158,7 +157,7 @@
 import _ from 'lodash';
 import settings from '~/config/general.config';
 import Player from '~/lib/player';
-import {isEmpty} from '~/lib/utils';
+import {isEmpty, entries} from '~/lib/utils';
 import api from '~/services/api';
 import ImageRender from '~/components/map/image-render';
 import ActionLink from '~/components/map/action-link';
@@ -182,6 +181,7 @@ export default {
             borderYRange: [],
             borderXRange: [],
             players: {},
+            items: {},
             settings,
         };
     },
@@ -195,18 +195,26 @@ export default {
         });
     },
     methods: {
-        itemsByDistance(data) {
+        itemsByDistance(data, isPlayer) {
             const items = {};
-            data.forEach((objectsX) => {
-                objectsX.forEach((objects) => {
-                    objects.forEach((object) => {
+            /* eslint-disable no-restricted-syntax, no-unused-vars */
+            for (const [kd, objectsX] of entries(data)) {
+                for (const [ko, objects] of entries(objectsX)) {
+                    for (const [k, object] of entries(objects)) {
                         if (isEmpty(items[object.distance])) {
                             items[object.distance] = [];
                         }
-                        items[object.distance].push(object);
-                    });
-                });
-            });
+
+                        if (isPlayer) {
+                            items[object.distance].push(new Player(object.entity));
+                        } else {
+                            items[object.distance].push(object.entity);
+                        }
+                    }
+                }
+            }
+            /* eslint-enable no-restricted-syntax */
+            console.log(items);
             return items;
         },
 

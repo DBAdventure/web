@@ -10,7 +10,7 @@
                     <p>{{ $t('miscellaneous.name', {name: target.getDisplayName()}) }}</p>
 
                     <p v-if="$store.state.player.connected">
-                        <router-link to="`/inbox/write/${target.id}`">
+                        <router-link :to="`/inbox/write/${target.id}`">
                             <img :src="target.getActionImagePath('write')" :alt="$t('inbox.write.him')" title="$t('inbox.write.him')" />
                         </router-link>
                     </p>
@@ -21,7 +21,7 @@
 
                     <p v-if="target.target !== null">
                         {{ $t('miscellaneous.search') }}
-                        <router-link to="`/player/info/${target.target.id}`">{{ target.target.getDisplayName() }}</router-link>
+                        <router-link :to="`/player/info/${target.target.id}`">{{ target.target.getDisplayName() }}</router-link>
                     </p>
 
                     <p>

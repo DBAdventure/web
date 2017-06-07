@@ -17,6 +17,9 @@ module.exports = {
     loading: {
         color: '#3fd0ae',
     },
+    router: {
+        middleware: ['ssr-cookie'],
+    },
     build: {
         vendor: [
             'axios',

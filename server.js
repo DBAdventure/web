@@ -1,6 +1,6 @@
 const bodyParser = require('body-parser');
 const express = require('express');
-const session = require('cookie-session');
+const session = require('express-session');
 const proxy = require('http-proxy-middleware');
 const Nuxt = require('nuxt');
 const morgan = require('morgan');
@@ -40,7 +40,7 @@ runNuxt().then((nuxt) => {
 
     app.use(session({
         secret: process.env.SESSION_SECRET || 'awesomecookiesecret',
-        resave: false,
+        resave: true,
         saveUninitialized: false,
         cookie: {maxAge: 60 * 60 * 1000},
     }));
