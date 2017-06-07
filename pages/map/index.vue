@@ -156,10 +156,10 @@
 
 <script type="text/ecmascript-6">
 import _ from 'lodash';
+import settings from '~/config/general.config';
 import Player from '~/lib/player';
 import {isEmpty} from '~/lib/utils';
 import api from '~/services/api';
-import settings from '~/config/general.config';
 import ImageRender from '~/components/map/image-render';
 import ActionLink from '~/components/map/action-link';
 
@@ -235,8 +235,39 @@ export default {
             return names.join(', ');
         },
 
-        runAction(what, who) {
+        runAction(what, id) {
+            let prom;
+            switch (what) {
+                case 'attack':
+                case 'attack-betray':
+                case 'attack-revenge':
+                    prom = api.attack(id, what);
+                    break;
+                case 'steal':
+                    prom = api.steal(id);
+                    break;
+                case 'heal':
+                    prom = api.heal(id);
+                    break;
+                case 'analysis':
+                    prom = api.analysis(id);
+                    break;
+                case 'slap':
+                    prom = api.slap(id);
+                    break;
+                case 'pickup':
+                    prom = api.pickup(id);
+                    break;
+                case 'give':
+                    prom = api.pickup(id);
+                    break;
+                default:
+                    return;
+            }
 
+            prom.then((res) => {
+                console.log(res);
+            });
         },
     },
 };
