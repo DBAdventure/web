@@ -5,8 +5,6 @@
         <bs-accordion >
             <template v-for="n in questionsList">
                 <bs-panel :is-open="n == 0" :header="$t(`faq.questions[${n}].title`)">
-                    {{ n == 0 }}
-                    {{ n }}
                     <p v-html="$t(`faq.questions[${n}].content`)"></p>
                 </bs-panel>
             </template>
