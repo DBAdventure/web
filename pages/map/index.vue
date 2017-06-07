@@ -209,6 +209,7 @@ export default {
             });
             return items;
         },
+
         itemsList(object, x, y) {
             if (!isEmpty(object[x]) && !isEmpty(object[x][y])) {
                 return object[x][y];
@@ -216,6 +217,7 @@ export default {
 
             return {};
         },
+
         getPlayer(entity) {
             if (isEmpty(this.players[entity.id])) {
                 this.players[entity.id] = new Player(entity);
@@ -223,6 +225,7 @@ export default {
 
             return this.players[entity.id];
         },
+
         groupNames(group) {
             const names = [];
             group.forEach((player) => {
@@ -232,6 +235,9 @@ export default {
             return names.join(', ');
         },
 
+        runAction(what, who) {
+
+        },
     },
 };
 </script>

@@ -1,4 +1,5 @@
 /* eslint-env es6 */
+import isEmpty from '~/lib/utils';
 import axios from 'axios';
 import settings from '~/config/general.config';
 
@@ -91,6 +92,67 @@ const api = {
      */
     getMap() {
         return makeGetRequest('/map/');
+    },
+
+    /**
+     * Action
+     */
+    convert() {
+        return makePostRequest('/action/convert');
+    },
+
+    move(where) {
+        return makePostRequest(`/action/move/${where}`);
+    },
+
+    spell(id, spellId, type) {
+        let url = `/action/spell/${id}`;
+        if (isEmpty(spellId)) {
+            return makeGetRequest(url);
+        }
+
+        url = `${url}/${spellId}`;
+        if (!isEmpty(type)) {
+            url = `${url}/${type}`;
+        }
+        return makePostRequest(url);
+    },
+
+    attack(id, type) {
+        let url = `/action/attack/${id}`;
+        if (!isEmpty(type)) {
+            url = `${url}/${type}`;
+        }
+
+        return makePostRequest(url);
+    },
+
+    pickup(id) {
+        return makePostRequest(`/action/pickup/${id}`);
+    },
+
+    steal(id) {
+        return makePostRequest(`/action/steal/${id}`);
+    },
+
+    analysis(id) {
+        return makePostRequest(`/action/analysis/${id}`);
+    },
+
+    slap(id) {
+        return makePostRequest(`/action/slap/${id}`);
+    },
+
+    heal(id) {
+        return makePostRequest(`/action/heal/${id}`);
+    },
+
+    give(id, objectId) {
+        if (isEmpty(objectId)) {
+            return makeGetRequest(`/action/give/${id}`);
+        }
+
+        return makePostRequest(`/action/give/${id}/${objectId}`);
     },
 };
 
