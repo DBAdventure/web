@@ -44,8 +44,10 @@
 import Player from '~/lib/player';
 
 export default {
-    head: {
-        title: 'Player information',
+    head() {
+        return {
+            title: this.$t('miscellaneous.title'),
+        };
     },
     data() {
         return {

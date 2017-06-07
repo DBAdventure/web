@@ -508,8 +508,10 @@ import {isEmpty} from '~/lib/utils';
 
 export default {
     middleware: 'anonymous',
-    head: {
-        title: 'Register',
+    head() {
+        return {
+            title: this.$t('register.title'),
+        };
     },
     components: {
         BsInput,

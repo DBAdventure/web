@@ -5,13 +5,15 @@
 </template>
 
 <script type="text/ecmascript-6">
- export default {
-     head: {
-         title: 'Team',
-     },
-     data() {
-         return {
-         };
-     },
- };
+export default {
+    head() {
+        return {
+            title: this.$t('team.title'),
+        };
+    },
+    data() {
+        return {
+        };
+    },
+};
 </script>

@@ -40,8 +40,10 @@ import PlayerEvent from '~/components/account/event';
 
 export default {
     middleware: 'auth',
-    head: {
-        title: 'Account',
+    head() {
+        return {
+            title: this.$t('account.title'),
+        };
     },
     components: {
         PlayerEvent,

@@ -5,8 +5,8 @@
     "author": "pierre.rambaud86@gmail.com",
     "private": true,
     "scripts": {
-        "dev": "node build/dev-server.js",
-        "build": "node build/build.js",
+        "dev": "node server.js",
+        "build": "nuxt build",
         "lint": "eslint -c .eslintrc.js --ext .js,.vue ."
     },
     "dependencies": {

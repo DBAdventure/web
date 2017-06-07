@@ -40,8 +40,10 @@
 import api from '~/services/api';
 
 export default {
-    head: {
-        title: 'Home',
+    head() {
+        return {
+            title: this.$t('home.title'),
+        };
     },
     data() {
         return {

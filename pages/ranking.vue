@@ -1,13 +1,15 @@
 <template>
     <div class="history">
-        <h1 class="title title-ranking">{{ $t('history.ranking') }}</h1>
+        <h1 class="title title-ranking">{{ $t('ranking.title') }}</h1>
     </div>
 </template>
 
 <script type="text/ecmascript-6">
 export default {
-    head: {
-        title: 'Ranking',
+    head() {
+        return {
+            title: this.$t('ranking.title'),
+        };
     },
     data() {
         return {

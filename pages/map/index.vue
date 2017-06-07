@@ -58,8 +58,10 @@ import ImageRender from '~/components/map/image-render';
 
 export default {
     middleware: 'auth',
-    head: {
-        title: 'Map',
+    head() {
+        return {
+            title: this.$t('map.title'),
+        };
     },
     components: {
         ImageRender,
