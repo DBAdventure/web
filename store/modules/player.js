@@ -12,7 +12,7 @@ const state = () => ({
 const actions = {
     async fetchPlayer({commit, dispatch}) {
         await api.getPlayer().then(res =>
-            axios.post('/session/save', {
+            axios.post('http://localhost:3000/session/save', {
                 data: res.data,
             }).then(() =>
                 commit(types.PLAYER, res.data),
@@ -39,7 +39,7 @@ const actions = {
 
     logout({commit}) {
         api.logout().then(() => {});
-        axios.post('/session/clear').then(() => {
+        axios.post('http://localhost:3000/session/clear').then(() => {
             commit(types.PLAYER, null);
         });
     },

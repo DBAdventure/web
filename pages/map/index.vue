@@ -126,7 +126,7 @@
 
                         <div class="actions">
                             <router-link :to="`/inbox/write/${enemy.id}`" v-if="enemy.isPlayer()">
-                                <img :src="enemy.getActionImagePath('write')" :alt="$t('inbox.write.him')" title="$t('inbox.write.him')" />
+                                <img :src="enemy.getActionImagePath('write')" :alt="$t('inbox.write.him')" :title="$t('inbox.write.him')" />
                             </router-link>
 
                             <template v-if="distance === 0">

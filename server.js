@@ -47,12 +47,12 @@ runNuxt().then((nuxt) => {
 
     /* eslint-disable no-param-reassign */
     app.post('/session/save', (req, res) => {
-        req.session.authUser = req.body.data;
+        req.session.authPlayer = req.body.data;
         return res.json(req.body.data);
     });
 
     app.post('/session/clear', (req, res) => {
-        req.session.authUser = null;
+        req.session.authPlayer = null;
         return res.json({});
     });
     /* eslint-enable no-param-reassign */
