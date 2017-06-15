@@ -224,6 +224,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+import {mapGetters} from 'vuex';
+import api from '~/services/api';
 import Player from '~/lib/player';
 import {manager as msgManager} from '~/lib/messages';
 import BsInput from '~components/bootstrap/input.vue';
@@ -248,15 +250,22 @@ export default {
                 this.password = '';
             });
         },
+        move(where) {
+            api.move(where).then((res) => {
+
+            });
+        },
     },
     data() {
         return {
             password: null,
             username: null,
-            player: new Player(this.$store.state.player.auth),
         };
     },
     computed: {
+        ...mapGetters({
+            player: 'getPlayer',
+        }),
         hPercent() {
             return Math.floor(
                 (this.player.health * 100) / this.player.total_max_health,

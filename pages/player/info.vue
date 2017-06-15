@@ -11,7 +11,7 @@
 
                     <p v-if="$store.state.player.connected">
                         <router-link :to="`/inbox/write/${target.id}`">
-                            <img :src="target.getActionImagePath('write')" :alt="$t('inbox.write.him')" title="$t('inbox.write.him')" />
+                            <img :src="target.getActionImagePath('write')" :alt="$t('inbox.write')" title="$t('inbox.write')" />
                         </router-link>
                     </p>
 

@@ -222,8 +222,8 @@
             "analysis": "Analysis ({ap} AP)",
             "heal": "Heal ({ap} AP)",
             "spell": "Cast spell ({ap} AP)",
-            "betray": "Attack (betrayal) ({ap} AP)",
-            "revenge": "Attack (revenge) ({ap} AP)",
+            "attack-betray": "Attack (betrayal) ({ap} AP)",
+            "attack-revenge": "Attack (revenge) ({ap} AP)",
             "again": {
                 "steal": "Steal again for {ap} AP",
                 "attack": "Attack again for {ap} AP",

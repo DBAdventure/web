@@ -56,13 +56,18 @@
 </template>
 
 <script type="text/ecmascript-6">
+import {mapGetters} from 'vuex';
 import api from '~/services/api';
-import Player from '~/lib/player';
 import ClickOutside from '~/directives/click-outside';
 
 export default {
     directives: {
         ClickOutside,
+    },
+    computed: {
+        ...mapGetters({
+            player: 'getPlayer',
+        }),
     },
     methods: {
         logout() {
@@ -79,7 +84,6 @@ export default {
     },
     data() {
         return {
-            player: new Player(this.$store.state.player.auth),
             onlinePlayers: 0,
             menuOpened: false,
         };

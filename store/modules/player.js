@@ -1,5 +1,7 @@
 /* eslint-disable no-shadow, no-param-reassign */
+import settings from '~/config/general.config';
 import {isEmpty} from '~/lib/utils';
+import Player from '~/lib/player';
 import axios from 'axios';
 import api from '~/services/api';
 import * as types from '../mutation-types';
@@ -9,10 +11,17 @@ const state = () => ({
     connected: false,
 });
 
+let instance;
+if (!process.BROWSER_BUILD && !process.env.SOCKET_PATH && settings.PORT) {
+    instance = axios.create({baseURL: `http://localhost:${settings.PORT}`});
+} else {
+    instance = axios.create();
+}
+
 const actions = {
     async fetchPlayer({commit, dispatch}) {
         await api.getPlayer().then(res =>
-            axios.post('http://localhost:3000/session/save', {
+            instance.post('/session/save', {
                 data: res.data,
             }).then(() =>
                 commit(types.PLAYER, res.data),
@@ -39,9 +48,16 @@ const actions = {
 
     logout({commit}) {
         api.logout().then(() => {});
-        axios.post('http://localhost:3000/session/clear').then(() => {
+        instance.post('/session/clear').then(() => {
             commit(types.PLAYER, null);
         });
+    },
+};
+
+const getters = {
+    getPlayer: (state) => {
+        console.log(state.auth);
+        return new Player(state.auth);
     },
 };
 
@@ -53,8 +69,9 @@ const mutations = {
 };
 
 export default {
-    state,
     actions,
+    getters,
     mutations,
+    state,
 };
 /* eslint-enable no-shadow, no-param-reassign */

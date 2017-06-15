@@ -98,15 +98,15 @@ const api = {
      * Action
      */
     convert() {
-        return makePostRequest('/action/convert');
+        return makePostRequest('/action/converts');
     },
 
     move(where) {
-        return makePostRequest(`/action/move/${where}`);
+        return makePostRequest(`/action/moves/${where}`);
     },
 
     spell(id, spellId, type) {
-        let url = `/action/spell/${id}`;
+        let url = `/action/spells/${id}`;
         if (isEmpty(spellId)) {
             return makeGetRequest(url);
         }
@@ -119,7 +119,7 @@ const api = {
     },
 
     attack(id, type) {
-        let url = `/action/attack/${id}`;
+        let url = `/action/attacks/${id}`;
         if (!isEmpty(type)) {
             url = `${url}/${type}`;
         }
@@ -128,31 +128,31 @@ const api = {
     },
 
     pickup(id) {
-        return makePostRequest(`/action/pickup/${id}`);
+        return makePostRequest(`/action/pickups/${id}`);
     },
 
     steal(id) {
-        return makePostRequest(`/action/steal/${id}`);
+        return makePostRequest(`/action/steals/${id}`);
     },
 
     analysis(id) {
-        return makePostRequest(`/action/analysis/${id}`);
+        return makePostRequest(`/action/analyses/${id}`);
     },
 
     slap(id) {
-        return makePostRequest(`/action/slap/${id}`);
+        return makePostRequest(`/action/slaps/${id}`);
     },
 
     heal(id) {
-        return makePostRequest(`/action/heal/${id}`);
+        return makePostRequest(`/action/heals/${id}`);
     },
 
     give(id, objectId) {
         if (isEmpty(objectId)) {
-            return makeGetRequest(`/action/give/${id}`);
+            return makeGetRequest(`/action/gives/${id}`);
         }
 
-        return makePostRequest(`/action/give/${id}/${objectId}`);
+        return makePostRequest(`/action/gives/${id}/${objectId}`);
     },
 };
 
