@@ -66,8 +66,7 @@
                 <div class="col-sm-10">
                     <bs-group justified>
                         <bs-select
-                            v-model="player.class"
-                            :value.sync="player.class"
+                            v-model="player.clas"
                             :options="classes"
                             required>
                         </bs-select>
@@ -76,7 +75,7 @@
             </div>
 
             <transition name="fade" mode="out-in">
-                <div class="class-list" v-if="player.class === 1" key="1">
+                <div class="class-list" v-if="player.clas === 1" key="1">
                     <div class="col-md-3 text-center">
                         <h3>{{ $t('warrior') }}</h3>
                         <img src="/images/avatars/players/M7.png" :title="$t('warrior')" :alt="$t('warrior')"/>
@@ -100,7 +99,7 @@
                     </div>
                 </div>
 
-                <div class="class-list" v-if="player.class === 2" key="2">
+                <div class="class-list" v-if="player.clas === 2" key="2">
                     <div class="col-md-3 text-center">
                         <h3>{{ $t('magus') }}</h3>
                         <img src="/images/avatars/players/HS24.png" :title="$t('magus')" :alt="$t('magus')"/>
@@ -122,7 +121,7 @@
                     </div>
                 </div>
 
-                <div class="class-list" v-if="player.class === 3" key="3">
+                <div class="class-list" v-if="player.clas === 3" key="3">
                     <div class="col-md-3 text-center">
                         <h3>{{ $t('thief') }}</h3>
                         <img src="/images/avatars/players/HS45.png" :title="$t('thief')" :alt="$t('thief')" />
@@ -145,7 +144,7 @@
                     </div>
                 </div>
 
-                <div class="class-list" v-if="player.class === 4" key="4">
+                <div class="class-list" v-if="player.clas === 4" key="4">
                     <div class="col-md-3 text-center">
                         <h3>{{ $t('healer') }}</h3>
                         <img src="/images/avatars/players/N2.png" :title="$t('healer')" :alt="$t('healer')" />
@@ -166,7 +165,7 @@
                     </div>
                 </div>
 
-                <div class="class-list" v-if="player.class === 5" key="5">
+                <div class="class-list" v-if="player.clas === 5" key="5">
                     <div class="col-md-3 text-center">
                         <h3>{{ $t('analyst') }}</h3>
                         <img src="/images/avatars/players/C16.png" :title="$t('analyst')" :alt="$t('analyst')" />
@@ -190,7 +189,7 @@
                     </div>
                 </div>
 
-                <div class="class-list" v-if="player.class === 6" key="6">
+                <div class="class-list" v-if="player.clas === 6" key="6">
                     <div class="col-md-3 text-center">
                         <h3>{{ $t('ranger') }}</h3>
                         <img src="/images/avatars/players/C16.png" :title="$t('ranger')" :alt="$t('ranger')" />
@@ -243,7 +242,6 @@
                     <bs-group justified>
                         <bs-select
                             v-model="player.race"
-                            :value.sync="player.race"
                             :options="races"
                             :placeholder="$t('form.choice.appearance')"
                             required>
@@ -471,7 +469,6 @@
                         <bs-group justified>
                             <bs-select
                                 v-model="player.side"
-                                :value.sync="player.side"
                                 :options="sides"
                                 options-value="value"
                                 required>
@@ -498,78 +495,80 @@
 </template>
 
 <script type="text/ecmascript-6">
-import settings from '~/config/general.config';
-import BsInput from '~components/bootstrap/input.vue';
-import BsSelect from '~components/bootstrap/select.vue';
-import BsOption from '~components/bootstrap/option.vue';
-import BsGroup from '~components/bootstrap/group.vue';
-import api from '~/services/api';
-import {isEmpty} from '~/lib/utils';
+    import {random} from 'lodash';
+    import settings from '~/config/general.config';
+    import BsInput from '~components/bootstrap/input.vue';
+    import BsSelect from '~components/bootstrap/select.vue';
+    import BsOption from '~components/bootstrap/option.vue';
+    import BsGroup from '~components/bootstrap/group.vue';
+    import api from '~/services/api';
+    import {isEmpty} from '~/lib/utils';
 
-export default {
-    middleware: 'anonymous',
-    head() {
-        return {
-            title: this.$t('register.title'),
-        };
-    },
-    components: {
-        BsInput,
-        BsGroup,
-        BsSelect,
-        BsOption,
-    },
-    data() {
-        return {
-            races: [],
-            sides: [],
-            classes: [],
-            appearanceType: null,
-            appearances: {},
-            player: {
-                class: 1,
-                side: 1,
-                race: null,
-                image: null,
-                name: '',
-                login: '',
-                password: '',
-                password_confirm: '',
-                email: '',
-                email_confirm: '',
+    export default {
+        middleware: 'anonymous',
+        head() {
+            return {
+                title: this.$t('register.title'),
+            };
+        },
+        components: {
+            BsInput,
+            BsGroup,
+            BsSelect,
+            BsOption,
+        },
+        data() {
+            return {
+                races: [],
+                sides: [],
+                classes: [],
+                appearanceType: null,
+                appearances: {},
+                player: {
+                    clas: 1,
+                    side: 1,
+                    race: null,
+                    image: null,
+                    name: '',
+                    login: '',
+                    password: '',
+                    password_confirm: '',
+                    email: '',
+                    email_confirm: '',
+                },
+            };
+        },
+        computed: {
+            selectedImage() {
+                let image = this.player.image;
+                if (isEmpty(image)) {
+                    image = 'S.png';
+                }
+                return `/images/avatars/players/${image}`;
             },
-        };
-    },
-    computed: {
-        selectedImage() {
-            let image = this.player.image;
-            if (isEmpty(image)) {
-                image = 'S.png';
-            }
-            return `/images/avatars/players/${image}`;
         },
-    },
-    methods: {
-        async submit() {
-            await api.register(this.player).then(() => {
+        methods: {
+            submit() {
+                api.register(this.player).then(() => {
 
-            }).catch((e) => {
+                }).catch((e) => {
 
-            });
+                });
+            },
         },
-    },
-    async mounted() {
-        this.races = settings.races;
-        this.sides = settings.sides;
-        this.classes = settings.classes;
-        await api.getAppearanceData().then((res) => {
-            this.appearances = res.data;
-        });
-
-        this.$nextTick(() => {
-            this.player.class = Math.floor((Math.random() * 6) + 1);
-            this.player.side = Math.floor((Math.random() * 2) + 1);
-        });
-    },
-};
+        mounted() {
+            this.races = settings.races;
+            this.sides = settings.sides;
+            this.classes = settings.classes;
+            this.player.clas = random(1, 6);
+            this.player.side = random(1, 2);
+        },
+        async asyncData() {
+            return api.getAppearanceData().then(res => (
+                {
+                    appearances: res.data,
+                }
+            ));
+        },
+    };
 </script>
