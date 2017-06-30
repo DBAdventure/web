@@ -56,7 +56,6 @@ const actions = {
 
 const getters = {
     getPlayer: (state) => {
-        console.log(state.auth);
         return new Player(state.auth);
     },
 };
