@@ -11,7 +11,9 @@ const actions = {
     fetchGameData({commit}) {
         return api.getGameData().then((res) => {
             commit(types.GAME_DATA, res.data);
-        }).catch(() => {});
+        }).catch((res) => {
+            console.log(res.data);
+        });
     },
     setStyle({commit}) {
         commit(

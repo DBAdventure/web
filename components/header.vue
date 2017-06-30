@@ -56,42 +56,42 @@
 </template>
 
 <script type="text/ecmascript-6">
-import {mapGetters} from 'vuex';
-import api from '~/services/api';
-import ClickOutside from '~/directives/click-outside';
+    import {mapGetters} from 'vuex';
+    import api from '~/services/api';
+    import ClickOutside from '~/directives/click-outside';
 
-export default {
-    directives: {
-        ClickOutside,
-    },
-    computed: {
-        ...mapGetters({
-            player: 'getPlayer',
-        }),
-    },
-    methods: {
-        logout() {
-            this.$store.dispatch('logout');
-            this.$router.push('/');
-            this.closeMenu();
+    export default {
+        directives: {
+            ClickOutside,
         },
-        toggleMenu() {
-            this.menuOpened = !this.menuOpened;
+        computed: {
+            ...mapGetters({
+                player: 'getPlayer',
+            }),
         },
-        closeMenu() {
-            this.menuOpened = false;
+        methods: {
+            logout() {
+                this.$store.dispatch('logout');
+                this.$router.push('/');
+                this.closeMenu();
+            },
+            toggleMenu() {
+                this.menuOpened = !this.menuOpened;
+            },
+            closeMenu() {
+                this.menuOpened = false;
+            },
         },
-    },
-    data() {
-        return {
-            onlinePlayers: 0,
-            menuOpened: false,
-        };
-    },
-    async mounted() {
-        await api.getOnlinePlayers().then((res) => {
-            this.onlinePlayers = res.data.nbOnlinePlayers;
-        });
-    },
-};
+        data() {
+            return {
+                onlinePlayers: 0,
+                menuOpened: false,
+            };
+        },
+        async mounted() {
+            await api.getOnlinePlayers().then((res) => {
+                this.onlinePlayers = res.data.nbOnlinePlayers;
+            });
+        },
+    };
 </script>

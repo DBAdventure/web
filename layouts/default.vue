@@ -24,17 +24,20 @@
 </template>
 
 <script type="text/ecmascript-6">
-import DbaHeader from '~/components/header';
-import DbaMenu from '~/components/menu';
-import DbaFooter from '~/components/footer';
-import Alert from '~/components/custom/alert';
+    import DbaHeader from '~/components/header';
+    import DbaMenu from '~/components/menu';
+    import DbaFooter from '~/components/footer';
+    import Alert from '~/components/custom/alert';
 
-export default {
-    components: {
-        DbaHeader,
-        DbaMenu,
-        DbaFooter,
-        Alert,
-    },
-};
+    export default {
+        components: {
+            DbaHeader,
+            DbaMenu,
+            DbaFooter,
+            Alert,
+        },
+        mounted() {
+            this.$store.dispatch('fetchGameData');
+        },
+    };
 </script>

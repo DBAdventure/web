@@ -35,28 +35,28 @@
 </template>
 
 <script type="text/ecmascript-6">
-import api from '~/services/api';
-import PlayerEvent from '~/components/account/event';
+    import api from '~/services/api';
+    import PlayerEvent from '~/components/account/event';
 
-export default {
-    middleware: 'auth',
-    head() {
-        return {
-            title: this.$t('account.title'),
-        };
-    },
-    components: {
-        PlayerEvent,
-    },
-    data() {
-        return {
-            events: {},
-        };
-    },
-    async mounted() {
-        await api.getEvents().then((res) => {
-            this.events = res.data;
-        });
-    },
-};
+    export default {
+        middleware: 'auth',
+        head() {
+            return {
+                title: this.$t('account.title'),
+            };
+        },
+        components: {
+            PlayerEvent,
+        },
+        data() {
+            return {
+                events: {},
+            };
+        },
+        async mounted() {
+            await api.getEvents().then((res) => {
+                this.events = res.data;
+            });
+        },
+    };
 </script>

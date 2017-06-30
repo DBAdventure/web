@@ -33,33 +33,33 @@
 </template>
 
 <script type="text/ecmascript-6">
-import Player from '~/lib/player';
+    import Player from '~/lib/player';
 
-export default {
-    props: {
-        event: {
-            type: Object,
-            required: true,
+    export default {
+        props: {
+            event: {
+                type: Object,
+                required: true,
+            },
+            target: {
+                type: Object,
+                required: false,
+            },
+            isReceived: {
+                type: Boolean,
+                default: false,
+            },
         },
-        target: {
-            type: Object,
-            required: false,
+        data() {
+            return {
+                player: new Player(this.target),
+            };
         },
-        isReceived: {
-            type: Boolean,
-            default: false,
+        methods: {
+            displayPlayerName(eventPlayer) {
+                const player = new Player(eventPlayer);
+                return player.getDisplayName();
+            },
         },
-    },
-    data() {
-        return {
-            player: new Player(this.target),
-        };
-    },
-    methods: {
-        displayPlayerName(eventPlayer) {
-            const player = new Player(eventPlayer);
-            return player.getDisplayName();
-        },
-    },
-};
+    };
 </script>

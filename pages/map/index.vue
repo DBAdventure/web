@@ -154,137 +154,137 @@
 </template>
 
 <script type="text/ecmascript-6">
-import _ from 'lodash';
-import settings from '~/config/general.config';
-import Player from '~/lib/player';
-import {isEmpty, entries} from '~/lib/utils';
-import api from '~/services/api';
-import ImageRender from '~/components/map/image-render';
-import ActionLink from '~/components/map/action-link';
-import {mapGetters} from 'vuex';
+    import _ from 'lodash';
+    import settings from '~/config/general.config';
+    import Player from '~/lib/player';
+    import {isEmpty, entries} from '~/lib/utils';
+    import api from '~/services/api';
+    import ImageRender from '~/components/map/image-render';
+    import ActionLink from '~/components/map/action-link';
+    import {mapGetters} from 'vuex';
 
-export default {
-    middleware: 'auth',
-    head() {
-        return {
-            title: this.$t('map.title'),
-        };
-    },
-    components: {
-        ImageRender,
-        ActionLink,
-    },
-    computed: {
-        ...mapGetters({
-            player: 'getPlayer',
-        }),
-    },
-    data() {
-        return {
-            map: {},
-            borders: {},
-            borderYRange: [],
-            borderXRange: [],
-            players: {},
-            items: {},
-            settings,
-        };
-    },
-    async mounted() {
-        await api.getMap().then((res) => {
-            this.map = res.data.map;
-            this.borders = res.data.borders;
-            this.items = res.data.items;
-            this.borderYRange = _.range(this.borders.yStart, this.borders.yEnd + 1);
-            this.borderXRange = _.range(this.borders.xStart, this.borders.xEnd + 1);
-        });
-    },
-    methods: {
-        itemsByDistance(data, isPlayer) {
-            const items = {};
-            /* eslint-disable no-restricted-syntax, no-unused-vars */
-            for (const [x, objectsX] of entries(data)) {
-                for (const [y, objects] of entries(objectsX)) {
-                    for (const [k, object] of entries(objects)) {
-                        if (isEmpty(items[object.distance])) {
-                            items[object.distance] = [];
-                        }
+    export default {
+        middleware: 'auth',
+        head() {
+            return {
+                title: this.$t('map.title'),
+            };
+        },
+        components: {
+            ImageRender,
+            ActionLink,
+        },
+        computed: {
+            ...mapGetters({
+                player: 'getPlayer',
+            }),
+        },
+        data() {
+            return {
+                map: {},
+                borders: {},
+                borderYRange: [],
+                borderXRange: [],
+                players: {},
+                items: {},
+                settings,
+            };
+        },
+        async mounted() {
+            await api.getMap().then((res) => {
+                this.map = res.data.map;
+                this.borders = res.data.borders;
+                this.items = res.data.items;
+                this.borderYRange = _.range(this.borders.yStart, this.borders.yEnd + 1);
+                this.borderXRange = _.range(this.borders.xStart, this.borders.xEnd + 1);
+            });
+        },
+        methods: {
+            itemsByDistance(data, isPlayer) {
+                const items = {};
+                /* eslint-disable no-restricted-syntax, no-unused-vars */
+                for (const [x, objectsX] of entries(data)) {
+                    for (const [y, objects] of entries(objectsX)) {
+                        for (const [k, object] of entries(objects)) {
+                            if (isEmpty(items[object.distance])) {
+                                items[object.distance] = [];
+                            }
 
-                        object.entity.x = x;
-                        object.entity.y = y;
-                        if (isPlayer) {
-                            items[object.distance].push(new Player(object.entity));
-                        } else {
-                            items[object.distance].push(object.entity);
+                            object.entity.x = x;
+                            object.entity.y = y;
+                            if (isPlayer) {
+                                items[object.distance].push(new Player(object.entity));
+                            } else {
+                                items[object.distance].push(object.entity);
+                            }
                         }
                     }
                 }
-            }
-            /* eslint-enable no-restricted-syntax */
-            return items;
+                /* eslint-enable no-restricted-syntax */
+                return items;
+            },
+
+            itemsList(object, x, y) {
+                if (!isEmpty(object) && !isEmpty(object[x]) && !isEmpty(object[x][y])) {
+                    return object[x][y];
+                }
+
+                return {};
+            },
+
+            getPlayer(entity) {
+                if (isEmpty(this.players[entity.id])) {
+                    this.players[entity.id] = new Player(entity);
+                }
+
+                return this.players[entity.id];
+            },
+
+            groupNames(group) {
+                const names = [];
+                group.forEach((player) => {
+                    names.push(this.getPlayer(player.entity).getDisplayName());
+                });
+
+                return names.join(', ');
+            },
+
+            async runAction(what, id) {
+                let prom;
+                switch (what) {
+                    case 'attack':
+                    case 'attack-betray':
+                    case 'attack-revenge':
+                        prom = api.attack(id, what);
+                        break;
+                    case 'steal':
+                        prom = api.steal(id);
+                        break;
+                    case 'heal':
+                        prom = api.heal(id);
+                        break;
+                    case 'analysis':
+                        prom = api.analysis(id);
+                        break;
+                    case 'slap':
+                        prom = api.slap(id);
+                        break;
+                    case 'pickup':
+                        prom = api.pickup(id);
+                        break;
+                    case 'give':
+                        prom = api.pickup(id);
+                        break;
+                    default:
+                        return;
+                }
+
+                this.$store.dispatch('fetchPlayer');
+                /* await prom.then((res) => {
+                 *     console.log(this.$store);
+                 *     console.log(res);
+                 * });*/
+            },
         },
-
-        itemsList(object, x, y) {
-            if (!isEmpty(object) && !isEmpty(object[x]) && !isEmpty(object[x][y])) {
-                return object[x][y];
-            }
-
-            return {};
-        },
-
-        getPlayer(entity) {
-            if (isEmpty(this.players[entity.id])) {
-                this.players[entity.id] = new Player(entity);
-            }
-
-            return this.players[entity.id];
-        },
-
-        groupNames(group) {
-            const names = [];
-            group.forEach((player) => {
-                names.push(this.getPlayer(player.entity).getDisplayName());
-            });
-
-            return names.join(', ');
-        },
-
-        async runAction(what, id) {
-            let prom;
-            switch (what) {
-                case 'attack':
-                case 'attack-betray':
-                case 'attack-revenge':
-                    prom = api.attack(id, what);
-                    break;
-                case 'steal':
-                    prom = api.steal(id);
-                    break;
-                case 'heal':
-                    prom = api.heal(id);
-                    break;
-                case 'analysis':
-                    prom = api.analysis(id);
-                    break;
-                case 'slap':
-                    prom = api.slap(id);
-                    break;
-                case 'pickup':
-                    prom = api.pickup(id);
-                    break;
-                case 'give':
-                    prom = api.pickup(id);
-                    break;
-                default:
-                    return;
-            }
-
-            this.$store.dispatch('fetchPlayer');
-            /* await prom.then((res) => {
-             *     console.log(this.$store);
-             *     console.log(res);
-             * });*/
-        },
-    },
-};
+    };
 </script>

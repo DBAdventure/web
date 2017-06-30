@@ -15,34 +15,34 @@
 </template>
 
 <script type="text/ecmascript-6">
-import {manager} from '~/lib/messages';
-import BsAlert from '~/components/bootstrap/alert.vue';
+    import {manager} from '~/lib/messages';
+    import BsAlert from '~/components/bootstrap/alert.vue';
 
-export default {
-    components: {
-        BsAlert,
-    },
-    data() {
-        return {
-            manager,
-            unRegisterCallback: undefined,
-            messages: [],
-        };
-    },
-    mounted() {
-        this.unRegisterCallback = this.manager.onChange((messages) => {
-            this.messages = messages;
-        });
-    },
-    beforeDestroy() {
-        if (this.unRegisterCallback) {
-            this.unRegisterCallback();
-        }
-    },
-    methods: {
-        drop(message) {
-            this.manager.drop(message.idx);
+    export default {
+        components: {
+            BsAlert,
         },
-    },
-};
+        data() {
+            return {
+                manager,
+                unRegisterCallback: undefined,
+                messages: [],
+            };
+        },
+        mounted() {
+            this.unRegisterCallback = this.manager.onChange((messages) => {
+                this.messages = messages;
+            });
+        },
+        beforeDestroy() {
+            if (this.unRegisterCallback) {
+                this.unRegisterCallback();
+            }
+        },
+        methods: {
+            drop(message) {
+                this.manager.drop(message.idx);
+            },
+        },
+    };
 </script>

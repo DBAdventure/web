@@ -41,18 +41,18 @@
 </template>
 
 <script type="text/ecmascript-6">
-import Player from '~/lib/player';
+    import Player from '~/lib/player';
 
-export default {
-    head() {
-        return {
-            title: this.$t('miscellaneous.title'),
-        };
-    },
-    data() {
-        return {
-            target: new Player(),
-        };
-    },
-};
+    export default {
+        head() {
+            return {
+                title: this.$t('miscellaneous.title'),
+            };
+        },
+        data() {
+            return {
+                target: new Player(),
+            };
+        },
+    };
 </script>

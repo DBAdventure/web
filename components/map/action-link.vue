@@ -5,44 +5,44 @@
 </template>
 
 <script type="text/ecmascript-6">
-import settings from '~/config/general.config';
+    import settings from '~/config/general.config';
 
-export default {
-    props: {
-        player: {
-            type: Object,
-            required: true,
+    export default {
+        props: {
+            player: {
+                type: Object,
+                required: true,
+            },
+            me: {
+                type: Object,
+                required: true,
+            },
+            what: {
+                type: String,
+                required: true,
+            },
         },
-        me: {
-            type: Object,
-            required: true,
+        data() {
+            return {
+                settings,
+            };
         },
-        what: {
-            type: String,
-            required: true,
-        },
-    },
-    data() {
-        return {
-            settings,
-        };
-    },
-    computed: {
-        action() {
-            return settings.player[`${this.what.toUpperCase()}_ACTION`];
-        },
-        imagePath() {
-            if (this.player.isPlayer()) {
-                return this.player.getActionImagePath(this.what);
-            }
+        computed: {
+            action() {
+                return settings.player[`${this.what.toUpperCase()}_ACTION`];
+            },
+            imagePath() {
+                if (this.player.isPlayer()) {
+                    return this.player.getActionImagePath(this.what);
+                }
 
-            return this.me.getActionImagePath(this.what);
+                return this.me.getActionImagePath(this.what);
+            },
         },
-    },
-    method: {
-        runAction() {
-            this.$emit('run-action', {action: this.action, id: this.player.id});
+        method: {
+            runAction() {
+                this.$emit('run-action', {action: this.action, id: this.player.id});
+            },
         },
-    },
-};
+    };
 </script>

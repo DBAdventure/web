@@ -5,15 +5,15 @@
 </template>
 
 <script type="text/ecmascript-6">
-export default {
-    head() {
-        return {
-            title: this.$t('ranking.title'),
-        };
-    },
-    data() {
-        return {
-        };
-    },
-};
+    export default {
+        head() {
+            return {
+                title: this.$t('ranking.title'),
+            };
+        },
+        data() {
+            return {
+            };
+        },
+    };
 </script>

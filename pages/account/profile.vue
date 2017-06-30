@@ -5,16 +5,16 @@
 </template>
 
 <script type="text/ecmascript-6">
-export default {
-    middleware: 'auth',
-    head() {
-        return {
-            title: this.$t('account.title'),
-        };
-    },
-    data() {
-        return {
-        };
-    },
-};
+    export default {
+        middleware: 'auth',
+        head() {
+            return {
+                title: this.$t('account.title'),
+            };
+        },
+        data() {
+            return {
+            };
+        },
+    };
 </script>

@@ -13,24 +13,24 @@
 </template>
 
 <script type="text/ecmascript-6">
-import _ from 'lodash';
-import BsAccordion from '~components/bootstrap/accordion.vue';
-import BsPanel from '~components/bootstrap/panel.vue';
+    import _ from 'lodash';
+    import BsAccordion from '~components/bootstrap/accordion.vue';
+    import BsPanel from '~components/bootstrap/panel.vue';
 
-export default {
-    components: {
-        BsAccordion,
-        BsPanel,
-    },
-    computed: {
-        questionsList() {
-            return _.range(7);
+    export default {
+        components: {
+            BsAccordion,
+            BsPanel,
         },
-    },
-    head() {
-        return {
-            title: this.$t('faq.title'),
-        };
-    },
-};
+        computed: {
+            questionsList() {
+                return _.range(7);
+            },
+        },
+        head() {
+            return {
+                title: this.$t('faq.title'),
+            };
+        },
+    };
 </script>

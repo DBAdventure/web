@@ -21,6 +21,7 @@
         "express-session": "^1.15.3",
         "glob": "^7.1.2",
         "http-proxy-middleware": "^0.17.4",
+        "iview": "^2.0.0-rc.17",
         "loadash": "^0.0.1",
         "lodash": "^4.17.4",
         "moment": "^2.18.1",

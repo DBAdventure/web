@@ -23,10 +23,11 @@ module.exports = {
     build: {
         vendor: [
             'axios',
-            'vue-i18n',
+            'iview',
             'moment',
-            'vuex-router-sync',
             'vue-cookie',
+            'vue-i18n',
+            'vuex-router-sync',
         ],
         postcss: [
             autoprefixer({
@@ -35,8 +36,9 @@ module.exports = {
         ],
     },
     plugins: [
+        '~plugins/date',
+        {src: '~plugins/iview', ssr: false},
         '~plugins/vue-cookie',
         '~plugins/vue-translate',
-        '~plugins/date',
     ],
 };

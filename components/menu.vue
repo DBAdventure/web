@@ -224,77 +224,77 @@
 </template>
 
 <script type="text/ecmascript-6">
-import {mapGetters} from 'vuex';
-import api from '~/services/api';
-import Player from '~/lib/player';
-import {manager as msgManager} from '~/lib/messages';
-import BsInput from '~components/bootstrap/input.vue';
+    import {mapGetters} from 'vuex';
+    import api from '~/services/api';
+    import Player from '~/lib/player';
+    import {manager as msgManager} from '~/lib/messages';
+    import BsInput from '~components/bootstrap/input.vue';
 
-export default {
-    components: {
-        BsInput,
-    },
-    methods: {
-        login() {
-            this.$store.dispatch('login', {
-                username: this.username,
-                password: this.password,
-            }).then(() => {
-                this.player = new Player(this.$store.state.player.auth);
-                this.$router.push('/account');
-            }).catch((err) => {
-                msgManager.push(
-                    this.$t(err.message),
-                    'danger',
+    export default {
+        components: {
+            BsInput,
+        },
+        methods: {
+            login() {
+                this.$store.dispatch('login', {
+                    username: this.username,
+                    password: this.password,
+                }).then(() => {
+                    this.player = new Player(this.$store.state.player.auth);
+                    this.$router.push('/account');
+                }).catch((err) => {
+                    msgManager.push(
+                        this.$t(err.message),
+                        'danger',
+                    );
+                    this.password = '';
+                });
+            },
+            move(where) {
+                api.move(where).then((res) => {
+
+                });
+            },
+        },
+        data() {
+            return {
+                password: null,
+                username: null,
+            };
+        },
+        computed: {
+            ...mapGetters({
+                player: 'getPlayer',
+            }),
+            hPercent() {
+                return Math.floor(
+                    (this.player.health * 100) / this.player.total_max_health,
                 );
-                this.password = '';
-            });
-        },
-        move(where) {
-            api.move(where).then((res) => {
+            },
 
-            });
-        },
-    },
-    data() {
-        return {
-            password: null,
-            username: null,
-        };
-    },
-    computed: {
-        ...mapGetters({
-            player: 'getPlayer',
-        }),
-        hPercent() {
-            return Math.floor(
-                (this.player.health * 100) / this.player.total_max_health,
-            );
-        },
+            kiPercent() {
+                return Math.floor(
+                    (this.player.ki * 100) / this.player.total_max_ki,
+                );
+            },
 
-        kiPercent() {
-            return Math.floor(
-                (this.player.ki * 100) / this.player.total_max_ki,
-            );
-        },
+            apPercent() {
+                return Math.floor(
+                    (this.player.action_points * 100) / this.player.max_action_points,
+                );
+            },
 
-        apPercent() {
-            return Math.floor(
-                (this.player.action_points * 100) / this.player.max_action_points,
-            );
-        },
+            mpPercent() {
+                return Math.floor(
+                    (this.player.movement_points * 100) / this.player.max_movement_points,
+                );
+            },
 
-        mpPercent() {
-            return Math.floor(
-                (this.player.movement_points * 100) / this.player.max_movement_points,
-            );
+            fpPercent() {
+                return Math.floor(
+                    (this.player.fatigue_points * 100) / this.player.max_fatigue_points,
+                );
+            },
         },
-
-        fpPercent() {
-            return Math.floor(
-                (this.player.fatigue_points * 100) / this.player.max_fatigue_points,
-            );
-        },
-    },
-};
+    };
 </script>

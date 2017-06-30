@@ -952,7 +952,8 @@
     "error": {
         "bad": {
             "credentials": "Your username or password are incorrect."
-        }
+        },
+        "generic": "Oops, something went wrong"
     },
     "strap": {
         "limit": "Limit reached ({limit} items max).",
