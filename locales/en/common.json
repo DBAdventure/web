@@ -68,6 +68,7 @@
     "health": "Health",
     "ki": "Ki",
     "class": "Class",
+    "side": "Side",
     "previous": "Previous",
     "next": "Next",
     "guilds": "Guilds",
@@ -145,22 +146,74 @@
         "stats": "Statistics",
         "various": "Various",
         "warrior": {
-            "intro": "Puissant et robuste, vous combattrez au corps à corps. Vous vous épuisez moins que les autres classes. Très efficace contre tout type d'adversaire, seuls les voleurs réussiront à parer vos attaques. Le guerrier sera un parfait membre d'une unité d'attaque mais dépendra de ses coéquipiers pour savoir qui frapper sans foncer tête baissée au risque de se faire prendre au dépourvu."
+            "intro": "Puissant et robuste, vous combattrez au corps à corps. Vous vous épuisez moins que les autres classes. Très efficace contre tout type d'adversaire, seuls les voleurs réussiront à parer vos attaques. Le guerrier sera un parfait membre d'une unité d'attaque mais dépendra de ses coéquipiers pour savoir qui frapper sans foncer tête baissée au risque de se faire prendre au dépourvu.",
+            "advantages": [
+                "Efficace contre la plupart des classes",
+                "Fatigue atténuée",
+                "Capacité à supporter de lourds équipements et objets consommables",
+                "Défense"
+            ],
+            "weakness": [
+                "Attaque contre les voleurs",
+                "Moins efficace dans les un contre un"
+            ],
+            "stats": "770 points de vie, 10 force, 9 précision, 5 résistance, 3 agilité"
         },
         "magus": {
-            "intro": "Doté d'une intelligence supérieure, vous vous distinguerez des autres classes par la diversité de votre talent : apprenez des sorts puissants pouvant toucher au loin, protégez vos alliés grâce à la magie, handicapez l'ennemi avec des sorts spéciaux ou encore, dcéuplez votre puissance en vous métamorphosant en une créature redoutable. Pourtant, derrière ces vertus remarquables se cache un revers de la lame : votre seule arme est votre esprit, donc sans sort de défense, vous représentez une proie facile à vaincre sans compter que vous vous épuisez facilement."
+            "intro": "Doté d'une intelligence supérieure, vous vous distinguerez des autres classes par la diversité de votre talent : apprenez des sorts puissants pouvant toucher au loin, protégez vos alliés grâce à la magie, handicapez l'ennemi avec des sorts spéciaux ou encore, dcéuplez votre puissance en vous métamorphosant en une créature redoutable. Pourtant, derrière ces vertus remarquables se cache un revers de la lame : votre seule arme est votre esprit, donc sans sort de défense, vous représentez une proie facile à vaincre sans compter que vous vous épuisez facilement.",
+            "advantages": [
+                "Attaques magiques variées et puissantes",
+                "Capacité à toucher à distance"
+            ],
+            "weakness": [
+                "Consomment plus d'énergie que les autres classes",
+                "Défense"
+            ],
+            "stats": "365 points de vie, 15 esprit, 3 analyse, 4 talent, 5 vision, 3 résistance, 15 de Ki + sort de base maîtrisé"
         },
         "thief": {
-            "intro": "Votre faible puissance sera largement compensée par votre capacité à parer les attaques des guerriers. Comme le soigneur, vous ne souffrez pas de la fatigue lors de vos vols. Richesse semble bien définir votre avenir mais ce ne sera pas chose facile, il faudra bien ouvrir l'oeil si vous ne souhaitez pas succomber facilement à la puissance dévastatrice des mages. Classe rusée donc, mais à surveiller."
+            "intro": "Votre faible puissance sera largement compensée par votre capacité à parer les attaques des guerriers. Comme le soigneur, vous ne souffrez pas de la fatigue lors de vos vols. Richesse semble bien définir votre avenir mais ce ne sera pas chose facile, il faudra bien ouvrir l'oeil si vous ne souhaitez pas succomber facilement à la puissance dévastatrice des mages. Classe rusée donc, mais à surveiller.",
+            "advantages": [
+                "Capacité à voler pour réapprovisionner les troupes",
+                "Défense contre les guerriers",
+                "Infatigable lors de tentative de vols"
+            ],
+            "weakness": [
+                "Puissance",
+                "Défense magique"
+            ],
+            "stats": "500 points de vie, 15 agilité, 11 précision, 5 force, 2 analyse"
         },
         "healer": {
-            "intro": "Classe aux nombreuses vertus. Votre savoir vous permet de guérir vos frères blessés aux combats. Rétablissez leur vivacité grâce à la médecine. Les mages auront bien du mal à vous faire tomber étant donné que vous maitrisez parfaitement les soins à appliquer face à tout type de magie. Les soigneurs ne souffrent pas de la fatigue lors de leurs actions médicales. Sachez également que certain habitants de l'île affirment avoir vu des soigneurs réaliser de véritables miracles comme par exemple rendre la vue ou estomper un empoisonnement."
+            "intro": "Classe aux nombreuses vertus. Votre savoir vous permet de guérir vos frères blessés aux combats. Rétablissez leur vivacité grâce à la médecine. Les mages auront bien du mal à vous faire tomber étant donné que vous maitrisez parfaitement les soins à appliquer face à tout type de magie. Les soigneurs ne souffrent pas de la fatigue lors de leurs actions médicales. Sachez également que certain habitants de l'île affirment avoir vu des soigneurs réaliser de véritables miracles comme par exemple rendre la vue ou estomper un empoisonnement.",
+            "advantages": [
+                "Excellent soutien en bataille",
+                "Défense magique"
+            ],
+            "weakness": [
+                "Attaque"
+            ],
+            "stats": "500 points de vie, 17 talent, 7 esprit, 4 force et 9 de Ki"
         },
         "analyst": {
-            "intro": "Classe défensive tacticienne indispensable à la bataille, effectuez un compte rendu de l'ennemi, déterminez sa principale qualité, son orientation, son arsenal et bien plus encore. Jouez en équipe avec les voleurs en leur informant des trésors à dérober. Aidez les soigneurs en leur indiquant quels sont vos frères à bout de souffle ou sous influence de malédiction. Cette classe représente le soutien exceptionnel lors des grandes guerres, sans compter qu'elle est capable de bien observer les attaques de ses adversaires lui permettant ainsi de bien se défendre face à tout type d'attaque. On regrette cependant que cette immense qualité ne se retrouve pas côté offensif de l'analyste..."
+            "intro": "Classe défensive tacticienne indispensable à la bataille, effectuez un compte rendu de l'ennemi, déterminez sa principale qualité, son orientation, son arsenal et bien plus encore. Jouez en équipe avec les voleurs en leur informant des trésors à dérober. Aidez les soigneurs en leur indiquant quels sont vos frères à bout de souffle ou sous influence de malédiction. Cette classe représente le soutien exceptionnel lors des grandes guerres, sans compter qu'elle est capable de bien observer les attaques de ses adversaires lui permettant ainsi de bien se défendre face à tout type d'attaque. On regrette cependant que cette immense qualité ne se retrouve pas côté offensif de l'analyste...",
+            "advantages": [
+                "Classe furtive, vous ne laissez aucune trace de votre passage",
+                "Permet d'élaborer de multiples stratégies menant à la victoire",
+                "Défense générale",
+                "Soutien"
+            ],
+            "weakness": [
+                "Attaque",
+                "Gestion très difficile"
+            ],
+            "stats": "500 points de vie, 15 analyse, 5 vision,  5 force, 3 agilité, 3 résistance et 4 précision"
         },
         "ranger": {
-            "intro": ""
+            "intro": "",
+            "advantages": [],
+            "weakness": [],
+            "stats": "770 points de vie, 10 force, 9 précision, 5 résistance, 3 agilité"
         },
         "humans": {
             "intro": "Face à la puissance remarquable des autre races, les mages humains ont du s'adapter et apprendre des sorts pouvant rivaliser avec les plus grands combattants de l'île. Pour cette troisième époque, la race humaine a usée de toute sa technologie de pointe pour maitriser des sorts de défense et de malus permettant à la fois de défendre ses alliés comme handicaper l'adversaire. Un mage humain sera un membre fondamental d'une unité de combattants car il saura protéger ses alliés, handicaper l'ennemi et même avantager ses frères offensifs en désactivant les sorts de soutien de l'ennemi."

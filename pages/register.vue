@@ -4,13 +4,13 @@
         <p>{{ $t('register.welcome') }}</p>
         <p>{{ $t('register.intro') }}</p>
 
-        <form id="register-form" class="form-horizontal" method="post" @submit.prevent="register">
+        <form id="register-form" class="form-horizontal" method="post" @submit.prevent="submit">
             <h2>{{ $t('register.personalinfo') }}</h2>
 
             <bs-input name="name"
                       :placeholder="$t('form.name')"
                       :label="$t('form.name')"
-                      v-model="player.name"
+                      v-model="player.username"
                       label-classes="col-sm-2"
                       container-classes="col-sm-10"
                       required
@@ -84,17 +84,17 @@
                         <p>{{ $t('register.warrior.intro') }}</p>
                         <dl>
                             <dt>{{ $t('register.advantages') }}</dt>
-                            <dd>Efficace contre la plupart des classes</dd>
-                            <dd>Fatigue atténuée</dd>
-                            <dd>Capacité à supporter de lourds équipements et objets consommables</dd>
-                            <dd>Défense</dd>
+                            <dd>{{ $t('register.warrior.advantages[0]') }}</dd>
+                            <dd>{{ $t('register.warrior.advantages[1]') }}</dd>
+                            <dd>{{ $t('register.warrior.advantages[2]') }}</dd>
+                            <dd>{{ $t('register.warrior.advantages[3]') }}</dd>
 
                             <dt>{{ $t('register.weakness') }}</dt>
-                            <dd>Attaque contre les voleurs</dd>
-                            <dd>Moins efficace dans les un contre un</dd>
+                            <dd>{{ $t('register.warrior.weakness[0]') }}</dd>
+                            <dd>{{ $t('register.warrior.advantages[1]') }}</dd>
 
                             <dt>{{ $t('register.stats') }}</dt>
-                            <dd>770 points de vie, 10 force, 9 précision, 5 résistance, 3 agilité</dd>
+                            <dd>{{ $t('register.warrior.stats') }}</dd>
                         </dl>
                     </div>
                 </div>
@@ -108,15 +108,15 @@
                         <p>{{ $t('register.magus.intro') }}</p>
                         <dl>
                             <dt>{{ $t('register.advantages') }}</dt>
-                            <dd>Attaques magiques variées et puissantes</dd>
-                            <dd>Capacité à toucher à distance</dd>
+                            <dd>{{ $t('register.magus.advantages[0]') }}</dd>
+                            <dd>{{ $t('register.magus.advantages[1]') }}</dd>
 
                             <dt>{{ $t('register.weakness') }}</dt>
-                            <dd>Consomment plus d'énergie que les autres classes</dd>
-                            <dd>Défense</dd>
+                            <dd>{{ $t('register.magus.weakness[0]') }}</dd>
+                            <dd>{{ $t('register.magus.weakness[1]') }}</dd>
 
                             <dt>{{ $t('register.stats') }}</dt>
-                            <dd>365 points de vie, 15 esprit, 3 analyse, 4 talent, 5 vision, 3 résistance, 15 de Ki + sort de base maîtrisé</dd>
+                            <dd>{{ $t('register.magus.stats') }}</dd>
                         </dl>
                     </div>
                 </div>
@@ -130,16 +130,16 @@
                         <p>{{ $t('register.thief.intro') }}</p>
                         <dl>
                             <dt>{{ $t('register.advantages') }}</dt>
-                            <dd>Capacité à voler pour réapprovisionner les troupes</dd>
-                            <dd>Défense contre les guerriers</dd>
-                            <dd>Infatigable lors de tentative de vols</dd>
+                            <dd>{{ $t('register.thief.advantages[0]') }}</dd>
+                            <dd>{{ $t('register.thief.advantages[1]') }}</dd>
+                            <dd>{{ $t('register.thief.advantages[2]') }}</dd>
 
                             <dt>{{ $t('register.weakness') }}</dt>
-                            <dd>Puissance</dd>
-                            <dd>Défense magique</dd>
+                            <dd>{{ $t('register.thief.weakness[0]') }}</dd>
+                            <dd>{{ $t('register.thief.weakness[1]') }}</dd>
 
                             <dt>{{ $t('register.stats') }}</dt>
-                            <dd>500 points de vie, 15 agilité, 11 précision,  5 force, 2 analyse</dd>
+                            <dd>{{ $t('register.thief.stats') }}</dd>
                         </dl>
                     </div>
                 </div>
@@ -153,14 +153,16 @@
                         <p>{{ $t('register.healer.intro') }}</p>
                         <dl>
                             <dt>{{ $t('register.advantages') }}</dt>
-                            <dd>Excellent soutien en bataille</dd>
-                            <dd>Défense magique</dd>
+                            <dd>{{ $t('register.healer.advantages[0]') }}</dd>
+                            <dd>{{ $t('register.healer.advantages[1]') }}</dd>
+                            <dd></dd>
+                            <dd></dd>
 
                             <dt>{{ $t('register.weakness') }}</dt>
-                            <dd>Attaque</dd>
+                            <dd>{{ $t('register.healer.weakness[0]') }}</dd>
 
                             <dt>{{ $t('register.stats') }}</dt>
-                            <dd>500 points de vie, 17 talent, 7 esprit, 4 force et 9 de Ki</dd>
+                            <dd>{{ $t('register.healer.stats') }}</dd>
                         </dl>
                     </div>
                 </div>
@@ -174,17 +176,17 @@
                         <p>{{ $t('register.analyst.intro') }}</p>
                         <dl>
                             <dt>{{ $t('register.advantages') }}</dt>
-                            <dd>Classe furtive, vous ne laissez aucune trace de votre passage</dd>
-                            <dd>Permet d'élaborer de multiples stratégies menant à la victoire</dd>
-                            <dd>Défense générale</dd>
-                            <dd>Soutien</dd>
+                            <dd>{{ $t('register.analyst.advantages[0]') }}</dd>
+                            <dd>{{ $t('register.analyst.advantages[1]') }}</dd>
+                            <dd>{{ $t('register.analyst.advantages[2]') }}</dd>
+                            <dd>{{ $t('register.analyst.advantages[3]') }}</dd>
 
                             <dt>{{ $t('register.weakness') }}</dt>
-                            <dd>Attaque</dd>
-                            <dd>Gestion très difficile</dd>
+                            <dd>{{ $t('register.analyst.weakness[0]') }}</dd>
+                            <dd>{{ $t('register.analyst.weakness[1]') }}</dd>
 
                             <dt>{{ $t('register.stats') }}</dt>
-                            <dd>500 points de vie, 15 analyse, 5 vision,  5 force, 3 agilité, 3 résistance et 4 précision</dd>
+                            <dd>{{ $t('register.analyst.stats') }}</dd>
                         </dl>
                     </div>
                 </div>
@@ -334,8 +336,6 @@
                             <dd>Sorts spéciaux remarquables</dd>
                             <dd>Capable d'imiter d'autres classes</dd>
                             <dd>Sort ultime dévastateur</dd>
-                            <dt>{{ $t('register.weakness') }}</dt>
-                            <dd>Aucun</dd>
                         </dl>
                     </div>
                 </div>
@@ -357,8 +357,6 @@
                             <dd>4 sorts de transformation</dd>
                             <dd>Sorts mystérieux au potentiel caché</dd>
                             <dd>1 sort spécial</dd>
-                            <dt>{{ $t('register.weakness') }}</dt>
-                            <dd>Aucun sort de soutien</dd>
                         </dl>
                     </div>
                 </div>
@@ -380,8 +378,6 @@
                             <dd>Sorts très variés et handicapant sérieusement l'adversaire</dd>
                             <dd>Défense</dd>
                             <dd>2 transformations</dd>
-                            <dt>{{ $t('register.weakness') }}</dt>
-                            <dd>Aucun</dd>
                         </dl>
                     </div>
                 </div>
@@ -404,8 +400,6 @@
                             <dd>Soutien</dd>
                             <dd>Sorts spéciaux</dd>
                             <dd>Consommation de Ki fortement réduite</dd>
-                            <dt>{{ $t('register.weakness') }}</dt>
-                            <dd>Diversité des sorts</dd>
                         </dl>
                     </div>
                 </div>
@@ -549,8 +543,8 @@
         },
         methods: {
             submit() {
-                api.register(this.player).then(() => {
-
+                api.register(this.player).then((res) => {
+                    console.log(res);
                 }).catch((e) => {
 
                 });
