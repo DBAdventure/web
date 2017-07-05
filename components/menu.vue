@@ -251,8 +251,8 @@
                 });
             },
             move(where) {
-                api.move(where).then((res) => {
-
+                api.move(where).then(() => {
+                    this.$store.state.game.mapReload = true;
                 });
             },
         },

@@ -5,6 +5,7 @@ import * as types from '../mutation-types';
 const state = () => ({
     style: null,
     data: {},
+    mapReload: false,
 });
 
 const actions = {

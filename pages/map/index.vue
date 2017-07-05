@@ -191,15 +191,24 @@
             };
         },
         async mounted() {
-            await api.getMap().then((res) => {
-                this.map = res.data.map;
-                this.borders = res.data.borders;
-                this.items = res.data.items;
-                this.borderYRange = _.range(this.borders.yStart, this.borders.yEnd + 1);
-                this.borderXRange = _.range(this.borders.xStart, this.borders.xEnd + 1);
+            await this.loadMap();
+            this.$store.watch(this.$store.state.game.mapReload, (value) => {
+                if (value) {
+                    this.loadMap();
+                    this.$store.state.game.mapReload = false;
+                }
             });
         },
         methods: {
+            async loadMap() {
+                await api.getMap().then((res) => {
+                    this.map = res.data.map;
+                    this.borders = res.data.borders;
+                    this.items = res.data.items;
+                    this.borderYRange = _.range(this.borders.yStart, this.borders.yEnd + 1);
+                    this.borderXRange = _.range(this.borders.xStart, this.borders.xEnd + 1);
+                });
+            },
             itemsByDistance(data, isPlayer) {
                 const items = {};
                 /* eslint-disable no-restricted-syntax, no-unused-vars */
