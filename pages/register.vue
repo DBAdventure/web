@@ -277,7 +277,7 @@
                             <img v-for="image in ['H2', 'H1', 'H5', 'H3', 'H']" :src="`/images/avatars/players/${image}.png`" :title="$t('humans')" :alt="$t('humans')" />
                         </p>
                         <p>
-                            <a href="infos_race.php?race=1" target="_blank">{{ $t('register.viewSpell') }}</a>
+                            <a href="#1">{{ $t('register.viewSpell') }}</a>
                         </p>
                     </div>
                     <div class="col-md-9">
@@ -299,7 +299,7 @@
                             <img v-for="image in ['HS27', 'HS33', 'HS35', 'HS41', 'HS42']" :src="`/images/avatars/players/${image}.png`" :title="$t('human-saiyajins')" :alt="$t('human-saiyajins')" />
                         </p>
                         <p>
-                            <a href="infos_race.php?race=2" target="_blank">{{ $t('register.viewSpell') }}</a>
+                            <a href="#2">{{ $t('register.viewSpell') }}</a>
                         </p>
                     </div>
                     <div class="col-md-9">
@@ -319,7 +319,7 @@
                             <img v-for="image in ['N', 'N3', 'N2', 'N8', 'N5']" :src="`/images/avatars/players/${image}.png`" :title="$t('namekians')" :alt="$t('namekians')" />
                         </p>
                         <p>
-                            <a href="infos_race.php?race=3" target="_blank">{{ $t('register.viewSpell') }}</a>
+                            <a href="#3">{{ $t('register.viewSpell') }}</a>
                         </p>
                     </div>
                     <div class="col-md-9">
@@ -341,7 +341,7 @@
                             <img v-for="image in ['S6', 'S24', 'S10', 'S18', 'S16']" :src="`/images/avatars/players/${image}.png`" :title="$t('saiyajins')" :alt="$t('saiyajins')" />
                         </p>
                         <p>
-                            <a href="infos_race.php?race=4" target="_blank">{{ $t('register.viewSpell') }}</a>
+                            <a href="#4">{{ $t('register.viewSpell') }}</a>
                         </p>
                     </div>
                     <div class="col-md-9">
@@ -362,7 +362,7 @@
                             <img v-for="image in ['A17', 'A20', 'A15', 'A14', 'A23']" :src="`/images/avatars/players/${image}.png`" :title="$t('aliens')" :alt="$t('aliens')" />
                         </p>
                         <p>
-                            <a href="infos_race.php?race=5" target="_blank">{{ $t('register.viewSpell') }}</a>
+                            <a href="#5">{{ $t('register.viewSpell') }}</a>
                         </p>
                     </div>
                     <div class="col-md-9">
@@ -383,7 +383,7 @@
                             <img v-for="image in ['C2', 'C3', 'C1', 'C4', 'C8']" :src="`/images/avatars/players/${image}.png`" :title="$t('cyborgs')" :alt="$t('cyborgs')" />
                         </p>
                         <p>
-                            <a href="infos_race.php?race=6" target="_blank">{{ $t('register.viewSpell') }}</a>
+                            <a href="#6">{{ $t('register.viewSpell') }}</a>
                         </p>
                     </div>
                     <div class="col-md-9">
@@ -405,7 +405,7 @@
                             <img v-for="image in ['M9', 'M3', 'M2', 'M4', 'M10']" :src="`/images/avatars/players/${image}.png`" :title="$t('majins')" :alt="$t('majins')" />
                         </p>
                         <p>
-                            <a href="infos_race.php?race=7" target="_blank">{{ $t('register.viewSpell') }}</a>
+                            <a href="#7">{{ $t('register.viewSpell') }}</a>
                         </p>
                     </div>
                     <div class="col-md-9">
@@ -428,7 +428,7 @@
                             <img v-for="image in ['D4', 'D3', 'D13', 'D6', 'D8']" :src="`/images/avatars/players/${image}.png`" :title="$t('dragons')" :alt="$t('dragons')" />
                         </p>
                         <p>
-                            <a href="infos_race.php?race=8" target="_blank">{{ $t('register.viewSpell') }}</a>
+                            <a href="#8">{{ $t('register.viewSpell') }}</a>
                         </p>
                     </div>
                     <div class="col-md-9">
