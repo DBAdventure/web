@@ -212,12 +212,10 @@
 
             <div>
                 <p>
-                    A présent, choisis la race et l'apparence de ton personnage.
+                    {{ $t('register.appearance.title') }}
                 </p>
                 <div class="alert alert-warning" role="alert">
-                    L'apparence de ton personnage n'a d'importance que pour la classe <strong>Mage</strong> car chaque race possède des sorts différents.
-                    Fais donc bien attention au choix de la race de ton personnage si tu es mage.
-                    Dans le cas contraire, choisis simplement l'apparence en fonction de tes goûts sans prendre en compte les descriptions des races.
+                    <p v-html="$t('register.appearance.warning')"></p>
                 </div>
             </div>
 
@@ -279,19 +277,17 @@
                             <img v-for="image in ['H2', 'H1', 'H5', 'H3', 'H']" :src="`/images/avatars/players/${image}.png`" :title="$t('humans')" :alt="$t('humans')" />
                         </p>
                         <p>
-                            <a href="infos_race.php?race=1" target="_blank">Voir les sorts</a>
+                            <a href="infos_race.php?race=1" target="_blank">{{ $t('register.viewSpell') }}</a>
                         </p>
                     </div>
                     <div class="col-md-9">
                         <p>{{ $t('register.humans.intro') }}</p>
                         <dl>
                             <dt>{{ $t('register.advantages') }}</dt>
-                            <dd>Race équilibrée</dd>
-                            <dd>Sorts spéciaux variés</dd>
-                            <dd>Sort de défense et combinable avec les cyborgs</dd>
-                            <dd>Soutien exceptionnel</dd>
-                            <dt>{{ $t('register.weakness') }}</dt>
-                            <dd>Derniers sorts trop classiques</dd>
+                            <dd>{{ $t('register.humans.advantages[0]') }}</dd>
+                            <dd>{{ $t('register.humans.advantages[1]') }}</dd>
+                            <dd>{{ $t('register.humans.advantages[2]') }}</dd>
+                            <dd>{{ $t('register.humans.advantages[3]') }}</dd>
                         </dl>
                     </div>
                 </div>
@@ -303,17 +299,15 @@
                             <img v-for="image in ['HS27', 'HS33', 'HS35', 'HS41', 'HS42']" :src="`/images/avatars/players/${image}.png`" :title="$t('human-saiyajins')" :alt="$t('human-saiyajins')" />
                         </p>
                         <p>
-                            <a href="infos_race.php?race=2" target="_blank">Voir les sorts</a>
+                            <a href="infos_race.php?race=2" target="_blank">{{ $t('register.viewSpell') }}</a>
                         </p>
                     </div>
                     <div class="col-md-9">
                         <p>{{ $t('register.human-saiyajins.intro') }}</p>
                         <dl>
                             <dt>{{ $t('register.advantages') }}</dt>
-                            <dd>3 sorts de transformation</dd>
-                            <dd>Sorts spéciaux dévastateurs</dd>
-                            <dt>{{ $t('register.weakness') }}</dt>
-                            <dd>Aucun sort de soutien</dd>
+                            <dd>{{ $t('register.humans-saiyajins.advantages[0]') }}</dd>
+                            <dd>{{ $t('register.humans-saiyajins.advantages[1]') }}</dd>
                         </dl>
                     </div>
                 </div>
@@ -325,17 +319,17 @@
                             <img v-for="image in ['N', 'N3', 'N2', 'N8', 'N5']" :src="`/images/avatars/players/${image}.png`" :title="$t('namekians')" :alt="$t('namekians')" />
                         </p>
                         <p>
-                            <a href="infos_race.php?race=3" target="_blank">Voir les sorts</a>
+                            <a href="infos_race.php?race=3" target="_blank">{{ $t('register.viewSpell') }}</a>
                         </p>
                     </div>
                     <div class="col-md-9">
                         <p>{{ $t('register.namekians.intro') }}</p>
                         <dl>
                             <dt>{{ $t('register.advantages') }}</dt>
-                            <dd>Economie des points de mouvements</dd>
-                            <dd>Sorts spéciaux remarquables</dd>
-                            <dd>Capable d'imiter d'autres classes</dd>
-                            <dd>Sort ultime dévastateur</dd>
+                            <dd>{{ $t('register.namekians.advantages[0]') }}</dd>
+                            <dd>{{ $t('register.namekians.advantages[1]') }}</dd>
+                            <dd>{{ $t('register.namekians.advantages[2]') }}</dd>
+                            <dd>{{ $t('register.namekians.advantages[3]') }}</dd>
                         </dl>
                     </div>
                 </div>
@@ -347,16 +341,16 @@
                             <img v-for="image in ['S6', 'S24', 'S10', 'S18', 'S16']" :src="`/images/avatars/players/${image}.png`" :title="$t('saiyajins')" :alt="$t('saiyajins')" />
                         </p>
                         <p>
-                            <a href="infos_race.php?race=4" target="_blank">Voir les sorts</a>
+                            <a href="infos_race.php?race=4" target="_blank">{{ $t('register.viewSpell') }}</a>
                         </p>
                     </div>
                     <div class="col-md-9">
                         <p>{{ $t('register.saiyajins.intro') }}</p>
                         <dl>
                             <dt>{{ $t('register.advantages') }}</dt>
-                            <dd>4 sorts de transformation</dd>
-                            <dd>Sorts mystérieux au potentiel caché</dd>
-                            <dd>1 sort spécial</dd>
+                            <dd>{{ $t('register.saiyajins.advantages[0]') }}</dd>
+                            <dd>{{ $t('register.saiyajins.advantages[1]') }}</dd>
+                            <dd>{{ $t('register.saiyajins.advantages[2]') }}</dd>
                         </dl>
                     </div>
                 </div>
@@ -368,16 +362,16 @@
                             <img v-for="image in ['A17', 'A20', 'A15', 'A14', 'A23']" :src="`/images/avatars/players/${image}.png`" :title="$t('aliens')" :alt="$t('aliens')" />
                         </p>
                         <p>
-                            <a href="infos_race.php?race=5" target="_blank">Voir les sorts</a>
+                            <a href="infos_race.php?race=5" target="_blank">{{ $t('register.viewSpell') }}</a>
                         </p>
                     </div>
                     <div class="col-md-9">
                         <p>{{ $t('register.aliens.intro') }}</p>
                         <dl>
                             <dt>{{ $t('register.advantages') }}</dt>
-                            <dd>Sorts très variés et handicapant sérieusement l'adversaire</dd>
-                            <dd>Défense</dd>
-                            <dd>2 transformations</dd>
+                            <dd>{{ $t('register.aliens.advantages[0]') }}</dd>
+                            <dd>{{ $t('register.aliens.advantages[1]') }}</dd>
+                            <dd>{{ $t('register.aliens.advantages[2]') }}</dd>
                         </dl>
                     </div>
                 </div>
@@ -389,17 +383,17 @@
                             <img v-for="image in ['C2', 'C3', 'C1', 'C4', 'C8']" :src="`/images/avatars/players/${image}.png`" :title="$t('cyborgs')" :alt="$t('cyborgs')" />
                         </p>
                         <p>
-                            <a href="infos_race.php?race=6" target="_blank">Voir les sorts</a>
+                            <a href="infos_race.php?race=6" target="_blank">{{ $t('register.viewSpell') }}</a>
                         </p>
                     </div>
                     <div class="col-md-9">
                         <p>{{ $t('register.cyborgs.intro') }}</p>
                         <dl>
                             <dt>{{ $t('register.advantages') }}</dt>
-                            <dd>Défense</dd>
-                            <dd>Soutien</dd>
-                            <dd>Sorts spéciaux</dd>
-                            <dd>Consommation de Ki fortement réduite</dd>
+                            <dd>{{ $t('register.cyborgs.advantages[0]') }}</dd>
+                            <dd>{{ $t('register.cyborgs.advantages[1]') }}</dd>
+                            <dd>{{ $t('register.cyborgs.advantages[2]') }}</dd>
+                            <dd>{{ $t('register.cyborgs.advantages[3]') }}</dd>
                         </dl>
                     </div>
                 </div>
@@ -411,20 +405,18 @@
                             <img v-for="image in ['M9', 'M3', 'M2', 'M4', 'M10']" :src="`/images/avatars/players/${image}.png`" :title="$t('majins')" :alt="$t('majins')" />
                         </p>
                         <p>
-                            <a href="infos_race.php?race=7" target="_blank">Voir les sorts</a>
+                            <a href="infos_race.php?race=7" target="_blank">{{ $t('register.viewSpell') }}</a>
                         </p>
                     </div>
                     <div class="col-md-9">
                         <p>{{ $t('register.majins.intro') }}</p>
                         <dl>
                             <dt>{{ $t('register.advantages') }}</dt>
-                            <dd>Race équilibrée</dd>
-                            <dd>Potentiel offensif infini</dd>
-                            <dd>Réssurection</dd>
-                            <dd>Economie de points de mouvements</dd>
-                            <dd>Soutien grâce au contrôle de Babidi</dd>
-                            <dt>{{ $t('register.weakness') }}</dt>
-                            <dd>Défense</dd>
+                            <dd>{{ $t('register.majins.advantages[0]') }}</dd>
+                            <dd>{{ $t('register.majins.advantages[1]') }}</dd>
+                            <dd>{{ $t('register.majins.advantages[2]') }}</dd>
+                            <dd>{{ $t('register.majins.advantages[3]') }}</dd>
+                            <dd>{{ $t('register.majins.advantages[4]') }}</dd>
                         </dl>
                     </div>
                 </div>
@@ -436,23 +428,20 @@
                             <img v-for="image in ['D4', 'D3', 'D13', 'D6', 'D8']" :src="`/images/avatars/players/${image}.png`" :title="$t('dragons')" :alt="$t('dragons')" />
                         </p>
                         <p>
-                            <a href="infos_race.php?race=8" target="_blank">Voir les sorts</a>
+                            <a href="infos_race.php?race=8" target="_blank">{{ $t('register.viewSpell') }}</a>
                         </p>
                     </div>
                     <div class="col-md-9">
                         <p>{{ $t('register.dragons.intro') }}</p>
                         <dl>
                             <dt>{{ $t('register.advantages') }}</dt>
-                            <dd>Un total de 13 sorts !</dd>
-                            <dd>Sort de soutien protecteur</dd>
-                            <dd>Sorts spéciaux nombreux, très puissants, variés et inégalables</dd>
-                            <dd>Capable d'accroitre sa puissance grâce aux Dragon Ball</dd>
-                            <dt>{{ $t('register.weakness') }}</dt>
-                            <dd>Consommation de Ki la plus élevée de toutes les races</dd>
+                            <dd>{{ $t('register.dragons.advantages[0]') }}</dd>
+                            <dd>{{ $t('register.dragons.advantages[1]') }}</dd>
+                            <dd>{{ $t('register.dragons.advantages[2]') }}</dd>
+                            <dd>{{ $t('register.dragons.advantages[3]') }}</dd>
                         </dl>
                     </div>
                 </div>
-
             </div>
 
             <div>
@@ -472,11 +461,11 @@
                 </div>
 
                 <div class="col-md-12">
-                    <p>Afin de t'épauler un peu dès le début de l'aventure, tu auras à ta disposition ces objets ci-dessous dès ta première connexion au jeu :</p>
+                    <p>{{ $t('register.objects.title') }}</p>
                     <ul>
-                        <li>2 options de fatigue</li>
-                        <li>1 senzu</li>
-                        <li>5 baies sauvages</li>
+                        <li>{{ $t('register.objects.objects[0]') }}</li>
+                        <li>{{ $t('register.objects.objects[1]') }}</li>
+                        <li>{{ $t('register.objects.objects[2]') }}</li>
                     </ul>
                 </div>
 

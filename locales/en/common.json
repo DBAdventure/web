@@ -145,6 +145,11 @@
         "weakness": "Weakness",
         "stats": "Statistics",
         "various": "Various",
+        "viewSpell": "View spells",
+        "appearance": {
+            "title": "A présent, choisis la race et l'apparence de ton personnage.",
+            "warning": "L'apparence de ton personnage n'a d'importance que pour la classe <strong>Mage</strong> car chaque race possède des sorts différents. Fais donc bien attention au choix de la race de ton personnage si tu es mage. Dans le cas contraire, choisis simplement l'apparence en fonction de tes goûts sans prendre en compte les descriptions des races."
+        },
         "warrior": {
             "intro": "Puissant et robuste, vous combattrez au corps à corps. Vous vous épuisez moins que les autres classes. Très efficace contre tout type d'adversaire, seuls les voleurs réussiront à parer vos attaques. Le guerrier sera un parfait membre d'une unité d'attaque mais dépendra de ses coéquipiers pour savoir qui frapper sans foncer tête baissée au risque de se faire prendre au dépourvu.",
             "advantages": [
@@ -216,28 +221,81 @@
             "stats": "770 points de vie, 10 force, 9 précision, 5 résistance, 3 agilité"
         },
         "humans": {
-            "intro": "Face à la puissance remarquable des autre races, les mages humains ont du s'adapter et apprendre des sorts pouvant rivaliser avec les plus grands combattants de l'île. Pour cette troisième époque, la race humaine a usée de toute sa technologie de pointe pour maitriser des sorts de défense et de malus permettant à la fois de défendre ses alliés comme handicaper l'adversaire. Un mage humain sera un membre fondamental d'une unité de combattants car il saura protéger ses alliés, handicaper l'ennemi et même avantager ses frères offensifs en désactivant les sorts de soutien de l'ennemi."
+            "intro": "Face à la puissance remarquable des autre races, les mages humains ont du s'adapter et apprendre des sorts pouvant rivaliser avec les plus grands combattants de l'île. Pour cette troisième époque, la race humaine a usée de toute sa technologie de pointe pour maitriser des sorts de défense et de malus permettant à la fois de défendre ses alliés comme handicaper l'adversaire. Un mage humain sera un membre fondamental d'une unité de combattants car il saura protéger ses alliés, handicaper l'ennemi et même avantager ses frères offensifs en désactivant les sorts de soutien de l'ennemi.",
+            "advantages": [
+                "Race équilibrée",
+                "Sorts spéciaux variés",
+                "Sort de défense et combinable avec les cyborgs",
+                "Soutien exceptionnel"
+            ]
         },
         "human-saiyajins": {
-            "intro": "L'union des humains et des saïyens donna naissance à cette race exceptionnelle comblant à la fois les défauts de ses pères et offrant une diversité de sorts. Un mage humain saïyen est très polyvalent, son talent a de quoi rendre jaloux les autre races. Il peut se transformer en un combattant redoutable, handicaper l'ennemi en réduisant ses points de mouvements ou encore frapper plusieurs cibles à la fois. On retrouve là toute l'influence de la puissance saïyenne et la tacticité des humains chez le mage humain saïyen."
+            "intro": "L'union des humains et des saïyens donna naissance à cette race exceptionnelle comblant à la fois les défauts de ses pères et offrant une diversité de sorts. Un mage humain saïyen est très polyvalent, son talent a de quoi rendre jaloux les autre races. Il peut se transformer en un combattant redoutable, handicaper l'ennemi en réduisant ses points de mouvements ou encore frapper plusieurs cibles à la fois. On retrouve là toute l'influence de la puissance saïyenne et la tacticité des humains chez le mage humain saïyen.",
+            "advantages": [
+                "3 sorts de transformation",
+                "Sorts spéciaux dévastateurs"
+            ]
         },
         "namekians": {
-            "intro": "Autrefois, les Nameks d'origine pacifiste, n'avaient que peu de combattants. Mais face à la menace que représentent leurs adversaires pour leur peuple, les Nameks ont exploité du mieux que possible leur intelligence supérieure à de très nombreuses races afin de créer des mages surpuissants n'ayant désormais plus rien à voir avec leurs ancêtres. Ces nouveaux combattants savent économiser leurs points de mouvements, protéger leurs amis ou même décupler leur puissance en se sacrifiant pour eux. Et comme si cela ne suffisait pas, un mage Namek est même capable de tuer en un coup et d'imiter partiellement les capacités des autres classes (vol, soin)."
+            "intro": "Autrefois, les Nameks d'origine pacifiste, n'avaient que peu de combattants. Mais face à la menace que représentent leurs adversaires pour leur peuple, les Nameks ont exploité du mieux que possible leur intelligence supérieure à de très nombreuses races afin de créer des mages surpuissants n'ayant désormais plus rien à voir avec leurs ancêtres. Ces nouveaux combattants savent économiser leurs points de mouvements, protéger leurs amis ou même décupler leur puissance en se sacrifiant pour eux. Et comme si cela ne suffisait pas, un mage Namek est même capable de tuer en un coup et d'imiter partiellement les capacités des autres classes (vol, soin).",
+            "advantages": [
+                "Economie des points de mouvements",
+                "Sorts spéciaux remarquables",
+                "Capable d'imiter d'autres classes",
+                "Sort ultime dévastateur"
+            ]
         },
         "saiyajins": {
-            "intro": "Dotée d'une puissance sans limite, cette race légendaire bénéficie de nombreux sorts de transformation avec en complément la capacité d'éloigner l'ennemi. Les saïyens sont tellement avide de puissance qu'ils en négligent la défense ou les contre face aux sorts spéciaux de l'adversaire. Un saïyen représentera donc pour cette troisième époque, l'attaquant idéal à condition d'assurer sa sécurité à l'aide des autres races et classes."
+            "intro": "Dotée d'une puissance sans limite, cette race légendaire bénéficie de nombreux sorts de transformation avec en complément la capacité d'éloigner l'ennemi. Les saïyens sont tellement avide de puissance qu'ils en négligent la défense ou les contre face aux sorts spéciaux de l'adversaire. Un saïyen représentera donc pour cette troisième époque, l'attaquant idéal à condition d'assurer sa sécurité à l'aide des autres races et classes.",
+            "advantages": [
+                "4 sorts de transformation",
+                "Sorts mystérieux au potentiel caché",
+                "1 sort spécial"
+            ]
         },
         "aliens": {
-            "intro": "Représentant le pire cauchemar pour des peuples ayant été réduits à l'esclavage, les mages aliens seront des adversaires très difficiles à combattre. Grâce au talent des mercenaires de l'espace, de Freezer, Cooler, Janemba ou encore Tapion et Minosha, les mages aliens peuvent se vanter de posséder le plus grand nombre de sorts spéciaux parmi toutes les races. Pour résumé leur potentiel, ils excellent dans tous les domaines, que ce soit en termes d'attaque, de soutien ou de défense."
+            "intro": "Représentant le pire cauchemar pour des peuples ayant été réduits à l'esclavage, les mages aliens seront des adversaires très difficiles à combattre. Grâce au talent des mercenaires de l'espace, de Freezer, Cooler, Janemba ou encore Tapion et Minosha, les mages aliens peuvent se vanter de posséder le plus grand nombre de sorts spéciaux parmi toutes les races. Pour résumé leur potentiel, ils excellent dans tous les domaines, que ce soit en termes d'attaque, de soutien ou de défense.",
+            "advantages": [
+                "Sorts très variés et handicapant sérieusement l'adversaire",
+                "Défense",
+                "2 transformations"
+            ]
         },
         "cyborgs": {
-            "intro": "Tacticien défensif, le mage cyborg se remarquera par son énorme potentiel défensif mais également ses sorts tactiques pouvant réduire les points de mouvement adverses mais aussi désarmant la cible. Il sait jouer en équipe avec les mages humains afin de créer des barrières défensives optimales. A travers les âges, ces êtres cybernétiques réalisèrent l'immense avantage de leur résistance robotique. Ainsi, ils développèrent encore et encore cette incroyable endurance du combat leur permettant pour cette troisième époque, de bénéficier de mages cyborgs pouvant lancer de puissants sorts nécessitant une consommation de Ki très réduite."
+            "intro": "Tacticien défensif, le mage cyborg se remarquera par son énorme potentiel défensif mais également ses sorts tactiques pouvant réduire les points de mouvement adverses mais aussi désarmant la cible. Il sait jouer en équipe avec les mages humains afin de créer des barrières défensives optimales. A travers les âges, ces êtres cybernétiques réalisèrent l'immense avantage de leur résistance robotique. Ainsi, ils développèrent encore et encore cette incroyable endurance du combat leur permettant pour cette troisième époque, de bénéficier de mages cyborgs pouvant lancer de puissants sorts nécessitant une consommation de Ki très réduite.",
+            "advantages": [
+                "Défense",
+                "Soutien",
+                "Sorts spéciaux",
+                "Consommation de Ki fortement réduite"
+            ]
         },
         "majins": {
-            "intro": "La puissance des mages majins ne cesse de s'intensifier à travers les âges. Pour cette troisième époque, ils se sont eux aussi entrainés dur afin de maitriser de nouvelles techniques impressionnantes. Comme les Nameks, ils savent économiser leurs points de mouvements, et encore plus efficacement qu'à la précédente époque. Les grandes nouveautés pour le mage Majin reposent sur la maitrise de la résurrection et l'absorption suprême pouvant décupler très fortement le potentiel offensif de celui-ci. Une panoplie de stratégie s'offre donc à cette race."
+            "intro": "La puissance des mages majins ne cesse de s'intensifier à travers les âges. Pour cette troisième époque, ils se sont eux aussi entrainés dur afin de maitriser de nouvelles techniques impressionnantes. Comme les Nameks, ils savent économiser leurs points de mouvements, et encore plus efficacement qu'à la précédente époque. Les grandes nouveautés pour le mage Majin reposent sur la maitrise de la résurrection et l'absorption suprême pouvant décupler très fortement le potentiel offensif de celui-ci. Une panoplie de stratégie s'offre donc à cette race.",
+            "advantages": [
+                "Race équilibrée",
+                "Potentiel offensif infini",
+                "Réssurection",
+                "Economie de points de mouvements",
+                "Soutien grâce au contrôle de Babidi"
+            ]
         },
         "dragons": {
-            "intro": "Créatures légendaires, cette race bénéficie de sorts très variés. Les dragons se distinguent des autres races par leurs attaques ayant de nombreux effets négatifs pour l&#9;adversaire et bénéfiques pour les alliés. On raconte même qu'ils sont capables de réaliser des miracles comme décupler leur puissance à l'aide des fameuses Dragon Ball ou encore ramener à la vie leurs amis vaincus au combat. Mais attention cependant à la consommation de Ki très élevée pouvant épuiser très vite le Dragon..."
+            "intro": "Créatures légendaires, cette race bénéficie de sorts très variés. Les dragons se distinguent des autres races par leurs attaques ayant de nombreux effets négatifs pour l&#9;adversaire et bénéfiques pour les alliés. On raconte même qu'ils sont capables de réaliser des miracles comme décupler leur puissance à l'aide des fameuses Dragon Ball ou encore ramener à la vie leurs amis vaincus au combat. Mais attention cependant à la consommation de Ki très élevée pouvant épuiser très vite le Dragon...",
+            "advantages": [
+                "Un total de 13 sorts !",
+                "Sort de soutien protecteur",
+                "Sorts spéciaux nombreux, très puissants, variés et inégalables",
+                "Capable d'accroitre sa puissance grâce aux Dragon Ball"
+            ]
+        },
+        "objects": {
+            "title": "Afin de t'épauler un peu dès le début de l'aventure, tu auras à ta disposition ces objets ci-dessous dès ta première connexion au jeu :",
+            "objects": [
+                "b2 options de fatigue",
+                "1 senzu",
+                "5 baies sauvages"
+            ]
         }
     },
     "map": {
