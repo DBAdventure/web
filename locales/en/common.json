@@ -1058,7 +1058,11 @@
     ]
   },
   "account": {
-    "title": "Account"
+    "title": "Account",
+    "created": {
+      "title": "Account created",
+      "description": "You should have receive a mail to confirm your account."
+    }
   },
   "error": {
     "bad": {

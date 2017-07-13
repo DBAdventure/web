@@ -510,30 +510,19 @@
                 classes: [],
                 appearances: {},
                 player: {
-                    /* clas: 1,
-                     * side: 1,
-                     * race: null,
-                     * image: null,
-                     * type: null,
-                     * name: '',
-                     * username: '',
-                     * password: '',
-                     * password_confirm: '',
-                     * email: '',
-                     * email_confirm: '',*/
                     class: 1,
                     side: 1,
-                    race: 2,
+                    race: null,
+                    name: '',
+                    username: '',
+                    password: '',
+                    password_confirm: '',
+                    email: '',
+                    email_confirm: '',
                     appearance: {
-                        type: 'HS1',
-                        image: 'HS5.png',
+                        type: null,
+                        image: null,
                     },
-                    name: 'test',
-                    username: 'test',
-                    password: 'test',
-                    password_confirm: 'test',
-                    email: 'test@test.com',
-                    email_confirm: 'test@test.com',
                 },
                 registerRules: {
                     name: [
@@ -575,10 +564,16 @@
                 this.$refs.registerForm.validate((valid) => {
                     if (valid) {
                         console.log(this.player);
-                        api.register(this.player).then((res) => {
-                            console.log(res);
-                        }).catch((e) => {
-
+                        api.register({player_registration: this.player}).then(() => {
+                            this.$Notice.success({
+                                title: this.$t('account.created.title'),
+                                desc: this.$t('account.created.description'),
+                            });
+                            this.$router.push('/');
+                        }).catch(() => {
+                            this.$Notice.error({
+                                title: this.$t('error.generic'),
+                            });
                         });
                     } else {
                         this.$Notice.error('表单验证失败!');
