@@ -37,7 +37,7 @@ module.exports = {
     },
     plugins: [
         '~plugins/date',
-        {src: '~plugins/iview', ssr: false},
+        '~plugins/iview',
         '~plugins/vue-cookie',
         '~plugins/vue-translate',
     ],

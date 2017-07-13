@@ -19,7 +19,6 @@
         </div>
 
         <dba-footer></dba-footer>
-        <alert></alert>
     </div>
 </template>
 
@@ -27,14 +26,12 @@
     import DbaHeader from '~/components/header';
     import DbaMenu from '~/components/menu';
     import DbaFooter from '~/components/footer';
-    import Alert from '~/components/custom/alert';
 
     export default {
         components: {
             DbaHeader,
             DbaMenu,
             DbaFooter,
-            Alert,
         },
         mounted() {
             this.$store.dispatch('fetchGameData');

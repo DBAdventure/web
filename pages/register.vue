@@ -4,59 +4,45 @@
         <p>{{ $t('register.welcome') }}</p>
         <p>{{ $t('register.intro') }}</p>
 
-        <form id="register-form" class="form-horizontal" method="post" @submit.prevent="submit">
+        <Form ref="registerForm" id="register-form" class="form-horizontal" @submit.prevent="submit" :rules="registerRules">
             <h2>{{ $t('register.personalinfo') }}</h2>
 
-            <bs-input name="name"
-                      :placeholder="$t('form.name')"
-                      :label="$t('form.name')"
-                      v-model="player.username"
-                      label-classes="col-sm-2"
-                      container-classes="col-sm-10"
-                      required
-                      type="text" />
-            <bs-input name="login"
-                      :placeholder="$t('form.login')"
-                      :label="$t('form.login')"
-                      v-model="player.login"
-                      label-classes="col-sm-2"
-                      container-classes="col-sm-10"
-                      required
-                      type="text" />
-            <bs-input name="password"
-                      :placeholder="$t('form.password')"
-                      :label="$t('form.password')"
-                      v-model="player.password"
-                      label-classes="col-sm-2"
-                      container-classes="col-sm-10"
-                      required
-                      type="password" />
-            <bs-input name="password_confirm"
-                      :placeholder="$t('form.passwordConfirm')"
-                      :label="$t('form.passwordConfirm')"
-                      :match="player.password"
-                      v-model="player.password_confirm"
-                      label-classes="col-sm-2"
-                      container-classes="col-sm-10"
-                      required
-                      type="password" />
-            <bs-input name="email"
-                      :placeholder="$t('form.email')"
-                      :label="$t('form.email')"
-                      v-model="player.email"
-                      label-classes="col-sm-2"
-                      container-classes="col-sm-10"
-                      required
-                      type="email" />
-            <bs-input name="email"
-                      :placeholder="$t('form.emailConfirm')"
-                      :label="$t('form.emailConfirm')"
-                      :match="player.email"
-                      v-model="player.email_confirm"
-                      label-classes="col-sm-2"
-                      container-classes="col-sm-10"
-                      required
-                      type="email" />
+            <Form-item :label="$t('form.name')" :label-width="150" required>
+                <Input name="name"
+                       :placeholder="$t('form.name')"
+                       v-model="player.username"
+                       type="text" />
+            </Form-item>
+            <Form-item :label="$t('form.login')" :label-width="150" required>
+                <Input name="login"
+                       :placeholder="$t('form.login')"
+                       v-model="player.login"
+                       type="text" />
+            </Form-item>
+            <Form-item :label="$t('form.password')" :label-width="150" prop="password" required>
+                <Input name="password"
+                       :placeholder="$t('form.password')"
+                       v-model="player.password"
+                       type="password" />
+            </Form-item>
+            <Form-item :label="$t('form.passwordConfirm')" :label-width="150" prop="passwordConfirm" required>
+                <Input name="password_confirm"
+                       :placeholder="$t('form.passwordConfirm')"
+                       v-model="player.password_confirm"
+                       type="password" />
+            </Form-item>
+            <Form-item :label="$t('form.email')" :label-width="150" prop="email" required>
+                <Input name="email"
+                       :placeholder="$t('form.email')"
+                       v-model="player.email"
+                       type="text" />
+            </Form-item>
+            <Form-item :label="$t('form.email')" :label-width="150" prop="emailConfirm" required>
+                <Input name="email_confirm"
+                       :placeholder="$t('form.emailConfirm')"
+                       v-model="player.email_confirm"
+                       type="text" />
+            </Form-item>
 
             <h2>{{ $t('register.speciality') }}</h2>
             <p>{{ $t('register.specialityIntro') }}</p>
@@ -64,13 +50,11 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label required">{{ $t('class') }}</label>
                 <div class="col-sm-10">
-                    <bs-group justified>
-                        <bs-select
-                            v-model="player.clas"
-                            :options="classes"
-                            required>
-                        </bs-select>
-                    </bs-group>
+                    <Select
+                        v-model="player.clas"
+                        required>
+                        <Option v-for="clas in classes" :key="clas.label" :value="clas.value">{{ $t(clas.label) }}</Option>
+                    </select>
                 </div>
             </div>
 
@@ -239,35 +223,28 @@
                 </table>
 
                 <div>
-                    <bs-group justified>
-                        <bs-select
-                            v-model="player.race"
-                            :options="races"
-                            :placeholder="$t('form.choice.appearance')"
-                            required>
-                        </bs-select>
-                    </bs-group>
+                    <Select
+                        v-model="player.race"
+                        :placeholder="$t('form.choice.appearance')"
+                        required>
+                        <Option v-for="race in races" :key="race.value" :value="race.value">{{ $t(race.label) }}</Option>
+                    </Select>
 
-                    <bs-group justified v-if="player.race !== null">
-                        <bs-select
-                            v-model="appearanceType"
-                            :placeholder="$t('choice.character')"
-                            required>
-                            <template v-for="value, key in appearances[player.race]">
-                                <bs-option :value="key">{{ key }}</bs-option>
-                            </template>
-                        </bs-select>
-                    </bs-group>
+                    <Select
+                        v-if="player.race !== null"
+                        v-model="appearanceType"
+                        :placeholder="$t('choice.character')"
+                        clearable
+                        required>
+                        <Option v-for="value, key in appearances[player.race]" :key="value" :value="key">{{ key }}</Option>
+                    </Select>
 
-                    <bs-group justified v-if="appearanceType !== null && appearances[player.race]">
-                        <bs-select
-                            v-model="player.image"
-                            required>
-                            <template v-for="value, key in appearances[player.race][appearanceType]">
-                                <bs-option :value="value">{{ key }}</bs-option>
-                            </template>
-                        </bs-select>
-                    </bs-group>
+                    <Select
+                        v-if="appearanceType !== null && appearances[player.race]"
+                        v-model="player.image"
+                        required>
+                        <Option v-for="value, key in appearances[player.race][appearanceType]" :key="key" :value="value">{{ key }}</Option>
+                    </Select>
                 </div>
 
                 <div class="race-list race-list1">
@@ -306,8 +283,8 @@
                         <p>{{ $t('register.human-saiyajins.intro') }}</p>
                         <dl>
                             <dt>{{ $t('register.advantages') }}</dt>
-                            <dd>{{ $t('register.humans-saiyajins.advantages[0]') }}</dd>
-                            <dd>{{ $t('register.humans-saiyajins.advantages[1]') }}</dd>
+                            <dd>{{ $t('register.human-saiyajins.advantages[0]') }}</dd>
+                            <dd>{{ $t('register.human-saiyajins.advantages[1]') }}</dd>
                         </dl>
                     </div>
                 </div>
@@ -449,14 +426,11 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label required">{{ $t('side') }}</label>
                     <div class="col-sm-10">
-                        <bs-group justified>
-                            <bs-select
-                                v-model="player.side"
-                                :options="sides"
-                                options-value="value"
-                                required>
-                            </bs-select>
-                        </bs-group>
+                        <Select
+                            v-model="player.side"
+                            required>
+                            <Option v-for="side in sides" :key="side.label" :value="side.value">{{ $t(side.label) }}</Option>
+                        </Select>
                     </div>
                 </div>
 
@@ -473,17 +447,13 @@
                     <button type="submit" class="btn btn-default">{{ $t('register.text') }}</button>
                 </div>
             </div>
-        </form>
+        </Form>
     </div>
 </template>
 
 <script type="text/ecmascript-6">
     import {random} from 'lodash';
     import settings from '~/config/general.config';
-    import BsInput from '~components/bootstrap/input.vue';
-    import BsSelect from '~components/bootstrap/select.vue';
-    import BsOption from '~components/bootstrap/option.vue';
-    import BsGroup from '~components/bootstrap/group.vue';
     import api from '~/services/api';
     import {isEmpty} from '~/lib/utils';
 
@@ -494,13 +464,46 @@
                 title: this.$t('register.title'),
             };
         },
-        components: {
-            BsInput,
-            BsGroup,
-            BsSelect,
-            BsOption,
-        },
         data() {
+            const validatePass = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error(this.$t('field.empty')));
+                } else {
+                    if (this.player.password_confirm !== '') {
+                        this.$refs.registerForm.validateField('passwordConfirm');
+                    }
+                    callback();
+                }
+            };
+            const validatePassCheck = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error(this.$t('field.empty')));
+                } else if (this.player.password && value !== this.player.password) {
+                    callback(new Error(this.$t('field.nomatch')));
+                } else {
+                    callback();
+                }
+            };
+            const validateEmail = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('field.empty'));
+                } else {
+                    if (this.player.email_confirm !== '') {
+                        this.$refs.registerForm.validateField('emailConfirm');
+                    }
+                    callback();
+                }
+            };
+            const validateEmailCheck = (rule, value, callback) => {
+                if (value === '') {
+                    callback(new Error('field.empty'));
+                } else if (this.player.email && value !== this.player.email) {
+                    callback(new Error(this.$t('field.nomatch')));
+                } else {
+                    callback();
+                }
+            };
+
             return {
                 races: [],
                 sides: [],
@@ -518,6 +521,40 @@
                     password_confirm: '',
                     email: '',
                     email_confirm: '',
+                },
+                registerRules: {
+                    password: [
+                        {
+                            validator: validatePass,
+                            trigger: 'blur',
+                        },
+                    ],
+                    passwordConfirm: [
+                        {
+                            validator: validatePassCheck,
+                            trigger: 'blur',
+                        },
+                    ],
+                    email: [
+                        {
+                            validator: validateEmail,
+                            trigger: 'blur',
+                        },
+                        {
+                            type: 'email',
+                            trigger: 'blur',
+                        },
+                    ],
+                    emailConfirm: [
+                        {
+                            validator: validateEmailCheck,
+                            trigger: 'blur',
+                        },
+                        {
+                            type: 'email',
+                            trigger: 'blur',
+                        },
+                    ],
                 },
             };
         },

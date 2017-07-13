@@ -147,9 +147,9 @@
             <form role="form" @submit.prevent="login">
                 <div class="text-center">
                     <label for="login">{{ $t('login.text') }}</label>
-                    <bs-input name="username" v-model="username" :placeholder="$t('login.text')" required type="text"/>
+                    <Input name="username" v-model="username" :placeholder="$t('login.text')" required type="text" />
                     <label for="password">{{ $t('password') }}</label>
-                    <bs-input name="password" v-model="password" :placeholder="$t('password')" required type="password"/>
+                    <Input name="password" v-model="password" :placeholder="$t('password')" required type="password"/>
                 </div>
 
                 <div class="form-group last">
@@ -227,13 +227,8 @@
     import {mapGetters} from 'vuex';
     import api from '~/services/api';
     import Player from '~/lib/player';
-    import {manager as msgManager} from '~/lib/messages';
-    import BsInput from '~components/bootstrap/input.vue';
 
     export default {
-        components: {
-            BsInput,
-        },
         methods: {
             login() {
                 this.$store.dispatch('login', {
@@ -243,10 +238,9 @@
                     this.player = new Player(this.$store.state.player.auth);
                     this.$router.push('/account');
                 }).catch((err) => {
-                    msgManager.push(
-                        this.$t(err.message),
-                        'danger',
-                    );
+                    this.$Notice.error({
+                        title: this.$t(err.message),
+                    });
                     this.password = '';
                 });
             },
