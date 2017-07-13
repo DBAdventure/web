@@ -4,19 +4,19 @@
         <p>{{ $t('register.welcome') }}</p>
         <p>{{ $t('register.intro') }}</p>
 
-        <Form ref="registerForm" id="register-form" class="form-horizontal" @submit.prevent="submit" :rules="registerRules">
+        <Form ref="registerForm" id="register-form" class="form-horizontal" :rules="registerRules" :model="player">
             <h2>{{ $t('register.personalinfo') }}</h2>
 
-            <Form-item :label="$t('form.name')" :label-width="150" required>
+            <Form-item :label="$t('form.name')" :label-width="150" prop="username" required>
                 <Input name="name"
                        :placeholder="$t('form.name')"
-                       v-model="player.username"
+                       v-model="player.name"
                        type="text" />
             </Form-item>
-            <Form-item :label="$t('form.login')" :label-width="150" required>
-                <Input name="login"
+            <Form-item :label="$t('form.login')" :label-width="150" prop="username" required>
+                <Input name="username"
                        :placeholder="$t('form.login')"
-                       v-model="player.login"
+                       v-model="player.username"
                        type="text" />
             </Form-item>
             <Form-item :label="$t('form.password')" :label-width="150" prop="password" required>
@@ -25,7 +25,7 @@
                        v-model="player.password"
                        type="password" />
             </Form-item>
-            <Form-item :label="$t('form.passwordConfirm')" :label-width="150" prop="passwordConfirm" required>
+            <Form-item :label="$t('form.passwordConfirm')" :label-width="150" prop="password_confirm" required>
                 <Input name="password_confirm"
                        :placeholder="$t('form.passwordConfirm')"
                        v-model="player.password_confirm"
@@ -37,7 +37,7 @@
                        v-model="player.email"
                        type="text" />
             </Form-item>
-            <Form-item :label="$t('form.email')" :label-width="150" prop="emailConfirm" required>
+            <Form-item :label="$t('form.emailConfirm')" :label-width="150" prop="email_confirm" required>
                 <Input name="email_confirm"
                        :placeholder="$t('form.emailConfirm')"
                        v-model="player.email_confirm"
@@ -51,15 +51,15 @@
                 <label class="col-sm-2 control-label required">{{ $t('class') }}</label>
                 <div class="col-sm-10">
                     <Select
-                        v-model="player.clas"
+                        v-model="player.class"
                         required>
-                        <Option v-for="clas in classes" :key="clas.label" :value="clas.value">{{ $t(clas.label) }}</Option>
+                        <Option v-for="klass in classes" :key="klass.label" :value="klass.value">{{ $t(klass.label) }}</Option>
                     </select>
                 </div>
             </div>
 
             <transition name="fade" mode="out-in">
-                <div class="class-list" v-if="player.clas === 1" key="1">
+                <div class="class-list" v-if="player.class === 1" key="1">
                     <div class="col-md-3 text-center">
                         <h3>{{ $t('warrior') }}</h3>
                         <img src="/images/avatars/players/M7.png" :title="$t('warrior')" :alt="$t('warrior')"/>
@@ -83,7 +83,7 @@
                     </div>
                 </div>
 
-                <div class="class-list" v-if="player.clas === 2" key="2">
+                <div class="class-list" v-if="player.class === 2" key="2">
                     <div class="col-md-3 text-center">
                         <h3>{{ $t('magus') }}</h3>
                         <img src="/images/avatars/players/HS24.png" :title="$t('magus')" :alt="$t('magus')"/>
@@ -105,7 +105,7 @@
                     </div>
                 </div>
 
-                <div class="class-list" v-if="player.clas === 3" key="3">
+                <div class="class-list" v-if="player.class === 3" key="3">
                     <div class="col-md-3 text-center">
                         <h3>{{ $t('thief') }}</h3>
                         <img src="/images/avatars/players/HS45.png" :title="$t('thief')" :alt="$t('thief')" />
@@ -128,7 +128,7 @@
                     </div>
                 </div>
 
-                <div class="class-list" v-if="player.clas === 4" key="4">
+                <div class="class-list" v-if="player.class === 4" key="4">
                     <div class="col-md-3 text-center">
                         <h3>{{ $t('healer') }}</h3>
                         <img src="/images/avatars/players/N2.png" :title="$t('healer')" :alt="$t('healer')" />
@@ -151,7 +151,7 @@
                     </div>
                 </div>
 
-                <div class="class-list" v-if="player.clas === 5" key="5">
+                <div class="class-list" v-if="player.class === 5" key="5">
                     <div class="col-md-3 text-center">
                         <h3>{{ $t('analyst') }}</h3>
                         <img src="/images/avatars/players/C16.png" :title="$t('analyst')" :alt="$t('analyst')" />
@@ -175,7 +175,7 @@
                     </div>
                 </div>
 
-                <div class="class-list" v-if="player.clas === 6" key="6">
+                <div class="class-list" v-if="player.class === 6" key="6">
                     <div class="col-md-3 text-center">
                         <h3>{{ $t('ranger') }}</h3>
                         <img src="/images/avatars/players/C16.png" :title="$t('ranger')" :alt="$t('ranger')" />
@@ -232,18 +232,18 @@
 
                     <Select
                         v-if="player.race !== null"
-                        v-model="appearanceType"
+                        v-model="player.appearance.type"
                         :placeholder="$t('choice.character')"
                         clearable
                         required>
-                        <Option v-for="value, key in appearances[player.race]" :key="value" :value="key">{{ key }}</Option>
+                        <Option v-for="value, key in appearances[player.race]" :key="key" :value="key">{{ value.label }}</Option>
                     </Select>
 
                     <Select
-                        v-if="appearanceType !== null && appearances[player.race]"
-                        v-model="player.image"
+                        v-if="player.appearance.type !== null && appearances[player.race]"
+                        v-model="player.appearance.image"
                         required>
-                        <Option v-for="value, key in appearances[player.race][appearanceType]" :key="key" :value="value">{{ key }}</Option>
+                        <Option v-for="value, key in appearances[player.race][player.appearance.type].value" :key="key" :value="value">{{ key }}</Option>
                     </Select>
                 </div>
 
@@ -444,7 +444,7 @@
                 </div>
 
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">{{ $t('register.text') }}</button>
+                    <Button type="primary" @click.prevent="handleSubmit()" long>{{ $t('register.text') }}</Button>
                 </div>
             </div>
         </Form>
@@ -470,7 +470,7 @@
                     callback(new Error(this.$t('field.empty')));
                 } else {
                     if (this.player.password_confirm !== '') {
-                        this.$refs.registerForm.validateField('passwordConfirm');
+                        this.$refs.registerForm.validateField('password_confirm');
                     }
                     callback();
                 }
@@ -478,7 +478,7 @@
             const validatePassCheck = (rule, value, callback) => {
                 if (value === '') {
                     callback(new Error(this.$t('field.empty')));
-                } else if (this.player.password && value !== this.player.password) {
+                } else if (value !== this.player.password) {
                     callback(new Error(this.$t('field.nomatch')));
                 } else {
                     callback();
@@ -489,7 +489,7 @@
                     callback(new Error('field.empty'));
                 } else {
                     if (this.player.email_confirm !== '') {
-                        this.$refs.registerForm.validateField('emailConfirm');
+                        this.$refs.registerForm.validateField('email_confirm');
                     }
                     callback();
                 }
@@ -497,7 +497,7 @@
             const validateEmailCheck = (rule, value, callback) => {
                 if (value === '') {
                     callback(new Error('field.empty'));
-                } else if (this.player.email && value !== this.player.email) {
+                } else if (value !== this.player.email) {
                     callback(new Error(this.$t('field.nomatch')));
                 } else {
                     callback();
@@ -508,59 +508,62 @@
                 races: [],
                 sides: [],
                 classes: [],
-                appearanceType: null,
                 appearances: {},
                 player: {
-                    clas: 1,
+                    /* clas: 1,
+                     * side: 1,
+                     * race: null,
+                     * image: null,
+                     * type: null,
+                     * name: '',
+                     * username: '',
+                     * password: '',
+                     * password_confirm: '',
+                     * email: '',
+                     * email_confirm: '',*/
+                    class: 1,
                     side: 1,
-                    race: null,
-                    image: null,
-                    name: '',
-                    login: '',
-                    password: '',
-                    password_confirm: '',
-                    email: '',
-                    email_confirm: '',
+                    race: 2,
+                    appearance: {
+                        type: 'HS1',
+                        image: 'HS5.png',
+                    },
+                    name: 'test',
+                    username: 'test',
+                    password: 'test',
+                    password_confirm: 'test',
+                    email: 'test@test.com',
+                    email_confirm: 'test@test.com',
                 },
                 registerRules: {
-                    password: [
-                        {
-                            validator: validatePass,
-                            trigger: 'blur',
-                        },
+                    name: [
+                        {type: 'string', required: true},
                     ],
-                    passwordConfirm: [
-                        {
-                            validator: validatePassCheck,
-                            trigger: 'blur',
-                        },
+                    username: [
+                        {type: 'string', required: true},
+                    ],
+                    password: [
+                        {type: 'string', required: true},
+                        {validator: validatePass},
+                    ],
+                    password_confirm: [
+                        {type: 'string', required: true},
+                        {validator: validatePassCheck},
                     ],
                     email: [
-                        {
-                            validator: validateEmail,
-                            trigger: 'blur',
-                        },
-                        {
-                            type: 'email',
-                            trigger: 'blur',
-                        },
+                        {type: 'email', required: true},
+                        {validator: validateEmail},
                     ],
-                    emailConfirm: [
-                        {
-                            validator: validateEmailCheck,
-                            trigger: 'blur',
-                        },
-                        {
-                            type: 'email',
-                            trigger: 'blur',
-                        },
+                    email_confirm: [
+                        {type: 'email', required: true},
+                        {validator: validateEmailCheck},
                     ],
                 },
             };
         },
         computed: {
             selectedImage() {
-                let image = this.player.image;
+                let image = this.player.appearance.image;
                 if (isEmpty(image)) {
                     image = 'S.png';
                 }
@@ -568,11 +571,18 @@
             },
         },
         methods: {
-            submit() {
-                api.register(this.player).then((res) => {
-                    console.log(res);
-                }).catch((e) => {
+            handleSubmit() {
+                this.$refs.registerForm.validate((valid) => {
+                    if (valid) {
+                        console.log(this.player);
+                        api.register(this.player).then((res) => {
+                            console.log(res);
+                        }).catch((e) => {
 
+                        });
+                    } else {
+                        this.$Notice.error('表单验证失败!');
+                    }
                 });
             },
         },
@@ -580,7 +590,7 @@
             this.races = settings.races;
             this.sides = settings.sides;
             this.classes = settings.classes;
-            this.player.clas = random(1, 6);
+            this.player.class = random(1, 6);
             this.player.side = random(1, 2);
         },
         async asyncData() {
