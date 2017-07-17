@@ -39,9 +39,15 @@
                 return this.me.getActionImagePath(this.what);
             },
         },
-        method: {
+        methods: {
             runAction() {
-                this.$emit('run-action', {action: this.action, id: this.player.id});
+                this.$parent.$emit(
+                    'run-action',
+                    {
+                        action: this.what,
+                        id: this.player.id,
+                    },
+                );
             },
         },
     };

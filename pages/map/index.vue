@@ -49,105 +49,131 @@
         </a>
 
         <div class="search-container container-fluid">
-            <template v-for="objects, distance in itemsByDistance(items.objects)">
-                <div class="row row-object" v-for="object in objects">
-                    <div class="col-lg-2 text-center">
-                        <image-render :x="object.x" :y="object.y" :image="`/images/objects/map/${object.map_object_type.image}`" :title="$t(`objects.${object.map_object_type.name}`)"/>
-                    </div>
-                    <div class="col-lg-10">
-                        {{ $t(`objects.${object.map_object_type.name}`) }}
-                        <template v-if="distance == 0">
-                            {{ $t('map.nearYou') }}
-                        </template>
-                        <template v-else>
-                            {{ $t('map.distance', {'x': object.x, 'y': object.y, 'distance': distance} )}}
-                        </template>
+            <template v-if="action">
+                <div class="text-center">
+                    <p v-for="message in parameters.messages">{{ message }}</p>
 
-                        <div class="actions" v-if="distance == 0">
-                            <a href="#" @click.prevent="runAction('pickup', object.id)">
-                                <img :src="player.getActionImagePath('pickup')" :alt="$t('map.action.pickup', {'AP': settings.player.PICKUP_ACTION})" :title="$t('map.action.pickup', {'AP': settings.player.PICKUP_ACTION})" />
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </template>
+                    <template v-if="action == 'analysis'">
+                        <table class="table table-condensed table-striped">
+                            <tr v-for="value, name in parameters.competences">
+                                <td>
+                                    {{ $t(`action.analysis.${name}`) }}
+                                </td>
+                                <td>
+                                    {{ value }}
+                                </td>
+                            </tr>
+                        </table>
 
-            <template v-for="buildings, distance in itemsByDistance(items.buildings)">
-                <div class="row row-object" v-for="building in buildings">
-                    <div class="col-lg-2 text-center">
-                        <image-render :x="building.x" :y="building.y" :image="`/images/${building.image}`" :title="$t(`buildings.${building.name}`)"/>
-                    </div>
-                    <div class="col-lg-10">
-                        {{ $t(`buildings.${building.name}`) }}
-                        <template v-if="distance == 0">
-                            {{ $t('map.nearYou') }}
-                        </template>
-                        <template v-else>
-                            {{ $t('map.distance', {'x': building.x, 'y': building.y, 'distance': distance} )}}
-                        </template>
+                        <action-link :player="target" :me="player" what="analysis" v-if="player.action_points >= settings.player.ANALYSIS_ACTION" message-key="map.action.again.analysis"/>
+                    </template>
 
-                        <div class="actions" v-if="distance == 0">
-                            <a href="#" @click.prevent="runAction('building.enter', building.id)">
-                                <template v-if="building.type == 1">
-                                    {{ $t('map.building.teleport') }}
-                                </template>
-                                <template v-if="building.type == 3">
-                                    {{ $t('map.building.wanted') }}
-                                </template>
-                                <template v-if="building.type == 4 || building.type == 2">
-                                    {{ $t('map.building.enter') }}
-                                </template>
-                            </a>
-                        </div>
+                    <div class="text-center">
+                        <a href="#" @click.prevent="back" class="back-to-map">{{ $t('action.back.map') }}</a>
                     </div>
                 </div>
             </template>
-
-            <template v-for="players, distance in itemsByDistance(items.players, true)">
-                <div class="row row-object" v-for="enemy in players" v-if="enemy.id != player.id">
-                    <div class="col-lg-2 text-center">
-                        <image-render :x="enemy.x" :y="enemy.y" :image="enemy.getImagePath()" :title="enemy.getDisplayName()"/>
-                    </div>
-                    <div class="col-lg-10">
-                        <strong>
-                            <router-link v-if="enemy.isPlayer()" :to="`/player/info/${enemy.id}`">{{ enemy.getDisplayName() }}</router-link>
-                            <template v-else>{{ enemy.getDisplayName() }}</template>
-                        </strong>
-                        <br/>
-
-                        <!-- <span v-html="$t('map.player.info', {'sideClass': enemy.side.name, 'raceClass': enemy.race.name, 'side': $t(enemy.side.name), 'race': $t(player.race.name), 'class': $t(player.class)})"></span> -->
-
-                        <template v-if="distance == 0">
-                            {{ $t('map.player.nearYou', {"level": enemy.level}) }}
-                        </template>
-                        <template v-else>
-                            {{ $t('map.player.distance', {'level': enemy.level, 'x': enemy.x, 'y': enemy.y, 'distance': distance}) }}
-                        </template>
-
-                        <div class="actions">
-                            <router-link :to="`/inbox/write/${enemy.id}`" v-if="enemy.isPlayer()">
-                                <img :src="enemy.getActionImagePath('write')" :alt="$t('inbox.write')" :title="$t('inbox.write')" />
-                            </router-link>
-
+            <template v-else>
+                <template v-for="objects, distance in itemsByDistance(items.objects)">
+                    <div class="row row-object" v-for="object in objects">
+                        <div class="col-lg-2 text-center">
+                            <image-render :x="object.x" :y="object.y" :image="`/images/objects/map/${object.map_object_type.image}`" :title="$t(`objects.${object.map_object_type.name}`)"/>
+                        </div>
+                        <div class="col-lg-10">
+                            {{ $t(`objects.${object.map_object_type.name}`) }}
                             <template v-if="distance == 0">
-                                <action-link :player="enemy" :me="player" what="slap" v-if="enemy.isPlayer() && enemy.betrayals > 0 && player.action_points >= settings.player.SLAP_ACTION"/>
-                                <action-link :player="enemy" :me="player" what="give" v-if="enemy.isPlayer() && player.action_points >= settings.player.GIVE_ACTION"/>
-                                <action-link :player="enemy" :me="player" what="analysis" v-if="player.action_points >= settings.player.ANALYSIS_ACTION"/>
-                                <action-link :player="enemy" :me="player" what="steal" v-if="player.action_points >= settings.player.STEAL_ACTION && map[enemy.x][enemy.y]['bonus'] == settings.map.TYPE_DEFAULT" />
-                                <action-link :player="enemy" :me="player" what="heal" v-if="player.action_points >= settings.player.HEAL_ACTION && enemy.health < enemy.total_max_health"/>
-
-                                <template v-if="player.action_points >= settings.player.ATTACK_ACTION && map[enemy.x][enemy.y]['bonus'] == settings.map.TYPE_DEFAULT">
-                                    <action-link :player="enemy" :me="player" what="attack-betray"  v-if="enemy.side.id === player.side.id"/>
-                                    <action-link :player="enemy" :me="player" what="attack" v-else/>
-
-                                    <action-link :player="enemy" :me="player" what="attack-revenge"  v-if="player.target && player.target.id === enemy.id"/>
-                                </template>
+                                {{ $t('map.nearYou') }}
+                            </template>
+                            <template v-else>
+                                {{ $t('map.distance', {'x': object.x, 'y': object.y, 'distance': distance} )}}
                             </template>
 
-                            <action-link :player="enemy" :me="player" what="spell" v-if="player.action_points >= settings.player.SPELL_ACTION"/>
+                            <div class="actions" v-if="distance == 0">
+                                <a href="#" @click.prevent="runAction('pickup', object.id)">
+                                    <img :src="player.getActionImagePath('pickup')" :alt="$t('map.action.pickup', {'AP': settings.player.PICKUP_ACTION})" :title="$t('map.action.pickup', {'AP': settings.player.PICKUP_ACTION})" />
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </template>
+
+                <template v-for="buildings, distance in itemsByDistance(items.buildings)">
+                    <div class="row row-object" v-for="building in buildings">
+                        <div class="col-lg-2 text-center">
+                            <image-render :x="building.x" :y="building.y" :image="`/images/${building.image}`" :title="$t(`buildings.${building.name}`)"/>
+                        </div>
+                        <div class="col-lg-10">
+                            {{ $t(`buildings.${building.name}`) }}
+                            <template v-if="distance == 0">
+                                {{ $t('map.nearYou') }}
+                            </template>
+                            <template v-else>
+                                {{ $t('map.distance', {'x': building.x, 'y': building.y, 'distance': distance} )}}
+                            </template>
+
+                            <div class="actions" v-if="distance == 0">
+                                <a href="#" @click.prevent="runAction('building.enter', building.id)">
+                                    <template v-if="building.type == 1">
+                                        {{ $t('map.building.teleport') }}
+                                    </template>
+                                    <template v-if="building.type == 3">
+                                        {{ $t('map.building.wanted') }}
+                                    </template>
+                                    <template v-if="building.type == 4 || building.type == 2">
+                                        {{ $t('map.building.enter') }}
+                                    </template>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+                <template v-for="players, distance in itemsByDistance(items.players, true)">
+                    <div class="row row-object" v-for="enemy in players" v-if="enemy.id != player.id">
+                        <div class="col-lg-2 text-center">
+                            <image-render :x="enemy.x" :y="enemy.y" :image="enemy.getImagePath()" :title="enemy.getDisplayName()"/>
+                        </div>
+                        <div class="col-lg-10">
+                            <strong>
+                                <router-link v-if="enemy.isPlayer()" :to="`/player/info/${enemy.id}`">{{ enemy.getDisplayName() }}</router-link>
+                                <template v-else>{{ enemy.getDisplayName() }}</template>
+                            </strong>
+                            <br/>
+
+                            <!-- <span v-html="$t('map.player.info', {'sideClass': enemy.side.name, 'raceClass': enemy.race.name, 'side': $t(enemy.side.name), 'race': $t(player.race.name), 'class': $t(player.class)})"></span> -->
+
+                            <template v-if="distance == 0">
+                                {{ $t('map.player.nearYou', {"level": enemy.level}) }}
+                            </template>
+                            <template v-else>
+                                {{ $t('map.player.distance', {'level': enemy.level, 'x': enemy.x, 'y': enemy.y, 'distance': distance}) }}
+                            </template>
+
+                            <div class="actions">
+                                <router-link :to="`/inbox/write/${enemy.id}`" v-if="enemy.isPlayer()">
+                                    <img :src="enemy.getActionImagePath('write')" :alt="$t('inbox.write')" :title="$t('inbox.write')" />
+                                </router-link>
+
+                                <template v-if="distance == 0">
+                                    <action-link :player="enemy" :me="player" what="slap" v-if="enemy.isPlayer() && enemy.betrayals > 0 && player.action_points >= settings.player.SLAP_ACTION"/>
+                                    <action-link :player="enemy" :me="player" what="give" v-if="enemy.isPlayer() && player.action_points >= settings.player.GIVE_ACTION"/>
+                                    <action-link :player="enemy" :me="player" what="analysis" v-if="player.action_points >= settings.player.ANALYSIS_ACTION"/>
+                                    <action-link :player="enemy" :me="player" what="steal" v-if="player.action_points >= settings.player.STEAL_ACTION && map[enemy.x][enemy.y]['bonus'] == settings.map.TYPE_DEFAULT" />
+                                    <action-link :player="enemy" :me="player" what="heal" v-if="player.action_points >= settings.player.HEAL_ACTION && enemy.health < enemy.total_max_health"/>
+
+                                    <template v-if="player.action_points >= settings.player.ATTACK_ACTION && map[enemy.x][enemy.y]['bonus'] == settings.map.TYPE_DEFAULT">
+                                        <action-link :player="enemy" :me="player" what="attack-betray"  v-if="enemy.side.id === player.side.id"/>
+                                        <action-link :player="enemy" :me="player" what="attack" v-else/>
+
+                                        <action-link :player="enemy" :me="player" what="attack-revenge"  v-if="player.target && player.target.id === enemy.id"/>
+                                    </template>
+                                </template>
+
+                                <action-link :player="enemy" :me="player" what="spell" v-if="player.action_points >= settings.player.SPELL_ACTION"/>
+                            </div>
+                        </div>
+                    </div>
+                </template>
             </template>
         </div>
     </div>
@@ -181,6 +207,9 @@
         },
         data() {
             return {
+                action: null,
+                parameters: {},
+                target: null,
                 map: {},
                 borders: {},
                 borderYRange: [],
@@ -198,8 +227,17 @@
                     this.$store.state.game.mapReload = false;
                 }
             });
+
+            this.$on('run-action', (options) => {
+                this.runAction(options.action, options.id);
+            });
         },
         methods: {
+            back() {
+                this.action = null;
+                this.parameters = {};
+                this.target = null;
+            },
             async loadMap() {
                 await api.getMap().then((res) => {
                     this.map = res.data.map;
@@ -259,6 +297,7 @@
             },
 
             async runAction(what, id) {
+                const actions = settings.player.actions;
                 let prom;
                 switch (what) {
                     case 'attack':
@@ -289,10 +328,12 @@
                 }
 
                 this.$store.dispatch('fetchPlayer');
-                /* await prom.then((res) => {
-                 *     console.log(this.$store);
-                 *     console.log(res);
-                 * });*/
+                await prom.then((res) => {
+                    this.action = what;
+                    this.parameters = res.data;
+                    this.target = this.players[id];
+                    console.log(res.data);
+                });
             },
         },
     };
