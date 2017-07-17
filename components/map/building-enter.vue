@@ -40,75 +40,70 @@
         <template v-if="type === 'wanted'">
             <div class="text-left" v-html="$t('game.wanted.text', {player: me.name, name: building.name, minimalAmount: objects.minimalAmount})"></div>
 
-            {% if me.zeni < objects.minimalAmount %}
-            <p>{{ 'game.wanted.not.enough.zeni' | trans }}</p>
-            {% else %}
-            <form class="form-inline" method="post" action="{{ path('building.wanted', {"building_id": building.id}) }}">
+            <p v-if="me.zeni < objects.minimalAmount">{{ $t('game.wanted.not.enough.zeni') }}</p>
+            <form class="form-inline" @submit.prevent="wanted()" v-else>
                 <div class="form-group">
-                    <label for="amount">{{ 'game.wanted.amount' | trans }}</label>
-                    <input type="text" class="form-control" id="amount" placeholder="0" name="amount">
+                    <label for="amount">{{ $t('game.wanted.amount') }}</label>
+                    <input type="text" class="form-control" id="amount" placeholder="0" name="amount"/>
                 </div>
                 <div class="form-group">
-                    <label for="amount">{{ 'game.wanted.target' | trans }}</label>
-                    <input type="text" class="form-control" id="target" name="target">
+                    <label for="amount">{{ $t('game.wanted.target') }}</label>
+                    <input type="text" class="form-control" id="target" name="target"/>
                 </div>
-                <button type="submit" name="Submit" class="btn btn-default">{{ 'form.wanted.setprice' | trans }}</button>
+                <button type="submit" class="btn btn-default">{{ $t('form.wanted.setprice') }}</button>
             </form>
-            {% endif %}
         </template>
 
         <template v-if="type === 'bank'">
-            {% set goldBar = objects.zeni is defined ? objects.zeni : 0 %}
-            <div class="text-left">{{ 'game.bank.text' | trans({"%player%": me.name, "%name%": building.name, "%goldBar%": goldBar }) | raw }}</div>
+            <div class="text-left" v-html="$t('game.bank.text', {player: me.name, name: building.name, goldBar: goldbar})"></div>
 
-            <p>{{ 'game.bank.deposit' | trans | raw }}</p>
-            <form class="form-inline" method="post" action="{{ path('building.bank.deposit', {"building_id": building.id}) }}">
+            <p v-html="$t('game.bank.deposit')" />
+            <form class="form-inline" method="post" @submit.prevent="deposit()">
                 <div class="form-group">
                     <input class="form-control" placeholder="0" type="text" name="deposit"/>
                 </div>
-                <button type="submit" name="Submit" class="btn btn-default">{{ 'form.bank.deposit' | trans }}</button>
+                <button type="submit" class="btn btn-default">{{ $t('form.bank.deposit') }}</button>
             </form>
 
-            <p>{{ 'game.bank.withdraw' | trans | raw }}</p>
-            <form class="form-inline" method="post" action="{{ path('building.bank.withdraw', {"building_id": building.id}) }}">
+            <p v-html="$t('game.bank.withdraw')"/>
+            <form class="form-inline" method="post" @submit.prevent="withdraw()">
                 <div class="form-group">
                     <input class="form-control" placeholder="0" type="text" name="withdraw"/>
                 </div>
-                <button type="submit" name="Submit" class="btn btn-default">{{ 'form.bank.withdraw' | trans }}</button>
+                <button type="submit" class="btn btn-default">{{ $t('form.bank.withdraw') }}</button>
             </form>
         </template>
-
         <template v-if="type ==='magic'">
-            <div class="text-left">{{ 'game.magic.text' | trans({"%player%": me.name, "%name%": building.name }) | raw }}</div>
+            <div class="text-left" v-html="$t('game.bank.text', {player: me.name, name: building.name})"></div>
 
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>{{ 'price' | trans }}</th>
-                        <th>{{ 'requirements' | trans }}</th>
-                        <th>{{ 'name' | trans }}</th>
-                        <th>{{ 'description' | trans }}</th>
+                        <th>{{ $t('price') }}</th>
+                        <th>{{ $t('requirements') }}</th>
+                        <th>{{ $t('name') }}</th>
+                        <th>{{ $t('description') }}</th>
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for object in objects %}
-                    <tr>
+                    <tr v-for="object in objects">
                         <td>{{ object.price }}</td>
                         <td>{{ helper.displayRequirements(object) }}</td>
                         <td>{{ $t(`$t{object.name}.name`) }}</td>
-                        <td>{{ $t(`$t{object.name}.description`) }}{{ helper.displayBonus(object) | raw }}</td>
+                        <td>{{ $t(`$t{object.name}.description`) }}
+                            <stats :data="object.bonus" v-if="object.bonus" />
+                        </td>
                         <td>
                             {% if me.hasSpell(object) %}
-                            {{ 'building.shop.already.purchased.spell' | trans }}
+                            {{ $t('building.shop.already.purchased.spell') }}
                             {% elseif object.price > me.zeni %}
-                            {{ 'building.shop.no.zeni' | trans}}
+                            {{ $t('building.shop.no.zeni') }}
                             {% else %}
-                            <a class="btn btn-default" href="{{ path('building.spell.buy', {"building_id": building.id, "spell_id": object.id})}}">{{ 'building.shop.buy' | trans }}</a>
+                            <a class="btn btn-default" href="{{ path('building.spell.buy', {"building_id": building.id, "spell_id": object.id})}}">{{ $t('building.shop.buy') }}</a>
                             {% endif %}
                         </td>
                     </tr>
-                    {% endfor %}
                 </tbody>
             </table>
         </template>
@@ -116,6 +111,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+    import {isEmpty} from '~/lib/utils';
     import Stats from '~/components/objects/stats';
 
     export default {
@@ -144,6 +140,11 @@
             return {
                 availableMoves: ['n', 'ne', 'e', 'se', 's', 'sw', 'w', 'nw'],
             };
+        },
+        computed: {
+            goldBar() {
+                return !isEmpty(this.objects.zeni) ? this.objects.zeni : 0;
+            },
         },
     };
 </script>
