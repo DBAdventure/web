@@ -50,7 +50,10 @@
         },
         data() {
             return {
-                events: {},
+                events: {
+                    target: [],
+                    player: [],
+                },
             };
         },
         async mounted() {

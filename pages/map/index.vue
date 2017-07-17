@@ -192,7 +192,7 @@
         },
         async mounted() {
             await this.loadMap();
-            this.$store.watch(this.$store.state.game.mapReload, (value) => {
+            this.$store.watch(state => state.game.mapReload, (value) => {
                 if (value) {
                     this.loadMap();
                     this.$store.state.game.mapReload = false;
