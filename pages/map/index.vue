@@ -70,12 +70,25 @@
                     <template v-if="action === 'heal'">
                         <action-link :player="target" :me="player" what="heal" v-if="target.can_be_healed && player.action_points >= settings.player.HEAL_ACTION" message-key="map.action.again.heal"/>
                     </template>
+                    <template v-if="action == 'building-enter'">
+                        <template v-if="parameters.type === 'teleport'">
+                            <template v-for="move in availableMoves" v-if="player.forbidden_teleport !== move">
+                                <a href="#" @click.prevent="runAction('teleport', {where: move, id: parameters.building.id})">
+                                    {{ $t('game.teleport.link', {where: $t(`game.teleport.where.${move}`)}) }}
+                                </a>
+                                <br>
+                            </template>
+                        </template>
+                    </template>
 
                     <div class="text-center">
                         <a href="#" @click.prevent="back" class="back-to-map">{{ $t('action.back.map') }}</a>
                     </div>
                 </div>
             </template>
+
+
+
             <template v-else>
                 <template v-for="objects, distance in itemsByDistance(items.objects)">
                     <div class="row row-object" v-for="object in objects">
@@ -115,14 +128,14 @@
                             </template>
 
                             <div class="actions" v-if="distance == 0">
-                                <a href="#" @click.prevent="runAction('building.enter', building.id)">
+                                <a href="#" @click.prevent="runAction('building-enter', building.id)">
                                     <template v-if="building.type == 1">
                                         {{ $t('map.building.teleport') }}
                                     </template>
-                                    <template v-if="building.type == 3">
+                                    <template v-else-if="building.type == 3">
                                         {{ $t('map.building.wanted') }}
                                     </template>
-                                    <template v-if="building.type == 4 || building.type == 2">
+                                    <template v-else>
                                         {{ $t('map.building.enter') }}
                                     </template>
                                 </a>
@@ -213,6 +226,7 @@
                 action: null,
                 parameters: {},
                 target: null,
+                availableMoves: ['n', 'ne', 'e', 'se', 's', 'sw', 'w', 'nw'],
                 map: {},
                 borders: {},
                 borderYRange: [],
@@ -299,43 +313,54 @@
                 return names.join(', ');
             },
 
-            async runAction(what, id) {
+            async runAction(what, data) {
                 const actions = settings.player.actions;
                 let prom;
                 switch (what) {
                     case 'attack':
                     case 'attack-betray':
                     case 'attack-revenge':
-                        prom = api.attack(id, what);
+                        prom = api.attack(data, what);
                         break;
                     case 'steal':
-                        prom = api.steal(id);
+                        prom = api.steal(data);
                         break;
                     case 'heal':
-                        prom = api.heal(id);
+                        prom = api.heal(data);
                         break;
                     case 'analysis':
-                        prom = api.analysis(id);
+                        prom = api.analysis(data);
                         break;
                     case 'slap':
-                        prom = api.slap(id);
+                        prom = api.slap(data);
                         break;
                     case 'pickup':
-                        prom = api.pickup(id);
+                        prom = api.pickup(data);
                         break;
                     case 'give':
-                        prom = api.pickup(id);
+                        prom = api.pickup(data);
                         break;
+                    case 'building-enter':
+                        prom = api.enterBuilding(data).then((res) => {
+                            this.action = what;
+                            this.parameters = res.data;
+                        });
+                        return;
+                    case 'teleport':
+                        prom = api.teleport(data.id, data.where).then((res) => {
+                            this.$store.state.game.mapReload = true;
+                            this.$store.dispatch('fetchPlayer');
+                        });
+                        return;
                     default:
                         return;
                 }
 
-                this.$store.dispatch('fetchPlayer');
                 await prom.then((res) => {
+                    this.$store.dispatch('fetchPlayer');
                     this.action = what;
                     this.parameters = res.data;
-                    this.target = this.players[id];
-                    console.log(res.data);
+                    this.target = this.players[data];
                 });
             },
         },

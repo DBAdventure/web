@@ -93,6 +93,12 @@ const api = {
     getMap() {
         return makeGetRequest('/map/');
     },
+    enterBuilding(id) {
+        return makeGetRequest(`/building/enters/${id}`);
+    },
+    teleport(id, where) {
+        return makePostRequest(`/building/teleports/${id}`, {where});
+    },
 
     /**
      * Action
