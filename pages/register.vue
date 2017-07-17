@@ -455,7 +455,7 @@
     import {random} from 'lodash';
     import settings from '~/config/general.config';
     import api from '~/services/api';
-    import {isEmpty} from '~/lib/utils';
+    import {isEmpty, entries} from '~/lib/utils';
 
     export default {
         middleware: 'anonymous',
@@ -570,10 +570,21 @@
                                 desc: this.$t('account.created.description'),
                             });
                             this.$router.push('/');
-                        }).catch(() => {
-                            this.$Notice.error({
-                                title: this.$t('error.generic'),
-                            });
+                        }).catch((e) => {
+                            if (!isEmpty(e.response.data.error)) {
+                                /* eslint-disable no-restricted-syntax */
+                                for (const [key, messages] of entries(e.response.data.error)) {
+                                    this.$Notice.error({
+                                        title: this.$t(key),
+                                        desc: messages.join('.\n'),
+                                    });
+                                }
+                                /* eslint-enable no-restricted-syntax */
+                            } else {
+                                this.$Notice.error({
+                                    title: this.$t('error.generic'),
+                                });
+                            }
                         });
                     } else {
                         this.$Notice.error('表单验证失败!');

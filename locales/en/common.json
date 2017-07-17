@@ -9,6 +9,8 @@
   "edit": "Edit",
   "delete": "Delete",
   "name": "Name",
+  "username": "Login",
+  "email": "Email",
   "image": "Image",
   "price": "Price",
   "description": "Description",
