@@ -247,6 +247,7 @@
             move(where) {
                 api.move(where).then(() => {
                     this.$store.state.game.mapReload = true;
+                    this.$store.dispatch('fetchPlayer');
                 });
             },
         },

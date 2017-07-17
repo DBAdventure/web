@@ -1,6 +1,9 @@
 <template>
     <a href="#" @click.prevent="runAction">
         <img :src="imagePath" :alt="$t(`map.action.${what}`, {'AP': action})" :title="$t(`map.action.${what}`, {'AP': action})"  />
+        <template v-if="messageKey">
+            {{ $t(messageKey, {'AP': action})}}
+        </template>
     </a>
 </template>
 
@@ -20,6 +23,10 @@
             what: {
                 type: String,
                 required: true,
+            },
+            messageKey: {
+                type: String,
+                required: false,
             },
         },
         data() {

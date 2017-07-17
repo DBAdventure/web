@@ -7,7 +7,7 @@
                 <thead>
                     <tr>
                         <th class="map-refresh">
-                            <a href="#" id="refresh" :title="$t('map.refresh')"></a>
+                            <a href="#" @click.prevent="loadMap" id="refresh" :title="$t('map.refresh')"></a>
                         </th>
                         <th v-for="index in borderXRange">{{ index }}</th>
                     </tr>
@@ -53,7 +53,7 @@
                 <div class="text-center">
                     <p v-for="message in parameters.messages">{{ message }}</p>
 
-                    <template v-if="action == 'analysis'">
+                    <template v-if="action === 'analysis'">
                         <table class="table table-condensed table-striped">
                             <tr v-for="value, name in parameters.competences">
                                 <td>
@@ -66,6 +66,9 @@
                         </table>
 
                         <action-link :player="target" :me="player" what="analysis" v-if="player.action_points >= settings.player.ANALYSIS_ACTION" message-key="map.action.again.analysis"/>
+                    </template>
+                    <template v-if="action === 'heal'">
+                        <action-link :player="target" :me="player" what="heal" v-if="target.can_be_healed && player.action_points >= settings.player.HEAL_ACTION" message-key="map.action.again.heal"/>
                     </template>
 
                     <div class="text-center">
@@ -140,7 +143,7 @@
                             </strong>
                             <br/>
 
-                            <!-- <span v-html="$t('map.player.info', {'sideClass': enemy.side.name, 'raceClass': enemy.race.name, 'side': $t(enemy.side.name), 'race': $t(player.race.name), 'class': $t(player.class)})"></span> -->
+                            <span v-html="$t('map.player.info', {'sideClass': enemy.side.name, 'raceClass': enemy.race.name, 'side': $t(enemy.side.name), 'race': $t(enemy.race.name), 'class': $t(enemy.class)})"></span>
 
                             <template v-if="distance == 0">
                                 {{ $t('map.player.nearYou', {"level": enemy.level}) }}
@@ -159,7 +162,7 @@
                                     <action-link :player="enemy" :me="player" what="give" v-if="enemy.isPlayer() && player.action_points >= settings.player.GIVE_ACTION"/>
                                     <action-link :player="enemy" :me="player" what="analysis" v-if="player.action_points >= settings.player.ANALYSIS_ACTION"/>
                                     <action-link :player="enemy" :me="player" what="steal" v-if="player.action_points >= settings.player.STEAL_ACTION && map[enemy.x][enemy.y]['bonus'] == settings.map.TYPE_DEFAULT" />
-                                    <action-link :player="enemy" :me="player" what="heal" v-if="player.action_points >= settings.player.HEAL_ACTION && enemy.health < enemy.total_max_health"/>
+                                    <action-link :player="enemy" :me="player" what="heal" v-if="player.action_points >= settings.player.HEAL_ACTION && enemy.can_be_healed"/>
 
                                     <template v-if="player.action_points >= settings.player.ATTACK_ACTION && map[enemy.x][enemy.y]['bonus'] == settings.map.TYPE_DEFAULT">
                                         <action-link :player="enemy" :me="player" what="attack-betray"  v-if="enemy.side.id === player.side.id"/>
