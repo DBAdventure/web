@@ -71,14 +71,7 @@
                         <action-link :player="target" :me="player" what="heal" v-if="target.can_be_healed && player.action_points >= settings.player.HEAL_ACTION" message-key="map.action.again.heal"/>
                     </template>
                     <template v-if="action == 'building-enter'">
-                        <template v-if="parameters.type === 'teleport'">
-                            <template v-for="move in availableMoves" v-if="player.forbidden_teleport !== move">
-                                <a href="#" @click.prevent="runAction('teleport', {where: move, id: parameters.building.id})">
-                                    {{ $t('game.teleport.link', {where: $t(`game.teleport.where.${move}`)}) }}
-                                </a>
-                                <br>
-                            </template>
-                        </template>
+                        <building-enter :building="parameters.building" :type="parameters.type" :objects="parameters.objects" :me="player" />
                     </template>
 
                     <div class="text-center">
@@ -203,6 +196,7 @@
     import api from '~/services/api';
     import ImageRender from '~/components/map/image-render';
     import ActionLink from '~/components/map/action-link';
+    import BuildingEnter from '~/components/map/building-enter';
     import {mapGetters} from 'vuex';
 
     export default {
@@ -213,6 +207,7 @@
             };
         },
         components: {
+            BuildingEnter,
             ImageRender,
             ActionLink,
         },
@@ -226,7 +221,6 @@
                 action: null,
                 parameters: {},
                 target: null,
-                availableMoves: ['n', 'ne', 'e', 'se', 's', 'sw', 'w', 'nw'],
                 map: {},
                 borders: {},
                 borderYRange: [],
@@ -313,41 +307,41 @@
                 return names.join(', ');
             },
 
-            async runAction(what, data) {
+            async runAction(what, id, data) {
                 const actions = settings.player.actions;
                 let prom;
                 switch (what) {
                     case 'attack':
                     case 'attack-betray':
                     case 'attack-revenge':
-                        prom = api.attack(data, what);
+                        prom = api.attack(id, what);
                         break;
                     case 'steal':
-                        prom = api.steal(data);
+                        prom = api.steal(id);
                         break;
                     case 'heal':
-                        prom = api.heal(data);
+                        prom = api.heal(id);
                         break;
                     case 'analysis':
-                        prom = api.analysis(data);
+                        prom = api.analysis(id);
                         break;
                     case 'slap':
-                        prom = api.slap(data);
+                        prom = api.slap(id);
                         break;
                     case 'pickup':
-                        prom = api.pickup(data);
+                        prom = api.pickup(id);
                         break;
                     case 'give':
-                        prom = api.pickup(data);
+                        prom = api.pickup(id);
                         break;
                     case 'building-enter':
-                        prom = api.enterBuilding(data).then((res) => {
+                        prom = api.enterBuilding(id).then((res) => {
                             this.action = what;
                             this.parameters = res.data;
                         });
                         return;
                     case 'teleport':
-                        prom = api.teleport(data.id, data.where).then((res) => {
+                        prom = api.teleport(id, data.where).then((res) => {
                             this.$store.state.game.mapReload = true;
                             this.$store.dispatch('fetchPlayer');
                         });
@@ -360,7 +354,7 @@
                     this.$store.dispatch('fetchPlayer');
                     this.action = what;
                     this.parameters = res.data;
-                    this.target = this.players[data];
+                    this.target = this.players[id];
                 });
             },
         },
