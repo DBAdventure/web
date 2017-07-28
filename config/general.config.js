@@ -66,4 +66,16 @@ module.exports = {
         SPELL_ACTION: 6,
         MOVEMENT_ACTION: 5,
     },
+    objects: {
+        TYPE_SPECIAL: 0,
+        TYPE_UNIQUE: 2,
+        TYPE_CONSUMABLE: 4,
+        TYPE_VISION: 5,
+        TYPE_WEAPON: 6,
+        TYPE_SHIELD: 7,
+        TYPE_ACCESSORY: 8,
+        TYPE_CAP: 9,
+        TYPE_SHOES: 10,
+        TYPE_OUTFIT: 11,
+    },
 };

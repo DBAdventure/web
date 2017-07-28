@@ -3,7 +3,7 @@
         <ul class="nav navbar-nav">
             <li class="dropdown" v-if="this.$store.state.player.connected" :class="{'open': menuOpened}" v-click-outside="closeMenu">
                 <a href="#" class="dropdown-toggle" @click.prevent="toggleMenu">
-                    <img :src="player.getImagePath()" :alt="player.getDisplayName()"/> {{ player.getDisplayName() }} <b class="caret"></b>
+                    <img :src="currentPlayer.getImagePath()" :alt="currentPlayer.getDisplayName()"/> {{ currentPlayer.getDisplayName() }} <b class="caret"></b>
                 </a>
 
                 <ul class="dropdown-menu">
@@ -16,7 +16,7 @@
                     <li>
                         <router-link to="/account/training-room">
                             <i class="glyphicon glyphicon-education"></i> {{ $t('header.training.room') }}
-                            <span class="badge" v-if="player.skillPoints > 0">{{ player.skillPoints }}</span>
+                            <span class="badge" v-if="currentPlayer.skillPoints > 0">{{ currentPlayer.skillPoints }}</span>
                         </router-link>
                     </li>
                     <li>
@@ -25,7 +25,7 @@
                         </router-link>
                     </li>
                     <li class="divider"></li>
-                    <template v-if="player.isModo">
+                    <template v-if="currentPlayer.isModo">
                         <li>
                             <router-link to="/account/appearance">
                                 <router-link to="admin">
@@ -65,9 +65,9 @@
             ClickOutside,
         },
         computed: {
-            ...mapGetters({
-                player: 'getPlayer',
-            }),
+            ...mapGetters([
+                'currentPlayer',
+            ]),
         },
         methods: {
             logout() {

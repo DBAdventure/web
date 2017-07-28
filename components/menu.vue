@@ -1,18 +1,18 @@
 <template>
     <div id="menu"">
         <div class="start"></div>
-        <template v-if="$store.state.player.connected && player.isPlayer()">
+        <template v-if="$store.state.player.connected && currentPlayer.isPlayer()">
             <div class="player">
                 <h2>{{ $t('menu.player.text') }}</h2>
                 <div class="player-info">
                     <div class="submenu">
                         <ul>
-                            <li>{{ $t('menu.map.name', {"mapName": $t(player.map.name)}) }}</li>
-                            <li>{{ $t('menu.map.position', {"x": player.x, "y": player.y}) }}</li>
-                            <li>{{ $t('menu.map.zeni', {"zeni": player.zeni}) }}</li>
+                            <li>{{ $t('menu.map.name', {"mapName": $t(currentPlayer.map.name)}) }}</li>
+                            <li>{{ $t('menu.map.position', {"x": currentPlayer.x, "y": currentPlayer.y}) }}</li>
+                            <li>{{ $t('menu.map.zeni', {"zeni": currentPlayer.zeni}) }}</li>
                         </ul>
                         <div class="bars">
-                            {{ $t('menu.player.health', {"h": player.health, "maxH": player.total_max_health}) }}
+                            {{ $t('menu.player.health', {"h": currentPlayer.health, "maxH": currentPlayer.total_max_health}) }}
                             <div class="progress">
                                 <div class="progress-bar progress-bar-danger"
                                      role="progressbar"
@@ -23,8 +23,8 @@
                                 </div>
                             </div>
 
-                            {{ $t('menu.player.ki', {"ki": player.ki, "maxKi": player.total_max_ki}) }}
-                            {{ $t('menu.player.plus', {"time": player.getTimeRemaining('ki_points')}) }}
+                            {{ $t('menu.player.ki', {"ki": currentPlayer.ki, "maxKi": currentPlayer.total_max_ki}) }}
+                            {{ $t('menu.player.plus', {"time": currentPlayer.getTimeRemaining('ki_points')}) }}
                             <div class="progress">
                                 <div class="progress-bar progress-bar-info"
                                      role="progressbar"
@@ -35,8 +35,8 @@
                                 </div>
                             </div>
 
-                            {{ $t('menu.player.ap', {"ap": player.action_points, "maxAp": player.max_action_points}) }}
-                            {{ $t('menu.player.plus', {"time": player.getTimeRemaining('action_points')}) }}
+                            {{ $t('menu.player.ap', {"ap": currentPlayer.action_points, "maxAp": currentPlayer.max_action_points}) }}
+                            {{ $t('menu.player.plus', {"time": currentPlayer.getTimeRemaining('action_points')}) }}
                             <div class="progress">
                                 <div class="progress-bar progress-bar-warning"
                                      role="progressbar"
@@ -47,8 +47,8 @@
                                 </div>
                             </div>
 
-                            {{ $t('menu.player.mp', {"mp": player.movement_points, "maxMp": player.max_movement_points}) }}
-                            {{ $t('menu.player.plus', {"time": player.getTimeRemaining('movement_points')}) }}
+                            {{ $t('menu.player.mp', {"mp": currentPlayer.movement_points, "maxMp": currentPlayer.max_movement_points}) }}
+                            {{ $t('menu.player.plus', {"time": currentPlayer.getTimeRemaining('movement_points')}) }}
                             <div class="progress">
                                 <div class="progress-bar progress-bar-success"
                                      role="progressbar"
@@ -59,8 +59,8 @@
                                 </div>
                             </div>
 
-                            {{ $t('menu.player.fp', {"fp": player.fatigue_points, "maxFp": player.max_fatigue_points}) }}
-                            {{ $t('menu.player.minus', {"time": player.getTimeRemaining('fatigue_points')}) }}
+                            {{ $t('menu.player.fp', {"fp": currentPlayer.fatigue_points, "maxFp": currentPlayer.max_fatigue_points}) }}
+                            {{ $t('menu.player.minus', {"time": currentPlayer.getTimeRemaining('fatigue_points')}) }}
                             <div class="progress">
                                 <div class="progress-bar"
                                      role="progressbar"
@@ -136,7 +136,7 @@
                         </li>
                     </ul>
 
-                    <div class="text-center" v-if="player.canConvert()">
+                    <div class="text-center" v-if="currentPlayer.canConvert()">
                         <strong><a href="#" @click.prevent="convert">{{ $t('action.convert') }}</a></strong>
                     </div>
                 </div>
@@ -226,7 +226,6 @@
 <script type="text/ecmascript-6">
     import {mapGetters} from 'vuex';
     import api from '~/services/api';
-    import Player from '~/lib/player';
 
     export default {
         methods: {
@@ -235,7 +234,6 @@
                     username: this.username,
                     password: this.password,
                 }).then(() => {
-                    this.player = new Player(this.$store.state.player.auth);
                     this.$router.push('/account');
                 }).catch((err) => {
                     this.$Notice.error({
@@ -258,36 +256,36 @@
             };
         },
         computed: {
-            ...mapGetters({
-                player: 'getPlayer',
-            }),
+            ...mapGetters([
+                'currentPlayer',
+            ]),
             hPercent() {
                 return Math.floor(
-                    (this.player.health * 100) / this.player.total_max_health,
+                    (this.currentPlayer.health * 100) / this.currentPlayer.total_max_health,
                 );
             },
 
             kiPercent() {
                 return Math.floor(
-                    (this.player.ki * 100) / this.player.total_max_ki,
+                    (this.currentPlayer.ki * 100) / this.currentPlayer.total_max_ki,
                 );
             },
 
             apPercent() {
                 return Math.floor(
-                    (this.player.action_points * 100) / this.player.max_action_points,
+                    (this.currentPlayer.action_points * 100) / this.currentPlayer.max_action_points,
                 );
             },
 
             mpPercent() {
                 return Math.floor(
-                    (this.player.movement_points * 100) / this.player.max_movement_points,
+                    (this.currentPlayer.movement_points * 100) / this.currentPlayer.max_movement_points,
                 );
             },
 
             fpPercent() {
                 return Math.floor(
-                    (this.player.fatigue_points * 100) / this.player.max_fatigue_points,
+                    (this.currentPlayer.fatigue_points * 100) / this.currentPlayer.max_fatigue_points,
                 );
             },
         },

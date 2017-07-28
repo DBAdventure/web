@@ -26,7 +26,7 @@
                             </template>
 
                             <template v-if="itemsList(items.players, x, y).length > 2">
-                                <image-render :x="x" :y="y" :image="getPlayer($store.state.player.auth).getImagePath()" :title="getPlayer($store.state.player.auth).getDisplayName()"/>
+                                <image-render :x="x" :y="y" :image="currentPlayer.getImagePath()" :title="currentPlayer.getDisplayName()"/>
                                 <image-render :x="x" :y="y" image="/images/avatars/players/group.png" :title="groupNames(itemsList(items.players, x, y))"/>
                             </template>
                             <template v-else>
@@ -44,8 +44,8 @@
             </table>
         </div>
 
-        <a href="#" @click.prevent="runAction('heal', player.id)"  v-if="player.health < player.total_max_health && player.action_points >= settings.player.HEAL_ACTION">
-            <img :src="player.getActionImagePath('heal')" :alt="$t('map.action.heal', {'AP': settings.player.HEAL_ACTION})" :title="$t('map.action.heal', {'AP': settings.player.HEAL_ACTION})" />
+        <a href="#" @click.prevent="runAction('heal', currentPlayer.id)"  v-if="currentPlayer.health < currentPlayer.total_max_health && currentPlayer.action_points >= settings.player.HEAL_ACTION">
+            <img :src="currentPlayer.getActionImagePath('heal')" :alt="$t('map.action.heal', {'AP': settings.player.HEAL_ACTION})" :title="$t('map.action.heal', {'AP': settings.player.HEAL_ACTION})" />
         </a>
 
         <div class="search-container container-fluid">
@@ -65,10 +65,10 @@
                             </tr>
                         </table>
 
-                        <action-link :player="target" :me="player" what="analysis" v-if="player.action_points >= settings.player.ANALYSIS_ACTION" message-key="map.action.again.analysis"/>
+                        <action-link :player="target" :me="player" what="analysis" v-if="currentPlayer.action_points >= settings.player.ANALYSIS_ACTION" message-key="map.action.again.analysis"/>
                     </template>
                     <template v-if="action === 'heal'">
-                        <action-link :player="target" :me="player" what="heal" v-if="target.can_be_healed && player.action_points >= settings.player.HEAL_ACTION" message-key="map.action.again.heal"/>
+                        <action-link :player="target" :me="player" what="heal" v-if="target.can_be_healed && currentPlayer.action_points >= settings.player.HEAL_ACTION" message-key="map.action.again.heal"/>
                     </template>
                     <template v-if="action == 'building-enter'">
                         <building-enter :building="parameters.building" :type="parameters.type" :objects="parameters.objects" :me="player" />
@@ -99,7 +99,7 @@
 
                             <div class="actions" v-if="distance == 0">
                                 <a href="#" @click.prevent="runAction('pickup', object.id)">
-                                    <img :src="player.getActionImagePath('pickup')" :alt="$t('map.action.pickup', {'AP': settings.player.PICKUP_ACTION})" :title="$t('map.action.pickup', {'AP': settings.player.PICKUP_ACTION})" />
+                                    <img :src="currentPlayer.getActionImagePath('pickup')" :alt="$t('map.action.pickup', {'AP': settings.player.PICKUP_ACTION})" :title="$t('map.action.pickup', {'AP': settings.player.PICKUP_ACTION})" />
                                 </a>
                             </div>
                         </div>
@@ -138,7 +138,7 @@
                 </template>
 
                 <template v-for="players, distance in itemsByDistance(items.players, true)">
-                    <div class="row row-object" v-for="enemy in players" v-if="enemy.id != player.id">
+                    <div class="row row-object" v-for="enemy in players" v-if="enemy.id != currentPlayer.id">
                         <div class="col-lg-2 text-center">
                             <image-render :x="enemy.x" :y="enemy.y" :image="enemy.getImagePath()" :title="enemy.getDisplayName()"/>
                         </div>
@@ -164,21 +164,21 @@
                                 </router-link>
 
                                 <template v-if="distance == 0">
-                                    <action-link :player="enemy" :me="player" what="slap" v-if="enemy.isPlayer() && enemy.betrayals > 0 && player.action_points >= settings.player.SLAP_ACTION"/>
-                                    <action-link :player="enemy" :me="player" what="give" v-if="enemy.isPlayer() && player.action_points >= settings.player.GIVE_ACTION"/>
-                                    <action-link :player="enemy" :me="player" what="analysis" v-if="player.action_points >= settings.player.ANALYSIS_ACTION"/>
-                                    <action-link :player="enemy" :me="player" what="steal" v-if="player.action_points >= settings.player.STEAL_ACTION && map[enemy.x][enemy.y]['bonus'] == settings.map.TYPE_DEFAULT" />
-                                    <action-link :player="enemy" :me="player" what="heal" v-if="player.action_points >= settings.player.HEAL_ACTION && enemy.can_be_healed"/>
+                                    <action-link :player="enemy" :me="player" what="slap" v-if="enemy.isPlayer() && enemy.betrayals > 0 && currentPlayer.action_points >= settings.player.SLAP_ACTION"/>
+                                    <action-link :player="enemy" :me="player" what="give" v-if="enemy.isPlayer() && currentPlayer.action_points >= settings.player.GIVE_ACTION"/>
+                                    <action-link :player="enemy" :me="player" what="analysis" v-if="currentPlayer.action_points >= settings.player.ANALYSIS_ACTION"/>
+                                    <action-link :player="enemy" :me="player" what="steal" v-if="currentPlayer.action_points >= settings.player.STEAL_ACTION && map[enemy.x][enemy.y]['bonus'] == settings.map.TYPE_DEFAULT" />
+                                    <action-link :player="enemy" :me="player" what="heal" v-if="currentPlayer.action_points >= settings.player.HEAL_ACTION && enemy.can_be_healed"/>
 
-                                    <template v-if="player.action_points >= settings.player.ATTACK_ACTION && map[enemy.x][enemy.y]['bonus'] == settings.map.TYPE_DEFAULT">
-                                        <action-link :player="enemy" :me="player" what="attack-betray"  v-if="enemy.side.id === player.side.id"/>
+                                    <template v-if="currentPlayer.action_points >= settings.player.ATTACK_ACTION && map[enemy.x][enemy.y]['bonus'] == settings.map.TYPE_DEFAULT">
+                                        <action-link :player="enemy" :me="player" what="attack-betray"  v-if="enemy.side.id === currentPlayer.side.id"/>
                                         <action-link :player="enemy" :me="player" what="attack" v-else/>
 
-                                        <action-link :player="enemy" :me="player" what="attack-revenge"  v-if="player.target && player.target.id === enemy.id"/>
+                                        <action-link :player="enemy" :me="player" what="attack-revenge"  v-if="currentPlayer.getTarget().id === enemy.id"/>
                                     </template>
                                 </template>
 
-                                <action-link :player="enemy" :me="player" what="spell" v-if="player.action_points >= settings.player.SPELL_ACTION"/>
+                                <action-link :player="enemy" :me="player" what="spell" v-if="currentPlayer.action_points >= settings.player.SPELL_ACTION"/>
                             </div>
                         </div>
                     </div>
@@ -212,9 +212,9 @@
             ActionLink,
         },
         computed: {
-            ...mapGetters({
-                player: 'getPlayer',
-            }),
+            ...mapGetters([
+                'currentPlayer',
+            ]),
         },
         data() {
             return {

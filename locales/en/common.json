@@ -1067,6 +1067,11 @@
     }
   },
   "error": {
+    "home": "Back to the home page",
+    "not": {
+      "connected": "You are not connected",
+      "exists": "This page does not exists"
+    },
     "bad": {
       "credentials": "Your username or password are incorrect."
     },
