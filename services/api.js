@@ -3,6 +3,8 @@ import isEmpty from '~/lib/utils';
 import axios from 'axios';
 import settings from '~/config/general.config';
 
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+
 let baseUrl = '';
 if (!process.BROWSER_BUILD) {
     baseUrl = settings.API_DOMAIN;

@@ -5,7 +5,7 @@
 module.exports = {
     PORT: process.env.PORT || 3000,
     NODE_ENV: process.env.NODE_ENV || 'local',
-    API_DOMAIN: process.env.API_DOMAIN || 'http://jdr-dba.dev',
+    API_DOMAIN: process.env.API_DOMAIN || 'http://localhost:8081',
     API_TOKEN: process.env.API_TOKEN,
     languages: ['en', 'fr'],
     races: [

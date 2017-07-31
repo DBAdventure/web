@@ -3,7 +3,7 @@
         <div>
             <h1 class="error-code">{{ error.statusCode }}</h1>
             <div class="error-wrapper-message">
-                <h2 class="error-message">{{ error.message }}</h2>
+                <h2 class="error-message">{{ $t(error.message) }}</h2>
             </div>
             <p v-if="error.statusCode === 404">
                 <nuxt-link class="error-link" to="/">{{ $t('error.home') }}</nuxt-link>
