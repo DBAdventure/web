@@ -4,9 +4,7 @@
         <dba-header></dba-header>
 
         <div class="middle container-fluid" :class="$store.state.game.style">
-            <div id="menu">
-                <dba-menu></dba-menu>
-            </div>
+            <dba-menu></dba-menu>
 
             <div id="content">
                 <div class="border-top">&nbsp;</div>

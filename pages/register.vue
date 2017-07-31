@@ -563,7 +563,6 @@
             handleSubmit() {
                 this.$refs.registerForm.validate((valid) => {
                     if (valid) {
-                        console.log(this.player);
                         api.register({player_registration: this.player}).then(() => {
                             this.$Notice.success({
                                 title: this.$t('account.created.title'),
