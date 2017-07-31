@@ -17,7 +17,6 @@
         "bootstrap-sass": "^3.3.7",
         "css-loader": "^0.28.4",
         "es6-promise": "^4.1.1",
-        "eslint-plugin-html": "^3.1.1",
         "express": "^4.15.3",
         "express-session": "^1.15.4",
         "glob": "^7.1.2",
@@ -44,6 +43,7 @@
     },
     "devDependencies": {
         "eslint": "^4.3.0",
+        "eslint-plugin-html": "^3.1.1",
         "eslint-config-airbnb": "^15.1.0",
         "eslint-loader": "^1.9.0",
         "eslint-plugin-import": "^2.7.0",
