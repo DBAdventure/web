@@ -18,7 +18,7 @@
         </template>
 
         <table class="inventory">
-            <tr v-if="playerObject in objects[type]" v-if="playerObject.equipped ">
+            <tr v-for="playerObject in objects[type]" v-if="playerObject.equipped ">
                 <td>
                     <Poptip :title="`$t('objects.${playerObject.object.name}.name)`"
                             :content="`$t('objects.${playerObject.object.name}.description)`"
@@ -40,11 +40,11 @@
 
                         <button class="btn btn-default btn-xs" @click.prevent="equip(playerObject.id)">
                             {{ $t('inventory.equip')}}
-                        </a>
+                        </button>
 
                         <button v-if="playerObject.can_be_dropped" data-toggle="confirmation" class="btn btn-danger btn-xs" @click.prevent="drop(playerObject.id)">
                             {{ 'inventory.drop' | trans}}
-                        </a>
+                        </button>
                     </div>
                 </td>
             </tr>

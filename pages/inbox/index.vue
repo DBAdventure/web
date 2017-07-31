@@ -79,8 +79,8 @@
                         <tbody>
                             <tr v-for="message in messages">
                                 <td class="text-center">
-                                    <img v-if="message.status === status.unread" src="{{ asset('bundles/dbagame/images/inbox/unread.png') }}" />
-                                    <img v-else src="{{ asset('bundles/dbagame/images/inbox/read.png') }}" />
+                                    <img v-if="message.status === status.unread" src="/images/inbox/unread.png" />
+                                    <img v-else src="/images/inbox/read.png" />
                                 </td>
                                 <td>{{ $moment(message.createdAt).format('ll') }}</td>
                                 <template v-if="directory === type.inbox">
@@ -161,9 +161,9 @@
                                 <div class="clearfix">&nbsp;</div>
                             </div>
 
-                            <div id="recipients" data-prototype="{{ helper.widget_prototype(form.recipients, 'form.remove') | escape }}">
+                            <div id="recipients">
                                 <template v-for="i, recipient in messages.recipients">
-                                    <div data-content="{{ i }}">
+                                    <div>
                                         <div class="form-group">
                                             <Form-item :label="$t('form.recipient')" :label-width="150" required>
                                                 <Input :placeholder="$t('form.recipient')"
