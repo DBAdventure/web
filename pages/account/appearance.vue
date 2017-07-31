@@ -1,7 +1,7 @@
 <template>
-    <dvi>
+    <div>
         <h1 class="title title-appearance">{{ $t('appearance') }}</h1>
-    </dvi>
+    </div>
 </template>
 
 <script type="text/ecmascript-6">

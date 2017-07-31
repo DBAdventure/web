@@ -3,7 +3,7 @@
         <h1 class="title title-inventory-equip">{{ $t('menu.inventory') }}</h1>
 
         <div id="inventory">
-            <table class="character" class="table" style="background: url({{ app.user.inventoryImagePath }}) no-repeat 50% 50%">
+            <table class="character table" :style="`background: url(${currentPlayer.getImagePath()}) no-repeat 50% 50%`">
                 <tr>
                     <td>
                         <span class="type-title">{{ $t('inventory.cap') }}</span>
