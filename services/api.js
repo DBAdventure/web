@@ -3,25 +3,10 @@ import isEmpty from '~/lib/utils';
 import axios from 'axios';
 import settings from '~/config/general.config';
 
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-
 let baseUrl = '';
 if (!process.BROWSER_BUILD) {
     baseUrl = settings.API_DOMAIN;
 }
-
-/**
- * Abstract function that make a DELETE request to the U2Guide API
- * @param {string} path
- * @returns {Promise}
- */
-const makeDeleteRequest = (path, params = {}) => new Promise((resolve, reject) => {
-    axios.delete(`${baseUrl}/api${path}`, {params}).then((result) => {
-        resolve(result);
-    }).catch((err) => {
-        reject(err);
-    });
-});
 
 /**
  * Abstract function that make a GET request to the U2Guide API
@@ -31,8 +16,8 @@ const makeDeleteRequest = (path, params = {}) => new Promise((resolve, reject) =
 const makeGetRequest = (path, params = {}) => new Promise((resolve, reject) => {
     axios.get(`${baseUrl}/api${path}`, {params}).then((result) => {
         resolve(result);
-    }).catch((err) => {
-        reject(err);
+    }).catch((error) => {
+        reject(error);
     });
 });
 
@@ -43,10 +28,16 @@ const makeGetRequest = (path, params = {}) => new Promise((resolve, reject) => {
  * @returns {Promise}
  */
 const makePostRequest = (path, postData, config = {}) => new Promise((resolve, reject) => {
-    axios.post(`${baseUrl}/api${path}`, postData, config).then((result) => {
+    const newConfig = Object.assign({
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            Accept: 'application/json',
+        },
+    }, config);
+    axios.post(`${baseUrl}/api${path}`, postData, newConfig).then((result) => {
         resolve(result);
-    }).catch((err) => {
-        reject(err);
+    }).catch((error) => {
+        reject(error);
     });
 });
 
