@@ -16,13 +16,13 @@
         "bootstrap": "^3.3.7",
         "bootstrap-sass": "^3.3.7",
         "css-loader": "^0.28.4",
+        "es6-promise": "^4.1.1",
         "eslint-plugin-html": "^2.0.3",
         "express": "^4.15.3",
         "express-session": "^1.15.4",
         "glob": "^7.1.2",
         "http-proxy-middleware": "^0.17.4",
         "iview": "^2.0.0",
-        "loadash": "^0.0.1",
         "lodash": "^4.17.4",
         "moment": "^2.18.1",
         "morgan": "^1.8.2",
@@ -50,7 +50,7 @@
         "eslint-plugin-import": "^2.3.0",
         "eslint-plugin-jsx-a11y": "^5.0.3",
         "eslint-plugin-react": "^7.0.1",
-        "npm-check-updates": "^2.11.3"
+        "npm-check-updates": "^2.12.1"
     },
     "engines": {
         "node": ">= 4.0.0",
