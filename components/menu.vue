@@ -78,7 +78,7 @@
                         <router-link to="/account">{{ $t('menu.dashboard') }}</router-link>
                     </li>
                     <li class="list-group-item">
-                        <router-link to="/magic">{{ $t('menu.magic') }}</router-link>
+                        <router-link to="/account/magic">{{ $t('menu.magic') }}</router-link>
                     </li>
                     <li class="list-group-item">
                         <router-link to="/map">{{ $t('menu.map.text') }}</router-link>
@@ -87,7 +87,7 @@
                         <router-link to="/map/mini">{{ $t('menu.map.mini') }}</router-link>
                     </li>
                     <li class="list-group-item">
-                        <router-link to="/inventory">{{ $t('menu.inventory') }}</router-link>
+                        <router-link to="/account/inventory">{{ $t('menu.inventory') }}</router-link>
                     </li>
                     <li class="list-group-item">
                         <router-link to="/guild">{{ $t('menu.guild.text') }}</router-link>
@@ -246,8 +246,21 @@
                 api.move(where).then(() => {
                     this.$store.state.game.mapReload = true;
                     this.$store.dispatch('fetchPlayer');
+                }).catch(() => {
+                    this.$Notice.error({
+                        title: this.$t('error.move.forbidden'),
+                    })
                 });
             },
+            convert() {
+                api.convert().then(() => {
+                    this.$store.dispatch('fetchPlayer');
+                }).catch(() => {
+                    this.$Notice.error({
+                        title: this.$t('error.convert.forbidden'),
+                    })
+                });
+            }
         },
         data() {
             return {

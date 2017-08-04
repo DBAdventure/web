@@ -1075,7 +1075,13 @@
     "bad": {
       "credentials": "Your username or password are incorrect."
     },
-    "generic": "Oops, something went wrong"
+    "generic": "Oops, something went wrong",
+    "move": {
+      "forbidden": "You are not able to move here!"
+    },
+    "convert": {
+      "forbidden": "You are not able to convert!"
+    }
   },
   "strap": {
     "limit": "Limit reached ({limit} items max).",
@@ -1090,5 +1096,6 @@
   "field": {
     "nomatch": "Field does not match",
     "empty": "Field is empty"
-  }
+  },
+  "This page could not be found.": "This page could not be found."
 }

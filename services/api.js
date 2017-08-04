@@ -16,7 +16,11 @@ if (!process.BROWSER_BUILD) {
  * @returns {Promise}
  */
 const makeGetRequest = (path, params = {}) => new Promise((resolve, reject) => {
-    axios.get(`${baseUrl}/api${path}`, {params}).then((result) => {
+    const config = {
+        withCredentials: true,
+        params,
+    };
+    axios.get(`${baseUrl}/api${path}`, config).then((result) => {
         resolve(result);
     }).catch((error) => {
         reject(error);
@@ -32,9 +36,9 @@ const makeGetRequest = (path, params = {}) => new Promise((resolve, reject) => {
 const makePostRequest = (path, postData, config = {}) => new Promise((resolve, reject) => {
     const newConfig = Object.assign({
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
             Accept: 'application/json',
         },
+        withCredentials: true,
     }, config);
     axios.post(`${baseUrl}/api${path}`, postData, newConfig).then((result) => {
         resolve(result);

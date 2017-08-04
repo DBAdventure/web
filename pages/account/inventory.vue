@@ -3,7 +3,7 @@
         <h1 class="title title-inventory-equip">{{ $t('menu.inventory') }}</h1>
 
         <div id="inventory">
-            <table class="character table" :style="`background: url(${currentPlayer.getImagePath()}) no-repeat 50% 50%`">
+            <table class="character table" :style="`background: url(${currentPlayer.getInventoryImagePath()}) no-repeat 50% 50%`">
                 <tr>
                     <td>
                         <span class="type-title">{{ $t('inventory.cap') }}</span>
@@ -45,7 +45,7 @@
             </table>
 
             <p class="text-center">
-                {{ $t('inventory.weight', {'weight': currentPlayer.inventory_weight, "max_weight": currentPlayer.inventory_max_weight}) }}
+                {{ $t('inventory.weight', {'weight': currentPlayer.inventory_weight, 'maxWeight': currentPlayer.inventory_max_weight}) }}
             </p>
 
             <h1 class="title title-inventory-objects">{{ $t('menu.inventory') }}</h1>
@@ -55,7 +55,9 @@
 </template>
 
 <script type="text/ecmascript-6">
+    import {mapGetters} from 'vuex';
     import Frame from '~/components/account/inventory/frame';
+    import settings from '~/config/general.config';
 
     export default {
         middleware: 'auth',
@@ -69,7 +71,14 @@
         },
         data() {
             return {
+                settings,
+                objects: {},
             };
+        },
+        computed: {
+            ...mapGetters([
+                'currentPlayer',
+            ]),
         },
     };
 </script>
