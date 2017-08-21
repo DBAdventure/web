@@ -55,5 +55,5 @@ if (isDev) {
 app.use(nuxt.render);
 
 app.listen(process.env.SOCKET_PATH || generalConfig.PORT, () => {
-    console.log(`Running server... on ${process.env.SOCKET_PATH || 3000}`);
+    console.log(`Running server... on ${process.env.SOCKET_PATH || generalConfig.PORT}`);
 });

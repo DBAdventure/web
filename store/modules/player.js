@@ -12,7 +12,7 @@ const state = () => ({
 });
 
 let instance;
-if (!process.BROWSER_BUILD && !process.env.SOCKET_PATH && settings.PORT) {
+if (!process.browser && !process.env.SOCKET_PATH && settings.PORT) {
     instance = axios.create({baseURL: `http://localhost:${settings.PORT}`});
 } else {
     instance = axios.create();

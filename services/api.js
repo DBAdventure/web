@@ -6,7 +6,7 @@ import settings from '~/config/general.config';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
 let baseUrl = '';
-if (!process.BROWSER_BUILD) {
+if (!process.browser) {
     baseUrl = settings.API_DOMAIN;
 }
 
