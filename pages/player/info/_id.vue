@@ -42,6 +42,7 @@
 
 <script type="text/ecmascript-6">
     import Player from '~/lib/player';
+    import api from '~/services/api';
 
     export default {
         head() {
@@ -52,7 +53,27 @@
         data() {
             return {
                 target: new Player(),
+                selectedPlayer: null,
             };
+        },
+        mounted() {
+            console.log(this.selectedPlayer);
+            this.target = new Player(this.selectedPlayer);
+        },
+        asyncData({params, error}) {
+            return api.getPlayerInfo(params.id).then((res) => {
+                console.log(res);
+                return {
+                    selectedPlayer: res.data.player,
+                };
+            }).catch((e) => {
+                console.log('here');
+                console.log(e);
+                error({
+                    message: 'error.not.found.player',
+                    statusCode: 404,
+                });
+            });
         },
     };
 </script>

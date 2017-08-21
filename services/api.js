@@ -73,6 +73,9 @@ const api = {
     getOnlinePlayers() {
         return makeGetRequest('/data/online');
     },
+    getPlayerInfo(id) {
+        return makeGetRequest(`/data/players/${id}/info`);
+    },
 
     /**
      * Account
