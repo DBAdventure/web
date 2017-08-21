@@ -598,7 +598,7 @@
             this.player.class = random(1, 6);
             this.player.side = random(1, 2);
         },
-        async asyncData() {
+        asyncData() {
             return api.getAppearanceData().then(res => (
                 {
                     appearances: res.data,

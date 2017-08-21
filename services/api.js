@@ -98,6 +98,13 @@ const api = {
     },
 
     /**
+     * Inbox
+     */
+    getInboxDirectory(directory = 'inbox') {
+        return makeGetRequest(`/inbox/${directory}`);
+    },
+
+    /**
      * Action
      */
     convert() {

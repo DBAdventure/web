@@ -1,6 +1,6 @@
 @import 'variables';
-@import '../../node_modules/iview/dist/styles/iview.css';
 @import '../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
+@import '../../node_modules/iview/dist/styles/iview.css';
 
 a:hover,
 #contenu a:hover,
@@ -194,7 +194,7 @@ body {
         background-repeat: no-repeat;
         border: thin solid transparent;
         border-bottom: none;
-        margin: -9px;
+        margin: -9px -9px 0 -9px;
         min-height: 55px;
         padding: 55px 10px 0;
         position: relative;

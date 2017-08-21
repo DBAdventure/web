@@ -11,22 +11,22 @@
                         <a href="#" @click.prevent="writeGuild()">{{ $t('inbox.guild.write') }}</a>
                     </li>
                     <li class="sep"></li>
-                    <li><a href="#" @click.prevent="inbox()">{{ $t('inbox.inbox') }}</a></li>
-                    <li><a href="#" @click.prevent="outbox()">{{ $t('inbox.outbox') }}</a></li>
+                    <li><a href="#" @click.prevent="selectDirectory(type.inbox)">{{ $t('inbox.inbox') }}</a></li>
+                    <li><a href="#" @click.prevent="selectDirectory(type.outbox)">{{ $t('inbox.outbox') }}</a></li>
                     <li v-if="currentPlayer.getGuild().enabled">
-                        <a href="#" @click.prevent="outbox(true)">{{ $t('inbox.guild.outbox') }}</a>
+                        <a href="#" @click.prevent="selectDirectory(type.guild)">{{ $t('inbox.guild.outbox') }}</a>
                     </li>
 
-                    <li><a href="#" @click.prevent="archive()">{{ $t('inbox.archive') }}</a></li>
+                    <li><a href="#" @click.prevent="selectDirectory(type.archive)">{{ $t('inbox.archive') }}</a></li>
                     <li class="sep"></li>
-                    <li><a href="#" @click.prevent="clear('inbox')">{{ $t('inbox.clear.inbox') }}</a></li>
-                    <li><a href="#" @click.prevent="clear('outbox')">{{ $t('inbox.clear.outbox') }}</a></li>
+                    <li><a href="#" @click.prevent="clear(type.inbox)">{{ $t('inbox.clear.inbox') }}</a></li>
+                    <li><a href="#" @click.prevent="clear(type.outbox)">{{ $t('inbox.clear.outbox') }}</a></li>
                     <li v-if="currentPlayer.getGuild().enabled">
-                        <a href="#" @click.prevent="clear('inbox', true)">{{ $t('inbox.clear.guild.outbox') }}</a>
+                        <a href="#" @click.prevent="clear(type.guild)">{{ $t('inbox.clear.guild.outbox') }}</a>
                     </li>
-                    <li><a href="#" @click.prevent="clear('archive')">{{ $t('inbox.clear.archive') }}</a></li>
+                    <li><a href="#" @click.prevent="clear(type.archive)">{{ $t('inbox.clear.archive') }}</a></li>
                     <li class="sep"></li>
-                    <li><a href="#" @click.prevent="clear('read')">{{ $t('inbox.clear.read') }}</a></li>
+                    <li><a href="#" @click.prevent="clear(type.read)">{{ $t('inbox.clear.read') }}</a></li>
                 </ul>
 
                 <p>
@@ -50,7 +50,7 @@
                         </template>
                     </h2>
 
-                    <table class="table table-striped">
+                    <table class="table table-striped" v-if="messages.lenght > 0">
                         <colgroup>
                             <col class="col-md-1"/>
                             <col class="col-md-3"/>
@@ -98,6 +98,10 @@
                             </tr>
                         </tbody>
                     </table>
+                    <p v-else>
+                        {{ $t('inbox.no.messages') }}
+                    </p>
+
                 </template>
                 <template v-else-if="page === type.read">
                     <h2 class="subtitle text-center">
@@ -106,7 +110,7 @@
 
                     <div class="container-fluid">
                         <p>
-                            <strong>{{ $('inbox.info.from') }}</strong>{{ message.sender.name }}
+                            <strong>{{ $t('inbox.info.from') }}</strong>{{ message.sender.name }}
                         </p>
                         <p v-if="message.sender.id === currentPlayer.id && message.sender_directory === type.outbox">
                             <strong>{{ $t('inbox.info.to') }}</strong>{{ message.recipient.name }}
@@ -126,7 +130,7 @@
 
                     <div class="container-fluid">
                         <div class="col-lg-4">
-                            <button class="btn btn-default" @click.prevent="back(directory ? `inbox.${directory}` : 'inbox')">
+                            <button class="btn btn-default" @click.prevent="back(directory)">
                                 {{ $t('inbox.back') }}
                             </button>
                         </div>
@@ -151,32 +155,25 @@
                     </h2>
 
 
-                    <form @submit.prevent="submitMessage()">
+                    <Form @submit.prevent="submitMessage()">
                         <template v-if="currentMessage === null">
                             <div class="text-center">
-                                <button class="btn btn-default btn-add" @click.prevent="addRecipient()">
-                                    <span class="glyphicon glyphicon-plus"></span>
+                                <Button @click.prevent="addRecipient()">
+                                    <Icon type="plus-round" />
                                     {{ $t('form.add.recipient') }}
-                                </button>
+                                </Button>
                                 <div class="clearfix">&nbsp;</div>
                             </div>
 
                             <div id="recipients">
-                                <template v-for="i, recipient in messages.recipients">
-                                    <div>
-                                        <div class="form-group">
-                                            <Form-item :label="$t('form.recipient')" :label-width="150" required>
-                                                <Input :placeholder="$t('form.recipient')"
-                                                       v-model="recipients[i]"
-                                                       type="text" />
-                                            </Form-item>
-                                            <div class="col-sm-2 text-right">
-                                                <button type="button" class="btn btn-default btn-sm btn-remove" @click.prevent="removeRecipient(i)">
-                                                    <span class="glyphicon glyphicon-remove btn-remove"></span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <template v-for="value, key in message.recipients">
+                                    <Form-item :label="$t('form.recipient')" :label-width="150" required>
+                                        <Input :placeholder="$t('form.recipient')"
+                                               v-model="message.recipients[key]"
+                                               type="text">
+                                            <Button slot="append" icon="close-round" @click.prevent="removeRecipient(key)"/>
+                                        </Input>
+                                    </Form-item>
                                 </template>
                             </div>
                         </template>
@@ -192,14 +189,14 @@
                             <Input name="message"
                                    :rows="4"
                                    :placeholder="$t('form.message')"
-                                   v-model="message"
+                                   v-model="message.message"
                                    type="textarea" />
                         </Form-item>
 
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default">{{ $('form.send') }}</button>
+                            <button type="submit" class="btn btn-default">{{ $t('form.send') }}</button>
                         </div>
-                    </form>
+                    </Form>
                 </template>
             </div>
         </div>
@@ -208,6 +205,7 @@
 
 <script type="text/ecmascript-6">
     import {mapGetters} from 'vuex';
+    import api from '~/services/api';
 
     export default {
         middleware: 'auth',
@@ -224,21 +222,49 @@
         data() {
             return {
                 subject: null,
-                message: null,
                 currentMessage: null,
                 messages: [],
+                message: {
+                    recipients: [''],
+                    subject: '',
+                    message: '',
+                },
                 type: {
                     list: 'list',
                     read: 'read',
                     write: 'write',
+                    inbox: 'inbox',
+                    outbox: 'outbox',
+                    archive: 'archive',
                 },
+                page: 'list',
+                directory: 'inbox',
             };
         },
-        mounted() {
-
+        methods: {
+            selectDirectory(directory) {
+                api.getInboxDirectory(directory).then((res) => {
+                    this.page = 'list';
+                    this.directory = directory;
+                    this.messages = res.data.messages;
+                });
+            },
+            write() {
+                this.page = 'write';
+            },
+            addRecipient() {
+                this.message.recipients.push('');
+            },
+            removeRecipient(index) {
+                this.message.recipients.splice(index, 1);
+            },
         },
         asyncData() {
-
+            return api.getInboxDirectory().then(res => (
+                {
+                    messages: res.data.messages,
+                }
+            ));
         },
     };
 </script>

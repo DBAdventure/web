@@ -108,6 +108,7 @@
       "bonus": "Add Bonus",
       "requirements": "Add Requirements"
     },
+    "recipient": "Recipient",
     "description": "Description",
     "price": "Price",
     "remove": "Remove",
