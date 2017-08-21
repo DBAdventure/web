@@ -227,6 +227,11 @@
                 message: null,
                 currentMessage: null,
                 messages: [],
+                type: {
+                    list: 'list',
+                    read: 'read',
+                    write: 'write',
+                },
             };
         },
         mounted() {

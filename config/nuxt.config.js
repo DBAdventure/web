@@ -29,11 +29,11 @@ module.exports = {
             'vue-i18n',
             'vuex-router-sync',
         ],
-        postcss: [
-            autoprefixer({
+        postcss: {
+            'postcss-autoprefixer': autoprefixer({
                 browsers: ['last 3 versions'],
             }),
-        ],
+        },
     },
     plugins: [
         '~plugins/date',
