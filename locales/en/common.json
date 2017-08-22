@@ -491,6 +491,7 @@
     }
   },
   "training": {
+    "title": "Training room",
     "room": "Training room",
     "success": "Capacity improved!",
     "error": "Can not increase this capacity!",
@@ -852,16 +853,16 @@
   },
   "miscellaneous": {
     "title": "Player information",
-    "side": "Side:",
-    "name": "Name:",
-    "race": "Race:",
-    "level": "Level:",
+    "side": "Side: {side}",
+    "name": "Name: {name}",
+    "race": "Race: {race}",
+    "level": "Level: {level}",
     "search": "Searching for player:",
     "killed": {
       "all": "All players killed",
-      "good": "Good killed:",
-      "bad": "Bad killed:",
-      "npc": "Npc killed:"
+      "good": "Good killed: {nb}",
+      "bad": "Bad killed: {nb}",
+      "npc": "Npc killed: {nb}"
     },
     "lastConnection": "Last connection"
   },

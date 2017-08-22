@@ -11,15 +11,15 @@
 
                     <p v-if="$store.state.player.connected">
                         <router-link :to="`/inbox/write/${target.id}`">
-                            <img :src="target.getActionImagePath('write')" :alt="$t('inbox.write')" title="$t('inbox.write')" />
+                            <img :src="target.getActionImagePath('write')" :alt="$t('inbox.write')" :title="$t('inbox.write')" />
                         </router-link>
                     </p>
 
-                    <p>{{ $t('miscellaneous.side') }} {{ $t(target.side.name) }}</p>
-                    <p>{{ $t('miscellaneous.race') }} {{ $t(target.race.name) }}</p>
-                    <p v-html="$t('miscellaneous.level', {level: target.level})"></p>
+                    <p v-if="target.side">{{ $t('miscellaneous.side', {side: $t(target.side.name)}) }}</p>
+                    <p v-if="target.race">{{ $t('miscellaneous.race', {race: $t(target.race.name)}) }}</p>
+                    <p v-if="target.level">{{ $t('miscellaneous.level', {race: target.level}) }}</p>
 
-                    <p v-if="target.target !== null">
+                    <p v-if="target.target">
                         {{ $t('miscellaneous.search') }}
                         <router-link :to="`/player/info/${target.target.id}`">{{ target.target.getDisplayName() }}</router-link>
                     </p>
@@ -27,13 +27,13 @@
                     <p>
                         {{ $t('miscellaneous.killed.all') }}
                         <ul>
-                            <li>{{ $t('miscellaneous.killed.good', {nb: target.nbKillGood}) }}</li>
-                            <li>{{ $t('miscellaneous.killed.bad', {nb: target.nbKillBad}) }}</li>
-                            <li>{{ $t('miscellaneous.killed.npc', {nb: target.nbKillNpc}) }}</li>
+                            <li>{{ $t('miscellaneous.killed.good', {nb: target.nb_kill_good}) }}</li>
+                            <li>{{ $t('miscellaneous.killed.bad', {nb: target.nb_kill_bad}) }}</li>
+                            <li>{{ $t('miscellaneous.killed.npc', {nb: target.nb_kill_npc}) }}</li>
                         </ul>
                     </p>
 
-                    <p>{{ $t('miscellaneous.last.connection', {date: target.lastLogin}) }}</p>
+                    <p v-if="target.last_login">{{ $t('miscellaneous.lastConnection', {date: target.last_login}) }}</p>
                 </div>
             </td>
         </tr>
@@ -53,22 +53,16 @@
         data() {
             return {
                 target: new Player(),
-                selectedPlayer: null,
+                selectedPlayer: {},
             };
         },
         mounted() {
-            console.log(this.selectedPlayer);
             this.target = new Player(this.selectedPlayer);
         },
         asyncData({params, error}) {
-            return api.getPlayerInfo(params.id).then((res) => {
-                console.log(res);
-                return {
-                    selectedPlayer: res.data.player,
-                };
-            }).catch((e) => {
-                console.log('here');
-                console.log(e);
+            return api.getPlayerInfo(params.id).then(res => ({
+                selectedPlayer: res.data.player,
+            })).catch(() => {
                 error({
                     message: 'error.not.found.player',
                     statusCode: 404,
