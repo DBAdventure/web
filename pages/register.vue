@@ -586,7 +586,7 @@
                             }
                         });
                     } else {
-                        this.$Notice.error('表单验证失败!');
+                        this.$Notice.error('Form is not valid');
                     }
                 });
             },

@@ -37,7 +37,10 @@
             </div>
 
             <div id="inbox-content">
-                <template v-if="page === type.list">
+                <template v-if="page === type.loading">
+                    Loading...
+                </template>
+                <template v-else-if="page === type.list">
                     <h2 class="subtitle text-center">
                         <template v-if="directory === type.inbox">
                             {{ $t('inbox.inbox') }}
@@ -50,103 +53,49 @@
                         </template>
                     </h2>
 
-                    <table class="table table-striped" v-if="messages.lenght > 0">
-                        <colgroup>
-                            <col class="col-md-1"/>
-                            <col class="col-md-3"/>
-                            <col />
-                            <col />
-                            <col class="col-md-1"/>
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th>{{ $t('inbox.status') }}</th>
-                                <th>{{ $t('inbox.date') }}</th>
-                                <template v-if="directory === type.inbox">
-                                    <th>{{ $t('inbox.sender') }}</th>
-                                </template>
-                                <template v-else-if="directory === type.archive">
-                                    <th >{{ $t('inbox.sender') }}</th>
-                                    <th>{{ $t('inbox.recipient') }}</th>
-                                </template>
-                                <template v-else>
-                                    <th>{{ $t('inbox.recipient') }}</th>
-                                </template>
-                                <th>{{ $t('inbox.subject') }}</th>
-                                <th>{{ $t('inbox.actions') }}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="message in messages">
-                                <td class="text-center">
-                                    <img v-if="message.status === status.unread" src="/images/inbox/unread.png" />
-                                    <img v-else src="/images/inbox/read.png" />
-                                </td>
-                                <td>{{ $moment(message.createdAt).format('ll') }}</td>
-                                <template v-if="directory === type.inbox">
-                                    <td>{{ message.sender.displayName }}</td>
-                                </template>
-                                <template v-else-if="directory === type.archive">
-                                    <td>{{ message.sender.displayName }}</td>
-                                    <td>{{ message.recipient.displayName }}</td>
-                                </template>
-                                <template v-else>
-                                    <td>{{ message.recipient.displayName }}</td>
-                                </template>
-                                <td>{{ message.subject }}</td>
-                                <td><a @click.prevent="read(message.id)" href="#">{{ $t('inbox.read') }}</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p v-else>
-                        {{ $t('inbox.no.messages') }}
-                    </p>
-
+                    <Table :columns="getTableColumns()" :data="messages"></Table>
                 </template>
                 <template v-else-if="page === type.read">
                     <h2 class="subtitle text-center">
                         {{ $t('inbox.read') }}
                     </h2>
 
+                    <Button @click.prevent="back(directory)">
+                        {{ $t('inbox.back') }}
+                    </Button>
+
                     <div class="container-fluid">
                         <p>
-                            <strong>{{ $t('inbox.info.from') }}</strong>{{ message.sender.name }}
+                            <strong>{{ $t('inbox.info.from') }}</strong>{{ getPlayer(selectedMessage.sender).getDisplayName() }}
                         </p>
-                        <p v-if="message.sender.id === currentPlayer.id && message.sender_directory === type.outbox">
-                            <strong>{{ $t('inbox.info.to') }}</strong>{{ message.recipient.name }}
+                        <p v-if="getPlayer(selectedMessage.sender).id === currentPlayer.id && selectedMessage.sender_directory === type.outbox">
+                            <strong>{{ $t('inbox.info.to') }}</strong>{{ getPlayer(selectedMessage.recipient).getDisplayName() }}
                         </p>
 
                         <p>
-                            <strong>{{ $t('inbox.info.date') }}</strong>{{ message.createdAt | date }}
+                            <strong>{{ $t('inbox.info.date') }}</strong>{{ $moment(selectedMessage.created_at).format('LLL') }}
                         </p>
                         <p>
-                            <strong>{{ $t('inbox.info.subject') }}</strong>{{ message.subject }}
+                            <strong>{{ $t('inbox.info.subject') }}</strong>{{ selectedMessage.subject }}
                         </p>
                         <p>
                             <strong>{{ $t('inbox.info.message') }}</strong><br/>
-                            {{ message.message | nl2br }}
+                            {{ selectedMessage.message }}
                         </p>
                     </div>
 
-                    <div class="container-fluid">
-                        <div class="col-lg-4">
-                            <button class="btn btn-default" @click.prevent="back(directory)">
-                                {{ $t('inbox.back') }}
-                            </button>
-                        </div>
-                        <div class="col-lg-8 text-right">
-                            <a v-if="message.can_reply" class="btn btn-default" @click.prevent="reply(message.id)">
-                                <img src="/images/inbox/reply.png" alt="" /> {{ $t('inbox.reply') }}
-                            </a>
+                    <div>
+                        <Button v-if="selectedMessage.recipient.id === currentPlayer.id" @click.prevent="reply(message.id)">
+                            <img src="/images/inbox/reply.png" alt="" /> {{ $t('inbox.reply') }}
+                        </Button>
 
-                            <button class="btn btn-default" @click.prevent="delete(message.id)">
-                                <img src="/images/inbox/delete.png" /> {{ $t('inbox.delete') }}
-                            </button>
+                        <Button @click.prevent="delete(message.id)">
+                            <img src="/images/inbox/delete.png" /> {{ $t('inbox.delete') }}
+                        </Button>
 
-                            <button v-if="message.can_archive" class="btn btn-default" @click.prevent="archive(message.id)">
-                                <img src="/images/inbox/archive.png" /> {{ $t('inbox.archive') }}
-                            </button>
-                        </div>
+                        <Button v-if="selectedMessage.can_archive" @click.prevent="archive(message.id)">
+                            <img src="/images/inbox/archive.png" /> {{ $t('inbox.archive') }}
+                        </Button>
                     </div>
                 </template>
                 <template v-else-if="page === type.write">
@@ -154,8 +103,7 @@
                         {{ $t('inbox.write') }}
                     </h2>
 
-
-                    <Form @submit.prevent="submitMessage()">
+                    <Form ref="inboxForm" id="inbox-write-form" >
                         <template v-if="currentMessage === null">
                             <div class="text-center">
                                 <Button @click.prevent="addRecipient()">
@@ -171,7 +119,7 @@
                                         <Input :placeholder="$t('form.recipient')"
                                                v-model="message.recipients[key]"
                                                type="text">
-                                            <Button slot="append" icon="close-round" @click.prevent="removeRecipient(key)"/>
+                                        <Button slot="append" icon="close-round" @click.prevent="removeRecipient(key)"/>
                                         </Input>
                                     </Form-item>
                                 </template>
@@ -181,7 +129,7 @@
                         <Form-item :label="$t('form.subject')" :label-width="150" required>
                             <Input name="subject"
                                    :placeholder="$t('form.subject')"
-                                   v-model="subject"
+                                   v-model="message.subject"
                                    type="text" />
                         </Form-item>
 
@@ -194,7 +142,7 @@
                         </Form-item>
 
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default">{{ $t('form.send') }}</button>
+                            <button @click.prevent="submitMessage()" type="submit">{{ $t('form.send') }}</button>
                         </div>
                     </Form>
                 </template>
@@ -205,10 +153,15 @@
 
 <script type="text/ecmascript-6">
     import {mapGetters} from 'vuex';
+    import _ from 'lodash';
     import api from '~/services/api';
+    import Players from '~/components/mixins/players';
 
     export default {
         middleware: 'auth',
+        mixins: [
+            Players,
+        ],
         head() {
             return {
                 title: this.$t('account.title'),
@@ -224,6 +177,7 @@
                 subject: null,
                 currentMessage: null,
                 messages: [],
+                selectedMessage: {},
                 message: {
                     recipients: [''],
                     subject: '',
@@ -236,21 +190,110 @@
                     inbox: 'inbox',
                     outbox: 'outbox',
                     archive: 'archive',
+                    loading: 'loading',
+                },
+                status: {
+                    unread: 0,
+                    read: 1,
                 },
                 page: 'list',
                 directory: 'inbox',
             };
         },
         methods: {
+            getTableColumns() {
+                const columns = [
+                    {
+                        type: 'selection',
+                        width: 30,
+                        align: 'center',
+                    },
+                    {
+                        title: this.$t('inbox.status'),
+                        align: 'center',
+                        key: 'status',
+                        render: (h, params) => {
+                            const status = params.row.status === this.status.unread ? 'unread' : 'read';
+                            return h(
+                                'div',
+                                {
+                                    domProps: {
+                                        innerHTML: `<img src="/images/inbox/${status}.png"/>`,
+                                    },
+                                },
+                            );
+                        },
+                    },
+                    {
+                        title: this.$t('inbox.date'),
+                        key: 'created_at',
+                        render: (h, params) => this.$moment(params.row.created_at).fromNow(),
+                    },
+                ];
+
+                if (this.directory === this.type.inbox || this.directory === this.type.archive) {
+                    columns.push({
+                        title: this.$t('inbox.sender'),
+                        key: 'sender',
+                        render: (h, params) => this.getPlayer(params.row.sender).getDisplayName(),
+                    });
+                }
+
+                if (this.directory !== this.type.inbox || this.directory === this.type.archive) {
+                    columns.push({
+                        title: this.$t('inbox.recipient'),
+                        key: 'recipient',
+                        render: (h, params) => this.getPlayer(params.row.recipient).getDisplayName(),
+                    });
+                }
+
+                columns.push({
+                    title: this.$t('inbox.subject'),
+                    key: 'subject',
+                });
+                columns.push({
+                    title: this.$t('inbox.actions'),
+                    key: 'action',
+                    render: (h, params) => h(
+                        'Button',
+                        {
+                            props: {
+                                type: 'primary',
+                                size: 'small',
+                            },
+                            on: {
+                                click: () => {
+                                    this.read(params.row.id);
+                                },
+                            },
+                        },
+                        this.$t('inbox.read'),
+                    ),
+                });
+
+                return columns;
+            },
             selectDirectory(directory) {
+                this.page = this.type.loading;
                 api.getInboxDirectory(directory).then((res) => {
-                    this.page = 'list';
+                    this.page = this.type.list;
                     this.directory = directory;
                     this.messages = res.data.messages;
                 });
             },
             write() {
-                this.page = 'write';
+                this.page = this.type.write;
+            },
+            read(id) {
+                this.page = this.type.loading;
+                api.readMessage(id).then((res) => {
+                    this.page = this.type.read;
+                    this.selectedMessage = res.data.message;
+                });
+            },
+            back(directory) {
+                this.selectedMessage = {};
+                this.selectDirectory(directory);
             },
             addRecipient() {
                 this.message.recipients.push('');
@@ -258,13 +301,36 @@
             removeRecipient(index) {
                 this.message.recipients.splice(index, 1);
             },
+            submitMessage() {
+                this.$refs.inboxForm.validate((valid) => {
+                    if (valid) {
+                        const message = Object.assign({}, this.message);
+                        const recipients = [];
+                        _.uniq(message.recipients).forEach((r) => {
+                            recipients.push({name: r});
+                        });
+                        message.recipients = recipients;
+
+                        this.page = this.type.loading;
+                        api.postMessage({inbox_message: message}).then(() => {
+                            this.$Notice.success({
+                                title: this.$t('inbox.message.sent', {names: this.message.recipients.join(', ')}),
+                            });
+                            this.message.subject = '';
+                            this.message.message = '';
+                            this.message.recipients = [''];
+                            this.selectDirectory(this.type.inbox);
+                        });
+                    } else {
+                        this.$Notice.error('Form is not valid');
+                    }
+                });
+            },
         },
-        asyncData() {
-            return api.getInboxDirectory().then(res => (
-                {
-                    messages: res.data.messages,
-                }
-            ));
+        mounted() {
+            api.getInboxDirectory().then((res) => {
+                this.messages = res.data.messages;
+            });
         },
     };
 </script>

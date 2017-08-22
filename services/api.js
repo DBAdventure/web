@@ -106,6 +106,12 @@ const api = {
     getInboxDirectory(directory = 'inbox') {
         return makeGetRequest(`/inbox/${directory}`);
     },
+    postMessage(message) {
+        return makePostRequest('/inbox/writes', message);
+    },
+    readMessage(id) {
+        return makeGetRequest(`/inbox/reads/${id}`);
+    },
 
     /**
      * Action

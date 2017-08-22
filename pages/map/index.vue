@@ -190,17 +190,21 @@
 
 <script type="text/ecmascript-6">
     import _ from 'lodash';
-    import settings from '~/config/general.config';
-    import Player from '~/lib/player';
+    import {mapGetters} from 'vuex';
     import {isEmpty, entries} from '~/lib/utils';
+    import settings from '~/config/general.config';
     import api from '~/services/api';
+    import Player from '~/lib/player';
     import ImageRender from '~/components/map/image-render';
     import ActionLink from '~/components/map/action-link';
     import BuildingEnter from '~/components/map/building-enter';
-    import {mapGetters} from 'vuex';
+    import Players from '~/components/mixins/players';
 
     export default {
         middleware: 'auth',
+        mixins: [
+            Players,
+        ],
         head() {
             return {
                 title: this.$t('map.title'),
@@ -225,7 +229,6 @@
                 borders: {},
                 borderYRange: [],
                 borderXRange: [],
-                players: {},
                 items: {},
                 settings,
             };
@@ -288,14 +291,6 @@
                 }
 
                 return {};
-            },
-
-            getPlayer(entity) {
-                if (isEmpty(this.players[entity.id])) {
-                    this.players[entity.id] = new Player(entity);
-                }
-
-                return this.players[entity.id];
             },
 
             groupNames(group) {
