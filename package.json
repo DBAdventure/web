@@ -27,7 +27,7 @@
         "morgan": "^1.8.2",
         "navigator": "^1.0.1",
         "node-sass": "^4.5.3",
-        "nuxt": "^1.0.0-rc5",
+        "nuxt": "^1.0.0-rc6",
         "postcss-loader": "^2.0.6",
         "sass-loader": "^6.0.6",
         "slugify": "^1.2.1",

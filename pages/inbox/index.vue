@@ -85,7 +85,7 @@
                     </div>
 
                     <div>
-                        <Button v-if="selectedMessage.recipient.id === currentPlayer.id" @click.prevent="reply(message.id)">
+                        <Button v-if="selectedMessage.recipient.id === currentPlayer.id" @click.prevent="reply()">
                             <img src="/images/inbox/reply.png" alt="" /> {{ $t('inbox.reply') }}
                         </Button>
 
@@ -141,8 +141,8 @@
                                    type="textarea" />
                         </Form-item>
 
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button @click.prevent="submitMessage()" type="submit">{{ $t('form.send') }}</button>
+                        <div class="col-sm-offset-2 col-sm-10 text-right">
+                            <Button @click.prevent="submitMessage()">{{ $t('form.send') }}</Button>
                         </div>
                     </Form>
                 </template>
@@ -282,6 +282,9 @@
                 });
             },
             write() {
+                this.page = this.type.write;
+            },
+            reply() {
                 this.page = this.type.write;
             },
             read(id) {

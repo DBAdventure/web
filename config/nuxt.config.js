@@ -21,6 +21,7 @@ module.exports = {
         middleware: ['ssr-cookie'],
     },
     build: {
+        dll: true,
         vendor: [
             'axios',
             'iview',
