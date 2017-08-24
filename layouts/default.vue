@@ -31,8 +31,22 @@
             DbaMenu,
             DbaFooter,
         },
+        data() {
+            return {
+                interval: null,
+            };
+        },
         mounted() {
             this.$store.dispatch('fetchGameData');
+            this.$store.watch(state => state.player.connected, (value) => {
+                if (value) {
+                    this.interval = setInterval(() => {
+                        this.$store.dispatch('fetchPlayer');
+                    }, 10000);
+                } else {
+                    clearInterval(this.interval);
+                }
+            });
         },
     };
 </script>
