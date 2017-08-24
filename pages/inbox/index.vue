@@ -62,21 +62,21 @@
 
                     <div class="container-fluid">
                         <p>
-                            <strong>{{ $t('inbox.info.from') }}</strong>{{ getPlayer(selectedMessage.sender).getDisplayName() }}
+                            <strong>{{ $t('inbox.info.from') }}</strong>{{ getPlayer(currentMessage.sender).getDisplayName() }}
                         </p>
-                        <p v-if="getPlayer(selectedMessage.sender).id === currentPlayer.id && selectedMessage.sender_directory === type.outbox">
-                            <strong>{{ $t('inbox.info.to') }}</strong>{{ getPlayer(selectedMessage.recipient).getDisplayName() }}
+                        <p v-if="getPlayer(currentMessage.sender).id === currentPlayer.id && currentMessage.sender_directory === type.outbox">
+                            <strong>{{ $t('inbox.info.to') }}</strong>{{ getPlayer(currentMessage.recipient).getDisplayName() }}
                         </p>
 
                         <p>
-                            <strong>{{ $t('inbox.info.date') }}</strong>{{ $moment(selectedMessage.created_at).format('LLL') }}
+                            <strong>{{ $t('inbox.info.date') }}</strong>{{ $moment(currentMessage.created_at).format('LLL') }}
                         </p>
                         <p>
-                            <strong>{{ $t('inbox.info.subject') }}</strong>{{ selectedMessage.subject }}
+                            <strong>{{ $t('inbox.info.subject') }}</strong>{{ currentMessage.subject }}
                         </p>
                         <p>
                             <strong>{{ $t('inbox.info.message') }}</strong><br/>
-                            {{ selectedMessage.message }}
+                            {{ currentMessage.message }}
                         </p>
                     </div>
 
@@ -85,7 +85,7 @@
                             {{ $t('inbox.back') }}
                         </Button>
 
-                        <Button v-if="selectedMessage.recipient.id === currentPlayer.id" @click.prevent="replyMessage()">
+                        <Button v-if="currentMessage.recipient.id === currentPlayer.id" @click.prevent="replyMessage()">
                             <img src="/images/inbox/reply.png" alt="" /> {{ $t('inbox.reply') }}
                         </Button>
 
@@ -93,7 +93,7 @@
                             <img src="/images/inbox/delete.png" /> {{ $t('inbox.delete') }}
                         </Button>
 
-                        <Button v-if="selectedMessage.can_archive" @click.prevent="archiveMessage()">
+                        <Button v-if="currentMessage.can_archive" @click.prevent="archiveMessage()">
                             <img src="/images/inbox/archive.png" /> {{ $t('inbox.archive') }}
                         </Button>
                     </div>
@@ -126,7 +126,7 @@
                             </div>
                         </template>
 
-                        <Form-item :label="$t('form.subject')" :label-width="150" required>
+                        <Form-item :label="$t('form.subject')" :label-width="150" required v-if="currentMessage === null">
                             <Input name="subject"
                                    :placeholder="$t('form.subject')"
                                    v-model="message.subject"
@@ -177,7 +177,6 @@
                 subject: null,
                 currentMessage: null,
                 messages: [],
-                selectedMessage: {},
                 message: {
                     recipients: [''],
                     subject: '',
@@ -279,23 +278,26 @@
                     this.page = this.type.list;
                     this.directory = directory;
                     this.messages = res.data.messages;
+                    this.currentMessage = null;
                 });
             },
             writeMessage() {
                 this.page = this.type.write;
+                this.currentMessage = null;
             },
             replyMessage() {
                 this.page = this.type.write;
+                this.message.message = `\n\n${'='.repeat(50)}\n${this.currentMessage.message}`;
             },
             deleteMessage() {
                 this.page = this.type.loading;
-                api.deleteMessage(this.selectedMessage.id).then(() => {
+                api.deleteMessage(this.currentMessage.id).then(() => {
                     this.selectDirectory(this.directory);
                 });
             },
             archiveMessage() {
                 this.page = this.type.loading;
-                api.archiveMessage(this.selectedMessage.id).then(() => {
+                api.archiveMessage(this.currentMessage.id).then(() => {
                     this.selectDirectory(this.type.archive);
                 });
             },
@@ -303,11 +305,10 @@
                 this.page = this.type.loading;
                 api.readMessage(id).then((res) => {
                     this.page = this.type.read;
-                    this.selectedMessage = res.data.message;
+                    this.currentMessage = res.data.message;
                 });
             },
             back(directory) {
-                this.selectedMessage = {};
                 this.selectDirectory(directory);
             },
             addRecipient() {
