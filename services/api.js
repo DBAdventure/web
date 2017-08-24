@@ -11,7 +11,7 @@ if (!process.browser) {
 }
 
 /**
- * Abstract function that make a GET request to the U2Guide API
+ * Abstract function that make a GET request to the DBA API
  * @param {string} path
  * @returns {Promise}
  */
@@ -28,7 +28,24 @@ const makeGetRequest = (path, params = {}) => new Promise((resolve, reject) => {
 });
 
 /**
- * Abstract function that make a POST request to the U2Guide API
+ * Abstract function that make a DELETE request to the DBA API
+ * @param {string} path
+ * @returns {Promise}
+ */
+const makeDeleteRequest = (path, params = {}) => new Promise((resolve, reject) => {
+    const config = {
+        withCredentials: true,
+        params,
+    };
+    axios.delete(`${baseUrl}/api${path}`, config).then((result) => {
+        resolve(result);
+    }).catch((error) => {
+        reject(error);
+    });
+});
+
+/**
+ * Abstract function that make a POST request to the DBA API
  * @param {string} path
  * @param {object} postData
  * @returns {Promise}
@@ -112,6 +129,13 @@ const api = {
     readMessage(id) {
         return makeGetRequest(`/inbox/reads/${id}`);
     },
+    deleteMessage(id) {
+        return makeDeleteRequest(`/inbox/messages/${id}`);
+    },
+    archiveMessage(id) {
+        return makePostRequest(`/inbox/archives/${id}`);
+    },
+
 
     /**
      * Action

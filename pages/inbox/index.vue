@@ -5,7 +5,7 @@
             <div id="inbox-menu">
                 <ul class="list-dots">
                     <li>
-                        <a href="#" @click.prevent="write()">{{ $t('inbox.write') }}</a>
+                        <a href="#" @click.prevent="writeMessage()">{{ $t('inbox.write') }}</a>
                     </li>
                     <li v-if="currentPlayer.getGuild().enabled">
                         <a href="#" @click.prevent="writeGuild()">{{ $t('inbox.guild.write') }}</a>
@@ -60,10 +60,6 @@
                         {{ $t('inbox.read') }}
                     </h2>
 
-                    <Button @click.prevent="back(directory)">
-                        {{ $t('inbox.back') }}
-                    </Button>
-
                     <div class="container-fluid">
                         <p>
                             <strong>{{ $t('inbox.info.from') }}</strong>{{ getPlayer(selectedMessage.sender).getDisplayName() }}
@@ -85,15 +81,19 @@
                     </div>
 
                     <div>
-                        <Button v-if="selectedMessage.recipient.id === currentPlayer.id" @click.prevent="reply()">
+                        <Button @click.prevent="back(directory)">
+                            {{ $t('inbox.back') }}
+                        </Button>
+
+                        <Button v-if="selectedMessage.recipient.id === currentPlayer.id" @click.prevent="replyMessage()">
                             <img src="/images/inbox/reply.png" alt="" /> {{ $t('inbox.reply') }}
                         </Button>
 
-                        <Button @click.prevent="delete(message.id)">
+                        <Button @click.prevent="deleteMessage()">
                             <img src="/images/inbox/delete.png" /> {{ $t('inbox.delete') }}
                         </Button>
 
-                        <Button v-if="selectedMessage.can_archive" @click.prevent="archive(message.id)">
+                        <Button v-if="selectedMessage.can_archive" @click.prevent="archiveMessage()">
                             <img src="/images/inbox/archive.png" /> {{ $t('inbox.archive') }}
                         </Button>
                     </div>
@@ -263,7 +263,7 @@
                             },
                             on: {
                                 click: () => {
-                                    this.read(params.row.id);
+                                    this.readMessage(params.row.id);
                                 },
                             },
                         },
@@ -281,13 +281,25 @@
                     this.messages = res.data.messages;
                 });
             },
-            write() {
+            writeMessage() {
                 this.page = this.type.write;
             },
-            reply() {
+            replyMessage() {
                 this.page = this.type.write;
             },
-            read(id) {
+            deleteMessage() {
+                this.page = this.type.loading;
+                api.deleteMessage(this.selectedMessage.id).then(() => {
+                    this.selectDirectory(this.directory);
+                });
+            },
+            archiveMessage() {
+                this.page = this.type.loading;
+                api.archiveMessage(this.selectedMessage.id).then(() => {
+                    this.selectDirectory(this.type.archive);
+                });
+            },
+            readMessage(id) {
                 this.page = this.type.loading;
                 api.readMessage(id).then((res) => {
                     this.page = this.type.read;
