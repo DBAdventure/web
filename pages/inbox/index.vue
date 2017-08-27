@@ -3,14 +3,15 @@
         <h1 class="title title-inbox">{{ $t('inbox.title') }}</h1>
         <div id="inbox">
             <div id="inbox-menu">
-                <ul class="list-dots">
+                <ul class="list-dots clearfix">
                     <li>
                         <a href="#" @click.prevent="writeMessage()">{{ $t('inbox.write') }}</a>
                     </li>
                     <li v-if="currentPlayer.getGuild().enabled">
                         <a href="#" @click.prevent="writeGuild()">{{ $t('inbox.guild.write') }}</a>
                     </li>
-                    <li class="sep"></li>
+                </ul>
+                <ul class="list-dots clearfix">
                     <li><a href="#" @click.prevent="selectDirectory(type.inbox)">{{ $t('inbox.inbox') }}</a></li>
                     <li><a href="#" @click.prevent="selectDirectory(type.outbox)">{{ $t('inbox.outbox') }}</a></li>
                     <li v-if="currentPlayer.getGuild().enabled">
@@ -18,15 +19,19 @@
                     </li>
 
                     <li><a href="#" @click.prevent="selectDirectory(type.archive)">{{ $t('inbox.archive') }}</a></li>
-                    <li class="sep"></li>
-                    <li><a href="#" @click.prevent="clear(type.inbox)">{{ $t('inbox.clear.inbox') }}</a></li>
-                    <li><a href="#" @click.prevent="clear(type.outbox)">{{ $t('inbox.clear.outbox') }}</a></li>
+
+                </ul>
+                <ul class="list-dots clearfix">
+                    <li><a href="#" @click.prevent="clearMessages(type.inbox)">{{ $t('inbox.clear.inbox') }}</a></li>
+                    <li><a href="#" @click.prevent="clearMessages(type.outbox)">{{ $t('inbox.clear.outbox') }}</a></li>
                     <li v-if="currentPlayer.getGuild().enabled">
-                        <a href="#" @click.prevent="clear(type.guild)">{{ $t('inbox.clear.guild.outbox') }}</a>
+                        <a href="#" @click.prevent="clearMessages(type.guild)">{{ $t('inbox.clear.guild.outbox') }}</a>
                     </li>
-                    <li><a href="#" @click.prevent="clear(type.archive)">{{ $t('inbox.clear.archive') }}</a></li>
-                    <li class="sep"></li>
-                    <li><a href="#" @click.prevent="clear(type.read)">{{ $t('inbox.clear.read') }}</a></li>
+                    <li><a href="#" @click.prevent="clearMessages(type.archive)">{{ $t('inbox.clear.archive') }}</a></li>
+
+                </ul>
+                <ul class="list-dots clearfix">
+                    <li><a href="#" @click.prevent="clearMessages(type.read)">{{ $t('inbox.clear.read') }}</a></li>
                 </ul>
 
                 <p>
@@ -292,6 +297,12 @@
             deleteMessage() {
                 this.page = this.type.loading;
                 api.deleteMessage(this.currentMessage.id).then(() => {
+                    this.selectDirectory(this.directory);
+                });
+            },
+            clearMessages(type) {
+                this.page = this.type.loading;
+                api.clearMessages(type).then(() => {
                     this.selectDirectory(this.directory);
                 });
             },

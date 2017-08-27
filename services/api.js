@@ -135,6 +135,9 @@ const api = {
     archiveMessage(id) {
         return makePostRequest(`/inbox/archives/${id}`);
     },
+    clearMessages(type) {
+        return makePostRequest(`/inbox/clears/${type}`);
+    },
 
 
     /**

@@ -56,12 +56,12 @@ body {
                     max-height:18px;
                 }
                 li a {
-                    text-transform:none;
-                    background:none;
+                    text-transform: none;
+                    background: none;
                     &:hover,
                     &:focus,
                     &:active {
-                        text-decoration:underline;
+                        text-decoration: underline;
                         border: 1px solid transparent;
                     }
                 }
@@ -201,7 +201,7 @@ body {
         text-indent: -5000px;
         height: 45px;
         &.title-default {
-            text-align:center;
+            text-align: center;
             text-indent:0px;
             font-size: 20px;
             font-variant: small-caps;
@@ -238,8 +238,8 @@ body {
         margin: 0;
         padding: 0;
         dt {
-            padding:3px 0 0 10px;
-            text-transform:uppercase;
+            padding: 3px 0 0 10px;
+            text-transform: uppercase;
             background-repeat: no-repeat;
             border-style: solid;
             border-width: thin;
@@ -249,10 +249,10 @@ body {
             padding: 10px;
             border-style: solid;
             border-width: thin;
-            border-top:none;
-            margin-bottom:10px;
+            border-top: none;
+            margin-bottom: 10px;
             .news-image {
-                float:left;
+                float: left;
                 margin: 7px 10px 0 4px;
             }
         }
@@ -262,11 +262,11 @@ body {
 #home-news {
     >dl {
         dt {
-            text-align:right;
+            text-align: right;
             text-transform: none;
             padding-right: 10px;
             strong {
-                text-transform:uppercase;
+                text-transform: uppercase;
                 padding-right: 10px;
             }
         }
@@ -472,11 +472,11 @@ body {
             height: 100px;
         }
         .map-y {
-            width:25px;
+            width: 25px;
         }
         .map-refresh {
-            width:25px;
-            height:25px;
+            width: 25px;
+            height: 25px;
         }
     }
 }
@@ -491,9 +491,9 @@ body {
         .col-lg-10 {
             vertical-align:middle;
             display:table-cell;
-            float:none;
+            float: none;
             .actions {
-                float:right;
+                float: right;
                 a:after {
                     content: " ";
                 }
@@ -503,9 +503,9 @@ body {
 }
 
 #refresh {
-    display:block;
-    width:24px;
-    height:24px;
+    display: block;
+    width: 24px;
+    height: 24px;
 }
 
 #register-form {
@@ -518,12 +518,14 @@ body {
 .list-dots {
     list-style-position: inside;
     padding-left:10px;
-    .active {
-        font-weight:bold;
+    li {
+        float: left;
+        &:not(:first-child) {
+            margin-left: 10px;
+        }
     }
-    .sep {
-        list-style:none;
-        height: 10px;
+    .active {
+        font-weight: bold;
     }
 }
 
@@ -557,9 +559,9 @@ body {
 
 #inventory {
     form {
-        display:inline;
+        display: inline;
         button {
-            float:left;
+            float: left;
         }
     }
     .character {
@@ -568,14 +570,14 @@ body {
         margin-top:15px;
     }
     .type-title {
-        font-weight:bold;
-        text-transform:uppercase;
+        font-weight: bold;
+        text-transform: uppercase;
     }
     td {
-        text-align:center;
+        text-align: center;
     }
     a:hover{
-        text-decoration:none;
+        text-decoration: none;
     }
     .equiped {
         margin:0 auto;
