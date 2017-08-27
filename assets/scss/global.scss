@@ -558,11 +558,11 @@ body {
 }
 
 #inventory {
-    form {
-        display: inline;
-        button {
-            float: left;
-        }
+    button {
+        float: left;
+    }
+    .form-control {
+        padding: 0;
     }
     .character {
         height: 600px;
@@ -575,6 +575,7 @@ body {
     }
     td {
         text-align: center;
+        border: none;
     }
     a:hover{
         text-decoration: none;

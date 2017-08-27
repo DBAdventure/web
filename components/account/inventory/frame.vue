@@ -1,12 +1,12 @@
 <template>
     <div class="text-center">
         <template v-if="objects[type]">
-            <div class="equiped" v-for="object in objects[type]" v-if="playerObject.equipped">
-                <Poptip :title="`$t('objects.${playerObject.object.name}.name)`"
-                        :content="`$t('objects.${playerObject.object.name}.description)`"
+            <div class="equiped" v-for="playerObject in objects[type]" v-if="playerObject.equipped">
+                <Poptip :title="$t(`objects.${playerObject.object.name}.name`)"
+                        :content="$t(`objects.${playerObject.object.name}.description`)"
                         placement="top"
                         trigger="hover">
-                    <img :src="playerObject.object.image_path"  /><br/>
+                    <img :src="`/images/objects/${playerObject.object.image}`" /><br/>
                     <button class="btn btn-primary btn-xs" @click.prevent="unequip(playerObject.id)" >
                         {{ $t('inventory.unequip') }}
                     </button>
@@ -17,37 +17,39 @@
             {{ $t('inventory.no.items') }}
         </template>
 
-        <table class="inventory">
-            <tr v-for="playerObject in objects[type]" v-if="playerObject.equipped ">
-                <td>
-                    <Poptip :title="`$t('objects.${playerObject.object.name}.name)`"
-                            :content="`$t('objects.${playerObject.object.name}.description)`"
-                            placement="top"
-                            trigger="hover">
-                        <img :src="playerObject.object.image_path"  />
-                    </Poptip>
-                    <br/>
-                    <div class="btn-group btn-group-xs">
-                        <form @submit.prevent="use()" v-if="playerObject.can_be_used">
-                            <Select name="nb-objects" :ref="`nb-objects-${playerObject.object.id}`" class="form-control" v-if="playerObject.can_use_many">
-                                <template v-for="i in playerObject.number">
-                                    <Option :value="nb">{{ nb }}</Option>
-                                </template>
-                            </Select>
+        <table class="inventory" v-if="objects[type]" >
+            <tbody>
+                <tr v-for="playerObject in objects[type]" v-if="!playerObject.equipped">
+                    <td>
+                        <Poptip :title="$t(`objects.${playerObject.object.name}.name`)"
+                                :content="$t(`objects.${playerObject.object.name}.description`)"
+                                placement="top"
+                                trigger="hover">
+                            <img :src="`/images/objects/${playerObject.object.image}`" />
+                        </Poptip>
+                        <br/>
+                        <div class="btn-group btn-group-xs">
+                            <template v-if="playerObject.can_be_used && playerObject.number > 1">
+                                <Select name="nb-objects" :ref="`nb-objects-${playerObject.object.id}`" class="form-control" v-if="playerObject.can_use_many">
+                                    <template v-for="nb in playerObject.number">
+                                        <Option :value="nb">{{ nb }}</Option>
+                                    </template>
+                                </Select>
 
-                            <button type="submit" class="btn btn-default btn-xs">{{ $t('inventory.use')}}</button>
-                        </form>
+                                <Button @click.prevent="use()" class="btn btn-default btn-xs">{{ $t('inventory.use')}}</Button>
+                            </template>
 
-                        <button class="btn btn-default btn-xs" @click.prevent="equip(playerObject.id)">
-                            {{ $t('inventory.equip')}}
-                        </button>
+                            <button class="btn btn-default btn-xs" @click.prevent="equip(playerObject.id)" v-if="playerObject.can_be_equipped" >
+                                {{ $t('inventory.equip')}}
+                            </button>
 
-                        <button v-if="playerObject.can_be_dropped" data-toggle="confirmation" class="btn btn-danger btn-xs" @click.prevent="drop(playerObject.id)">
-                            {{ 'inventory.drop' | trans}}
-                        </button>
-                    </div>
-                </td>
-            </tr>
+                            <button v-if="playerObject.can_be_dropped" data-toggle="confirmation" class="btn btn-danger btn-xs" @click.prevent="drop(playerObject.id)">
+                                {{ $t('inventory.drop')}}
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </template>
@@ -57,18 +59,21 @@
 
     export default {
         props: {
-            type: {
-                type: String,
+            objects: {
+                type: Object,
                 required: true,
             },
-            objects: {
-                type: Array,
+            type: {
+                type: Number,
                 required: true,
             },
         },
         data() {
             return {
             };
+        },
+        mounted() {
+            console.log(this.objects);
         },
         methods: {
             unequip(objectId) {

@@ -1066,6 +1066,12 @@
     "created": {
       "title": "Account created",
       "description": "You should have receive a mail to confirm your account."
+    },
+    "inventory": {
+      "title": "Inventory"
+    },
+    "magic": {
+      "title": "Magic"
     }
   },
   "error": {

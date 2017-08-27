@@ -38,7 +38,7 @@
         ],
         head() {
             return {
-                title: this.$t('account.inventory'),
+                title: this.$t('account.magic.title'),
             };
         },
         computed: {

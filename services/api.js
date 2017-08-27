@@ -105,6 +105,13 @@ const api = {
     },
 
     /**
+     * Inventory
+     */
+    getInventoryObjects() {
+        return makeGetRequest('/inventory/objects');
+    },
+
+    /**
      * Map
      */
     getMap() {
