@@ -110,6 +110,18 @@ const api = {
     getInventoryObjects() {
         return makeGetRequest('/inventory/objects');
     },
+    unequipObject(objectId) {
+        return makePostRequest(`/inventory/equips/${objectId}`);
+    },
+    equipObject(objectId) {
+        return makePostRequest(`/inventory/unequips/${objectId}`);
+    },
+    dropObject(objectId, nb) {
+        return makePostRequest(`/inventory/drops/${objectId}`, {nb});
+    },
+    useObject(objectId, nb) {
+        return makePostRequest(`/inventory/uses/${objectId}`, {nb});
+    },
 
     /**
      * Map

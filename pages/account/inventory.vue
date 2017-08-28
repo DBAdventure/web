@@ -3,14 +3,14 @@
         <h1 class="title title-inventory-equip">{{ $t('menu.inventory') }}</h1>
 
         <div id="inventory">
-            <table class="character table">
+            <table class="character table" :style="`background: url(${currentPlayer.getInventoryImagePath()}) no-repeat 50% 50%`">
                 <tbody>
                     <tr>
                         <td>
                             <span class="type-title">{{ $t('inventory.cap') }}</span>
                             <frame :objects="objects" :type="settings.objects.TYPE_CAP" />
                         </td>
-                        <td rowspan="3" width="250" :style="`background: url(${currentPlayer.getInventoryImagePath()}) no-repeat 50% 50%`">
+                        <td rowspan="3" width="250">
                         </td>
                         <td>
                             <span class="type-title">{{ $t('inventory.accessory') }}</span>
@@ -84,7 +84,11 @@
             ]),
         },
         mounted() {
-            console.log(this.objects);
+            this.$on('reload', () => {
+                api.getInventoryObjects().then((res) => {
+                    this.objects = res.data;
+                });
+            });
         },
         asyncData() {
             return api.getInventoryObjects().then(res => (
