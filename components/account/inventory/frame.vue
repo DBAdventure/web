@@ -1,16 +1,16 @@
 <template>
     <div class="text-center">
         <template v-if="objects[type]">
-v            <div class="equiped" v-for="playerObject in objects[type]" v-if="playerObject.equipped">
-                <Poptip :title="$t(`objects.${playerObject.object.name}.name`)"
-                        :content="$t(`objects.${playerObject.object.name}.description`)"
-                        placement="top"
-                        trigger="hover">
-                    <img :src="`/images/objects/${playerObject.object.image}`" /><br/>
-                    <button class="btn btn-primary btn-xs" @click.prevent="unequip(playerObject.object.id)" >
-                        {{ $t('inventory.unequip') }}
-                    </button>
-                </Poptip>
+            <div class="equiped" v-for="playerObject in objects[type]" v-if="playerObject.equipped">
+            <Poptip :title="$t(`objects.${playerObject.object.name}.name`)"
+                    :content="$t(`objects.${playerObject.object.name}.description`)"
+                    placement="top"
+                    trigger="hover">
+                <img :src="`/images/objects/${playerObject.object.image}`" /><br/>
+                <button class="btn btn-primary btn-xs" @click.prevent="unequip(playerObject.object.id)" >
+                    {{ $t('inventory.unequip') }}
+                </button>
+            </Poptip>
             </div>
         </template>
         <template v-else>
@@ -69,9 +69,6 @@ v            <div class="equiped" v-for="playerObject in objects[type]" v-if="pl
                 selectedObjects: {},
             };
         },
-        mounted() {
-            console.log(this.objects);
-        },
         methods: {
             unequip(objectId) {
                 api.unequipObject(objectId).then(() => {
@@ -89,20 +86,20 @@ v            <div class="equiped" v-for="playerObject in objects[type]" v-if="pl
                     nb = this.selectedObjects[objectId];
                 }
 
-                console.log(this.$t('modal.confirm.title'));
-                this.$Modal.confirm({
-                    title: this.$t('modal.confirm.title'),
-                    content: this.$t('modal.confirm.drop'),
-                    loading: true,
-                    onOk: () => {
-                        api.dropObject(objectId, nb).then(() => {
-                            this.$Modal.remove();
-                            this.$Notice.success({
-                                title: this.$t('notice.item.dropped'),
-                            });
-                            this.$emit('reload');
-                        });
-                    },
+                // @TODO
+                /* this.$Modal.confirm({
+                 *     title: this.$t('modal.confirm.title'),
+                 *     content: this.$t('modal.confirm.drop'),
+                 *     loading: true,
+                 *     onOk: () => {
+                 *     },
+                 * });*/
+                api.dropObject(objectId, nb).then(() => {
+                    /* this.$Modal.remove();*/
+                    this.$Notice.success({
+                        title: this.$t('notice.item.dropped'),
+                    });
+                    this.$emit('reload');
                 });
             },
             use(objectId) {
@@ -111,20 +108,23 @@ v            <div class="equiped" v-for="playerObject in objects[type]" v-if="pl
                     nb = this.selectedObjects[objectId];
                 }
 
-                this.$Modal.confirm({
-                    title: this.$t('modal.confirm.title'),
-                    content: this.$t('modal.confirm.use'),
-                    loading: true,
-                    onOk: () => {
-                        api.useObject(objectId, nb).then(() => {
-                            this.$Modal.remove();
-                            this.$Notice.success({
-                                title: this.$t('notice.item.used'),
-                            });
-                            this.$emit('reload');
-                        });
-                    },
+                // @TODO
+
+                api.useObject(objectId, nb).then(() => {
+                    /* this.$Modal.remove();*/
+                    this.$Notice.success({
+                        title: this.$t('notice.item.used'),
+                    });
+                    this.$emit('reload');
                 });
+
+                /* this.$Modal.confirm({
+                 *     title: this.$t('modal.confirm.title'),
+                 *     content: this.$t('modal.confirm.use'),
+                 *     loading: true,
+                 *     onOk: () => {
+                 *     },
+                 * });*/
             },
         },
     };

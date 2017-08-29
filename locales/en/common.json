@@ -1105,5 +1105,12 @@
     "nomatch": "Field does not match",
     "empty": "Field is empty"
   },
-  "This page could not be found.": "This page could not be found."
+  "This page could not be found.": "This page could not be found.",
+  "modal": {
+    "confirm": {
+      "title": "Are you sure?",
+      "drop": "Do you really want to drop this item?",
+      "use": "Do you really want to use this item?"
+    }
+  }
 }
