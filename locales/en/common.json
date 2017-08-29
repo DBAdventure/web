@@ -328,24 +328,24 @@
       "pickup": "Pick up"
     },
     "action": {
-      "pickup": "Pick up ({ap} AP)",
-      "attack": "Attack ({ap} AP)",
-      "steal": "Steal ({ap} AP)",
-      "give": "Give item ({ap} AP)",
-      "slap": "Slap ({ap} AP)",
-      "analysis": "Analysis ({ap} AP)",
-      "heal": "Heal ({ap} AP)",
-      "spell": "Cast spell ({ap} AP)",
-      "attack-betray": "Attack (betrayal) ({ap} AP)",
-      "attack-revenge": "Attack (revenge) ({ap} AP)",
+      "pickup": "Pick up ({AP} AP)",
+      "attack": "Attack ({AP} AP)",
+      "steal": "Steal ({AP} AP)",
+      "give": "Give item ({AP} AP)",
+      "slap": "Slap ({AP} AP)",
+      "analysis": "Analysis ({AP} AP)",
+      "heal": "Heal ({AP} AP)",
+      "spell": "Cast spell ({AP} AP)",
+      "attack-betray": "Attack (betrayal) ({AP} AP)",
+      "attack-revenge": "Attack (revenge) ({AP} AP)",
       "again": {
-        "steal": "Steal again for {ap} AP",
-        "attack": "Attack again for {ap} AP",
-        "spell": "Cast spell again for {ap} AP",
-        "heal": "Heal again for {ap} AP",
-        "slap": "Slap again for {ap} AP",
-        "analysis": "Analysis again for {ap} AP",
-        "give": "Give an other item for {ap} AP"
+        "steal": "Steal again for {AP} AP",
+        "attack": "Attack again for {AP} AP",
+        "spell": "Cast spell again for {AP} AP",
+        "heal": "Heal again for {AP} AP",
+        "slap": "Slap again for {AP} AP",
+        "analysis": "Analysis again for {AP} AP",
+        "give": "Give an other item for {AP} AP"
       }
     }
   },
@@ -392,7 +392,7 @@
     "player": {
       "text": "Character",
       "health": "Health: {h} / {maxH}",
-      "ap": "Action: {ap} / {maxAp}",
+      "ap": "Action: {AP} / {maxAp}",
       "ki": "Ki: {ki} / {maxKi}",
       "mp": "Movement: {mp} / {maxMp}",
       "fp": "Fatigue: {fp} / {maxFp}",
@@ -713,18 +713,6 @@
         "1": "Inventory is full, can't hold more objects!",
         "3": "He already have this item!"
       }
-    },
-    "pickup": {
-      "zeni": "You pick up {zeni} Zenis.",
-      "object": "You have some luck, you just found {number} {objectName}.",
-      "capsule": {
-        "object": "You have some luck, this one gave you {number} {objectName}.",
-        "damage": "Too bad, this capsule was trapped you lose {damages} points of life."
-      },
-      "error": {
-        "1": "Inventory is full, can't hold more objects!",
-        "3": "You already have this object!"
-      }
     }
   },
   "ranking": {
@@ -951,7 +939,7 @@
     "headPrice": "Your head is priced to:",
     "player": {
       "health": "Health: {h} / {maxH}",
-      "ap": "Action points: {ap} / {maxAp}",
+      "ap": "Action points: {AP} / {maxAp}",
       "ki": "Ki points: {ki} / {maxKi}",
       "mp": "Movement points: {mp} / {maxMp}",
       "fp": "Fatigue points: {fp} / {maxFp}",

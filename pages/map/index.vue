@@ -67,9 +67,11 @@
 
                         <action-link :player="target" :me="player" what="analysis" v-if="currentPlayer.action_points >= settings.player.ANALYSIS_ACTION" message-key="map.action.again.analysis"/>
                     </template>
+
                     <template v-if="action === 'heal'">
                         <action-link :player="target" :me="player" what="heal" v-if="target.can_be_healed && currentPlayer.action_points >= settings.player.HEAL_ACTION" message-key="map.action.again.heal"/>
                     </template>
+
                     <template v-if="action == 'building-enter'">
                         <building-enter :building="parameters.building" :type="parameters.type" :objects="parameters.objects" :me="player" />
                     </template>
