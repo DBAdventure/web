@@ -44,9 +44,11 @@
             </table>
         </div>
 
-        <a href="#" @click.prevent="runAction('heal', currentPlayer.id)"  v-if="currentPlayer.health < currentPlayer.total_max_health && currentPlayer.action_points >= settings.player.HEAL_ACTION">
-            <img :src="currentPlayer.getActionImagePath('heal')" :alt="$t('map.action.heal', {'AP': settings.player.HEAL_ACTION})" :title="$t('map.action.heal', {'AP': settings.player.HEAL_ACTION})" />
-        </a>
+        <div v-if="!action">
+            <a href="#" @click.prevent="runAction('heal', currentPlayer.id)"  v-if="currentPlayer.health < currentPlayer.total_max_health && currentPlayer.action_points >= settings.player.HEAL_ACTION">
+                <img :src="currentPlayer.getActionImagePath('heal')" :alt="$t('map.action.heal', {'AP': settings.player.HEAL_ACTION})" :title="$t('map.action.heal', {'AP': settings.player.HEAL_ACTION})" />
+            </a>
+        </div>
 
         <div class="search-container container-fluid">
             <template v-if="action">
@@ -65,11 +67,11 @@
                             </tr>
                         </table>
 
-                        <action-link :player="target" :me="player" what="analysis" v-if="currentPlayer.action_points >= settings.player.ANALYSIS_ACTION" message-key="map.action.again.analysis"/>
+                        <action-link :player="target" :me="currentPlayer" what="analysis" v-if="currentPlayer.action_points >= settings.player.ANALYSIS_ACTION" message-key="map.action.again.analysis"/>
                     </template>
 
                     <template v-if="action === 'heal'">
-                        <action-link :player="target" :me="player" what="heal" v-if="target.can_be_healed && currentPlayer.action_points >= settings.player.HEAL_ACTION" message-key="map.action.again.heal"/>
+                        <action-link :player="target" :me="currentPlayer" what="heal" v-if="target.can_be_healed && currentPlayer.action_points >= settings.player.HEAL_ACTION" message-key="map.action.again.heal"/>
                     </template>
 
                     <template v-if="action == 'building-enter'">
@@ -166,21 +168,21 @@
                                 </router-link>
 
                                 <template v-if="distance == 0">
-                                    <action-link :player="enemy" :me="player" what="slap" v-if="enemy.isPlayer() && enemy.betrayals > 0 && currentPlayer.action_points >= settings.player.SLAP_ACTION"/>
-                                    <action-link :player="enemy" :me="player" what="give" v-if="enemy.isPlayer() && currentPlayer.action_points >= settings.player.GIVE_ACTION"/>
-                                    <action-link :player="enemy" :me="player" what="analysis" v-if="currentPlayer.action_points >= settings.player.ANALYSIS_ACTION"/>
-                                    <action-link :player="enemy" :me="player" what="steal" v-if="currentPlayer.action_points >= settings.player.STEAL_ACTION && map[enemy.x][enemy.y]['bonus'] == settings.map.TYPE_DEFAULT" />
-                                    <action-link :player="enemy" :me="player" what="heal" v-if="currentPlayer.action_points >= settings.player.HEAL_ACTION && enemy.can_be_healed"/>
+                                    <action-link :player="enemy" :me="currentPlayer" what="slap" v-if="enemy.isPlayer() && enemy.betrayals > 0 && currentPlayer.action_points >= settings.player.SLAP_ACTION"/>
+                                    <action-link :player="enemy" :me="currentPlayer" what="give" v-if="enemy.isPlayer() && currentPlayer.action_points >= settings.player.GIVE_ACTION"/>
+                                    <action-link :player="enemy" :me="currentPlayer" what="analysis" v-if="currentPlayer.action_points >= settings.player.ANALYSIS_ACTION"/>
+                                    <action-link :player="enemy" :me="currentPlayer" what="steal" v-if="currentPlayer.action_points >= settings.player.STEAL_ACTION && map[enemy.x][enemy.y]['bonus'] == settings.map.TYPE_DEFAULT" />
+                                    <action-link :player="enemy" :me="currentPlayer" what="heal" v-if="currentPlayer.action_points >= settings.player.HEAL_ACTION && enemy.can_be_healed"/>
 
                                     <template v-if="currentPlayer.action_points >= settings.player.ATTACK_ACTION && map[enemy.x][enemy.y]['bonus'] == settings.map.TYPE_DEFAULT">
-                                        <action-link :player="enemy" :me="player" what="attack-betray"  v-if="enemy.side.id === currentPlayer.side.id"/>
-                                        <action-link :player="enemy" :me="player" what="attack" v-else/>
+                                        <action-link :player="enemy" :me="currentPlayer" what="attack-betray"  v-if="enemy.side.id === currentPlayer.side.id"/>
+                                        <action-link :player="enemy" :me="currentPlayer" what="attack" v-else/>
 
-                                        <action-link :player="enemy" :me="player" what="attack-revenge"  v-if="currentPlayer.getTarget().id === enemy.id"/>
+                                        <action-link :player="enemy" :me="currentPlayer" what="attack-revenge"  v-if="currentPlayer.getTarget().id === enemy.id"/>
                                     </template>
                                 </template>
 
-                                <action-link :player="enemy" :me="player" what="spell" v-if="currentPlayer.action_points >= settings.player.SPELL_ACTION"/>
+                                <action-link :player="enemy" :me="currentPlayer" what="spell" v-if="currentPlayer.action_points >= settings.player.SPELL_ACTION"/>
                             </div>
                         </div>
                     </div>

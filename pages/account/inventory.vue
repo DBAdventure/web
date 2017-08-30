@@ -85,7 +85,6 @@
         },
         methods: {
             reloadObjects() {
-                console.log('here');
                 api.getInventoryObjects().then((res) => {
                     this.objects = res.data;
                 });

@@ -2,6 +2,12 @@
 @import '../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
 @import '../../node_modules/iview/dist/styles/iview.css';
 
+.ivu-poptip-content,
+.ivu-poptip-body-content {
+  white-space: initial;
+  text-align: left;
+}
+
 a:hover,
 #contenu a:hover,
 #content a:hover {
@@ -562,9 +568,6 @@ body {
 }
 
 #inventory {
-  button {
-    float: left;
-  }
   .form-control {
     padding: 0;
   }
