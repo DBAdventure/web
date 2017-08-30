@@ -27,7 +27,7 @@
         "morgan": "^1.8.2",
         "navigator": "^1.0.1",
         "node-sass": "^4.5.3",
-        "nuxt": "^1.0.0-rc6",
+        "nuxt": "^1.0.0-rc7",
         "postcss-loader": "^2.0.6",
         "sass-loader": "^6.0.6",
         "slugify": "^1.2.1",
@@ -37,7 +37,7 @@
         "vue-i18n-mixin": "^0.1.0",
         "vue-meta": "1.1.0",
         "vue-router": "^2.7.0",
-        "vuex": "^2.3.1",
+        "vuex": "^2.4.0",
         "vuex-router-sync": "^4.2.0",
         "webpack": "^3.5.5"
     },

@@ -1172,12 +1172,12 @@ caniuse-api@^2.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
-  version "1.0.30000718"
-  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000718.tgz#86cdd97987302554934c61e106f4e470f16f993c"
+  version "1.0.30000721"
+  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000721.tgz#cdc52efe8f82dd13916615b78e86f704ece61802"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000718:
-  version "1.0.30000718"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000718.tgz#0dd24290beb11310b2d80f6b70a823c2a65a6fad"
+  version "1.0.30000721"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000721.tgz#931a21a7bd85016300328d21f126d84b73437d35"
 
 capture-stack-trace@^1.0.0:
   version "1.0.0"
@@ -1676,6 +1676,25 @@ css-color-names@0.0.4:
 css-loader@^0.28.5:
   version "0.28.5"
   resolved "https://registry.yarnpkg.com/css-loader/-/css-loader-0.28.5.tgz#dd02bb91b94545710212ef7f6aaa66663113d754"
+  dependencies:
+    babel-code-frame "^6.11.0"
+    css-selector-tokenizer "^0.7.0"
+    cssnano ">=2.6.1 <4"
+    icss-utils "^2.1.0"
+    loader-utils "^1.0.2"
+    lodash.camelcase "^4.3.0"
+    object-assign "^4.0.1"
+    postcss "^5.0.6"
+    postcss-modules-extract-imports "^1.0.0"
+    postcss-modules-local-by-default "^1.0.1"
+    postcss-modules-scope "^1.0.0"
+    postcss-modules-values "^1.1.0"
+    postcss-value-parser "^3.3.0"
+    source-list-map "^2.0.0"
+
+"css-loader@git+https://github.com/nuxt/css-loader.git":
+  version "0.28.5"
+  resolved "git+https://github.com/nuxt/css-loader.git#43674428e42dd208f6192cfc0b1679935a0bae4b"
   dependencies:
     babel-code-frame "^6.11.0"
     css-selector-tokenizer "^0.7.0"
@@ -4139,8 +4158,8 @@ mute-stream@0.0.7, mute-stream@~0.0.4:
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
 
 nan@^2.3.0, nan@^2.3.2:
-  version "2.6.2"
-  resolved "https://registry.yarnpkg.com/nan/-/nan-2.6.2.tgz#e4ff34e6c95fdfb5aecc08de6596f43605a7db45"
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.7.0.tgz#d95bf721ec877e08db276ed3fc6eb78f9083ad46"
 
 natural-compare@^1.4.0:
   version "1.4.0"
@@ -4549,9 +4568,9 @@ number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
 
-nuxt@^1.0.0-rc6:
-  version "1.0.0-rc6"
-  resolved "https://registry.yarnpkg.com/nuxt/-/nuxt-1.0.0-rc6.tgz#57b7eb06298f2a4519e19acb30e2ba564a196015"
+nuxt@^1.0.0-rc7:
+  version "1.0.0-rc7"
+  resolved "https://registry.yarnpkg.com/nuxt/-/nuxt-1.0.0-rc7.tgz#5b3400ab57dc88124b188b6e209177ffabeff3b6"
   dependencies:
     "@nuxtjs/youch" "3.0.2"
     ansi-html "^0.0.7"
@@ -4565,7 +4584,7 @@ nuxt@^1.0.0-rc6:
     clone "^2.1.1"
     compression "^1.7.0"
     connect "^3.6.3"
-    css-loader "^0.28.5"
+    css-loader "https://github.com/nuxt/css-loader.git"
     debug "^3.0.0"
     es6-promise "^4.1.1"
     etag "^1.8.0"
@@ -7146,9 +7165,9 @@ vuex-router-sync@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/vuex-router-sync/-/vuex-router-sync-4.2.0.tgz#ebfc497d69b4018a9266a8f18b54bfca4d52125f"
 
-vuex@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/vuex/-/vuex-2.3.1.tgz#cde8e997c1f9957719bc7dea154f9aa691d981a6"
+vuex@^2.3.1, vuex@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/vuex/-/vuex-2.4.0.tgz#e1d0430646282b40007fdd06ec6ae88a9f5a1e14"
 
 watchpack@^1.4.0:
   version "1.4.0"
