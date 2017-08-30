@@ -322,7 +322,10 @@
     "building": {
       "enter": "Enter",
       "teleport": "Teleport",
-      "wanted": "Put a price on a head"
+      "wanted": "Put a price on a head",
+      "error": {
+        "teleport": "Can not teleport"
+      }
     },
     "object": {
       "pickup": "Pick up"

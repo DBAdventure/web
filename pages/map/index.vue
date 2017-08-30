@@ -73,7 +73,7 @@
                     </template>
 
                     <template v-if="action == 'building-enter'">
-                        <building-enter :building="parameters.building" :type="parameters.type" :objects="parameters.objects" :me="player" />
+                        <building-enter :building="parameters.building" :type="parameters.type" :objects="parameters.objects" :me="currentPlayer" />
                     </template>
 
                     <div class="text-center">
@@ -240,6 +240,7 @@
             this.$store.watch(state => state.game.mapReload, (value) => {
                 if (value) {
                     this.loadMap();
+                    this.back();
                     this.$store.state.game.mapReload = false;
                 }
             });
@@ -304,8 +305,7 @@
                 return names.join(', ');
             },
 
-            async runAction(what, id, data) {
-                const actions = settings.player.actions;
+            async runAction(what, id) {
                 let prom;
                 switch (what) {
                     case 'attack':
@@ -335,12 +335,6 @@
                         prom = api.enterBuilding(id).then((res) => {
                             this.action = what;
                             this.parameters = res.data;
-                        });
-                        return;
-                    case 'teleport':
-                        prom = api.teleport(id, data.where).then((res) => {
-                            this.$store.state.game.mapReload = true;
-                            this.$store.dispatch('fetchPlayer');
                         });
                         return;
                     default:

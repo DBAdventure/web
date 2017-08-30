@@ -2,7 +2,7 @@
     <div>
         <template v-if="type === 'teleport'">
             <template v-for="move in availableMoves" v-if="me.forbidden_teleport !== move">
-                <a href="#" @click.prevent="runAction('teleport', {where: move, id: building.id})">
+                <a href="#" @click.prevent="runAction('teleport', move)">
                     {{ $t('game.teleport.link', {where: $t(`game.teleport.where.${move}`)}) }}
                 </a>
                 <br>
@@ -24,12 +24,13 @@
                 </thead>
                 <tbody>
                     <tr v-for="object in objects">
-                        <td><img :src="object.imagePath" :alt="$t(`${object.name}.name`)"></td>
+                        <td><img :src="`/images/objects/${object.image}`" :alt="$t(`objects.${object.name}.name`)"></td>
                         <td>{{ object.price }}</td>
                         <td>{{ object.weight }}</td>
                         <td>{{ $t(`objects.${object.name}.name`) }}</td>
-                        <td>{{ $t(`objects.${object.name}.description`) }}
-                            <stats :data="object.bonus" v-if="object.bonus" />
+                        <td>
+                            {{ $t(`objects.${object.name}.description`) }}
+                            <stats :data="object.bonus" v-if="object.bonus.length > 0" />
                         </td>
                         <td><a class="btn btn-default" href="#" @click.prevent="buy(building.id, object.id)">{{ $t('building.shop.buy') }}</a></td>
                     </tr>
@@ -113,6 +114,7 @@
 <script type="text/ecmascript-6">
     import {isEmpty} from '~/lib/utils';
     import Stats from '~/components/objects/stats';
+    import api from '~/services/api';
 
     export default {
         components: {
@@ -124,7 +126,7 @@
                 required: true,
             },
             objects: {
-                type: Object,
+                type: [Array, Object],
                 required: false,
             },
             me: {
@@ -144,6 +146,30 @@
         computed: {
             goldBar() {
                 return !isEmpty(this.objects.zeni) ? this.objects.zeni : 0;
+            },
+        },
+        methods: {
+            async runAction(what, data) {
+                let prom;
+                let errorMessage;
+                switch (what) {
+                    case 'teleport':
+                        prom = api.teleport(this.building.id, data).then(() => {
+                            this.$store.state.game.mapReload = true;
+                            this.$store.dispatch('fetchPlayer');
+                        }).catch(() => {
+                            errorMessage = 'building.error.teleport';
+                        });
+                        break;
+                    default:
+                        return;
+                }
+
+                if (errorMessage) {
+                    this.$Notice.error({
+                        title: this.$t(errorMessage),
+                    });
+                }
             },
         },
     };
