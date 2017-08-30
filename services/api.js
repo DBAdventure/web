@@ -132,8 +132,11 @@ const api = {
     enterBuilding(id) {
         return makeGetRequest(`/building/enters/${id}`);
     },
-    teleport(id, where) {
-        return makePostRequest(`/building/teleports/${id}`, {where});
+    teleport(buildingId, where) {
+        return makePostRequest(`/building/teleports/${buildingId}`, {where});
+    },
+    buyObject(buildingId, objectId) {
+        return makePostRequest(`/building/buys/${buildingId}/objects/${objectId}`);
     },
 
     /**

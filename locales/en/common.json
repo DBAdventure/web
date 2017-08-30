@@ -1103,5 +1103,9 @@
       "drop": "Do you really want to drop this item?",
       "use": "Do you really want to use this item?"
     }
+  },
+  "notice": {
+    "success": "Success",
+    "error": "Error"
   }
 }

@@ -73,8 +73,8 @@
                     if (valid) {
                         api.lostPassword({player_registration: this.player}).then(() => {
                             this.$Notice.success({
-                                title: this.$t('account.created.title'),
-                                desc: this.$t('account.created.description'),
+                                title: this.$t('notice.success'),
+                                desc: this.$t('account.lost.description'),
                             });
                             this.$router.push('/');
                         }).catch((e) => {
@@ -89,7 +89,8 @@
                                 /* eslint-enable no-restricted-syntax */
                             } else {
                                 this.$Notice.error({
-                                    title: this.$t('error.generic'),
+                                    title: this.$t('notice.error'),
+                                    desc: this.$t('error.generic'),
                                 });
                             }
                         });

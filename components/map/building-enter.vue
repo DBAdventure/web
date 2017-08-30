@@ -32,7 +32,7 @@
                             {{ $t(`objects.${object.name}.description`) }}
                             <stats :data="object.bonus" v-if="object.bonus.length > 0" />
                         </td>
-                        <td><a class="btn btn-default" href="#" @click.prevent="buy(building.id, object.id)">{{ $t('building.shop.buy') }}</a></td>
+                        <td><a class="btn btn-default" href="#" @click.prevent="runAction('buy', object.id)">{{ $t('building.shop.buy') }}</a></td>
                     </tr>
                 </tbody>
             </table>
@@ -151,22 +151,38 @@
         methods: {
             async runAction(what, data) {
                 let errorMessage;
+                let successMessage;
                 switch (what) {
+                    case 'buy':
+                        await api.buyObject(this.building.id, data).then((res) => {
+                            successMessage = res.data.message;
+                        }).catch((err) => {
+                            errorMessage = err.response.data.error;
+                        });
+                        break;
                     case 'teleport':
-                        api.teleport(this.building.id, data).then(() => {
+                        await api.teleport(this.building.id, data).then(() => {
                             this.$store.state.game.mapReload = true;
                             this.$store.dispatch('fetchPlayer');
                         }).catch(() => {
-                            errorMessage = 'error.teleport.forbidden';
+                            errorMessage = this.$t('error.teleport.forbidden');
                         });
                         break;
                     default:
                         return;
                 }
 
+                if (successMessage) {
+                    this.$Notice.success({
+                        title: this.$t('notice.success'),
+                        desc: successMessage,
+                    });
+                }
+
                 if (errorMessage) {
                     this.$Notice.error({
-                        title: this.$t(errorMessage),
+                        title: this.$t('notice.error'),
+                        desc: errorMessage,
                     });
                 }
             },

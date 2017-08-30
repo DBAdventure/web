@@ -237,7 +237,8 @@
                     this.$router.push('/account');
                 }).catch((err) => {
                     this.$Notice.error({
-                        title: this.$t(err.message),
+                        title: this.$t('notice.error'),
+                        desc: this.$t(err.message),
                     });
                     this.password = '';
                 });
@@ -248,7 +249,8 @@
                     this.$store.dispatch('fetchPlayer');
                 }).catch(() => {
                     this.$Notice.error({
-                        title: this.$t('error.move.forbidden'),
+                        title: this.$t('notice.error'),
+                        desc: this.$t('error.move.forbidden'),
                     });
                 });
             },
@@ -257,7 +259,8 @@
                     this.$store.dispatch('fetchPlayer');
                 }).catch(() => {
                     this.$Notice.error({
-                        title: this.$t('error.convert.forbidden'),
+                        title: this.$t('notice.error'),
+                        desc: this.$t('error.convert.forbidden'),
                     });
                 });
             },

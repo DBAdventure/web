@@ -97,7 +97,8 @@
                 api.dropObject(objectId, nb).then(() => {
                     /* this.$Modal.remove();*/
                     this.$Notice.success({
-                        title: this.$t('notice.item.dropped'),
+                        title: this.$t('notice.success'),
+                        desc: this.$t('notice.item.dropped'),
                     });
                     this.$emit('reload');
                 });
@@ -113,7 +114,8 @@
                 api.useObject(objectId, nb).then(() => {
                     /* this.$Modal.remove();*/
                     this.$Notice.success({
-                        title: this.$t('notice.item.used'),
+                        title: this.$t('notice.success'),
+                        desc: this.$t('notice.item.used'),
                     });
                     this.$emit('reload');
                 });

@@ -581,7 +581,8 @@
                                 /* eslint-enable no-restricted-syntax */
                             } else {
                                 this.$Notice.error({
-                                    title: this.$t('error.generic'),
+                                    title: this.$t('notice.error'),
+                                    desc: this.$t('error.generic'),
                                 });
                             }
                         });
