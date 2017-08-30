@@ -322,10 +322,7 @@
     "building": {
       "enter": "Enter",
       "teleport": "Teleport",
-      "wanted": "Put a price on a head",
-      "error": {
-        "teleport": "Can not teleport"
-      }
+      "wanted": "Put a price on a head"
     },
     "object": {
       "pickup": "Pick up"
@@ -1080,6 +1077,9 @@
     },
     "convert": {
       "forbidden": "You are not able to convert!"
+    },
+    "teleport": {
+      "forbidden": "Can not teleport"
     }
   },
   "strap": {

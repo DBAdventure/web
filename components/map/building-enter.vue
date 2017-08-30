@@ -150,15 +150,14 @@
         },
         methods: {
             async runAction(what, data) {
-                let prom;
                 let errorMessage;
                 switch (what) {
                     case 'teleport':
-                        prom = api.teleport(this.building.id, data).then(() => {
+                        api.teleport(this.building.id, data).then(() => {
                             this.$store.state.game.mapReload = true;
                             this.$store.dispatch('fetchPlayer');
                         }).catch(() => {
-                            errorMessage = 'building.error.teleport';
+                            errorMessage = 'error.teleport.forbidden';
                         });
                         break;
                     default:

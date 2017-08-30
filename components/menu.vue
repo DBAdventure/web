@@ -249,7 +249,7 @@
                 }).catch(() => {
                     this.$Notice.error({
                         title: this.$t('error.move.forbidden'),
-                    })
+                    });
                 });
             },
             convert() {
@@ -258,9 +258,9 @@
                 }).catch(() => {
                     this.$Notice.error({
                         title: this.$t('error.convert.forbidden'),
-                    })
+                    });
                 });
-            }
+            },
         },
         data() {
             return {
