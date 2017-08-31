@@ -86,13 +86,30 @@
         },
         methods: {
             unequip(objectId) {
-                api.unequipObject(objectId).then(() => {
+                api.unequipObject(objectId).then((res) => {
+                    this.$Notice.success({
+                        title: this.$t('notice.success'),
+                        desc: res.data.message,
+                    });
                     this.$emit('reload');
                 });
             },
             equip(objectId) {
-                api.equipObject(objectId).then(() => {
+                api.equipObject(objectId).then((res) => {
+                    res.data.messages.forEach((msg) => {
+                        this.$Notice.success({
+                            title: this.$t('notice.success'),
+                            desc: msg,
+                        });
+                    });
                     this.$emit('reload');
+                }).catch((err) => {
+                    if (err.response.data.error) {
+                        this.$Notice.error({
+                            title: this.$t('notice.error'),
+                            desc: err.response.data.error,
+                        });
+                    }
                 });
             },
             drop(objectId) {
@@ -101,10 +118,10 @@
                     nb = this.selectedObjects[objectId];
                 }
 
-                api.dropObject(objectId, nb).then(() => {
+                api.dropObject(objectId, nb).then((res) => {
                     this.$Notice.success({
                         title: this.$t('notice.success'),
-                        desc: this.$t('notice.item.dropped'),
+                        desc: res.data.message,
                     });
                     this.$emit('reload');
                 });
@@ -115,10 +132,10 @@
                     nb = this.selectedObjects[objectId];
                 }
 
-                api.useObject(objectId, nb).then(() => {
+                api.useObject(objectId, nb).then((res) => {
                     this.$Notice.success({
                         title: this.$t('notice.success'),
-                        desc: this.$t('notice.item.used'),
+                        desc: res.data.message,
                     });
                     this.$emit('reload');
                 });

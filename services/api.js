@@ -111,10 +111,10 @@ const api = {
         return makeGetRequest('/inventory/objects');
     },
     unequipObject(objectId) {
-        return makePostRequest(`/inventory/equips/${objectId}`);
+        return makePostRequest(`/inventory/unequips/${objectId}`);
     },
     equipObject(objectId) {
-        return makePostRequest(`/inventory/unequips/${objectId}`);
+        return makePostRequest(`/inventory/equips/${objectId}`);
     },
     dropObject(objectId, nb) {
         return makePostRequest(`/inventory/drops/${objectId}`, {nb});
