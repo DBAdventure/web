@@ -242,7 +242,6 @@
             this.$store.watch(state => state.game.mapReload, (value) => {
                 if (value) {
                     this.loadMap();
-                    this.back();
                     this.$store.state.game.mapReload = false;
                 }
             });
@@ -252,7 +251,8 @@
             });
         },
         methods: {
-            back() {
+            async back() {
+                await this.loadMap();
                 this.action = null;
                 this.parameters = {};
                 this.target = null;
