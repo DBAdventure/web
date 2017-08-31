@@ -88,10 +88,10 @@ const api = {
         return makeGetRequest('/data/appearance');
     },
     getOnlinePlayers() {
-        return makeGetRequest('/data/online');
+        return makeGetRequest('/data/online/players');
     },
     getPlayerInfo(id) {
-        return makeGetRequest(`/data/players/${id}/info`);
+        return makeGetRequest(`/data/player/${id}`);
     },
 
     /**
@@ -104,7 +104,10 @@ const api = {
         return makeGetRequest('/account/events');
     },
     useTrainingPoint(what) {
-        return makePostRequest(`/account/trains/${what}`);
+        return makePostRequest(`/account/training/${what}`);
+    },
+    confirmAccount(id, token) {
+        return makePostRequest(`/account/confirm/${id}/${token}`);
     },
 
     /**
@@ -114,16 +117,16 @@ const api = {
         return makeGetRequest('/inventory/objects');
     },
     unequipObject(objectId) {
-        return makePostRequest(`/inventory/unequips/${objectId}`);
+        return makePostRequest(`/inventory/unequip/${objectId}`);
     },
     equipObject(objectId) {
-        return makePostRequest(`/inventory/equips/${objectId}`);
+        return makePostRequest(`/inventory/equip/${objectId}`);
     },
     dropObject(objectId, nb) {
-        return makePostRequest(`/inventory/drops/${objectId}`, {nb});
+        return makePostRequest(`/inventory/drop/${objectId}`, {nb});
     },
     useObject(objectId, nb) {
-        return makePostRequest(`/inventory/uses/${objectId}`, {nb});
+        return makePostRequest(`/inventory/use/${objectId}`, {nb});
     },
 
     /**
@@ -133,13 +136,13 @@ const api = {
         return makeGetRequest('/map/');
     },
     enterBuilding(id) {
-        return makeGetRequest(`/building/enters/${id}`);
+        return makeGetRequest(`/building/enter/${id}`);
     },
     teleport(buildingId, where) {
-        return makePostRequest(`/building/teleports/${buildingId}`, {where});
+        return makePostRequest(`/building/teleport/${buildingId}`, {where});
     },
     buyObject(buildingId, objectId) {
-        return makePostRequest(`/building/buys/${buildingId}/objects/${objectId}`);
+        return makePostRequest(`/building/buy/${buildingId}/object/${objectId}`);
     },
 
     /**
@@ -177,7 +180,7 @@ const api = {
     },
 
     spell(id, spellId, type) {
-        let url = `/action/spells/${id}`;
+        let url = `/action/spell/${id}`;
         if (isEmpty(spellId)) {
             return makeGetRequest(url);
         }
@@ -190,7 +193,7 @@ const api = {
     },
 
     attack(id, type) {
-        let url = `/action/attacks/${id}`;
+        let url = `/action/attack/${id}`;
         if (!isEmpty(type)) {
             url = `${url}/${type}`;
         }
@@ -199,31 +202,31 @@ const api = {
     },
 
     pickup(id) {
-        return makePostRequest(`/action/pickups/${id}`);
+        return makePostRequest(`/action/pickup/${id}`);
     },
 
     steal(id) {
-        return makePostRequest(`/action/steals/${id}`);
+        return makePostRequest(`/action/steal/${id}`);
     },
 
     analysis(id) {
-        return makePostRequest(`/action/analyses/${id}`);
+        return makePostRequest(`/action/analysis/${id}`);
     },
 
     slap(id) {
-        return makePostRequest(`/action/slaps/${id}`);
+        return makePostRequest(`/action/slap/${id}`);
     },
 
     heal(id) {
-        return makePostRequest(`/action/heals/${id}`);
+        return makePostRequest(`/action/heal/${id}`);
     },
 
     give(id, objectId) {
         if (isEmpty(objectId)) {
-            return makeGetRequest(`/action/gives/${id}`);
+            return makeGetRequest(`/action/give/${id}`);
         }
 
-        return makePostRequest(`/action/gives/${id}/${objectId}`);
+        return makePostRequest(`/action/give/${id}/${objectId}`);
     },
 };
 
