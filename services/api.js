@@ -103,6 +103,9 @@ const api = {
     getEvents() {
         return makeGetRequest('/account/events');
     },
+    useTrainingPoint(what) {
+        return makePostRequest(`/account/trains/${what}`);
+    },
 
     /**
      * Inventory
