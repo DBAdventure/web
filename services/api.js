@@ -66,7 +66,7 @@ const makePostRequest = (path, postData, config = {}) => new Promise((resolve, r
 
 const api = {
     register(postData) {
-        return makePostRequest('/registers', postData);
+        return makePostRequest('/register', postData);
     },
     login(postData) {
         return makePostRequest('/login', postData);
