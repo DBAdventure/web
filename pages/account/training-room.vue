@@ -16,24 +16,7 @@
             {{ $t('training.info') }}
         </div>
 
-        <table class="table table-hover">
-            <tbody>
-                <tr v-for="comp, name in skills">
-                    <td>
-                        {{ $t(`training.${name}.title`, {value: currentPlayer[comp]}) }}<br/>
-                        {{ $t(`training.${name}.description`) }}
-                    </td>
-                    <td>
-                        <template v-if="currentPlayer.skill_points > 0 && currentPlayer.action_points >= 5">
-                            <Button @click.prevent="train(name)">
-                                {{ $t(`training.${name}.increase`) }}
-                            </Button>
-                        </template>
-                        <p>{{ $t('training.increase.require') }}</p>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <Table :columns="columns" :data="skills" />
     </div>
 </template>
 
@@ -55,21 +38,73 @@
         },
         data() {
             return {
-                skills: {
-                    health: 'max_health',
-                    ki: 'max_ki',
-                    skill: 'skill',
-                    analysis: 'analysis',
-                    strength: 'strength',
-                    resistance: 'resistance',
-                    accuracy: 'accuracy',
-                    agility: 'agility',
-                    intellect: 'intellect',
-                    vision: 'vision',
-                },
+                columns: [
+                    {
+                        title: this.$t('training.capacity'),
+                        key: 'name',
+                        render: (h, params) => h('div', [
+                            h(
+                                'p',
+                                [
+                                    h(
+                                        'strong',
+                                        this.$t(`training.${params.row.name}.title`, {value: this.currentPlayer[params.row.comp]}),
+                                    ),
+                                ],
+                            ),
+                            h(
+                                'p',
+                                this.$t(`training.${params.row.name}.description`),
+                            ),
+                        ]),
+                    },
+                    {
+                        title: this.$t('training.action'),
+                        key: 'action',
+                        align: 'right',
+                        render: (h, params) => {
+                            let button;
+                            if (this.currentPlayer.skill_points > 0 &&
+                                this.currentPlayer.action_points >= 5
+                            ) {
+                                button = h(
+                                    'Button',
+                                    {
+                                        props: {
+                                            type: 'primary',
+                                            size: 'small',
+                                        },
+                                        on: {
+                                            click: () => {
+                                                this.train(params.row.name);
+                                            },
+                                        },
+                                    },
+                                    this.$t(`training.${params.row.name}.increase`),
+                                );
+                            }
+
+                            return h('div', [
+                                h('p', this.$t('training.increase.require')),
+                                button,
+                            ]);
+                        },
+                    },
+                ],
+                skills: [
+                    {name: 'health', comp: 'max_health'},
+                    {name: 'ki', comp: 'max_ki'},
+                    {name: 'skill', comp: 'skill'},
+                    {name: 'analysis', comp: 'analysis'},
+                    {name: 'strength', comp: 'strength'},
+                    {name: 'resistance', comp: 'resistance'},
+                    {name: 'accuracy', comp: 'accuracy'},
+                    {name: 'agility', comp: 'agility'},
+                    {name: 'intellect', comp: 'intellect'},
+                    {name: 'vision', comp: 'vision'},
+                ],
             };
         },
-
         methods: {
             train(what) {
                 api.useTrainingPoint(what).then(() => {

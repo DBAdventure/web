@@ -1,11 +1,12 @@
 const bodyParser = require('body-parser');
 const express = require('express');
-const session = require('express-session');
-const proxy = require('http-proxy-middleware');
-const {Nuxt, Builder} = require('nuxt');
+const generalConfig = require('./config/general.config');
+const helmet = require('helmet');
 const morgan = require('morgan');
 const nuxtConfig = require('./config/nuxt.config');
-const generalConfig = require('./config/general.config');
+const proxy = require('http-proxy-middleware');
+const session = require('express-session');
+const {Nuxt, Builder} = require('nuxt');
 
 const app = express();
 const isDev = generalConfig.NODE_ENV === 'local';
@@ -14,19 +15,33 @@ nuxtConfig.dev = isDev;
 const nuxt = new Nuxt(nuxtConfig);
 const morganMode = isDev ? 'dev' : 'combined';
 const logger = morgan(morganMode);
-const pro = proxy({
+const proxies = [
+    '/api',
+    '/media',
+    '/admin',
+    '/bundles',
+];
+
+if (isDev) {
+    proxies.push('_wdt');
+    proxies.push('_profiler');
+}
+
+const pro = proxy(proxies, {
     target: generalConfig.API_DOMAIN,
     changeOrigin: true,
     xfwd: true,
     headers: {
-        Authorization: `Token ${generalConfig.API_TOKEN}`,
         Accept: 'application/json',
     },
 });
 
-app.use('/api', pro);
-app.use('/media', pro);
+proxies.forEach((u) => {
+    app.use(u, pro);
+});
+
 app.use(logger);
+app.use(helmet());
 app.use(bodyParser.json());
 
 app.use(session({
