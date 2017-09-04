@@ -23,8 +23,9 @@ const proxies = [
 ];
 
 if (isDev) {
-    proxies.push('_wdt');
-    proxies.push('_profiler');
+    proxies.push('/_wdt');
+    proxies.push('/_profiler');
+    proxies.push('/_error');
 }
 
 const pro = proxy(proxies, {
