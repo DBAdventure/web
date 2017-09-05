@@ -103,6 +103,9 @@ const api = {
     getEvents() {
         return makeGetRequest('/account/events');
     },
+    updateAppearance(data) {
+        return makePostRequest('/account/appearance', data);
+    },
     useTrainingPoint(what) {
         return makePostRequest(`/account/training/${what}`);
     },

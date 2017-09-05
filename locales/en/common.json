@@ -1062,6 +1062,10 @@
     },
     "magic": {
       "title": "Magic"
+    },
+    "appearance": {
+      "failed": "Failed to change appearance",
+      "success": "New appearance saved!"
     }
   },
   "error": {
