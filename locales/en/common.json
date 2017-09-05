@@ -946,6 +946,9 @@
       "mp": "Movement points: {mp} / {maxMp}",
       "fp": "Fatigue points: {fp} / {maxFp}",
       "bp": "Battle points: {bp} / {maxBp}"
+    },
+    "stats": {
+      "zeni": "You have <strong>{zeni}</strong> Zenis"
     }
   },
   "events": {
