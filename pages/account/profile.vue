@@ -99,70 +99,65 @@
 
         <div>
             <p>
-                <span v-html="$t('profile.stats.zeni', {zeni: currentPlayer.zeni})"></span></br>
-                Tu as volé {{ currentPlayer.stats.nb_stolen_zeni }}<br/>
-                Moyenne de Zénies obtenus par vols : {{ currentPlayer.stats.nb_stolen_zeni / (currentPlayer.stats.nb_action_stolen_zeni == 0 ? 1 : currentPlayer.stats.nb_action_stolen_zeni) }}<br/>
-                Nombre de vols accomplis : {{ currentPlayer.stats.nb_action_stolen_zeni }}<br/>
+                <span v-html="$t('profile.stats.zeni', {value: currentPlayer.zeni})"></span></br>
+                <span v-html="$t('profile.stats.stolenZeni', {value: currentPlayer.stats.nb_stolen_zeni})"></span></br>
+                <span v-html="$t('profile.stats.avgStolenZeni', {value: currentPlayer.stats.nb_stolen_zeni / (currentPlayer.stats.nb_action_stolen_zeni == 0 ? 1 : currentPlayer.stats.nb_action_stolen_zeni)})"></span></br>
+                <span v-html="$t('profile.stats.nbActionStolenZeni', {value: currentPlayer.stats.nb_action_stolen_zeni})"></span>
             </p>
 
             <p>
-                Tu as trahi {{ currentPlayer.stats.betrayals }} fois tes compagnons.<br/>
-                Tu as {{ currentPlayer.side_points }} point(s) de côté. <br/>
-                <br/>
-                Chasseur de primes : {{ currentPlayer.stats.nb_wanted}} cible(s) &agrave; ton actif.
-                Nombre d'évaluations : {{ currentPlayer.stats.nb_wnalysis }}<br/><br/>
-                Nombre de coups esquivés : {{ currentPlayer.stats.nb_dodge }}
-                <br/>
-            </p>
-
-
-            <p>
-                Points de vie soignés : {{ currentPlayer.stats.nb_total_health_given }}<br/>
-                Nombre de soins effectués : {{ currentPlayer.stats.nb_health_given }}<br/>
-                Moyenne de point de vies administrés : {{ currentPlayer.stats.nb_total_health_given / (currentPlayer.stats.nb_health_given == 0 ? 1 : currentPlayer.stats.nb_health_given) }}<br/>
-            </p>
-
-            <p>
-                Nombre de sorts lancés: {{ currentPlayer.stats.nb_spell }} <br/>
-                Nombre de torgnoles données: {{ currentPlayer.stats.nb_slap_given }} <br/>
-                Nombre de torgnoles reçues: {{ currentPlayer.stats.nb_slap_taken }} <br/>
-            </p>
-
-            <p>
-                Tu as donné {{ currentPlayer.stats.nb_damage_hq }} dégât(s) aux Qg(s).<br/>
-                Tu as donné {{ currentPlayer.stats.nb_hit_hq }} coup(s) aux Qg(s).<br/>
-                Ta moyenne de dégât(s) par coup aux Qg(s) est de : {{ currentPlayer.stats.nb_damage_hq / (currentPlayer.stats.nb_hit_hq == 0 ? 1 : currentPlayer.stats.nb_hit_hq) }}<br/>
-                Tu as détruit {{ currentPlayer.stats.nb_kill_hq }} Qg(s).
-            </p>
-
-            <p>
-                Tu as donné {{ currentPlayer.stats.nb_damage_good }} dégât(s) aux Gentils.<br/>
-                Tu as donné {{ currentPlayer.stats.nb_hit_good }} coup(s) aux Gentils.<br/>
-                Ta moyenne de dégât(s) par coup aux Gentils est de : {{ currentPlayer.stats.nb_damage_good / (currentPlayer.stats.nb_hit_good == 0 ? 1 : currentPlayer.stats.nb_hit_good) }}<br/>
-                <br/>
-                Tu as tué {{ currentPlayer.stats.nb_kill_good }} Gentil(s).
-            </p>
-
-            <p>
-                Tu as donné {{ currentPlayer.stats.nb_damage_bad }} dégât(s) aux Méchants.<br/>
-                Tu as donné {{ currentPlayer.stats.nb_hit_bad }} coup(s) aux Méchants.<br/>
-                Ta moyenne de dégât(s) par coup aux Méchants est de : {{ currentPlayer.stats.nb_damage_bad / (currentPlayer.stats.nb_hit_bad == 0 ? 1 : currentPlayer.stats.nb_hit_bad) }}<br/>
-                <br/>
-                Tu as tué {{ currentPlayer.stats.nb_kill_bad }} Méchant(s).
-            </p>
-
-            <p>
-                Tu as donné {{ currentPlayer.stats.nb_damage_npc }} dégât(s) aux Pnjs.<br/>
-                Tu as donné {{ currentPlayer.stats.nb_hit_npc }} coup(s) aux Pnjs.<br/>
-                Ta moyenne de dégât(s) par coup aux Pnjs est de : {{ currentPlayer.stats.nb_damage_npc / (currentPlayer.stats.nb_hit_npc == 0 ? 1 : currentPlayer.stats.nb_hit_npc) }}<br/>
-                <br/>
-                Tu as tué {{ currentPlayer.stats.nb_kill_npc }} Pnj(s).
+                <span v-html="$t('profile.stats.betrayals', {value: currentPlayer.stats.betrayals})"></span></br>
+                <span v-html="$t('profile.stats.sidePoints', {value: currentPlayer.side_points})"></span></br></br>
+                <span v-html="$t('profile.stats.bountyHunter', {value: currentPlayer.stats.nb_wanted})"></span></br>
+                <span v-html="$t('profile.stats.nbAnalysis', {value: currentPlayer.stats.nb_analysis})"></span></br>
+                <span v-html="$t('profile.stats.nbDodge', {value: currentPlayer.stats.nb_dodge})"></span></br>
             </p>
 
 
             <p>
-                Tu as tué {{ currentPlayer.stats.nb_kill_good + currentPlayer.stats.nb_kill_bad + currentPlayer.stats.nb_kill_npc }} personne(s) en tout, y compris les PNJ.<br/>
-                Tu es mort {{ currentPlayer.stats.death_count }} fois.
+                <span v-html="$t('profile.stats.healthGiven', {value: currentPlayer.stats.nb_total_health_given})"></span></br>
+                <span v-html="$t('profile.stats.nbHealthGiven', {value: currentPlayer.stats.nb_health_given})"></span></br>
+                <span v-html="$t('profile.stats.avgHealthGiven', {value: currentPlayer.stats.nb_total_health_given / (currentPlayer.stats.nb_health_given == 0 ? 1 : currentPlayer.stats.nb_health_given)})"></span></br>
+            </p>
+
+            <p>
+                <span v-html="$t('profile.stats.nbSpell', {value: currentPlayer.stats.nb_spell})"></span></br>
+                <span v-html="$t('profile.stats.nbSlapGive', {value: currentPlayer.stats.nb_slap_given})"></span></br>
+                <span v-html="$t('profile.stats.nbSlapTaken', {value: currentPlayer.stats.nb_slap_taken})"></span></br>
+            </p>
+
+            <p>
+                <span v-html="$t('profile.stats.nbDamageHq', {value: currentPlayer.stats.nb_damage_hq})"></span></br>
+                <span v-html="$t('profile.stats.nbHitHq', {value: currentPlayer.stats.nb_hit_hq})"></span></br>
+                <span v-html="$t('profile.stats.avgDamageHq', {value: currentPlayer.stats.nb_damage_hq / (currentPlayer.stats.nb_hit_hq == 0 ? 1 : currentPlayer.stats.nb_hit_hq)})"></span></br>
+                <span v-html="$t('profile.stats.nbKillHq', {value: currentPlayer.stats.nb_kill_hq})"></span></br>
+            </p>
+
+            <p>
+                <span v-html="$t('profile.stats.nbDamageGood', {value: currentPlayer.stats.nb_damage_good})"></span></br>
+                <span v-html="$t('profile.stats.nbHitGood', {value: currentPlayer.stats.nb_hit_good})"></span></br>
+                <span v-html="$t('profile.stats.avgDamageGood', {value: currentPlayer.stats.nb_damage_good / (currentPlayer.stats.nb_hit_good == 0 ? 1 : currentPlayer.stats.nb_hit_good)})"></span></br>
+                <span v-html="$t('profile.stats.nbKillGood', {value: currentPlayer.stats.nb_kill_good})"></span></br>
+            </p>
+
+            <p>
+                <span v-html="$t('profile.stats.nbDamageBad', {value: currentPlayer.stats.nb_damage_bad})"></span></br>
+                <span v-html="$t('profile.stats.nbHitBad', {value: currentPlayer.stats.nb_hit_bad})"></span></br>
+                <span v-html="$t('profile.stats.avgDamageBad', {value: currentPlayer.stats.nb_damage_bad / (currentPlayer.stats.nb_hit_bad == 0 ? 1 : currentPlayer.stats.nb_hit_bad)})"></span></br>
+                <span v-html="$t('profile.stats.nbKillBad', {value: currentPlayer.stats.nb_kill_bad})"></span></br>
+            </p>
+
+            <p>
+                <span v-html="$t('profile.stats.nbDamageNpc', {value: currentPlayer.stats.nb_damage_npc})"></span></br>
+                <span v-html="$t('profile.stats.nbHitNpc', {value: currentPlayer.stats.nb_hit_npc})"></span></br>
+                <span v-html="$t('profile.stats.avgDamageNpc', {value: currentPlayer.stats.nb_damage_npc / (currentPlayer.stats.nb_hit_npc == 0 ? 1 : currentPlayer.stats.nb_hit_npc)})"></span></br>
+                <span v-html="$t('profile.stats.nbKillNpc', {value: currentPlayer.stats.nb_kill_npc})"></span></br>
+            </p>
+
+
+            <p>
+                <span v-html="$t('profile.stats.nbTotalKill', {value: currentPlayer.stats.nb_kill_good + currentPlayer.stats.nb_kill_bad + currentPlayer.stats.nb_kill_npc})"></span></br>
+                <span v-html="$t('profile.stats.nbDeahtCount', {value: currentPlayer.stats.death_count})"></span></br>
             </p>
         </div>
     </div>

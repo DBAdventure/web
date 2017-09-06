@@ -948,7 +948,44 @@
       "bp": "Battle points: {bp} / {maxBp}"
     },
     "stats": {
-      "zeni": "You have <strong>{zeni}</strong> Zenis"
+      "zeni": "You have <strong>{value}</strong> Zenis",
+      "stolenZeni": "You have stolen <strong>{value}</strong> Zenis",
+      "avgStolenZeni": "Average stolen Zenis: <strong>{value}</strong>",
+      "nbActionStolenZeni": "Number of steal: <strong>{value}</strong>",
+      "betrayals": "You have betrayed <strong>{value}</strong> times your friends",
+      "sidePoints": "You have <strong>{value}</strong> side points",
+      "bountyHunter": "Bounty hunter: <strong>{value}</strong> targets executed",
+      "nbAnalysis": "Number of analysis: <strong>{value}</strong>",
+      "nbDodge": "Number of dodged hits: <strong>{value}</strong>",
+      "healthGiven": "Health restored: <strong>{value}</strong>",
+      "nbHealthGiven": "Number of heal given: <strong>{value}</strong>",
+      "avgHealthGiven": "Average amount of health restored: <strong>{value}</strong>",
+      "nbSpell": "Number of spell cast: <strong>{value}</strong>",
+      "nbSlapGiven": "Number of slap given: <strong>{value}</strong>",
+      "nbSlapTaken": "Number of slap taken: <strong>{value}</strong>",
+      "nbDamageHq": "You have inflicted <strong>{value}</strong> damage(s) to Hq(s)",
+      "nbHitHq": "You gave <strong>{value}</strong> hit to Hq(s)",
+      "avgDamageHq": "Average damage by hit for Hq(s): <strong>{value}</strong>",
+      "nbKillHq": "You destroyed <strong>{value}</strong> Hq(s)",
+
+      "nbDamageGood": "You have inflicted <strong>{value}</strong> damage(s) to Good guy(s)",
+      "nbHitGood": "You gave <strong>{value}</strong> hit to Good guy(s)",
+      "avgDamageGood": "Average damage by hit for Good guy(s): <strong>{value}</strong>",
+      "nbKillGood": "You killed <strong>{value}</strong> Good guy(s)",
+
+      "nbDamageBad": "You have inflicted <strong>{value}</strong> damage(s) to Bad guy(s)",
+      "nbHitBad": "You gave <strong>{value}</strong> hit to Bad guy(s)",
+      "avgDamageBad": "Average damage by hit for Bad guy(s): <strong>{value}</strong>",
+      "nbKillBad": "You killed <strong>{value}</strong> Bad guy(s)",
+
+      "nbDamageNpc": "You have inflicted <strong>{value}</strong> damage(s) to Npc(s)",
+      "nbHitNpc": "You gave <strong>{value}</strong> hit to Npc(s)",
+      "avgDamageNpc": "Average damage by hit for Npc(s): <strong>{value}</strong>",
+      "nbKillNpc": "You killed <strong>{value}</strong> Npc(s)",
+
+      "nbTotalKill": "You killed a total of <strong>{value}</strong> people",
+      "nbDeahtCount": "You are dead <strong>{value}</strong> times"
+
     }
   },
   "events": {
