@@ -22,7 +22,7 @@
                 <template v-for="news in newsList">
                     <dt>
                         <strong>{{ $t(news.subject) }}</strong>
-                        {{ $t('home.news.created.by', {by: news.created_by.name, date: $moment(news.created_at).format('ll')}) }}
+                        {{ $t('home.news.created.by', {by: news.created_by.name, date: $moment(news.created_at).format('llll')}) }}
                     </dt>
                     <dd>
                         <img :src="news.image" :alt="$t(news.subject)" class="news-image"/>
@@ -50,10 +50,8 @@ export default {
             newsList: [],
         };
     },
-    mounted() {
-        api.getNews().then((res) => {
-            this.newsList = res.data.news;
-        });
+    asyncData() {
+        return api.getNews().then(res => ({newsList: res.data.news}));
     },
 };
 </script>

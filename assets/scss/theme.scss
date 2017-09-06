@@ -191,6 +191,9 @@ body {
   >dl {
     dt {
       background: $background-news-color;
+      strong {
+        color: $text-color;
+      }
     }
   }
 }
