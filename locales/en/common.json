@@ -948,6 +948,9 @@
       "bp": "Battle points: {bp} / {maxBp}"
     },
     "stats": {
+      "normal": "Default",
+      "objects": "Objects",
+      "total": "Total",
       "zeni": "You have <strong>{value}</strong> Zenis",
       "stolenZeni": "You have stolen <strong>{value}</strong> Zenis",
       "avgStolenZeni": "Average stolen Zenis: <strong>{value}</strong>",

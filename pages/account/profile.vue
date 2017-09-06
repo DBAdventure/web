@@ -95,7 +95,7 @@
             </div>
         </div>
 
-        <Table :row-class-name="rowClassName" :columns="statsColumns" :data="statsData" stripe size="small"></Table>
+        <Table :columns="statsColumns" :data="statsData" stripped size="small" width="625px" border></Table>
 
         <div>
             <p>
@@ -122,7 +122,7 @@
 
             <p>
                 <span v-html="$t('profile.stats.nbSpell', {value: currentPlayer.stats.nb_spell})"></span></br>
-                <span v-html="$t('profile.stats.nbSlapGive', {value: currentPlayer.stats.nb_slap_given})"></span></br>
+                <span v-html="$t('profile.stats.nbSlapGiven', {value: currentPlayer.stats.nb_slap_given})"></span></br>
                 <span v-html="$t('profile.stats.nbSlapTaken', {value: currentPlayer.stats.nb_slap_taken})"></span></br>
             </p>
 
@@ -220,6 +220,7 @@
 
                 return [
                     {
+                        type: this.$t('profile.stats.normal'),
                         health: this.currentPlayer.max_health,
                         ki: this.currentPlayer.max_ki,
                         strength: this.currentPlayer.strength,
@@ -232,6 +233,7 @@
                         analysis: this.currentPlayer.analysis,
                     },
                     {
+                        type: this.$t('profile.stats.objects'),
                         health: this.currentPlayer.objects.max_health,
                         ki: this.currentPlayer.objects.max_ki,
                         strength: this.currentPlayer.objects.strength,
@@ -244,6 +246,7 @@
                         analysis: this.currentPlayer.objects.analysis,
                     },
                     {
+                        type: this.$t('profile.stats.total'),
                         health: this.currentPlayer.total_max_health,
                         ki: this.currentPlayer.total_max_ki,
                         strength: this.currentPlayer.total_strength,
@@ -262,54 +265,69 @@
             return {
                 statsColumns: [
                     {
+                        key: 'type',
+                        width: 100,
+                        fixed: 'left',
+                    },
+                    {
                         title: this.$t('health'),
                         key: 'health',
                         align: 'center',
+                        width: 100,
                     },
                     {
                         title: this.$t('ki'),
                         key: 'ki',
                         align: 'center',
+                        width: 100,
                     },
                     {
                         title: this.$t('strength'),
                         key: 'strength',
                         align: 'center',
+                        width: 100,
                     },
                     {
                         title: this.$t('accuracy'),
                         key: 'accuracy',
                         align: 'center',
+                        width: 100,
                     },
                     {
                         title: this.$t('agility'),
                         key: 'agility',
                         align: 'center',
+                        width: 100,
                     },
                     {
                         title: this.$t('intellect'),
                         key: 'intellect',
                         align: 'center',
+                        width: 100,
                     },
                     {
                         title: this.$t('resistance'),
                         key: 'resistance',
                         align: 'center',
+                        width: 100,
                     },
                     {
                         title: this.$t('vision'),
                         key: 'vision',
                         align: 'center',
+                        width: 100,
                     },
                     {
                         title: this.$t('skill'),
                         key: 'skill',
                         align: 'center',
+                        width: 100,
                     },
                     {
                         title: this.$t('analysis'),
                         key: 'analysis',
                         align: 'center',
+                        width: 100,
                     },
                 ],
             };
