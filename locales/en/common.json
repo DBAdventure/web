@@ -988,7 +988,6 @@
 
       "nbTotalKill": "You killed a total of <strong>{value}</strong> people",
       "nbDeahtCount": "You are dead <strong>{value}</strong> times"
-
     }
   },
   "events": {

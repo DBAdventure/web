@@ -25,13 +25,11 @@
                         </router-link>
                     </li>
                     <li class="divider"></li>
-                    <template v-if="currentPlayer.isModo">
+                    <template v-if="currentPlayer.is_admin">
                         <li>
-                            <router-link to="/account/appearance">
-                                <router-link to="admin">
-                                    <i class="glyphicon glyphicon-fire"></i> {{ $t('header.admin')}}
-                                </router-link>
-                            </router-link>
+                            <a href="/admin/">
+                                <i class="glyphicon glyphicon-fire"></i> {{ $t('header.admin')}}
+                            </a>
                         </li>
                         <li class="divider"></li>
                     </template>
