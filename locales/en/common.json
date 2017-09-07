@@ -1094,6 +1094,7 @@
     ]
   },
   "account": {
+    "enabled": "Your account is now activated!",
     "title": "Account",
     "created": {
       "title": "Account created",

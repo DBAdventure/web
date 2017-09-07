@@ -36,22 +36,34 @@
 </template>
 
 <script type="text/ecmascript-6">
+    import api from '~/services/api';
 
-import api from '~/services/api';
-
-export default {
-    head() {
-        return {
-            title: this.$t('home.title'),
-        };
-    },
-    data() {
-        return {
-            newsList: [],
-        };
-    },
-    asyncData() {
-        return api.getNews().then(res => ({newsList: res.data.news}));
-    },
-};
+    export default {
+        head() {
+            return {
+                title: this.$t('home.title'),
+            };
+        },
+        data() {
+            return {
+                newsList: [],
+                enabled: false,
+            };
+        },
+        mounted() {
+            if (this.enabled) {
+                this.$Notice.success({
+                    title: this.$t('notice.success'),
+                    desc: this.$t('account.enabled'),
+                });
+                this.enabled = false;
+            }
+        },
+        asyncData({query}) {
+            return api.getNews().then(res => ({
+                newsList: res.data.news,
+                enabled: query.enabled,
+            }));
+        },
+    };
 </script>
