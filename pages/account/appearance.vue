@@ -88,11 +88,7 @@
                 'currentPlayer',
             ]),
             selectedImage() {
-                let image = this.player_appearance.image;
-                if (isEmpty(image)) {
-                    image = 'S.png';
-                }
-                return `/images/avatars/players/${image}`;
+                return `/images/avatars/players/${this.player_appearance.image}`;
             },
         },
         methods: {

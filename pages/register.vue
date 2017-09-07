@@ -247,7 +247,7 @@
                     </Select>
                 </div>
 
-                <div class="race-list race-list1">
+                <div class="race-list" v-if="player.race === 1">
                     <div class="col-md-3 text-center">
                         <h3>{{ $t('humans') }}</h3>
                         <p>
@@ -269,7 +269,7 @@
                     </div>
                 </div>
 
-                <div class="race-list race-list2 hide">
+                <div class="race-list" v-if="player.race === 2">
                     <div class="col-md-3 text-center">
                         <h3>{{ $t('human-saiyajins') }}</h3>
                         <p>
@@ -289,7 +289,7 @@
                     </div>
                 </div>
 
-                <div class="race-list race-list3 hide">
+                <div class="race-list" v-if="player.race === 3">
                     <div class="col-md-3 text-center">
                         <h3>{{ $t('namekians') }}</h3>
                         <p>
@@ -311,7 +311,7 @@
                     </div>
                 </div>
 
-                <div class="race-list race-list4 hide">
+                <div class="race-list" v-if="player.race === 4">
                     <div class="col-md-3 text-center">
                         <h3>{{ $t('saiyajins') }}</h3>
                         <p>
@@ -332,7 +332,7 @@
                     </div>
                 </div>
 
-                <div class="race-list race-list5 hide">
+                <div class="race-list" v-if="player.race === 5">
                     <div class="col-md-3 text-center">
                         <h3>{{ $t('aliens') }}</h3>
                         <p>
@@ -353,7 +353,7 @@
                     </div>
                 </div>
 
-                <div class="race-list race-list6 hide">
+                <div class="race-list" v-if="player.race === 6">
                     <div class="col-md-3 text-center">
                         <h3>{{ $t('cyborgs') }}</h3>
                         <p>
@@ -375,7 +375,7 @@
                     </div>
                 </div>
 
-                <div class="race-list race-list7 hide">
+                <div class="race-list" v-if="player.race === 7">
                     <div class="col-md-3 text-center">
                         <h3>{{ $t('majins') }}</h3>
                         <p>
@@ -398,7 +398,7 @@
                     </div>
                 </div>
 
-                <div class="race-list race-list8 hide">
+                <div class="race-list" v-if="player.race === 8">
                     <div class="col-md-3 text-center">
                         <h3>{{ $t('dragons') }}</h3>
                         <p>
@@ -554,8 +554,27 @@
             selectedImage() {
                 let image = this.player.appearance.image;
                 if (isEmpty(image)) {
-                    image = 'S.png';
+                    if (this.player.race === 1) {
+                        image = 'H.png';
+                    } else if (this.player.race === 2) {
+                        image = 'HS.png';
+                    } else if (this.player.race === 3) {
+                        image = 'N.png';
+                    } else if (this.player.race === 4) {
+                        image = 'S.png';
+                    } else if (this.player.race === 5) {
+                        image = 'A.png';
+                    } else if (this.player.race === 6) {
+                        image = 'C.png';
+                    } else if (this.player.race === 7) {
+                        image = 'M.png';
+                    } else if (this.player.race === 8) {
+                        image = 'D.png';
+                    } else {
+                        image = 'S.png';
+                    }
                 }
+
                 return `/images/avatars/players/${image}`;
             },
         },
@@ -593,16 +612,17 @@
             },
         },
         mounted() {
-            this.races = settings.races;
-            this.sides = settings.sides;
             this.classes = settings.classes;
             this.player.class = random(1, 6);
+            this.player.race = random(1, 8);
             this.player.side = random(1, 2);
         },
         asyncData() {
             return api.getAppearanceData().then(res => (
                 {
                     appearances: res.data,
+                    races: settings.races,
+                    sides: settings.sides,
                 }
             ));
         },
