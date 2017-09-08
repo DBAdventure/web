@@ -138,6 +138,9 @@ const api = {
     getMap() {
         return makeGetRequest('/map/');
     },
+    getMiniMap() {
+        return makeGetRequest('/map/mini');
+    },
     enterBuilding(id) {
         return makeGetRequest(`/building/enter/${id}`);
     },
@@ -179,7 +182,7 @@ const api = {
     },
 
     move(where) {
-        return makePostRequest(`/action/moves/${where}`);
+        return makePostRequest(`/action/move/${where}`);
     },
 
     spell(id, spellId, type) {
