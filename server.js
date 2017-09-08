@@ -5,7 +5,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const nuxtConfig = require('./config/nuxt.config');
 const proxy = require('http-proxy-middleware');
-const session = require('express-session');
+const session = require('cookie-session');
 const {Nuxt, Builder} = require('nuxt');
 
 const app = express();
@@ -45,18 +45,10 @@ app.use(logger);
 app.use(helmet());
 app.use(bodyParser.json());
 
-const sess = {
+app.use(session({
     secret: process.env.SESSION_SECRET || 'awesomecookiesecret',
-    resave: true,
-    saveUninitialized: false,
-    cookie: {maxAge: 60 * 60 * 1000, secure: 'auto'},
-};
-
-if (!isDev) {
-    app.set('trust proxy', true);
-}
-
-app.use(session(sess));
+    cookie: {maxAge: 60 * 60 * 1000},
+}));
 
 /* eslint-disable no-param-reassign */
 app.post('/session/save', (req, res) => {
