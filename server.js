@@ -5,7 +5,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const nuxtConfig = require('./config/nuxt.config');
 const proxy = require('http-proxy-middleware');
-const session = require('cookie-session');
+const session = require('express-session');
 const {Nuxt, Builder} = require('nuxt');
 
 const app = express();
@@ -47,7 +47,12 @@ app.use(bodyParser.json());
 
 app.use(session({
     secret: process.env.SESSION_SECRET || 'awesomecookiesecret',
-    cookie: {maxAge: 60 * 60 * 1000},
+    resave: true,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 60 * 60 * 1000,
+        secure: 'auto',
+    },
 }));
 
 /* eslint-disable no-param-reassign */
