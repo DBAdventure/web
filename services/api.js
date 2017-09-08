@@ -1,5 +1,5 @@
 /* eslint-env es6 */
-import isEmpty from '~/lib/utils';
+import {isEmpty} from '~/lib/utils';
 import axios from 'axios';
 import settings from '~/config/general.config';
 
@@ -200,7 +200,7 @@ const api = {
 
     attack(id, type) {
         let url = `/action/attack/${id}`;
-        if (!isEmpty(type)) {
+        if (!isEmpty(type) && type !== 'attack') {
             url = `${url}/${type}`;
         }
 
