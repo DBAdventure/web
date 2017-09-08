@@ -45,12 +45,18 @@ app.use(logger);
 app.use(helmet());
 app.use(bodyParser.json());
 
-app.use(session({
+const sess = {
     secret: process.env.SESSION_SECRET || 'awesomecookiesecret',
     resave: true,
     saveUninitialized: false,
-    cookie: {maxAge: 60 * 60 * 1000},
-}));
+    cookie: {maxAge: 60 * 60 * 1000, secure: 'auto'},
+};
+
+if (!isDev) {
+    app.set('trust proxy', true);
+}
+
+app.use(session(sess));
 
 /* eslint-disable no-param-reassign */
 app.post('/session/save', (req, res) => {
