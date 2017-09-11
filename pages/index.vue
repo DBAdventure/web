@@ -21,16 +21,19 @@
             <dl>
                 <template v-for="news in newsList">
                     <dt>
-                        <strong>{{ $t(news.subject) }}</strong>
+                        <strong>{{ news.subject }}</strong>
                         {{ $t('home.news.created.by', {by: news.created_by.name, date: $moment(news.created_at).format('llll')}) }}
                     </dt>
                     <dd>
-                        <img :src="news.image" :alt="$t(news.subject)" class="news-image"/>
+                        <img :src="news.image" :alt="news.subject" class="news-image"/>
                         <div v-html="news.message"></div>
                         <div class="clearfix"></div>
                     </dd>
                 </template>
             </dl>
+            <div class="text-center" v-if="totalPages > 1">
+                <Page :page-size="pageSize" :total="totalPages" size="small" @on-change="setCurrentPage"></Page>
+            </div>
         </div>
     </div>
 </template>
@@ -46,11 +49,15 @@
         },
         data() {
             return {
+                pageSize: 2,
+                totalPages: 1,
+                news: [],
                 newsList: [],
                 enabled: false,
             };
         },
         mounted() {
+            this.totalPages = this.news.length;
             if (this.enabled) {
                 this.$Notice.success({
                     title: this.$t('notice.success'),
@@ -58,10 +65,19 @@
                 });
                 this.enabled = false;
             }
+
+            this.setCurrentPage(1);
+        },
+        methods: {
+            setCurrentPage(page) {
+                const start = (page - 1) * this.pageSize;
+                const end = page * this.pageSize;
+                this.newsList = this.news.slice(start, end);
+            },
         },
         asyncData({query}) {
             return api.getNews().then(res => ({
-                newsList: res.data.news,
+                news: res.data.news,
                 enabled: query.enabled,
             }));
         },
