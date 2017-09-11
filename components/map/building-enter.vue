@@ -11,31 +11,7 @@
 
         <template v-if="type === 'shop'">
             <div class="text-left" v-html="$t('game.shop.text', {player: me.name, name: $t(`buildings.${building.name}`) })"></div>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>{{ $t('image') }}</th>
-                        <th>{{ $t('price') }}</th>
-                        <th>{{ $t('weight') }}</th>
-                        <th>{{ $t('name') }}</th>
-                        <th>{{ $t('description') }}</th>
-                        <th>&nbsp;</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="object in objects">
-                        <td><img :src="`/images/objects/${object.image}`" :alt="$t(`objects.${object.name}.name`)"></td>
-                        <td>{{ object.price }}</td>
-                        <td>{{ object.weight }}</td>
-                        <td>{{ $t(`objects.${object.name}.name`) }}</td>
-                        <td>
-                            {{ $t(`objects.${object.name}.description`) }}
-                            <stats :data="object.bonus" v-if="object.bonus.length > 0" />
-                        </td>
-                        <td><a class="btn btn-default" href="#" @click.prevent="runAction('buy', object.id)">{{ $t('building.shop.buy') }}</a></td>
-                    </tr>
-                </tbody>
-            </table>
+            <Table :columns="shopColumns()" :data="objects"></Table>
         </template>
 
         <template v-if="type === 'wanted'">
@@ -185,6 +161,82 @@
                         desc: errorMessage,
                     });
                 }
+            },
+
+            shopColumns() {
+                return [
+                    {
+                        align: 'center',
+                        width: 90,
+                        render: (h, params) => h(
+                            'div',
+                            {
+                                domProps: {
+                                    innerHTML: `<img src="/images/objects/${params.row.image}"/>`,
+                                },
+                            },
+                        ),
+                    },
+                    {
+                        title: this.$t('object.name'),
+                        align: 'center',
+                        width: 90,
+                        render: (h, params) => h(
+                            'strong',
+                            this.$t(`objects.${params.row.name}.name`),
+                        ),
+                    },
+                    {
+                        title: this.$t('object.price'),
+                        width: 70,
+                        key: 'price',
+                        align: 'center',
+                    },
+                    {
+                        title: this.$t('object.weight'),
+                        width: 80,
+                        key: 'weight',
+                        align: 'center',
+                    },
+                    {
+                        title: this.$t('object.description'),
+                        key: 'description',
+                        render: (h, params) => h(
+                            'div',
+                            [
+                                this.$t(`objects.${params.row.name}.description`),
+                                h(
+                                    Stats,
+                                    {
+                                        props: {
+                                            data: params.row.bonus,
+                                        },
+                                    },
+                                ),
+                            ],
+                        ),
+                    },
+                    {
+                        title: this.$t('object.action'),
+                        width: 70,
+                        align: 'center',
+                        render: (h, params) => h(
+                            'Button',
+                            {
+                                props: {
+                                    type: 'primary',
+                                    size: 'small',
+                                },
+                                on: {
+                                    click: () => {
+                                        this.runAction('buy', params.row.id);
+                                    },
+                                },
+                            },
+                            this.$t('building.shop.buy'),
+                        ),
+                    },
+                ];
             },
         },
     };

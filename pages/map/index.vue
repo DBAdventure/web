@@ -45,9 +45,10 @@
         </div>
 
         <div v-if="!action">
-            <a href="#" @click.prevent="runAction('heal', currentPlayer.id)"  v-if="currentPlayer.health < currentPlayer.total_max_health && currentPlayer.action_points >= settings.player.HEAL_ACTION">
+            <Button @click.prevent="runAction('heal', currentPlayer.id)" v-if="currentPlayer.health < currentPlayer.total_max_health && currentPlayer.action_points >= settings.player.HEAL_ACTION">
                 <img :src="currentPlayer.getActionImagePath('heal')" :alt="$t('map.action.heal', {'AP': settings.player.HEAL_ACTION})" :title="$t('map.action.heal', {'AP': settings.player.HEAL_ACTION})" />
-            </a>
+                {{ $t('map.action.self.heal', {'AP': settings.player.HEAL_ACTION}) }}
+            </Button>
         </div>
 
         <div class="search-container container-fluid">
@@ -56,22 +57,26 @@
                     <p v-for="message in parameters.messages">{{ message }}</p>
 
                     <template v-if="action === 'analysis'">
-                        <table class="table table-condensed table-striped">
-                            <tr v-for="value, name in parameters.competences">
-                                <td>
-                                    {{ $t(`action.analysis.${name}`) }}
-                                </td>
-                                <td>
-                                    {{ value }}
-                                </td>
-                            </tr>
-                        </table>
-
+                        <Table :columns="analysisColumns()" :data="analysisData()"></Table>
                         <action-link :player="target" :me="currentPlayer" what="analysis" v-if="currentPlayer.action_points >= settings.player.ANALYSIS_ACTION" message-key="map.action.again.analysis"/>
+                    </template>
+
+                    <template v-if="action === 'give'">
+                        <div class="form-group">
+                            <label for="zeni">{{ $t('zeni') }}</label>
+                            <input type="text" class="form-control" id="zeni" name="zeni">
+                        </div>
+                        <Button @click.prevent="giveZenis()">{{ $t('action.give.text') }}</button>
+
+                        <Table :columns="giveColumns()" :data="giveData()"></Table>
                     </template>
 
                     <template v-if="action === 'heal'">
                         <action-link :player="target" :me="currentPlayer" what="heal" v-if="target.can_be_healed && currentPlayer.action_points >= settings.player.HEAL_ACTION" message-key="map.action.again.heal"/>
+                    </template>
+
+                    <template v-if="action === 'steal'">
+                        <action-link :player="target" :me="currentPlayer" what="steal" v-if="currentPlayer.action_points >= settings.player.STEAL_ACTION" message-key="map.action.again.steal"/>
                     </template>
 
                     <template v-if="action == 'building-enter'">
@@ -79,7 +84,7 @@
                     </template>
 
                     <div class="text-center">
-                        <a href="#" @click.prevent="back" class="back-to-map">{{ $t('action.back.map') }}</a>
+                        <Button @click.prevent="back()">{{ $t('action.back.map') }}</Button>
                     </div>
                 </div>
             </template>
@@ -125,7 +130,7 @@
                             </template>
 
                             <div class="actions" v-if="distance == 0">
-                                <a href="#" @click.prevent="runAction('building-enter', building.id)">
+                                <Button size="small" @click.prevent="runAction('building-enter', building.id)">
                                     <template v-if="building.type == 1">
                                         {{ $t('map.building.teleport') }}
                                     </template>
@@ -135,7 +140,7 @@
                                     <template v-else>
                                         {{ $t('map.building.enter') }}
                                     </template>
-                                </a>
+                                </Button>
                             </div>
                         </div>
                     </div>
@@ -252,10 +257,10 @@
         },
         methods: {
             async back() {
-                await this.loadMap();
                 this.action = null;
                 this.parameters = {};
                 this.target = null;
+                await this.loadMap();
             },
             async loadMap() {
                 await api.getMap().then((res) => {
@@ -307,6 +312,77 @@
                 return names.join(', ');
             },
 
+            /**
+             * Analysis action
+             */
+            analysisColumns() {
+                return [
+                    {
+                        title: this.$t('skill'),
+                        key: 'name',
+                        render: (h, params) => h(
+                            'strong',
+                            this.$t(`action.analysis.${params.row.name}`),
+                        ),
+                    },
+                    {
+                        title: this.$t('value'),
+                        key: 'value',
+                        align: 'center',
+                    },
+                ];
+            },
+            analysisData() {
+                const result = [];
+                /* eslint-disable no-restricted-syntax */
+                for (const [key, value] of entries(this.parameters.competences)) {
+                    result.push({
+                        name: key,
+                        value,
+                    });
+                }
+                /* eslint-enable no-restricted-syntax */
+                return result;
+            },
+
+            /**
+             * Give action
+             */
+            giveColumns() {
+                return [
+                    {
+                        render: (h, params) => h(
+                            'div',
+                            {
+                                domProps: {
+                                    innerHTML: `<img src="/images/objects/${params.row.object.image}"/>`,
+                                },
+                            },
+                        ),
+                    },
+                    {
+                        title: this.$t('object.name'),
+                        align: 'center',
+                        render: (h, params) => h(
+                            'strong',
+                            this.$t(`objects.${params.row.object.name}.name`),
+                        ),
+                    },
+                    {
+                        title: this.$t('object.quantity'),
+                        key: 'quantity',
+                        align: 'center',
+                    },
+                    {
+                        title: this.$t('object.give'),
+                        key: 'give',
+                    },
+                ];
+            },
+            giveData() {
+                return this.parameters.playerObjects;
+            },
+
             async runAction(what, id) {
                 let prom;
                 switch (what) {
@@ -331,7 +407,7 @@
                         prom = api.pickup(id);
                         break;
                     case 'give':
-                        prom = api.pickup(id);
+                        prom = api.give(id);
                         break;
                     case 'building-enter':
                         prom = api.enterBuilding(id).then((res) => {

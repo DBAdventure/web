@@ -1,7 +1,7 @@
 <template>
     <ul>
         <li v-for="value, key in data">
-            {{ $t(`object.${key}`, {value}) }}
+            {{ $t(`objects.details.${key}`, {value}) }}
         </li>
     </ul>
 </template>

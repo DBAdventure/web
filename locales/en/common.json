@@ -338,6 +338,9 @@
       "spell": "Cast spell ({AP} AP)",
       "attack-betray": "Attack (betrayal) ({AP} AP)",
       "attack-revenge": "Attack (revenge) ({AP} AP)",
+      "self": {
+        "heal": "Heal yourself ({AP} AP)"
+      },
       "again": {
         "steal": "Steal again for {AP} AP",
         "attack": "Attack again for {AP} AP",
@@ -1040,6 +1043,10 @@
     "equipped": "Equipped",
     "used": "You used {number} {name}!",
     "drop": "{name} has been drop on the map!",
+    "price": "Price",
+    "description": "Description",
+    "weight": "Weight",
+    "action": "#",
     "error": {
       "teleport": "Not enough movement points",
       "equip": "{name} can not be equipped right now!"
