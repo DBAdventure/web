@@ -168,7 +168,7 @@
                             </template>
 
                             <div class="actions">
-                                <router-link :to="`/inbox?write=${enemy.id}`" v-if="enemy.isPlayer()">
+                                <router-link :to="{path: '/account/inbox', query: {write: enemy.id}}" v-if="enemy.isPlayer()">
                                     <img :src="enemy.getActionImagePath('write')" :alt="$t('inbox.write')" :title="$t('inbox.write')" />
                                 </router-link>
 
@@ -263,12 +263,14 @@
                 await this.loadMap();
             },
             async loadMap() {
+                this.$Loading.start();
                 await api.getMap().then((res) => {
                     this.map = res.data.map;
                     this.borders = res.data.borders;
                     this.items = res.data.items;
                     this.borderYRange = _.range(this.borders.yStart, this.borders.yEnd + 1);
                     this.borderXRange = _.range(this.borders.xStart, this.borders.xEnd + 1);
+                    this.$Loading.finish();
                 });
             },
             itemsByDistance(data, isPlayer) {
@@ -384,6 +386,7 @@
             },
 
             async runAction(what, id) {
+                this.$Loading.start();
                 let prom;
                 switch (what) {
                     case 'attack':
@@ -413,6 +416,7 @@
                         prom = api.enterBuilding(id).then((res) => {
                             this.action = what;
                             this.parameters = res.data;
+                            this.$Loading.finish();
                         });
                         return;
                     default:
@@ -424,6 +428,7 @@
                     this.action = what;
                     this.parameters = res.data;
                     this.target = this.players[id];
+                    this.$Loading.finish();
                 });
             },
         },

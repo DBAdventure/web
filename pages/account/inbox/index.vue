@@ -281,7 +281,9 @@
             },
             selectDirectory(directory) {
                 this.page = this.type.loading;
+                this.$Loading.start();
                 api.getInboxDirectory(directory).then((res) => {
+                    this.$Loading.finish();
                     this.page = this.type.list;
                     this.directory = directory;
                     this.messages = res.data.messages;
@@ -301,27 +303,33 @@
             },
             deleteMessage() {
                 this.page = this.type.loading;
+                this.$Loading.start();
                 api.deleteMessage(this.currentMessage.id).then(() => {
                     this.selectDirectory(this.directory);
+                    this.$Loading.finish();
                 });
             },
             clearMessages(type) {
                 this.page = this.type.loading;
+                this.$Loading.start();
                 api.clearMessages(type).then(() => {
                     this.selectDirectory(this.directory);
                 });
             },
             archiveMessage() {
                 this.page = this.type.loading;
+                this.$Loading.start();
                 api.archiveMessage(this.currentMessage.id).then(() => {
                     this.selectDirectory(this.type.archive);
                 });
             },
             readMessage(id) {
                 this.page = this.type.loading;
+                this.$Loading.start();
                 api.readMessage(id).then((res) => {
                     this.page = this.type.read;
                     this.currentMessage = res.data.message;
+                    this.$Loading.finish();
                 });
             },
             back(directory) {
@@ -334,6 +342,7 @@
                 this.message.recipients.splice(index, 1);
             },
             submitMessage() {
+                this.$Loading.start();
                 const message = Object.assign({}, this.message);
                 const recipients = [];
                 _.uniq(message.recipients).forEach((r) => {

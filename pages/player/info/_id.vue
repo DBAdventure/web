@@ -10,7 +10,7 @@
                     <p>{{ $t('miscellaneous.name', {name: target.getDisplayName()}) }}</p>
 
                     <p v-if="$store.state.player.connected">
-                        <router-link :to="`/inbox?write=${target.id}`">
+                        <router-link :to="{path: '/account/inbox', query: {write: target.id}}">
                             <img :src="target.getActionImagePath('write')" :alt="$t('inbox.write')" :title="$t('inbox.write')" />
                         </router-link>
                     </p>
