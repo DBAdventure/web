@@ -158,19 +158,22 @@ const api = {
         return makeGetRequest(`/inbox/${directory}`);
     },
     postMessage(message) {
-        return makePostRequest('/inbox/writes', message);
+        return makePostRequest('/inbox/write', message);
+    },
+    replyMessage(id, message) {
+        return makePostRequest(`/inbox/write/${id}`, message);
     },
     readMessage(id) {
-        return makeGetRequest(`/inbox/reads/${id}`);
+        return makeGetRequest(`/inbox/read/${id}`);
     },
     deleteMessage(id) {
-        return makeDeleteRequest(`/inbox/messages/${id}`);
+        return makeDeleteRequest(`/inbox/message/${id}`);
     },
     archiveMessage(id) {
-        return makePostRequest(`/inbox/archives/${id}`);
+        return makePostRequest(`/inbox/archive/${id}`);
     },
     clearMessages(type) {
-        return makePostRequest(`/inbox/clears/${type}`);
+        return makePostRequest(`/inbox/clear/${type}`);
     },
 
 

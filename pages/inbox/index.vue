@@ -81,7 +81,7 @@
                         </p>
                         <p>
                             <strong>{{ $t('inbox.info.message') }}</strong><br/>
-                            {{ currentMessage.message }}
+                            <template v-for="line in currentMessage.message.split('\n')">{{ line }}<br></template>
                         </p>
                     </div>
 
@@ -146,8 +146,8 @@
                                    type="textarea" />
                         </Form-item>
 
-                        <div class="col-sm-offset-2 col-sm-10 text-right">
-                            <Button @click.prevent="submitMessage()">{{ $t('form.send') }}</Button>
+                        <div class="text-right">
+                            <Button @click="submitMessage()">{{ $t('form.send') }}</Button>
                         </div>
                     </Form>
                 </template>
@@ -290,10 +290,12 @@
             },
             writeMessage() {
                 this.page = this.type.write;
+                this.message.subject = '';
+                this.message.message = '';
+                this.message.recipients = [''];
                 this.currentMessage = null;
             },
             replyMessage() {
-                /* @TODO */
                 this.page = this.type.write;
                 this.message.message = `\n\n${'='.repeat(50)}\n${this.currentMessage.message}`;
             },
@@ -332,36 +334,47 @@
                 this.message.recipients.splice(index, 1);
             },
             submitMessage() {
-                this.$refs.inboxForm.validate((valid) => {
-                    if (valid) {
-                        const message = Object.assign({}, this.message);
-                        const recipients = [];
-                        _.uniq(message.recipients).forEach((r) => {
-                            recipients.push({name: r});
-                        });
-                        message.recipients = recipients;
-
-                        this.page = this.type.loading;
-                        api.postMessage({inbox_message: message}).then(() => {
-                            this.$Notice.success({
-                                title: this.$t('inbox.message.sent', {names: this.message.recipients.join(', ')}),
-                            });
-                            this.message.subject = '';
-                            this.message.message = '';
-                            this.message.recipients = [''];
-                            this.selectDirectory(this.type.inbox);
-                        });
-                    } else {
-                        this.$Notice.error('Form is not valid');
-                    }
+                const message = Object.assign({}, this.message);
+                const recipients = [];
+                _.uniq(message.recipients).forEach((r) => {
+                    recipients.push({name: r});
                 });
+                message.recipients = recipients;
+
+                if (isEmpty(this.currentMessage) &&
+                    (message.recipients.length === 0 ||
+                     isEmpty(message.subject) ||
+                     isEmpty(message.message))) {
+                    this.$Notice.error({
+                        title: this.$t('notice.error'),
+                        desc: this.$t('error.write'),
+                    });
+                } else {
+                    this.page = this.type.loading;
+                    let prom;
+                    if (this.currentMessage) {
+                        prom = api.replyMessage(this.currentMessage.id, {inbox_message: message});
+                    } else {
+                        prom = api.postMessage({inbox_message: message});
+                    }
+
+                    prom.then((res) => {
+                        this.$Notice.success({
+                            title: this.$t('inbox.message.sent', {names: res.data.recipients.join(', ')}),
+                        });
+                        this.message.subject = '';
+                        this.message.message = '';
+                        this.message.recipients = [''];
+                        this.selectDirectory(this.type.inbox);
+                    });
+                }
             },
         },
         mounted() {
             if (this.writeTo) {
-                this.message.recipients = [this.writeTo];
                 this.$nextTick(() => {
                     this.writeMessage();
+                    this.message.recipients = [this.writeTo];
                 });
             }
         },
