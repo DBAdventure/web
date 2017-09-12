@@ -602,6 +602,12 @@ body {
     border-width: thin;
     padding: 10px;
   }
+
+  .inventory {
+    > div {
+      float: left;
+    }
+  }
 }
 
 .table {

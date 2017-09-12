@@ -246,7 +246,7 @@
             await this.loadMap();
             this.$store.watch(state => state.game.mapReload, (value) => {
                 if (value) {
-                    this.loadMap();
+                    this.back();
                     this.$store.state.game.mapReload = false;
                 }
             });
