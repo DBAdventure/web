@@ -43,7 +43,7 @@
 
             <div id="inbox-content">
                 <template v-if="page === type.loading">
-                    Loading...
+                    {{ $t('strap.loading') }}
                 </template>
                 <template v-else-if="page === type.list">
                     <h2 class="subtitle text-center">
@@ -108,7 +108,7 @@
                         {{ $t('inbox.write') }}
                     </h2>
 
-                    <Form ref="inboxForm" id="inbox-write-form" >
+                    <Form ref="inboxForm" id="inbox-write-form">
                         <template v-if="currentMessage === null">
                             <div class="text-center">
                                 <Button @click.prevent="addRecipient()">
@@ -159,6 +159,7 @@
 <script type="text/ecmascript-6">
     import {mapGetters} from 'vuex';
     import _ from 'lodash';
+    import {isEmpty} from '~/lib/utils';
     import api from '~/services/api';
     import Players from '~/components/mixins/players';
 
@@ -181,6 +182,7 @@
             return {
                 subject: null,
                 currentMessage: null,
+                writeTo: null,
                 messages: [],
                 message: {
                     recipients: [''],
@@ -356,9 +358,26 @@
             },
         },
         mounted() {
-            api.getInboxDirectory().then((res) => {
-                this.messages = res.data.messages;
-            });
+            if (this.writeTo) {
+                this.message.recipients = [this.writeTo];
+                this.$nextTick(() => {
+                    this.writeMessage();
+                });
+            }
+        },
+        async asyncData({query}) {
+            let writeTo;
+            if (query.write) {
+                const {data} = await api.getPlayerInfo(query.write);
+                if (!isEmpty(data.player)) {
+                    writeTo = data.player.name;
+                }
+            }
+
+            return api.getInboxDirectory().then(res => ({
+                messages: res.data.messages,
+                writeTo,
+            }));
         },
     };
 </script>

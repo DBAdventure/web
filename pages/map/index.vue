@@ -168,7 +168,7 @@
                             </template>
 
                             <div class="actions">
-                                <router-link :to="`/inbox/write/${enemy.id}`" v-if="enemy.isPlayer()">
+                                <router-link :to="`/inbox?write=${enemy.id}`" v-if="enemy.isPlayer()">
                                     <img :src="enemy.getActionImagePath('write')" :alt="$t('inbox.write')" :title="$t('inbox.write')" />
                                 </router-link>
 

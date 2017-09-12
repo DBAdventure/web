@@ -63,7 +63,7 @@ body {
       }
       &.dropdown {
         img {
-          max-height:18px;
+          max-height: 18px;
         }
         li a {
           text-transform: none;
@@ -79,8 +79,8 @@ body {
     }
   }
   .online-players {
-    left:15px;
-    bottom:10px;
+    left: 15px;
+    bottom: 10px;
     position:absolute;
     padding:5px;
   }
@@ -212,7 +212,7 @@ body {
     height: 45px;
     &.title-default {
       text-align: center;
-      text-indent:0px;
+      text-indent: 0px;
       font-size: 20px;
       font-variant: small-caps;
       font-weight: bolder;
@@ -235,7 +235,7 @@ body {
     padding: 0 20px;
     position: relative;
     display: table;
-    width:100%;
+    width: 100%;
   }
 }
 
@@ -468,7 +468,7 @@ body {
   overflow: auto;
   width: 600px;
   .map {
-    margin:0 auto;
+    margin: 0 auto;
     table-layout: fixed;
     word-wrap: break-word;
     th {
@@ -492,20 +492,26 @@ body {
 }
 
 .search-container {
-  display:table;
-  padding-right:0;
-  width:100%;
+  display: table;
+  padding-right: 0;
+  width: 100%;
   .row {
-    display:table-row;
+    display: table-row;
     .col-lg-2,
     .col-lg-10 {
-      vertical-align:middle;
-      display:table-cell;
+      vertical-align: middle;
+      display: table-cell;
       float: none;
       .actions {
         float: right;
-        a:after {
-          content: " ";
+        a {
+          display: inline-block;
+          &:hover {
+            text-decoration: none;
+          }
+          &:after {
+            content: " ";
+          }
         }
       }
     }
@@ -527,7 +533,7 @@ body {
 
 .list-dots {
   list-style-position: inside;
-  padding-left:10px;
+  padding-left: 10px;
   li {
     float: left;
     &:not(:first-child) {
@@ -549,11 +555,11 @@ body {
       display: block;
     }
     .event-meta {
-      font-size:11px;
+      font-size: 11px;
     }
     img {
       max-height: 43px;
-      padding-right:15px;
+      padding-right: 15px;
     }
     .event-title {
       font-size: 14px;
@@ -574,7 +580,7 @@ body {
   .character {
     height: 600px;
     width: 100%;
-    margin-top:15px;
+    margin-top: 15px;
   }
   .type-title {
     font-weight: bold;
@@ -588,7 +594,7 @@ body {
     text-decoration: none;
   }
   .equiped {
-    margin:0 auto;
+    margin: 0 auto;
   }
   img {
     margin: 5px;
@@ -600,7 +606,7 @@ body {
 
 .table {
   ul {
-    padding:0;
+    padding: 0;
   }
 }
 
