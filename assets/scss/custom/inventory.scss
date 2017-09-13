@@ -37,9 +37,18 @@
   flex-direction: row;
   flex-wrap: wrap;
 
+  &.list {
+      > div {
+          width: 105px;
+      }
+  }
+
   > div {
     margin: 10px;
     flex-grow: 1;
     text-align: center;
+  }
+  .ivu-select {
+      display: block;
   }
 }

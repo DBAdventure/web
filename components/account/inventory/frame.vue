@@ -39,7 +39,7 @@
                         <br/>
                         <div class="btn-group btn-group-xs">
                             <template v-if="playerObject.can_be_used">
-                                <Select name="nb-objects" v-model="selectedObjects[playerObject.object.id]" class="form-control" v-if="playerObject.can_use_many && playerObject.number > 1">
+                                <Select name="nb-objects" v-model="selectedObjects[playerObject.object.id]" v-if="playerObject.can_use_many && playerObject.number > 1">
                                     <template v-for="nb in playerObject.number">
                                         <Option :value="nb">{{ nb }}</Option>
                                     </template>
@@ -75,7 +75,7 @@
             </Modal>
         </template>
         <template v-else>
-            <div class="inventory clearfix" v-if="objects[type]">
+            <div class="inventory list clearfix" v-if="objects[type]">
                 <div v-for="playerObject in objects[type]" v-if="!playerObject.equipped">
                     <Poptip :title="$t(`objects.${playerObject.object.name}.name`)"
                             :content="$t(`objects.${playerObject.object.name}.description`)"
@@ -87,7 +87,7 @@
                     <br/>
                     <div class="btn-group btn-group-xs">
                         <template v-if="playerObject.can_be_used">
-                            <Select name="nb-objects" v-model="selectedObjects[playerObject.object.id]" class="form-control" v-if="playerObject.can_use_many && playerObject.number > 1">
+                            <Select name="nb-objects" v-model="selectedObjects[playerObject.object.id]" v-if="playerObject.can_use_many && playerObject.number > 1">
                                 <template v-for="nb in playerObject.number">
                                     <Option :value="nb">{{ nb }}</Option>
                                 </template>
