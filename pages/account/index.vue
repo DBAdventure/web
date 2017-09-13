@@ -56,10 +56,10 @@
                 },
             };
         },
-        async mounted() {
-            await api.getEvents().then((res) => {
-                this.events = res.data;
-            });
+        asyncData() {
+            return api.getEvents().then(res => ({
+                events: res.data,
+            }));
         },
     };
 </script>
