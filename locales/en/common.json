@@ -472,6 +472,7 @@
     }
   },
   "inventory": {
+    "choose": "Choose object",
     "unequip": "Unequip",
     "equip": "Equip",
     "use": "Use",

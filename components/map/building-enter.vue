@@ -132,6 +132,7 @@
                     case 'buy':
                         await api.buyObject(this.building.id, data).then((res) => {
                             successMessage = res.data.message;
+                            this.$store.dispatch('fetchPlayer');
                         }).catch((err) => {
                             errorMessage = err.response.data.error;
                         });

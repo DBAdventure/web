@@ -1,0 +1,54 @@
+.modal-mask {
+  text-align: center;
+  position: fixed;
+  overflow-y: auto;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  transition: opacity .3s ease;
+  &:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -4px; /* Adjusts for spacing */
+  }
+}
+
+.modal-container {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+  margin: 40px auto;
+  padding: 20px 30px;
+  background-color: $color-light;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+  transition: all .3s ease;
+  position:relative;
+}
+
+.modal-outer {
+  left: 0;
+  right: 0;
+  bottom: -(20px * 2);
+  position: absolute;
+  transition: all .3s ease;
+}
+
+.modal-body {
+  margin: 0;
+  padding: 0;
+}
+
+.modal-enter, .modal-leave {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave .modal-container {
+  transform: 1.1;
+}

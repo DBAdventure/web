@@ -144,7 +144,7 @@
         </template>
         <div class="connection" v-else>
             <h2>{{ $t('menu.connection.text') }}</h2>
-            <form role="form" @submit.prevent="login">
+            <form role="form" @submit.prevent="login()">
                 <div class="text-center">
                     <label for="login">{{ $t('login.text') }}</label>
                     <Input name="username" v-model="username" :placeholder="$t('login.text')" required type="text" />

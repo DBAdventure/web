@@ -1,0 +1,45 @@
+#inventory {
+  .form-control {
+    padding: 0;
+  }
+  .character {
+    height: 600px;
+    width: 100%;
+    margin-top: 15px;
+  }
+  .type-title {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  td {
+    text-align: center;
+    border: none;
+  }
+  a:hover{
+    text-decoration: none;
+  }
+  .equiped {
+    margin: 0 auto;
+    .ivu-poptip {
+      cursor: pointer;
+    }
+  }
+  img {
+    margin: 5px;
+    border-style: solid;
+    border-width: thin;
+    padding: 10px;
+  }
+}
+
+.inventory {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  > div {
+    margin: 10px;
+    flex-grow: 1;
+    text-align: center;
+  }
+}

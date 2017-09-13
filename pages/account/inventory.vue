@@ -8,39 +8,39 @@
                     <tr>
                         <td>
                             <span class="type-title">{{ $t('inventory.cap') }}</span>
-                            <frame v-on:reload="reloadObjects()" :objects="objects" :type="settings.objects.TYPE_CAP" />
+                            <frame modal v-on:reload="reloadObjects()" :objects="objects" :type="settings.objects.TYPE_CAP" />
                         </td>
                         <td rowspan="3" width="250">
                         </td>
                         <td>
                             <span class="type-title">{{ $t('inventory.accessory') }}</span>
-                            <frame v-on:reload="reloadObjects()" :objects="objects" :type="settings.objects.TYPE_ACCESSORY" />
+                            <frame modal v-on:reload="reloadObjects()" :objects="objects" :type="settings.objects.TYPE_ACCESSORY" />
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <span class="type-title">{{ $t('inventory.vision') }}</span>
-                            <frame v-on:reload="reloadObjects()" :objects="objects" :type="settings.objects.TYPE_VISION" />
+                            <frame modal v-on:reload="reloadObjects()" :objects="objects" :type="settings.objects.TYPE_VISION" />
                         </td>
                         <td>
                             <span class="type-title">{{ $t('inventory.outfit') }}</span>
-                            <frame v-on:reload="reloadObjects()" :objects="objects" :type="settings.objects.TYPE_OUTFIT" />
+                            <frame modal v-on:reload="reloadObjects()" :objects="objects" :type="settings.objects.TYPE_OUTFIT" />
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <span class="type-title">{{ $t('inventory.weapon') }}</span>
-                            <frame v-on:reload="reloadObjects()" :objects="objects" :type="settings.objects.TYPE_WEAPON" />
+                            <frame modal v-on:reload="reloadObjects()" :objects="objects" :type="settings.objects.TYPE_WEAPON" />
                         </td>
                         <td>
                             <span class="type-title">{{ $t('inventory.shield') }}</span>
-                            <frame v-on:reload="reloadObjects()" :objects="objects" :type="settings.objects.TYPE_SHIELD" />
+                            <frame modal v-on:reload="reloadObjects()" :objects="objects" :type="settings.objects.TYPE_SHIELD" />
                         </td>
                     </tr>
                     <tr>
                         <td colspan="3">
                             <span class="type-title">{{ $t('inventory.shoes') }}</span>
-                            <frame v-on:reload="reloadObjects()" :objects="objects" :type="settings.objects.TYPE_SHOES" />
+                            <frame modal v-on:reload="reloadObjects()" :objects="objects" :type="settings.objects.TYPE_SHOES" />
                         </td>
                     </tr>
                 </tbody>

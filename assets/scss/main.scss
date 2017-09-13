@@ -1,0 +1,145 @@
+a:hover,
+#contenu a:hover,
+#content a:hover {
+  text-decoration: underline;
+}
+
+a {
+  outline: none;
+}
+
+ul {
+  margin-bottom: 0;
+}
+
+body {
+  background-attachment: fixed;
+  background-repeat: repeat-x;
+  font-family: Verdana,Arial,Helvetica,sans-serif;
+  font-size: 12px;
+}
+
+#main {
+  background-image: url('/images/styles/shadow.png');
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+  position: relative;
+  width: 940px;
+}
+
+.header {
+  height: 300px;
+  width: 900px;
+  position: relative;
+  .nav {
+    left: 15px;
+    list-style: outside none none;
+    position: absolute;
+    top: 220px;
+    text-transform: uppercase;
+    li {
+      a {
+        display: inline-block;
+        color: black;
+        font-size: 16px;
+        padding: 5px 10px;
+        border: 1px solid transparent;
+        &:focus,
+        &:active {
+          background: none;
+        }
+      }
+      &.dropdown {
+        img {
+          max-height: 18px;
+        }
+        li a {
+          text-transform: none;
+          background: none;
+          &:hover,
+          &:focus,
+          &:active {
+            text-decoration: underline;
+            border: 1px solid transparent;
+          }
+        }
+      }
+    }
+  }
+  .online-players {
+    left: 15px;
+    bottom: 10px;
+    position:absolute;
+    padding:5px;
+  }
+}
+
+.middle {
+  background-repeat: no-repeat;
+  width: 900px;
+}
+
+.progress {
+  height: 10px;
+  margin-bottom: 5px;
+}
+
+#footer {
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+}
+
+#content {
+  width: 670px;
+  margin: 0 15px 0 195px;
+  .title {
+    background-repeat: no-repeat;
+    border: thin solid transparent;
+    border-bottom: none;
+    margin: -9px -9px 0 -9px;
+    min-height: 55px;
+    padding: 55px 10px 0;
+    position: relative;
+    text-indent: -5000px;
+    height: 45px;
+    &.title-default {
+      text-align: center;
+      text-indent: 0px;
+      font-size: 20px;
+      font-variant: small-caps;
+      font-weight: bolder;
+      letter-spacing: 2px;
+      margin-bottom: 5px;
+      padding-top: 15px;
+    }
+  }
+  .subtitle {
+    background-repeat: no-repeat;
+    margin: 0;
+    min-height: 32px;
+    padding-top: 7px;
+    font-size: 16px;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .body {
+    padding: 0 20px;
+    position: relative;
+    display: table;
+    width: 100%;
+  }
+}
+
+.table-apparence {
+  margin: 0 auto;
+}
+
+.table {
+  ul {
+    padding: 0;
+  }
+}

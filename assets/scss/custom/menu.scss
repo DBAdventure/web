@@ -1,0 +1,197 @@
+#menu {
+  .list-group {
+    margin-bottom: 0;
+  }
+
+  .list-group-item {
+    border: none;
+    background: none;
+    width: 95%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 10px;
+  }
+
+  width: 200px;
+  float: left;
+  margin-left: -10px;
+  > div {
+    width: 180px;
+    margin: 0 auto;
+  }
+  .start {
+    display: block;
+    margin: 0 auto;
+    line-height: 1px;
+    height: 1px;
+    width: 180px;
+  }
+  .end {
+    display: block;
+    margin: 0 auto;
+    line-height: 7px;
+    height: 7px;
+    width: 180px;
+  }
+  h2 {
+    height: 36px;
+    text-indent: -5000px;
+    margin-top: 0;
+  }
+  ul li {
+    text-transform: uppercase;
+    padding-left: 25px;
+    padding-right: 15px;
+    line-height: 19px;
+    list-style: none;
+    a {
+      padding-right: 10px;
+      background: transparent;
+      font-size: 11px;
+      padding-left: 15px;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  .player .player-info {
+    display: block;
+    margin-left: 25px;
+    margin-right: 25px;
+    line-height: 19px;
+    margin-top: 5px;
+  }
+  > div:after {
+    line-height: 5px;
+    content: " ";
+    display: block;
+    width: 180px;
+    height: 5px;
+  }
+  .connection {
+    input, label {
+      width: 80%;
+      margin: 0 auto;
+      display: inline-block;
+      font-weight: normal;
+      line-height: 25px;
+    }
+    .last {
+      margin-top: 10px;
+    }
+  }
+
+  .player-info .submenu ul {
+    padding: 0;
+    li {
+      padding: 0 !important;
+      text-transform: none !important;
+    }
+  }
+}
+
+#move-block {
+  width: 150px;
+  height: 150px;
+  margin: 0px auto;
+  padding: 0;
+  position: relative;
+  list-style: none;
+
+  li {
+    margin: 0;
+    padding: 0;
+    display: block;
+    position: absolute;
+    a {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+    }
+  }
+  a {
+    display: block;
+    cursor: pointer;
+  }
+
+  .n {
+    left: 67px;
+    top: 0px;
+    width: 20px;
+    height: 75px;
+  }
+  .s {
+    left: 67px;
+    top: 75px;
+    width: 20px;
+    height: 75px;
+  }
+  .e {
+    left: 75px;
+    top: 62px;
+    width: 75px;
+    height: 26px;
+  }
+  .w {
+    left: 0px;
+    top: 62px;
+    width: 75px;
+    height: 26px;
+  }
+  .ne {
+    left: 82px;
+    top: 0px;
+    width: 68px;
+    height: 68px;
+  }
+  .nw {
+    left: 0px;
+    top: 0px;
+    width: 68px;
+    height: 68px;
+  }
+  .se {
+    left: 82px;
+    top: 82px;
+    width: 68px;
+    height: 68px;
+  }
+  .sw {
+    left: 0px;
+    top: 82px;
+    width: 67px;
+    height: 68px;
+  }
+  .n a {
+    height: 75px;
+    outline-color: green;
+  }
+  .s a {
+    height: 75px;
+    outline-color: pink;
+  }
+  .e a {
+    height: 26px;
+    outline-color: white;
+  }
+  .w a {
+    height: 26px;
+    outline-color: cyan;
+  }
+  .ne a {
+    height: 68px;
+    outline-color: orange;
+  }
+  .nw a {
+    height: 68px;
+    outline-color: blue;
+  }
+  .se a {
+    height: 68px;
+    outline-color: lightgreen;
+  }
+  .sw a {
+    height: 68px;
+    outline-color: yellow;
+  }
+}

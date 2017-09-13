@@ -1,0 +1,13 @@
+.list-dots {
+  list-style-position: inside;
+  padding-left: 10px;
+  li {
+    float: left;
+    &:not(:first-child) {
+      margin-left: 10px;
+    }
+  }
+  .active {
+    font-weight: bold;
+  }
+}

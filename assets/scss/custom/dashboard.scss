@@ -1,0 +1,23 @@
+.events {
+  .event {
+    .event-body {
+      display: block;
+    }
+    .event-meta {
+      font-size: 11px;
+    }
+    img {
+      max-height: 43px;
+      padding-right: 15px;
+    }
+    .event-title {
+      font-size: 14px;
+      font-weight: bold;
+      line-height: normal;
+      margin: 0;
+    }
+    .summary {
+      font-size: 14px;
+    }
+  }
+}
