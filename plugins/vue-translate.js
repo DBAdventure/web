@@ -17,5 +17,9 @@ export default ({app, store}) => {
             fr,
         },
     });
+
+    store.watch(state => state.locale.locale, (value) => {
+        app.i18n.locale = value;
+    });
 };
 /* eslint-enable  no-param-reassign */
