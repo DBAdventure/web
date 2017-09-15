@@ -1,5 +1,5 @@
 <template>
-    <div id="menu"">
+    <div id="menu">
         <div class="start"></div>
         <template v-if="$store.state.player.connected && currentPlayer.isPlayer()">
             <div class="player">
@@ -168,7 +168,7 @@
                         <router-link :title="$t('register.text')" to="/register">{{ $t('register.text') }}</router-link>
                     </li>
                     <li>
-                        <router-link :title="$t('forgot.password')" to="/account/lost-password"">{{ $t('forgot.password') }}</router-link>
+                        <router-link :title="$t('forgot.password')" to="/account/lost-password">{{ $t('forgot.password') }}</router-link>
                     </li>
                     <li>&nbsp;</li>
                 </template>
