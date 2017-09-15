@@ -90,7 +90,7 @@
                         <router-link to="/account/inventory">{{ $t('menu.inventory') }}</router-link>
                     </li>
                     <li class="list-group-item">
-                        <router-link to="/guild">{{ $t('menu.guild.text') }}</router-link>
+                        <router-link to="/account/guild">{{ $t('menu.guild.text') }}</router-link>
                     </li>
                     <li class="list-group-item">
                         <router-link to="/account/inbox">{{ $t('menu.inbox') }} <span class="badge">{{ $store.state.game.data.unreadMessages }}</span></router-link>
