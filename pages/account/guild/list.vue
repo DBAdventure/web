@@ -42,6 +42,11 @@
         components: {
             GuildMenu,
         },
+        head() {
+            return {
+                title: this.$t('guild.join'),
+            };
+        },
         computed: {
             ...mapGetters([
                 'currentPlayer',

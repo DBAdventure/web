@@ -103,6 +103,7 @@
     "toggle": "Toggle navigation"
   },
   "form": {
+    "invalid": "This form is not valid",
     "add": {
       "recipient": "Add Recipient",
       "bonus": "Add Bonus",
@@ -820,7 +821,7 @@
     "requester": "View all requesters",
     "message": "Chef's message",
     "events": "Events",
-    "create": "Create",
+    "create": "Create guild",
     "view": "View all guilds",
     "shortName": "Short name",
     "name": "Name",

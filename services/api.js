@@ -237,6 +237,14 @@ const api = {
 
         return makePostRequest(`/action/give/${id}/${objectId}`);
     },
+
+    /**
+     * Guild
+     */
+
+    createGuild(postData) {
+        return makePostRequest('/guild/create', postData);
+    },
 };
 
 export default api;

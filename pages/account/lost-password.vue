@@ -95,7 +95,10 @@
                             }
                         });
                     } else {
-                        this.$Notice.error('Form is not valid');
+                        this.$Notice.error({
+                            title: this.$t('notice.error'),
+                            desc: this.$t('form.invalid'),
+                        });
                     }
                 });
             },
