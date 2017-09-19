@@ -34,7 +34,6 @@
 
 <script type="text/ecmascript-6">
     import {mapGetters} from 'vuex';
-    import {isEmpty, entries} from '~/lib/utils';
     import api from '~/services/api';
     import GuildMenu from '~/components/account/guild/menu';
 

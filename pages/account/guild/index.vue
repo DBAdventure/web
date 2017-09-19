@@ -46,8 +46,14 @@
     import GuildMenu from '~/components/account/guild/menu';
 
     export default {
+        middleware: 'auth',
         components: {
             GuildMenu,
+        },
+        head() {
+            return {
+                title: this.$t('guild'),
+            };
         },
         computed: {
             ...mapGetters([
