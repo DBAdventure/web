@@ -18,13 +18,6 @@ module.exports = {
         'import',
         'html',
     ],
-    settings: {
-        'import/resolver': {
-            'webpack': {
-                'config': 'build/webpack.base.conf.js'
-            },
-        },
-    },
     rules: {
         'indent': ['error', 4, {"SwitchCase": 1}],
         'import/no-unresolved': 0,

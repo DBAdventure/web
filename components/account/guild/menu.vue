@@ -1,6 +1,6 @@
 <template>
     <ul>
-        <li v-if="currentPlayer.guild.rank.modo || currentPlayer.guild.rank.admin">
+        <li v-if="currentPlayer.guild_player.rank.modo || currentPlayer.guild_player.rank.admin">
             <router-link to="/account/guild/admin">
                 {{ $t('guild.admin.title') }}
             </router-link>

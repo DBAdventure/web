@@ -1,0 +1,16 @@
+#ranking {
+  display:block;
+  margin-top: 25px;
+  width: 100%;
+  ul{
+    column-count: 4;
+    overflow: visible;
+    list-style: none;
+    padding: 0;
+    li {
+      a.active {
+        font-weight: bold;
+      }
+    }
+  }
+}

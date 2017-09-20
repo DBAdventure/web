@@ -13,7 +13,7 @@ const actions = {
         return api.getGameData().then((res) => {
             commit(types.GAME_DATA, res.data);
         }).catch((res) => {
-            console.log(res.data);
+            console.log(res);
         });
     },
     setStyle({commit}) {

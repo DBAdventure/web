@@ -3,8 +3,6 @@ import {isEmpty} from '~/lib/utils';
 import axios from 'axios';
 import settings from '~/config/general.config';
 
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-
 let baseUrl = '';
 if (!process.browser) {
     baseUrl = settings.API_DOMAIN;
@@ -92,6 +90,14 @@ const api = {
     },
     getPlayerInfo(id) {
         return makeGetRequest(`/data/player/${id}`);
+    },
+    getRankingData(what, type, page, who) {
+        const getData = {
+            type,
+            who,
+            page,
+        };
+        return makeGetRequest(`/data/ranking/${what}`, getData);
     },
 
     /**
