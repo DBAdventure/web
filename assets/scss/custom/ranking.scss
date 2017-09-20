@@ -8,6 +8,7 @@
     list-style: none;
     padding: 0;
     li {
+      min-height: 60px;
       a.active {
         font-weight: bold;
       }
