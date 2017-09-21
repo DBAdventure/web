@@ -417,6 +417,11 @@
                             this.action = what;
                             this.parameters = res.data;
                             this.$Loading.finish();
+                        }).catch(() => {
+                            this.$Notice.error({
+                                title: this.$t('notice.error'),
+                                desc: this.$t('notice.generic'),
+                            });
                         });
                         return;
                     default:
@@ -429,6 +434,11 @@
                     this.parameters = res.data;
                     this.target = this.players[id];
                     this.$Loading.finish();
+                }).catch(() => {
+                    this.$Notice.error({
+                        title: this.$t('notice.error'),
+                        desc: this.$t('notice.generic'),
+                    });
                 });
             },
         },

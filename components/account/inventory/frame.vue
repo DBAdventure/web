@@ -168,6 +168,12 @@
                         desc: res.data.message,
                     });
                     this.$emit('reload');
+                }).catch(() => {
+                    this.$Notice.error({
+                        title: this.$t('notice.error'),
+                        desc: this.$t('notice.generic'),
+                    });
+                    this.$emit('reload');
                 });
             },
             equip(objectId) {
@@ -185,7 +191,13 @@
                             title: this.$t('notice.error'),
                             desc: err.response.data.error,
                         });
+                    } else {
+                        this.$Notice.error({
+                            title: this.$t('notice.error'),
+                            desc: this.$t('notice.generic'),
+                        });
                     }
+                    this.$emit('reload');
                 });
             },
             drop(objectId) {
@@ -200,6 +212,12 @@
                         desc: res.data.message,
                     });
                     this.$emit('reload');
+                }).catch(() => {
+                    this.$Notice.error({
+                        title: this.$t('notice.error'),
+                        desc: this.$t('notice.generic'),
+                    });
+                    this.$emit('reload');
                 });
             },
             use(objectId) {
@@ -212,6 +230,12 @@
                     this.$Notice.success({
                         title: this.$t('notice.success'),
                         desc: res.data.message,
+                    });
+                    this.$emit('reload');
+                }).catch(() => {
+                    this.$Notice.error({
+                        title: this.$t('notice.error'),
+                        desc: this.$t('notice.generic'),
                     });
                     this.$emit('reload');
                 });

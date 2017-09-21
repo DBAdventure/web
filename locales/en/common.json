@@ -1164,6 +1164,7 @@
   },
   "notice": {
     "success": "Success",
-    "error": "Error"
+    "error": "Error",
+    "generic": "Whoops, something went wrong...Unexpected Error."
   }
 }
