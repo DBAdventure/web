@@ -38,22 +38,6 @@
                         </Poptip>
                         <br/>
                         <div class="btn-group btn-group-xs">
-                            <template v-if="playerObject.can_be_used">
-                                <Select name="nb-objects" v-model="selectedObjects[playerObject.object.id]" v-if="playerObject.can_use_many && playerObject.number > 1">
-                                    <template v-for="nb in playerObject.number">
-                                        <Option :value="nb">{{ nb }}</Option>
-                                    </template>
-                                </Select>
-                                <Poptip
-                                    confirm
-                                    :title="$t('modal.confirm.title')"
-                                    :content="$t('modal.confirm.use')"
-                                    @on-ok="use(playerObject.object.id)"
-                                >
-                                    <Button size="small">{{ $t('inventory.use')}}</Button>
-                                </Poptip>
-                            </template>
-
                             <Button size="small" @click.prevent="equip(playerObject.object.id)" v-if="playerObject.can_be_equipped">
                                 {{ $t('inventory.equip')}}
                             </Button>
@@ -87,7 +71,7 @@
                     <br/>
                     <div class="btn-group btn-group-xs">
                         <template v-if="playerObject.can_be_used">
-                            <Select name="nb-objects" v-model="selectedObjects[playerObject.object.id]" v-if="playerObject.can_use_many && playerObject.number > 1">
+                            <Select v-model="selectedObjects[playerObject.object.id]" v-if="playerObject.can_use_many && playerObject.number > 1">
                                 <template v-for="nb in playerObject.number">
                                     <Option :value="nb">{{ nb }}</Option>
                                 </template>
@@ -101,10 +85,6 @@
                                 <Button size="small">{{ $t('inventory.use')}}</Button>
                             </Poptip>
                         </template>
-
-                        <Button size="small" @click.prevent="equip(playerObject.object.id)" v-if="playerObject.can_be_equipped">
-                            {{ $t('inventory.equip')}}
-                        </Button>
 
                         <Poptip
                             confirm
@@ -159,6 +139,15 @@
 
                 return isEquipped;
             },
+        },
+        beforeMount() {
+            if (!this.modal) {
+                Object.values(this.objects[this.type]).forEach((playerObject) => {
+                    if (playerObject.can_use_many && playerObject.number > 1) {
+                        this.selectedObjects[playerObject.object.id] = 1;
+                    }
+                });
+            }
         },
         methods: {
             unequip(objectId) {

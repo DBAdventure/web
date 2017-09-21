@@ -6,21 +6,17 @@
             <img class="map-image" src="/api/map/mini.png" usemap="#minimap" />
             <map name="minimap" id="minimap">
                 <template v-for="item in buildings">
-                    <area href="#" shape="circle" :coords="`${(item.x * 5) - dot},${(item.y * 5) - dot},5`" data-toggle="tooltip" data-placement="top" :title="`(${item.x}, ${item.y}) ${$t(name)}`">
+                    <area href="#" shape="circle" :coords="`${(item.x * 5) - (dot / 2)},${(item.y * 5) - (dot / 2)},5`" data-toggle="tooltip" data-placement="top" :title="`(${item.x}, ${item.y}) ${$t(name)}`">
                 </template>
 
                 <template v-for="item in players">
-                    <area href="#" shape="circle" :coords="`${(item.x * 5) - dot},${(item.y * 5) - dot},5`" data-toggle="tooltip" data-placement="top" :title="`(${item.x}, ${item.y}) ${item.name}`">
+                    <area href="#" shape="circle" :coords="`${(item.x * 5) - (dot / 2)},${(item.y * 5) - (dot / 2)},5`" data-toggle="tooltip" data-placement="top" :title="`(${item.x}, ${item.y}) ${item.name}`">
                 </template>
 
-                <area href="#" shape="circle" :coords="`${(currentPlayer.x * 5) - dot},${(currentPlayer.y * 5) - dot},5`" data-toggle="tooltip" data-placement="top" :title="`(${currentPlayer.x}, ${currentPlayer.y}) ${currentPlayer.name}`">
+                <area href="#" shape="circle" :coords="`${(currentPlayer.x * 5) - (dot / 2)},${(currentPlayer.y * 5) - (dot / 2)},5`" data-toggle="tooltip" data-placement="top" :title="`(${currentPlayer.x}, ${currentPlayer.y}) ${currentPlayer.name}`">
             </map>
 
             <table class="table table-condensed table-bordered">
-                <col width="20"/>
-                <col/>
-                <col width="20"/>
-                <col/>
                 <thead>
                     <tr>
                         <th colspan="4" class="text-center">{{ $t('map.legend.title') }}</th>
