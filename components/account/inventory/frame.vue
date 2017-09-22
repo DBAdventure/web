@@ -141,7 +141,7 @@
             },
         },
         beforeMount() {
-            if (!this.modal) {
+            if (!this.modal && this.objects[this.type]) {
                 Object.values(this.objects[this.type]).forEach((playerObject) => {
                     if (playerObject.can_use_many && playerObject.number > 1) {
                         this.selectedObjects[playerObject.object.id] = 1;
