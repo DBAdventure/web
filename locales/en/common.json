@@ -346,6 +346,8 @@
       "again": {
         "steal": "Steal again for {AP} AP",
         "attack": "Attack again for {AP} AP",
+        "attack-betray": "Attack again (betrayal) ({AP} AP)",
+        "attack-revenge": "Attack again (revenge) ({AP} AP)",
         "spell": "Cast spell again for {AP} AP",
         "heal": "Heal again for {AP} AP",
         "slap": "Slap again for {AP} AP",

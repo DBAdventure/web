@@ -26,7 +26,9 @@
                             </template>
 
                             <template v-if="itemsList(items.players, x, y).length > 2">
-                                <image-render :x="x" :y="y" :image="currentPlayer.getImagePath()" :title="currentPlayer.getDisplayName()"/>
+                                <template v-if="currentPlayer.x == x && currentPlayer.y == y">
+                                    <image-render :x="x" :y="y" :image="currentPlayer.getImagePath()" :title="currentPlayer.getDisplayName()"/>
+                                </template>
                                 <image-render :x="x" :y="y" image="/images/avatars/players/group.png" :title="groupNames(itemsList(items.players, x, y))"/>
                             </template>
                             <template v-else>
@@ -71,12 +73,19 @@
                         <Table :columns="giveColumns()" :data="giveData()"></Table>
                     </template>
 
-                    <template v-if="action === 'heal'">
-                        <action-link :player="target" :me="currentPlayer" what="heal" v-if="target.can_be_healed && currentPlayer.action_points >= settings.player.HEAL_ACTION" message-key="map.action.again.heal"/>
+                    <template v-if="action === 'heal' && target.can_be_healed && currentPlayer.action_points >= settings.player.HEAL_ACTION">
+                        <action-link :player="target" :me="currentPlayer" what="heal" message-key="map.action.again.heal"/>
                     </template>
 
                     <template v-if="action === 'steal'">
                         <action-link :player="target" :me="currentPlayer" what="steal" v-if="currentPlayer.action_points >= settings.player.STEAL_ACTION" message-key="map.action.again.steal"/>
+                    </template>
+
+                    <template v-if="(action === 'attack' || action == 'attack-betray' || action == 'attack-revenge') && currentPlayer.action_points >= settings.player.ATTACK_ACTION">
+                        <action-link :player="target" :me="currentPlayer" what="attack-betray" v-if="target.side.id === currentPlayer.side.id" message-key="map.action.again.attack-betray"/>
+                        <action-link :player="target" :me="currentPlayer" what="attack" message-key="map.action.again.attack" v-else/>
+
+                        <action-link :player="target" :me="currentPlayer" what="attack-revenge" v-if="currentPlayer.getTarget().id === target.id" message-key="map.action.again.attack-revenge"/>
                     </template>
 
                     <template v-if="action == 'building-enter'">
@@ -176,14 +185,14 @@
                                     <action-link :player="enemy" :me="currentPlayer" what="slap" v-if="enemy.isPlayer() && enemy.betrayals > 0 && currentPlayer.action_points >= settings.player.SLAP_ACTION"/>
                                     <action-link :player="enemy" :me="currentPlayer" what="give" v-if="enemy.isPlayer() && currentPlayer.action_points >= settings.player.GIVE_ACTION"/>
                                     <action-link :player="enemy" :me="currentPlayer" what="analysis" v-if="currentPlayer.action_points >= settings.player.ANALYSIS_ACTION"/>
-                                    <action-link :player="enemy" :me="currentPlayer" what="steal" v-if="currentPlayer.action_points >= settings.player.STEAL_ACTION && map[enemy.x][enemy.y]['bonus'] == settings.map.TYPE_DEFAULT" />
+                                    <action-link :player="enemy" :me="currentPlayer" what="steal" v-if="currentPlayer.action_points >= settings.player.STEAL_ACTION && map[enemy.x][enemy.y].bonus == settings.map.TYPE_DEFAULT" />
                                     <action-link :player="enemy" :me="currentPlayer" what="heal" v-if="currentPlayer.action_points >= settings.player.HEAL_ACTION && enemy.can_be_healed"/>
 
-                                    <template v-if="currentPlayer.action_points >= settings.player.ATTACK_ACTION && map[enemy.x][enemy.y]['bonus'] == settings.map.TYPE_DEFAULT">
-                                        <action-link :player="enemy" :me="currentPlayer" what="attack-betray"  v-if="enemy.side.id === currentPlayer.side.id"/>
+                                    <template v-if="currentPlayer.action_points >= settings.player.ATTACK_ACTION && map[enemy.x][enemy.y].bonus == settings.map.TYPE_DEFAULT">
+                                        <action-link :player="enemy" :me="currentPlayer" what="attack-betray" v-if="enemy.side.id === currentPlayer.side.id"/>
                                         <action-link :player="enemy" :me="currentPlayer" what="attack" v-else/>
 
-                                        <action-link :player="enemy" :me="currentPlayer" what="attack-revenge"  v-if="currentPlayer.getTarget().id === enemy.id"/>
+                                        <action-link :player="enemy" :me="currentPlayer" what="attack-revenge" v-if="currentPlayer.getTarget().id === enemy.id"/>
                                     </template>
                                 </template>
 
@@ -265,9 +274,11 @@
             async loadMap() {
                 this.$Loading.start();
                 await api.getMap().then((res) => {
+                    this.players = {};
                     this.map = res.data.map;
                     this.borders = res.data.borders;
                     this.items = res.data.items;
+                    console.log(res.data.items);
                     this.borderYRange = _.range(this.borders.yStart, this.borders.yEnd + 1);
                     this.borderXRange = _.range(this.borders.xStart, this.borders.xEnd + 1);
                     this.$Loading.finish();
@@ -428,10 +439,12 @@
                         return;
                 }
 
-                await prom.then((res) => {
+                await prom.then(async (res) => {
                     this.$store.dispatch('fetchPlayer');
                     this.action = what;
                     this.parameters = res.data;
+                    await this.loadMap();
+                    console.log(this.items.players);
                     this.target = this.players[id];
                     this.$Loading.finish();
                 }).catch(() => {
