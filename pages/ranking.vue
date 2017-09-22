@@ -27,7 +27,6 @@
             </div>
         </div>
 
-        {{ type }}
         <div id="ranking">
             <ul>
                 <li v-for="player, position in ranking">
