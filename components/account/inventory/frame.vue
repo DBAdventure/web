@@ -33,7 +33,8 @@
                                 :content="$t(`objects.${playerObject.object.name}.description`)"
                                 placement="top"
                                 width="300"
-                                trigger="hover">
+                                trigger="hover"
+                                class="image-block">
                             <img :src="`/images/objects/${playerObject.object.image}`" />
                         </Poptip>
                         <br/>

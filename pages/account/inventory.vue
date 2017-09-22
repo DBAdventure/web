@@ -51,6 +51,8 @@
             </p>
 
             <h1 class="title title-inventory-objects">{{ $t('menu.inventory') }}</h1>
+            <frame v-on:reload="reloadObjects()" :objects="objects" :type="settings.objects.TYPE_UNIQUE" />
+            <frame v-on:reload="reloadObjects()" :objects="objects" :type="settings.objects.TYPE_SPECIAL" />
             <frame v-on:reload="reloadObjects()" :objects="objects" :type="settings.objects.TYPE_CONSUMABLE" />
         </div>
     </div>

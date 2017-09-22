@@ -34,18 +34,15 @@
 
 .inventory {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
 
-  &.list {
-      > div {
-          width: 105px;
-      }
+  .image-block {
+    width: 70px;
+    height: 70px;
   }
 
   > div {
     margin: 10px;
-    flex-grow: 1;
     text-align: center;
   }
   .ivu-select {
