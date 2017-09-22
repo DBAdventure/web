@@ -83,7 +83,7 @@
                     <li class="list-group-item">
                         <router-link to="/map">{{ $t('menu.map.text') }}</router-link>
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item" v-if="currentPlayer.has_mini_map">
                         <router-link to="/map/mini">{{ $t('menu.map.mini') }}</router-link>
                     </li>
                     <li class="list-group-item">

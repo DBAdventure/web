@@ -63,14 +63,19 @@
                 'currentPlayer',
             ]),
         },
-        asyncData() {
+        asyncData({error}) {
             return api.getMiniMap().then(res => (
                 {
                     players: res.data.players,
                     buildings: res.data.buildings,
                     dot: res.data.dot,
                 }
-            ));
+            )).catch(() => {
+                error({
+                    message: 'error.forbidden',
+                    statusCode: 403,
+                });
+            });
         },
     };
 </script>

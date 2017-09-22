@@ -21,8 +21,8 @@
             </ul>
         </template>
         <template v-else>
-            <h1 class="title title-default">{{ guild.name }}</h1>
-            <template v-if="!guild.enabled">
+            <h1 class="title title-default">{{ currentPlayer.getGuild().name }}</h1>
+            <template v-if="!currentPlayer.getGuild().enabled">
                 {{ $t('guild.not.enabled') }}
             </template>
             <template v-else-if="!currentPlayer.guild_player.enabled">
@@ -31,10 +31,10 @@
             <template v-else>
                 <guild-menu />
 
-                <template v-if="guild.message">
+                <template v-if="currentPlayer.getGuild().message">
                     <h1 class="title title-guild-message">{{ $t('guild.message') }}</h1>
                     <p>
-                        {{ guild.message }}
+                        {{ currentPlayer.getGuild().message }}
                     </p>
                 </template>
             </template>
@@ -52,9 +52,9 @@
             GuildMenu,
         },
         head() {
-            if (this.currentPlayer.guild_player.guild) {
+            if (this.currentPlayer.guild_player && this.currentPlayer.getGuild()) {
                 return {
-                    title: this.guild.name,
+                    title: this.currentPlayer.getGuild().name,
                 };
             }
 
@@ -66,9 +66,6 @@
             ...mapGetters([
                 'currentPlayer',
             ]),
-            guild() {
-                return this.currentPlayer.guild_player.guild;
-            },
         },
     };
 </script>

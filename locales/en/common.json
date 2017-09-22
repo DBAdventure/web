@@ -1127,6 +1127,7 @@
       "connected": "You are not connected",
       "exists": "This page does not exists"
     },
+    "forbidden": "Forbidden",
     "bad": {
       "credentials": "Your username or password are incorrect."
     },
