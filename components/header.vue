@@ -45,6 +45,7 @@
             <li><router-link to="/ranking">{{ $t('menu.ranking') }}</router-link></li>
             <li><router-link to="/history">{{ $t('menu.history') }}</router-link></li>
             <li><router-link to="/faq">{{ $t('menu.faq') }}</router-link></li>
+            <li><router-link to="/rules">{{ $t('menu.rules.supports') }}</router-link></li>
             <!-- <li><router-link to="/contact">{{ $t('menu.contact') }}</router-link></li>
                  <li><router-link to="/team">{{ $t('menu.team') }}</router-link></li> -->
         </ul>
