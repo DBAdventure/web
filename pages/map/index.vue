@@ -278,7 +278,6 @@
                     this.map = res.data.map;
                     this.borders = res.data.borders;
                     this.items = res.data.items;
-                    console.log(res.data.items);
                     this.borderYRange = _.range(this.borders.yStart, this.borders.yEnd + 1);
                     this.borderXRange = _.range(this.borders.xStart, this.borders.xEnd + 1);
                     this.$Loading.finish();
@@ -443,8 +442,9 @@
                     this.$store.dispatch('fetchPlayer');
                     this.action = what;
                     this.parameters = res.data;
-                    await this.loadMap();
-                    console.log(this.items.players);
+                    if (res.data.target) {
+                        this.players[id] = new Player(res.data.target);
+                    }
                     this.target = this.players[id];
                     this.$Loading.finish();
                 }).catch(() => {
