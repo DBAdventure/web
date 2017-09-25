@@ -1,0 +1,75 @@
+.rules {
+    .top-summary {
+        position: relative;
+        height: 350px;
+        width: 100%;
+        background-image: url('/images/styles/gohan-rules.jpg');
+        background-repeat: no-repeat;
+        background-position: 286px 77px;
+
+        .top-summary-menu {
+            border-style: none none solid solid;
+            border-color: #fff;
+            border-width: thin;
+            width: 18.4em;
+            padding: 0 0.5em;
+            position: absolute;
+            bottom: 20px;
+            left: 92px;
+            font-family: sans-serif;
+        }
+
+        dt {
+            text-transform: uppercase;
+            font-weight: bolder;
+            margin-top: 10px;
+            color: #c0e4f2;
+        }
+        dd {
+            display: list-item;
+        }
+    }
+
+    ul {
+        list-style-position: inside;
+        margin-bottom: 1em;
+        padding-left: 0.5em;
+        li {
+            padding-left: 1em;
+        }
+    }
+
+    h1 {
+        text-align: center;
+        padding: 8px;
+        margin: 15px -8px;
+    }
+
+    h2 {
+        padding: 0;
+        margin: 10px 0;
+        &:before {
+            margin-right: 0.5em;
+        }
+    }
+    h1,
+    h2 {
+        font-size: 14px;
+        text-transform: uppercase;
+        background-repeat: no-repeat;
+        color: #fff;
+    }
+
+    .regles table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 10px 0;
+        margin: 1em 0 0 0;
+    }
+    .regles table th.race {
+        text-align: left;
+        border-width: thin;
+        border-style: none none solid none;
+        padding: 0 0 0.3em 0;
+    }
+}

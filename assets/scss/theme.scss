@@ -173,7 +173,8 @@ body {
   background: url($images-path + '/compass.png');
 }
 
-#home-edito, #home-news {
+#home-edito,
+#home-news {
   border-color: $default-color;
   > dl {
     dt {
@@ -292,4 +293,18 @@ body {
 
 .ivu-table {
   color: $text-color;
+}
+
+.rules {
+    h1 {
+        background-image: url($images-path + '/title3.jpg');
+        &:first {
+            background-image: url($images-path + '/title2.jpg');
+        }
+    }
+    h2 {
+        &:before {
+            content: url($images-path + '/list-dot.jpg');
+        }
+    }
 }

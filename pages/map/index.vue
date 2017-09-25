@@ -92,13 +92,11 @@
                         <building-enter :building="parameters.building" :type="parameters.type" :objects="parameters.objects" :me="currentPlayer" />
                     </template>
 
-                    <div class="text-center">
+                    <div class="text-center buttons">
                         <Button @click.prevent="back()">{{ $t('action.back.map') }}</Button>
                     </div>
                 </div>
             </template>
-
-
 
             <template v-else>
                 <template v-for="objects, distance in itemsByDistance(items.objects)">

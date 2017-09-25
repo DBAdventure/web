@@ -204,7 +204,7 @@
             </div>
 
             <div>
-                <table class="table-apparence">
+                <table class="table-appearance">
                     <tbody>
                         <tr>
                             <td align="center" width="75" height="75" background="/media/map/day/grass_0.png">
