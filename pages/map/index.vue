@@ -64,11 +64,16 @@
                     </template>
 
                     <template v-if="action === 'give'">
-                        <div class="form-group">
-                            <label for="zeni">{{ $t('zeni') }}</label>
-                            <input type="text" class="form-control" id="zeni" name="zeni">
-                        </div>
-                        <Button @click.prevent="giveZenis()">{{ $t('action.give.text') }}</button>
+
+                        <Form inline>
+                            <FormItem>
+                                <InputNumber :max="currentPlayer.zeni" :min="0" v-model="give.zenis"></InputNumber>
+                            </FormItem>
+                            <FormItem>
+                                <Button type="primary" @click="giveZenis()">{{ $t('action.give.text') }}</Button>
+                            </FormItem>
+                        </Form>
+
 
                         <Table :columns="giveColumns()" :data="giveData()"></Table>
                     </template>
@@ -207,18 +212,20 @@
 <script type="text/ecmascript-6">
     import _ from 'lodash';
     import {mapGetters} from 'vuex';
-    import {isEmpty, entries} from '~/lib/utils';
     import settings from '~/config/general.config';
     import api from '~/services/api';
     import Player from '~/lib/player';
-    import ImageRender from '~/components/map/image-render';
+    import {isEmpty, entries} from '~/lib/utils';
     import ActionLink from '~/components/map/action-link';
     import BuildingEnter from '~/components/map/building-enter';
+    import Error from '~/components/mixins/error';
     import Players from '~/components/mixins/players';
+    import ImageRender from '~/components/map/image-render';
 
     export default {
         middleware: 'auth',
         mixins: [
+            Error,
             Players,
         ],
         head() {
@@ -246,6 +253,9 @@
                 borderYRange: [],
                 borderXRange: [],
                 items: {},
+                give: {
+                    zenis: 0,
+                },
                 settings,
             };
         },
@@ -271,8 +281,8 @@
             },
             async loadMap() {
                 this.$Loading.start();
+                this.players = {};
                 await api.getMap().then((res) => {
-                    this.players = {};
                     this.map = res.data.map;
                     this.borders = res.data.borders;
                     this.items = res.data.items;
@@ -361,6 +371,7 @@
             giveColumns() {
                 return [
                     {
+                        width: 100,
                         render: (h, params) => h(
                             'div',
                             {
@@ -391,6 +402,19 @@
             },
             giveData() {
                 return this.parameters.playerObjects;
+            },
+            giveZenis() {
+                this.$Loading.start();
+                api.give(this.target.id, null, this.give.zenis).then(async (res) => {
+                    await this.$store.dispatch('fetchPlayer');
+                    this.$Loading.finish();
+                    this.$Notice.success({
+                        title: this.$t('notice.sucess'),
+                        desc: this.$t('notice.generic'),
+                    });
+                }).catch(() => {
+                    this.raiseError();
+                });
             },
 
             async runAction(what, id) {
@@ -426,10 +450,7 @@
                             this.parameters = res.data;
                             this.$Loading.finish();
                         }).catch(() => {
-                            this.$Notice.error({
-                                title: this.$t('notice.error'),
-                                desc: this.$t('notice.generic'),
-                            });
+                            this.raiseError();
                         });
                         return;
                     default:
@@ -437,7 +458,7 @@
                 }
 
                 await prom.then(async (res) => {
-                    this.$store.dispatch('fetchPlayer');
+                    await this.$store.dispatch('fetchPlayer');
                     this.action = what;
                     this.parameters = res.data;
                     if (res.data.target) {
@@ -446,10 +467,7 @@
                     this.target = this.players[id];
                     this.$Loading.finish();
                 }).catch(() => {
-                    this.$Notice.error({
-                        title: this.$t('notice.error'),
-                        desc: this.$t('notice.generic'),
-                    });
+                    this.raiseError();
                 });
             },
         },

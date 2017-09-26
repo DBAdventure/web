@@ -210,7 +210,7 @@ const api = {
     attack(id, type) {
         let url = `/action/attack/${id}`;
         if (!isEmpty(type) && type !== 'attack') {
-            url = `${url}/${type}`;
+            url = `${url}/${type.replace('attack-', '')}`;
         }
 
         return makePostRequest(url);
@@ -236,9 +236,13 @@ const api = {
         return makePostRequest(`/action/heal/${id}`);
     },
 
-    give(id, objectId) {
-        if (isEmpty(objectId)) {
+    give(id, objectId, zenis) {
+        if (isEmpty(objectId) && isEmpty(zenis)) {
             return makeGetRequest(`/action/give/${id}`);
+        }
+
+        if (isEmpty(objectId)) {
+            return makePostRequest(`/action/give/${id}`, {zenis});
         }
 
         return makePostRequest(`/action/give/${id}/${objectId}`);

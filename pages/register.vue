@@ -455,6 +455,7 @@
     import {random} from 'lodash';
     import settings from '~/config/general.config';
     import api from '~/services/api';
+    import Error from '~/components/mixins/error';
     import {isEmpty, entries} from '~/lib/utils';
 
     export default {
@@ -599,10 +600,7 @@
                                 }
                                 /* eslint-enable no-restricted-syntax */
                             } else {
-                                this.$Notice.error({
-                                    title: this.$t('notice.error'),
-                                    desc: this.$t('error.generic'),
-                                });
+                                this.raiseError();
                             }
                         });
                     } else {

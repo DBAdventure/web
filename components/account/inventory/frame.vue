@@ -106,8 +106,12 @@
 
 <script type="text/ecmascript-6">
     import api from '~/services/api';
+    import Error from '~/components/mixins/error';
 
     export default {
+        mixins: [
+            Error
+        ],
         props: {
             objects: {
                 type: [Object, Array],
@@ -159,10 +163,7 @@
                     });
                     this.$emit('reload');
                 }).catch(() => {
-                    this.$Notice.error({
-                        title: this.$t('notice.error'),
-                        desc: this.$t('notice.generic'),
-                    });
+                    this.raiseError();
                     this.$emit('reload');
                 });
             },
@@ -203,10 +204,7 @@
                     });
                     this.$emit('reload');
                 }).catch(() => {
-                    this.$Notice.error({
-                        title: this.$t('notice.error'),
-                        desc: this.$t('notice.generic'),
-                    });
+                    this.raiseError();
                     this.$emit('reload');
                 });
             },
@@ -223,10 +221,7 @@
                     });
                     this.$emit('reload');
                 }).catch(() => {
-                    this.$Notice.error({
-                        title: this.$t('notice.error'),
-                        desc: this.$t('notice.generic'),
-                    });
+                    this.raiseError();
                     this.$emit('reload');
                 });
             },
