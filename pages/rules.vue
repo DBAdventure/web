@@ -59,7 +59,7 @@
                 En cliquant sur le lien (<span class="lien_menu">
                 Informations</span>) tu pourras modifier les paramètres suivants :
             </p>
-            <ul>
+            <ul class="list-dots">
                 <li>Mot de passe</li>
                 <li>Histoire</li>
                 <li>Email</li>
@@ -95,17 +95,17 @@
                 au milieu de la carte. Sur la carte, apparaissent plusieurs
                 choses :
             </p>
-            <ul>
-                <li>Le type de terrain : la terre (en vert), le désert
+            <ul class="list-dots">
+                <li><strong>Le type de terrain :</strong> la terre (en vert), le désert
                     (en jaune), ces terrains n'affectent en rien tes déplacement,
                     et il y a aussi l'eau (en bleu), qui délimite la
                     carte et qui est infranchissable...</li>
-                <li>Les joueurs : tu peux voir tous les joueurs à
+                <li><strong>Les joueurs :</strong> tu peux voir tous les joueurs à
                     proximité (quand il y a trop de joueurs sur une case,
                     un gros paquet de perso est representé) et si tu
                     es sur la même case que certains, tu peux
                     les attaquer.</li>
-                <li>Les bâtiments : Magasin, bâtiment de tête
+                <li><strong>Les bâtiments :</strong> Magasins, bâtiments de tête
                     à prix.</li>
             </ul>
 
