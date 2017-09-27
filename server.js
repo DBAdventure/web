@@ -1,4 +1,5 @@
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const express = require('express');
 const generalConfig = require('./config/general.config');
 const helmet = require('helmet');
@@ -43,6 +44,7 @@ proxies.forEach((u) => {
 
 app.use(logger);
 app.use(helmet());
+app.use(cookieParser(generalConfig.SESSION_SECRET));
 app.use(bodyParser.json());
 
 app.use(session({
