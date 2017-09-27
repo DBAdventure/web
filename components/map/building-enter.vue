@@ -5,7 +5,7 @@
                 <a href="#" @click.prevent="runAction('teleport', move)">
                     {{ $t('game.teleport.link', {where: $t(`game.teleport.where.${move}`)}) }}
                 </a>
-                <br>
+                <br/>
             </template>
         </template>
 

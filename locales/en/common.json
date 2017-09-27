@@ -1076,12 +1076,12 @@
         "sections": {
           "site": {
             "title": "Le site",
-            "text1": "DBAdventure, est un jeu de rôle. Tours par tours, tu gagnes des PA, un toutes les demi-heures, le maximun est de 60. Au délà de cette limite tu ne gagnes plus rien. Comme tu le sais, sur chaque jeu il y a des règles, nous te demandons de bien les respecter, sinon tu verras ton personnage ou tes personnages supprimé(s).<br>Bon jeu.<br>L'équipe.",
+            "text1": "DBAdventure, est un jeu de rôle. Tours par tours, tu gagnes des PA, un toutes les demi-heures, le maximun est de 60. Au délà de cette limite tu ne gagnes plus rien. Comme tu le sais, sur chaque jeu il y a des règles, nous te demandons de bien les respecter, sinon tu verras ton personnage ou tes personnages supprimé(s).<br/>Bon jeu.<br/>L'équipe.",
             "text2": "Le multicompte est interdit sous peine de suppression de tous les personnages du joueur."
           },
           "game": {
             "title": "Le jeu",
-            "text1": "DBAdventure est un jeu massivement multijoueur gratuit qui n'a besoin que d'un navigateur web pour marcher.<br> Pénétre les terres créées par l'infâme pilaf, choisis un camp ainsi qu'une race. Tu pourras être gentil, méchant, un Humain, un Namek, un Saïyen, un Humain-Saïyen, un Alien, un Cyborg, un Dragon, ou encore un Malduchi."
+            "text1": "DBAdventure est un jeu massivement multijoueur gratuit qui n'a besoin que d'un navigateur web pour marcher.<br/> Pénétre les terres créées par l'infâme pilaf, choisis un camp ainsi qu'une race. Tu pourras être gentil, méchant, un Humain, un Namek, un Saïyen, un Humain-Saïyen, un Alien, un Cyborg, un Dragon, ou encore un Malduchi."
           }
         }
       },
@@ -1098,7 +1098,7 @@
           },
           "character": {
             "title": "Personnages",
-            "text1": "Un personnage est gentil ou méchant, aucune différence, tu es juste prêt à disposer d'un camp.<br>Cela peut changer par la suite, on peut passer de gentil en méchant en tuant un gentil et inversement pour les méchants.",
+            "text1": "Un personnage est gentil ou méchant, aucune différence, tu es juste prêt à disposer d'un camp.<br/>Cela peut changer par la suite, on peut passer de gentil en méchant en tuant un gentil et inversement pour les méchants.",
             "text2": "Apparence : un personnage peut aussi choisir sa race ; Un Humain, un Namek, un Saïyen, un Humain-Saïyen, un Alien, un Cyborg, un Dragon, ou encore un Malduchi. La race sert en premier lieu pour les sorts des mages, puis pour l'apparence. Chaque races a ses sorts et ses apparences."
           }
         }
@@ -1112,7 +1112,7 @@
             "text2": "<strong>Le type de terrain:</strong> la terre (en vert), le désert (en jaune), ces terrains n'affectent en rien tes déplacement, et il y a aussi l'eau (en bleu), qui délimite la carte et qui est infranchissable...",
             "text3": "<strong>Les joueurs :</strong> tu peux voir tous les joueurs à proximité (quand il y a trop de joueurs sur une case, un groupe de personnages est representé) et si tu es sur la même case que certains, tu peux effectuer des actions sur eux.",
             "text4": "<strong>Les bâtiments :</strong> Magasins, bâtiments de tête à prix, informations...",
-            "text5": "<strong>Respawns :</strong> quand un personnage est créé ou qu'il meurt, il apparaît dans son respawn. Il y a deux respawns qui sont le paradis et l'enfer. Dans le respawn, on ne peut rien faire à part se déplacer, donner, et acheter des objets. <br>Pour effectuer plus d'actions, il faut aller sur le champ de bataille, et pour y aller, il faut accéder aux téléporteurs."
+            "text5": "<strong>Respawns :</strong> quand un personnage est créé ou qu'il meurt, il apparaît dans son respawn. Il y a deux respawns qui sont le paradis et l'enfer. Dans le respawn, on ne peut rien faire à part se déplacer, donner, et acheter des objets. <br/>Pour effectuer plus d'actions, il faut aller sur le champ de bataille, et pour y aller, il faut accéder aux téléporteurs."
           },
           "building": {
             "title": "Bâtiments",
@@ -1147,7 +1147,7 @@
           },
           "ranks": {
             "title": "Les Rangs",
-            "text1": "Les rangs varient selon les races, 11 rangs par race, un total de 88 rangs. Ceux ci sont calculés,par rapport au plus grand ou plus petit nombre de points de côtés selon la race.<br>Exemple :<br>Sangohan a 50 points de côtés, le maximun est Sangoky qui en a 100.<br>Pourcentage = (50*100)/100 donc 50%.<br>A partir de ce pourcentage, tu as par exemplele rang est Super saïyen si tu es Saïyen."
+            "text1": "Les rangs varient selon les races, 11 rangs par race, un total de 88 rangs. Ceux ci sont calculés,par rapport au plus grand ou plus petit nombre de points de côtés selon la race.<br/>Exemple :<br/>Sangohan a 50 points de côtés, le maximun est Sangoky qui en a 100.<br/>Pourcentage = (50*100)/100 donc 50%.<br/>A partir de ce pourcentage, tu as par exemplele rang est Super saïyen si tu es Saïyen."
           },
           "level": {
             "title": "Changement de niveau",

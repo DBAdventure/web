@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="guild">
         <template v-if="!currentPlayer.guild_player">
             <h1 class="title title-default">{{ $t('guilds') }}</h1>
 
@@ -29,13 +29,14 @@
                 {{ $t('guild.player.not.enabled') }}
             </template>
             <template v-else>
-                <guild-menu />
+                <div class="top">
+                    <guild-menu />
+                    <p class="bottom">Leave guild - View other guilds</p>
+                </div>
 
                 <template v-if="currentPlayer.getGuild().message">
                     <h1 class="title title-guild-message">{{ $t('guild.message') }}</h1>
-                    <p>
-                        {{ currentPlayer.getGuild().message }}
-                    </p>
+                    <p v-for="line in currentPlayer.getGuild().message.split('\n')">{{ line }}</p>
                 </template>
             </template>
         </template>

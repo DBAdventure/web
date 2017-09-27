@@ -1,0 +1,17 @@
+#guild {
+    .top {
+        background: url(/images/guild/hq.jpg) no-repeat;
+        background-position: 100% 70%;
+        padding-bottom: 50px;
+        height: 300px;
+        position: relative;
+        .bottom {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+    }
+    .title-guild-message {
+        background-position: 0 -6px;
+    }
+}
