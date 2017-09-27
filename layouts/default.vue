@@ -42,7 +42,7 @@
                 if (value) {
                     this.interval = setInterval(() => {
                         this.$store.dispatch('fetchPlayer');
-                    }, 10000);
+                    }, 60000);
                 } else {
                     clearInterval(this.interval);
                 }

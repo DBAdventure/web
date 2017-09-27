@@ -719,6 +719,11 @@
     },
     "give": {
       "text": "Give him",
+      "textObject": "Give",
+      "success": {
+        "zenis": "You gave him {zenis} Zenis",
+        "object": "You gave him {name}"
+      },
       "error": {
         "1": "Inventory is full, can't hold more objects!",
         "3": "He already have this item!"

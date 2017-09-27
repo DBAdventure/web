@@ -70,10 +70,9 @@
                                 <InputNumber :max="currentPlayer.zeni" :min="0" v-model="give.zenis"></InputNumber>
                             </FormItem>
                             <FormItem>
-                                <Button type="primary" @click="giveZenis()">{{ $t('action.give.text') }}</Button>
+                                <Button type="primary" @click="giveZenis()" :disabled="this.give.zenis === 0">{{ $t('action.give.text') }}</Button>
                             </FormItem>
                         </Form>
-
 
                         <Table :columns="giveColumns()" :data="giveData()"></Table>
                     </template>
@@ -397,6 +396,23 @@
                     {
                         title: this.$t('object.give'),
                         key: 'give',
+                        width: 70,
+                        align: 'center',
+                        render: (h, params) => h(
+                            'Button',
+                            {
+                                props: {
+                                    type: 'primary',
+                                    size: 'small',
+                                },
+                                on: {
+                                    click: () => {
+                                        this.giveObject(params.row);
+                                    },
+                                },
+                            },
+                            this.$t('action.give.textObject'),
+                        ),
                     },
                 ];
             },
@@ -407,16 +423,34 @@
                 this.$Loading.start();
                 api.give(this.target.id, null, this.give.zenis).then(async (res) => {
                     await this.$store.dispatch('fetchPlayer');
-                    this.$Loading.finish();
                     this.$Notice.success({
-                        title: this.$t('notice.sucess'),
-                        desc: this.$t('notice.generic'),
+                        title: this.$t('notice.success'),
+                        desc: this.$t('action.give.success.zenis', {zenis: this.give.zenis}),
                     });
+                    this.handleResult(res, this.target.id);
+                    this.$Loading.finish();
+                }).catch(() => {
+                    this.raiseError();
+                });
+            },
+            giveObject(playerObject) {
+                this.$Loading.start();
+                api.give(this.target.id, playerObject.object.id).then(async (res) => {
+                    await this.$store.dispatch('fetchPlayer');
+                    this.$Notice.success({
+                        title: this.$t('notice.success'),
+                        desc: this.$t('action.give.success.object', {name: this.$t(`objects.${playerObject.object.name}.name`)}),
+                    });
+                    this.handleResult(res, this.target.id);
+                    this.$Loading.finish();
                 }).catch(() => {
                     this.raiseError();
                 });
             },
 
+            /**
+             * Generic actions
+             */
             async runAction(what, id) {
                 this.$Loading.start();
                 let prom;
@@ -460,15 +494,19 @@
                 await prom.then(async (res) => {
                     await this.$store.dispatch('fetchPlayer');
                     this.action = what;
-                    this.parameters = res.data;
-                    if (res.data.target) {
-                        this.players[id] = new Player(res.data.target);
-                    }
-                    this.target = this.players[id];
+                    this.handleResult(res, id);
                     this.$Loading.finish();
                 }).catch(() => {
                     this.raiseError();
                 });
+            },
+
+            handleResult(res, id) {
+                this.parameters = res.data;
+                if (res.data.target) {
+                    this.players[id] = new Player(res.data.target);
+                }
+                this.target = this.players[id];
             },
         },
     };

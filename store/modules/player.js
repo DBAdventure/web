@@ -20,13 +20,12 @@ if (!process.browser && !process.env.SOCKET_PATH && settings.PORT) {
 
 const actions = {
     async fetchPlayer({commit, dispatch}) {
-        await api.getPlayer().then(res =>
+        await api.getPlayer().then((res) => {
+            commit(types.PLAYER, res.data);
             instance.post('/session/save', {
                 data: res.data,
-            }).then(() =>
-                commit(types.PLAYER, res.data),
-            ),
-        ).catch(() => {
+            });
+        }).catch(() => {
             dispatch('logout');
         });
     },
