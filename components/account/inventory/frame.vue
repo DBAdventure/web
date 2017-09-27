@@ -106,11 +106,11 @@
 
 <script type="text/ecmascript-6">
     import api from '~/services/api';
-    import Error from '~/components/mixins/error';
+    import ErrorMixin from '~/components/mixins/error';
 
     export default {
         mixins: [
-            Error
+            ErrorMixin,
         ],
         props: {
             objects: {

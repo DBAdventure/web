@@ -455,10 +455,13 @@
     import {random} from 'lodash';
     import settings from '~/config/general.config';
     import api from '~/services/api';
-    import Error from '~/components/mixins/error';
+    import ErrorMixin from '~/components/mixins/error';
     import {isEmpty, entries} from '~/lib/utils';
 
     export default {
+        mixins: [
+            ErrorMixin,
+        ],
         middleware: 'anonymous',
         head() {
             return {

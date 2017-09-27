@@ -217,15 +217,15 @@
     import {isEmpty, entries} from '~/lib/utils';
     import ActionLink from '~/components/map/action-link';
     import BuildingEnter from '~/components/map/building-enter';
-    import Error from '~/components/mixins/error';
-    import Players from '~/components/mixins/players';
+    import ErrorMixin from '~/components/mixins/error';
+    import PlayersMixin from '~/components/mixins/players';
     import ImageRender from '~/components/map/image-render';
 
     export default {
         middleware: 'auth',
         mixins: [
-            Error,
-            Players,
+            ErrorMixin,
+            PlayersMixin,
         ],
         head() {
             return {

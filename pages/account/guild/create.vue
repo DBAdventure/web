@@ -35,13 +35,13 @@
 <script type="text/ecmascript-6">
     import {mapGetters} from 'vuex';
     import api from '~/services/api';
-    import Error from '~/components/mixins/error';
+    import ErrorMixin from '~/components/mixins/error';
     import GuildMenu from '~/components/account/guild/menu';
 
     export default {
         middleware: 'auth',
         mixins: [
-            Error,
+            ErrorMixin,
         ],
         components: {
             GuildMenu,
