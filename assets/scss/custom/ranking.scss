@@ -2,15 +2,23 @@
   display:block;
   margin-top: 25px;
   width: 100%;
+
   ul{
-    column-count: 4;
+    column-count: 3;
     overflow: visible;
     list-style: none;
     padding: 0;
     li {
       min-height: 60px;
-      a.active {
-        font-weight: bold;
+      a {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
+        max-width: 180px;
+        &.active {
+          font-weight: bold;
+        }
       }
     }
   }
