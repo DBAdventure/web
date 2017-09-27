@@ -1,5 +1,5 @@
 <template>
-    <ul>
+    <ul class="list-dots">
         <li v-if="currentPlayer.guild_player.rank.modo || currentPlayer.guild_player.rank.admin">
             <router-link to="/account/guild/admin">
                 {{ $t('guild.admin.title') }}
