@@ -9,33 +9,44 @@
                 <ul class="dropdown-menu">
                     <li>
                         <router-link to="/account/profile">
-                            <i class="glyphicon glyphicon-user"></i>
+                            <Icon type="android-person"></Icon>
                             {{ $t('header.profile') }}
                         </router-link>
                     </li>
                     <li>
+                        <router-link to="/account/settings">
+                            <Icon type="ios-game-controller-a-outline"></Icon>
+                            {{ $t('header.settings') }}
+                        </router-link>
+                    </li>
+                    <li>
                         <router-link to="/account/training-room">
-                            <i class="glyphicon glyphicon-education"></i> {{ $t('header.training.room') }}
+                            <Icon type="ios-flask-outline"></Icon> {{ $t('header.training.room') }}
                             <span class="badge" v-if="currentPlayer.skillPoints > 0">{{ currentPlayer.skillPoints }}</span>
                         </router-link>
                     </li>
                     <li>
                         <router-link to="/account/appearance">
-                            <i class="glyphicon glyphicon-pencil"></i> {{ $t('header.appearance') }}
+                            <Icon type="android-create"></Icon>
+                            {{ $t('header.appearance') }}
                         </router-link>
                     </li>
                     <li class="divider"></li>
                     <template v-if="currentPlayer.is_admin">
                         <li>
                             <a href="/admin/">
-                                <i class="glyphicon glyphicon-fire"></i> {{ $t('header.admin')}}
+                                <Icon type="nuclear"></Icon>
+                                {{ $t('header.admin')}}
                             </a>
                         </li>
                         <li class="divider"></li>
                     </template>
 
                     <li>
-                        <a href="#" @click.prevent="logout()"><i class="glyphicon glyphicon-off"></i> {{ $t('header.logout')}}</a>
+                        <a href="#" @click.prevent="logout()">
+                            <Icon type="log-out"></Icon>
+                            {{ $t('header.logout')}}
+                        </a>
                     </li>
                 </ul>
             </li>

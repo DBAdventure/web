@@ -91,6 +91,7 @@
     }
   },
   "header": {
+    "settings": "Settings",
     "profile": "Profile",
     "training": {
       "room": "Training Room"
