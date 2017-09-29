@@ -29,10 +29,7 @@
                 {{ $t('guild.player.not.enabled') }}
             </template>
             <template v-else>
-                <div class="top">
-                    <guild-menu />
-                    <p class="bottom">Leave guild - View other guilds</p>
-                </div>
+                <guild-menu />
 
                 <template v-if="currentPlayer.getGuild().message">
                     <h1 class="title title-guild-message">{{ $t('guild.message') }}</h1>

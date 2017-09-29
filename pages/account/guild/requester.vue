@@ -4,7 +4,7 @@
 
         <guild-menu />
 
-        <Table :columns="membersColumns()" :data="guildPlayers"></Table>
+        <Table :columns="requestersColumns()" :data="guildPlayers"></Table>
     </div>
 </template>
 
@@ -41,17 +41,14 @@
             };
         },
         async mounted() {
-            await api.getGuildMembers().then((res) => {
+            await api.getGuildRequesters().then((res) => {
                 res.data.players.forEach((guildPlayer) => {
                     const player = this.getPlayer(guildPlayer.player);
                     const result = {
                         id: player.id,
                         level: player.level,
                         name: player.name,
-                        rank_name: guildPlayer.rank.name,
                         image_path: player.getImagePath(),
-                        zeni: guildPlayer.zeni,
-                        location: `${this.$t(guildPlayer.player.map.name)} ( ${guildPlayer.player.x} / ${guildPlayer.player.y})`,
                     };
 
                     this.guildPlayers.push(result);
@@ -59,7 +56,7 @@
             });
         },
         methods: {
-            membersColumns() {
+            requestersColumns() {
                 return [
                     {
                         title: this.$t('name'),
@@ -80,19 +77,6 @@
                         key: 'level',
                         width: 70,
                         align: 'center',
-                    },
-                    {
-                        title: this.$t('guild.rank'),
-                        key: 'rank_name',
-                    },
-                    {
-                        title: this.$t('guild.stats.zeni'),
-                        key: 'zeni',
-                        align: 'center',
-                    },
-                    {
-                        title: this.$t('guild.stats.location'),
-                        key: 'location',
                     },
                 ];
             },

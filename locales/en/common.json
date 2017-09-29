@@ -804,6 +804,9 @@
     "createdBy": "Created by",
     "history": "History",
     "action": "Action",
+    "send": {
+      "message": "Send message to members"
+    },
     "admin": {
       "title": "Administrate",
       "menu": {
@@ -847,7 +850,7 @@
     "stats": {
       "location": "Location",
       "lastConnection": "Last connection",
-      "zeni": "Zenis collected",
+      "zeni": "Zenis",
       "killed": {
         "good": "Good killed",
         "bad": "Bad killed",
@@ -1219,7 +1222,8 @@
     "home": "Back to the home page",
     "not": {
       "connected": "You are not connected",
-      "exists": "This page does not exists"
+      "exists": "This page does not exists",
+      "guilded": "You don't have a guild yet"
     },
     "forbidden": "Forbidden",
     "bad": {

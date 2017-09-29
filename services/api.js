@@ -255,6 +255,13 @@ const api = {
     createGuild(postData) {
         return makePostRequest('/guild/create', postData);
     },
+
+    getGuildMembers() {
+        return makeGetRequest('/guild/members');
+    },
+    getGuildRequesters() {
+        return makeGetRequest('/guild/members/requester');
+    },
 };
 
 export default api;
