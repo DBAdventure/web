@@ -1,7 +1,7 @@
 <template>
     <div class="top">
         <ul class="list-dots">
-            <li v-if="currentPlayer.guild_player.rank.modo || currentPlayer.guild_player.rank.admin">
+            <li v-if="currentPlayer.getGuildRank() === settings.guild.ROLE_MODO || currentPlayer.getGuildRank() === settings.guild.ROLE_ADMIN">
                 <router-link to="/account/guild/admin">
                     {{ $t('guild.admin.title') }}
                 </router-link>
@@ -39,12 +39,18 @@
 
 <script type="text/ecmascript-6">
     import {mapGetters} from 'vuex';
+    import settings from '~/config/general.config';
 
     export default {
         computed: {
             ...mapGetters([
                 'currentPlayer',
             ]),
+        },
+        data() {
+            return {
+                settings,
+            };
         },
     };
 </script>

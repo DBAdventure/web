@@ -57,7 +57,7 @@
         },
         methods: {
             requestersColumns() {
-                return [
+                const columns = [
                     {
                         title: this.$t('name'),
                         render: (h, params) => h(
@@ -79,6 +79,8 @@
                         align: 'center',
                     },
                 ];
+
+                return columns;
             },
         },
     };

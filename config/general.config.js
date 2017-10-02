@@ -29,6 +29,10 @@ module.exports = {
         {value: 5, label: 'analyst'},
         {value: 6, label: 'ranger'},
     ],
+    guild: {
+        ROLE_ADMIN: 'ROLE_ADMIN',
+        ROLE_MODO: 'ROLE_MODO',
+    },
     map: {
         TYPE_DEFAULT: 0,
         TYPE_IMPASSABLE: 1,
