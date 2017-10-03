@@ -582,6 +582,15 @@
                 return `/images/avatars/players/${image}`;
             },
         },
+        watch: {
+            'player.race': function onRaceChange() {
+                this.player.appearance.type = null;
+                this.player.appearance.image = null;
+            },
+            'player.appearance.type': function onTypeChange() {
+                this.player.appearance.image = null;
+            },
+        },
         methods: {
             handleSubmit() {
                 this.$refs.registerForm.validate((valid) => {
