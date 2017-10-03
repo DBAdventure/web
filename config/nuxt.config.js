@@ -28,7 +28,6 @@ module.exports = {
             'moment',
             'vue-cookie',
             'vue-i18n',
-            'vuex-router-sync',
         ],
         postcss: {
             'postcss-autoprefixer': autoprefixer({
