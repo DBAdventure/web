@@ -52,6 +52,11 @@
                 'currentPlayer',
             ]),
         },
+        data() {
+            return {
+                selectedGuild: null,
+            };
+        },
         methods: {
             guildsColumns() {
 

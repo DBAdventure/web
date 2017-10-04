@@ -6,30 +6,40 @@
             <h2 class="subtitle text-center">
                 {{ $t('events.target') }}
             </h2>
-            <table class="table table-filter">
-                <tbody>
-                    <tr v-for="event in events.target">
-                        <td>
-                            <player-event :event="event" :target="event.player" />
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <template v-if="events.target.length === 0">
+                <p class="text-center">{{ $t('events.nothing') }}</p>
+            </template>
+            <template v-else>
+                <table class="table table-filter">
+                    <tbody>
+                        <tr v-for="event in events.target">
+                            <td>
+                                <player-event :event="event" :target="event.player" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </template>
         </div>
 
         <div class="events">
             <h2 class="subtitle text-center">
                 {{ $t('events.player') }}
             </h2>
-            <table class="table table-filter">
-                <tbody>
-                    <tr v-for="event in events.player">
-                        <td>
-                            <player-event :event="event" :target="event.target" is-received />
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <template v-if="events.player.length === 0">
+                <p class="text-center">{{ $t('events.nothing') }}</p>
+            </template>
+            <template v-else>
+                <table class="table table-filter">
+                    <tbody>
+                        <tr v-for="event in events.player">
+                            <td>
+                                <player-event :event="event" :target="event.target" is-received />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </template>
         </div>
     </div>
 </template>

@@ -1009,7 +1009,8 @@
   },
   "events": {
     "target": "You have suffered",
-    "player": "Of which you are the author"
+    "player": "Of which you are the author",
+    "nothing": "Nothing happened yet"
   },
   "bonus": {
     "percent": {
