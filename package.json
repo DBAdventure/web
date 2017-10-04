@@ -17,7 +17,7 @@
         "bootstrap-sass": "^3.3.7",
         "css-loader": "^0.28.7",
         "es6-promise": "^4.1.1",
-        "express": "^4.15.5",
+        "express": "^4.16.1",
         "express-session": "^1.15.6",
         "glob": "^7.1.2",
         "helmet": "^3.8.2",
@@ -34,22 +34,22 @@
         "slugify": "^1.2.1",
         "vue": "2.4.4",
         "vue-cookie": "^1.1.4",
-        "vue-i18n": "^7.3.0",
+        "vue-i18n": "^7.3.1",
         "vue-i18n-mixin": "^0.1.0",
         "vue-meta": "1.2.0",
-        "vuex": "^2.4.0",
+        "vuex": "^2.4.1",
         "webpack": "^3.6.0"
     },
     "devDependencies": {
         "babel-preset-env": "^1.6.0",
-        "eslint": "^4.7.2",
+        "eslint": "^4.8.0",
         "eslint-config-airbnb": "^15.1.0",
         "eslint-loader": "^1.9.0",
         "eslint-plugin-html": "^3.2.2",
         "eslint-plugin-import": "^2.7.0",
         "eslint-plugin-jsx-a11y": "^5.1.1",
         "eslint-plugin-react": "^7.4.0",
-        "npm-check-updates": "^2.12.1"
+        "npm-check-updates": "^2.13.0"
     },
     "engines": {
         "node": ">= 4.0.0",
