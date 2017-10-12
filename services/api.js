@@ -182,18 +182,15 @@ const api = {
         return makePostRequest(`/inbox/clear/${type}`);
     },
 
-
     /**
      * Action
      */
     convert() {
         return makePostRequest('/action/converts');
     },
-
     move(where) {
         return makePostRequest(`/action/move/${where}`);
     },
-
     spell(id, spellId, type) {
         let url = `/action/spell/${id}`;
         if (isEmpty(spellId)) {
@@ -206,7 +203,6 @@ const api = {
         }
         return makePostRequest(url);
     },
-
     attack(id, type) {
         let url = `/action/attack/${id}`;
         if (!isEmpty(type) && type !== 'attack') {
@@ -215,27 +211,21 @@ const api = {
 
         return makePostRequest(url);
     },
-
     pickup(id) {
         return makePostRequest(`/action/pickup/${id}`);
     },
-
     steal(id) {
         return makePostRequest(`/action/steal/${id}`);
     },
-
     analysis(id) {
         return makePostRequest(`/action/analysis/${id}`);
     },
-
     slap(id) {
         return makePostRequest(`/action/slap/${id}`);
     },
-
     heal(id) {
         return makePostRequest(`/action/heal/${id}`);
     },
-
     give(id, objectId, zenis) {
         if (isEmpty(objectId) && isEmpty(zenis)) {
             return makeGetRequest(`/action/give/${id}`);
@@ -251,11 +241,15 @@ const api = {
     /**
      * Guild
      */
-
+    getGuilds() {
+        return makeGetRequest('/guild/list');
+    },
+    joinGuild(id) {
+        return makePostRequest(`/guild/join/${id}`);
+    },
     createGuild(postData) {
         return makePostRequest('/guild/create', postData);
     },
-
     getGuildMembers() {
         return makeGetRequest('/guild/members');
     },

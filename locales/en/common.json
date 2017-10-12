@@ -835,6 +835,10 @@
     "events": "Events",
     "create": "Create guild",
     "view": "View all guilds",
+    "buttons": {
+      "view": "View",
+      "join": "Join"
+    },
     "shortName": "Short name",
     "name": "Name",
     "created": "Guild has been created, but you must wait for a validation by an administrator.",

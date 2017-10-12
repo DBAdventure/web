@@ -2,23 +2,23 @@
     <div class="top">
         <ul class="list-dots">
             <li v-if="currentPlayer.getGuildRank() === settings.guild.ROLE_MODO || currentPlayer.getGuildRank() === settings.guild.ROLE_ADMIN">
-                <router-link to="/account/guild/admin">
+                <router-link to="/guild/admin">
                     {{ $t('guild.admin.title') }}
                 </router-link>
             </li>
 
             <li>
-                <router-link to="/account/guild/members">
+                <router-link to="/guild/members">
                     {{ $t('guild.members') }}
                 </router-link>
             </li>
             <li>
-                <router-link to="/account/guild/requester">
+                <router-link to="/guild/requester">
                     {{ $t('guild.requester') }}
                 </router-link>
             </li>
             <li>
-                <router-link to="/account/guild/events">
+                <router-link to="/guild/events">
                     {{ $t('guild.events') }}
                 </router-link>
             </li>

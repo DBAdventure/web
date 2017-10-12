@@ -36,7 +36,7 @@
     import {mapGetters} from 'vuex';
     import api from '~/services/api';
     import ErrorMixin from '~/components/mixins/error';
-    import GuildMenu from '~/components/account/guild/menu';
+    import GuildMenu from '~/components/guild/menu';
 
     export default {
         middleware: 'auth',
@@ -85,7 +85,7 @@
                                 title: this.$t('notice.success'),
                                 desc: this.$t('guild.created'),
                             });
-                            this.$router.push('/account/guild');
+                            this.$router.push('/guild');
                         }).catch(() => {
                             this.raiseError();
                         });

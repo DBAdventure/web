@@ -12,7 +12,7 @@
     import {mapGetters} from 'vuex';
     import api from '~/services/api';
     import PlayerMixin from '~/components/mixins/players';
-    import GuildMenu from '~/components/account/guild/menu';
+    import GuildMenu from '~/components/guild/menu';
 
     export default {
         middleware: [

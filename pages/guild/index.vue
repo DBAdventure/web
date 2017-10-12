@@ -9,12 +9,12 @@
 
             <ul>
                 <li>
-                    <router-link to="/account/guild/create">
+                    <router-link to="/guild/create">
                         {{ $t('guild.create') }}
                     </router-link>
                 </li>
                 <li>
-                    <router-link to="/account/guild/list">
+                    <router-link to="/guild/list">
                         {{ $t('guild.view') }}
                     </router-link>
                 </li>
@@ -42,7 +42,7 @@
 
 <script type="text/ecmascript-6">
     import {mapGetters} from 'vuex';
-    import GuildMenu from '~/components/account/guild/menu';
+    import GuildMenu from '~/components/guild/menu';
 
     export default {
         middleware: 'auth',
