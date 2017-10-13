@@ -94,7 +94,6 @@
                     },
                 ];
 
-                console.log(this.currentPlayer.guild_player);
                 if (!this.currentPlayer.guild_player) {
                     columns.push({
                         title: this.$t('guild.buttons.join'),
@@ -146,18 +145,23 @@
                 ];
             },
             selectGuild(guild) {
-                guild.players.forEach((guildPlayer) => {
-                    const player = this.getPlayer(guildPlayer.player);
-                    const result = {
-                        id: player.id,
-                        level: player.level,
-                        name: player.name,
-                        image_path: player.getImagePath(),
-                    };
+                this.selectedGuildPlayers = [];
+                if (this.selectedGuild && guild.id === this.selectedGuild.id) {
+                    this.selectedGuild = null;
+                } else {
+                    guild.players.forEach((guildPlayer) => {
+                        const player = this.getPlayer(guildPlayer.player);
+                        const result = {
+                            id: player.id,
+                            level: player.level,
+                            name: player.name,
+                            image_path: player.getImagePath(),
+                        };
 
-                    this.selectedGuildPlayers.push(result);
-                });
-                this.selectedGuild = guild;
+                        this.selectedGuildPlayers.push(result);
+                    });
+                    this.selectedGuild = guild;
+                }
             },
             joinGuild(id) {
                 api.joinGuild(id).then(() => {

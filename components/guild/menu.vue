@@ -33,7 +33,10 @@
                 </router-link>
             </li>
         </ul>
-        <p class="bottom">Leave guild - View other guilds</p>
+        <p class="bottom">
+            Leave guild -
+            <router-link to="/guild/list">{{ $t('guild.viewOthers') }}</router-link>
+        </p>
     </div>
 </template>
 

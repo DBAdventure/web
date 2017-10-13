@@ -804,6 +804,7 @@
     "createdBy": "Created by",
     "history": "History",
     "action": "Action",
+    "viewOthers": "View other guilds",
     "send": {
       "message": "Send message to members"
     },
