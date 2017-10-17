@@ -76,6 +76,7 @@
                     },
                     {
                         title: this.$t('guild.buttons.view'),
+                        width: 75,
                         render: (h, params) => h(
                             'Button',
                             {

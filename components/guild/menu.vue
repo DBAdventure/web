@@ -34,7 +34,7 @@
             </li>
         </ul>
         <p class="bottom">
-            Leave guild -
+            <a href="#" @click.prevent="leaveGuild()">{{ $t('guild.leave') }}</a> -
             <router-link to="/guild/list">{{ $t('guild.viewOthers') }}</router-link>
         </p>
     </div>
@@ -54,6 +54,11 @@
             return {
                 settings,
             };
+        },
+        methods: {
+            leaveGuild() {
+
+            },
         },
     };
 </script>

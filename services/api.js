@@ -186,7 +186,7 @@ const api = {
      * Action
      */
     convert() {
-        return makePostRequest('/action/converts');
+        return makePostRequest('/action/convert');
     },
     move(where) {
         return makePostRequest(`/action/move/${where}`);
