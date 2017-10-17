@@ -45,8 +45,7 @@
 
                             <Poptip
                                 confirm
-                                :title="$t('modal.confirm.title')"
-                                :content="$t('modal.confirm.drop')"
+                                :title="$t('modal.confirm.drop')"
                                 @on-ok="drop(playerObject.object.id)"
                             >
                                 <Button type="error" size="small" v-if="playerObject.can_be_dropped">
@@ -79,8 +78,7 @@
                             </Select>
                             <Poptip
                                 confirm
-                                :title="$t('modal.confirm.title')"
-                                :content="$t('modal.confirm.use')"
+                                :title="$t('modal.confirm.use')"
                                 @on-ok="use(playerObject.object.id)"
                             >
                                 <Button size="small">{{ $t('inventory.use')}}</Button>
@@ -89,8 +87,7 @@
 
                         <Poptip
                             confirm
-                            :title="$t('modal.confirm.title')"
-                            :content="$t('modal.confirm.drop')"
+                            :title="$t('modal.confirm.drop')"
                             @on-ok="drop(playerObject.object.id)"
                         >
                             <Button type="error" size="small" v-if="playerObject.can_be_dropped">

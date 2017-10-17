@@ -618,6 +618,9 @@
         "zeni": "gives you {zeni} zeni!",
         "item": "gives you {quantity} {objectName}!"
       }
+    },
+    "guild": {
+      "leave": "{name} just leave the guild!"
     }
   },
   "action": {
@@ -802,6 +805,14 @@
   "guild": {
     "join": "Join this guild",
     "createdBy": "Created by",
+    "request": {
+      "deleted": "Your previous request was deleted!"
+    },
+    "create": {
+      "deleted": "You just leave this guild, and because it wasn't validated yet, you get your money back!"
+    },
+    "deleted": "You just delete your guild. Hope you did the right choice!",
+    "left": "Guild left. Hope you did the right choice!",
     "history": "History",
     "action": "Action",
     "leave": "Leave guild",
@@ -837,6 +848,7 @@
     "events": "Events",
     "create": "Create guild",
     "view": "View all guilds",
+
     "buttons": {
       "view": "View",
       "join": "Join"
@@ -1266,7 +1278,10 @@
     "confirm": {
       "title": "Are you sure?",
       "drop": "Do you really want to drop this item?",
-      "use": "Do you really want to use this item?"
+      "use": "Do you really want to use this item?",
+      "guild": {
+        "leave": "Do you really want to leave this guild?"
+      }
     }
   },
   "notice": {

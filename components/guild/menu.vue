@@ -33,16 +33,26 @@
                 </router-link>
             </li>
         </ul>
-        <p class="bottom">
-            <a href="#" @click.prevent="leaveGuild()">{{ $t('guild.leave') }}</a> -
+
+        <div class="bottom">
+            <Poptip
+                confirm
+                :title="$t('modal.confirm.guild.leave')"
+                @on-ok="leaveGuild()"
+            >
+                <a href="#" @click.prevent="">{{ $t('guild.leave') }}</a>
+            </Poptip>
+             -
             <router-link to="/guild/list">{{ $t('guild.viewOthers') }}</router-link>
-        </p>
+        </div>
     </div>
 </template>
 
 <script type="text/ecmascript-6">
     import {mapGetters} from 'vuex';
     import settings from '~/config/general.config';
+    import api from '~/services/api';
+    import ErrorMixin from '~/components/mixins/error';
 
     export default {
         computed: {
@@ -50,6 +60,9 @@
                 'currentPlayer',
             ]),
         },
+        mixins: [
+            ErrorMixin,
+        ],
         data() {
             return {
                 settings,
@@ -57,7 +70,18 @@
         },
         methods: {
             leaveGuild() {
-
+                this.$Loading.start();
+                api.leaveGuild().then((res) => {
+                    const messages = res.data.messages.map(e => this.$t(e));
+                    this.$Notice.success({
+                        title: this.$t('notice.success'),
+                        desc: messages.join('\n'),
+                    });
+                    this.$Loading.finish();
+                    this.$router.push('/guild');
+                }).catch(() => {
+                    this.raiseError();
+                });
             },
         },
     };

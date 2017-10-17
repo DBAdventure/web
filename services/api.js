@@ -247,6 +247,9 @@ const api = {
     joinGuild(id) {
         return makePostRequest(`/guild/join/${id}`);
     },
+    leaveGuild() {
+        return makePostRequest('/guild/leave');
+    },
     createGuild(postData) {
         return makePostRequest('/guild/create', postData);
     },
