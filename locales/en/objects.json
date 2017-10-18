@@ -168,9 +168,11 @@
       }
     },
     "vision": {
-      "king.kai": {
-        "name": "Antennas of King Kai",
-        "description": "Heavy, but incredibly effective, these antennas allowed King Kai to spot the aura of enemies such as Freezer from the other end of the universe."
+      "king": {
+        "kai": {
+          "name": "Antennas of King Kai",
+          "description": "Heavy, but incredibly effective, these antennas allowed King Kai to spot the aura of enemies such as Freezer from the other end of the universe."
+        }
       },
       "glasses": {
         "name": "Glasses of King Kai",

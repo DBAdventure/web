@@ -102,10 +102,28 @@
                 switch (what) {
                     case 'buy':
                         await api.buyObject(this.building.id, data).then((res) => {
-                            successMessage = res.data.message;
+                            successMessage = this.$t(
+                                res.data.message,
+                                {
+                                    object: this.$t(res.data.object),
+                                },
+                            );
                             this.$store.dispatch('fetchPlayer');
                         }).catch((err) => {
-                            errorMessage = err.response.data.error;
+                            errorMessage = this.$t(err.response.data.error);
+                        });
+                        break;
+                    case 'buySpell':
+                        await api.buySpell(this.building.id, data).then((res) => {
+                            successMessage = this.$t(
+                                res.data.message,
+                                {
+                                    spell: this.$t(res.data.spell),
+                                },
+                            );
+                            this.$store.dispatch('fetchPlayer');
+                        }).catch((err) => {
+                            errorMessage = this.$t(err.response.data.error);
                         });
                         break;
                     case 'teleport':
@@ -215,7 +233,7 @@
                     {
                         title: this.$t('object.name'),
                         align: 'center',
-                        width: 90,
+                        width: 150,
                         render: (h, params) => h(
                             'strong',
                             this.$t(`spells.${params.row.name}.name`),

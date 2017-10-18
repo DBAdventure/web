@@ -156,7 +156,12 @@
                 api.unequipObject(objectId).then((res) => {
                     this.$Notice.success({
                         title: this.$t('notice.success'),
-                        desc: res.data.message,
+                        desc: this.$t(
+                            res.data.message,
+                            {
+                                name: this.$t(res.data.parameters.name),
+                            },
+                        ),
                     });
                     this.$emit('reload');
                 }).catch(() => {
@@ -169,7 +174,12 @@
                     res.data.messages.forEach((msg) => {
                         this.$Notice.success({
                             title: this.$t('notice.success'),
-                            desc: msg,
+                            desc: this.$t(
+                                msg.message,
+                                {
+                                    name: this.$t(msg.parameters.name),
+                                },
+                            ),
                         });
                     });
                     this.$emit('reload');
@@ -197,7 +207,12 @@
                 api.dropObject(objectId, nb).then((res) => {
                     this.$Notice.success({
                         title: this.$t('notice.success'),
-                        desc: res.data.message,
+                        desc: this.$t(
+                            res.data.message,
+                            {
+                                name: this.$t(res.data.parameters.name),
+                            },
+                        ),
                     });
                     this.$emit('reload');
                 }).catch(() => {
@@ -214,7 +229,12 @@
                 api.useObject(objectId, nb).then((res) => {
                     this.$Notice.success({
                         title: this.$t('notice.success'),
-                        desc: res.data.message,
+                        desc: this.$t(
+                            res.data.message,
+                            {
+                                name: this.$t(res.data.parameters.name),
+                            },
+                        ),
                     });
                     this.$emit('reload');
                 }).catch(() => {

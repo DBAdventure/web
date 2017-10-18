@@ -451,6 +451,14 @@
     }
   },
   "building": {
+    "magic": {
+      "success": "You successfully purchased {spell}!",
+      "error": {
+        "1": "Not enough zeni!",
+        "2": "You already purchased this spell!",
+        "3": "You can't buy this spell!"
+      }
+    },
     "shop": {
       "error": {
         "1": "Inventory is full, can't hold more objects!",

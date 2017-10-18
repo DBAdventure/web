@@ -156,6 +156,9 @@ const api = {
     buyObject(buildingId, objectId) {
         return makePostRequest(`/building/buy/${buildingId}/object/${objectId}`);
     },
+    buySpell(buildingId, spellId) {
+        return makePostRequest(`/building/buy/${buildingId}/spell/${spellId}`);
+    },
 
     /**
      * Inbox
