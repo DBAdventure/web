@@ -16,7 +16,7 @@
                     <tr v-for="playerSpell in currentPlayer.spells">
                         <td>{{ $t(`${playerSpell.spell.name}.name`) }}</td>
                         <td>{{ helper.displayRequirements(playerSpell.spell) }}</td>
-                        <td>{{ $t(`${playerSpell.spell.name}.description_rp`) }}</td>
+                        <td>{{ $t(`${playerSpell.spell.name}.descriptionRp`) }}</td>
                         <td>
                             <stats :data="object.bonus" v-if="object.bonus" />
                         </td>

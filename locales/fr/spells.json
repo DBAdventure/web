@@ -1,0 +1,632 @@
+{
+  "spells": {
+    "energy": {
+      "ray": {
+        "name": "Rayon d'énergie",
+        "description": "",
+        "descriptionRp": "Accumule rapidement l'énergie du corps pour la lancer sur l'ennemi."
+      }
+    },
+    "kaioken": {
+      "name": "kaioken",
+      "description": "",
+      "descriptionRp": "Première technique de transformation des Saïyen, augmente légèrement la puissance de vos sorts ainsi que votre résistance. Le Kaioken est beaucoup moins redoutable qu'une transformation en Super Saïyen mais dure plus longtemps, permet d'utiliser une technique cachée et peut être combiné avec les autres sorts divins. Sangoku apprit cette incroyable technique en suivant un entrainement des Dieux chez Maitre Kaio."
+    },
+    "omega": {
+      "blaster": {
+        "name": "Omega blaster",
+        "description": "",
+        "descriptionRp": "Technique du légendaire Broly. Le Saïyen rassemble la quasi totalité de ses forces dans son poing et envoi une gigantesque sphère surpuissante sur l'adversaire. Cette attaque est tellement dévastatrice qu'elle projette votre adversaire au loin à une quinzaine de cases."
+      }
+    },
+    "final": {
+      "flash": {
+        "name": "Final Flash",
+        "description": "",
+        "descriptionRp": "Mise au point par Végéta, le Saïyen concentre la totalité de son énergie entre ses mains avant de tout envoyer en un seul point sur l'adversaire. Lors de l'envoi, le Final Flash donne l'illusion d'être une immense comète allant s'écraser sur la Terre et peut être même de la détruire"
+      }
+    },
+    "ryuken": {
+      "bakuhatsu": {
+        "name": "Ryuken Bakuhatsu",
+        "description": "",
+        "descriptionRp": "Le saïyen s'envole pour transpercer l'adversaire d'un coup de point dévastateur laissant une explosion derrière lui. De cette explosion surgit un gigantesque dragon d'or ressemblant à Shenron..."
+      }
+    },
+    "genkidama": {
+      "name": "Genkidama",
+      "description": "",
+      "descriptionRp": "Permet de faire des dégats supplémentaires en fonction du nombre d'alliés dans votre vue.', 'Le saïyen lève ses bras pour récolter l'énergie de ses amis dans son champs de vision. L'énergie donnée par les alliés se rassemble en une énorme sphère. Plus il y a d'énergie récoltée, plus la sphère sera destructrice. Sangoku nous en fit une démonstration pour la première fois lors de son entrainement chez le maitre Kaïo."
+    },
+    "attack": {
+      "tail": {
+        "name": "Attaque queue",
+        "description": "",
+        "descriptionRp": "C'est une attaque normale mais vous avez plus de chance de toucher votre adversaire.', 'Cette technique consiste à surprendre l'adversaire en le prenant par les pieds avec sa queue de singe avant de l'envoyer au sol puis de bondir sur celui-ci et le ruer de coup de poings à la figure."
+      },
+      "mystic": {
+        "name": "Attaque mystique",
+        "description": "",
+        "descriptionRp": "Le Namek étire son bras pour attraper l'adversaire, le ramène vers lui très rapidement pour ensuite l'attaquer. La capacité d'étirement du bras est énorme. Ramener la cible sur votre case permettra à vos compagnons de l'attaquer en équipe avec vous en bénéficiant d'une économie de points de mouvement intéressante. On observe ce sort pour la première fois durant combat entre Krilin et Picolo lors du championnat du monde des arts martiaux."
+      },
+      "burst": {
+        "name": "Burst attack",
+        "description": "Attaque puissante mais facilement anticipable...",
+        "descriptionRp": "Observé pour la première fois entre Nova Shenron et Sangoku SSJ4, cela consiste à envoyer une vague de feu gigantesque sur l'adversaire. "
+      }
+    },
+    "kamehameha": {
+      "name": "Kamehameha",
+      "description": "",
+      "descriptionRp": "Créé par Tortue Génial, le Kamehameha consiste à rassembler son énergie entre ses mains puis de l'envoyer sur l'adversaire telle une vague déferlante.",
+      "father": {
+        "son": {
+          "name": "Kamehameha Père et fils",
+          "description": "",
+          "descriptionRp": "L'humain-Saïyen se transforme en Super Saiyen de niveau 2 puis invoque l'esprit de son père décédé au combat afin que ensemble, ils créent un gigantesque Kamehameha causant une explosion gigantesque. Sangohan s'en servit afin de terrasser une bonne fois pour toute le redoutable Cell."
+        }
+      }
+    },
+    "super": {
+      "saiyajin": {
+        "1": {
+          "name": "Super Saïyen",
+          "description": "Première transformation des humains saïyens. Augmente légèrement votre esprit.",
+          "descriptionRp": "Les humains saïyens ont la capacité de se transformer en super saïyen très tôt. Comme le démontra Sangoten par exemple. Vos capacités magiques seront plus puissantes."
+        },
+        "2": {
+          "name": "Super Saïyen 2",
+          "description": "Toutes vos compétences sont accrues pendant de longues heures. Ce sort n'a strictement aucun malus.",
+          "descriptionRp": "Tel Sangohan contre Perfect Cell, vous vous transformez en super saïyen de niveau 2. Ce qui augmente considérablement votre puissance magique. SanGohan éliminana d'un seul coup le Petit Cell qui tenta de l'approcher et ridiculisa Cell par la suite grâce à cette transformation incroyable."
+        },
+        "3": {
+          "name": "Super Saïyen 3",
+          "description": "Double vos degats pendant 12 heures. Attention, vous serez très fatigué en reprenant votre état normal.",
+          "descriptionRp": "Le saïyen laisse sa colère l'envahir le laissant se transformer jusqu'au Super Saïyen 3 ! Ses cheveux poussent jusqu'au bas du dos, de l'électricité jailli de son aura et sa puissance accroit énormément pendant un certain temps. Mais de retour à son état normal, il se verra exténué des effets secondaires de cette transformation..."
+        },
+        "majin": {
+          "name": "Majin Super Saïyen 2",
+          "description": "",
+          "descriptionRp": "Tel Majin Végéta, votre potentiel caché est révélé. Toute la haine qui est en vous, vous permet de décupler votre puissance magique, votre résistante et permet presque de dépasser le niveau de Super Saïyen 3. "
+        }
+      },
+      "explosive": {
+        "wave": {
+          "name": "Super explosive wave",
+          "description": "",
+          "descriptionRp": "Il s'agit d'une technique très dévastatrice. L'humain-saiyen concentre la totalité de sa force et lève les bras en l'air créant une immense sphère explosive dévastatrice autour de lui causant des dégâts à toute personne se situant sur un rayon de 2 cases. Cette technique ressemble au burning spin des dragons mais est moins puissante et touche plus loin. Observé dans la célèbre saga Dragon Ball Z Budokaï Tenkaichi au personnage Super Trunks"
+        }
+      }
+    },
+    "dynamit": {
+      "kick": {
+        "name": "Dynamite Kick",
+        "description": "",
+        "descriptionRp": "Bondit sur l'adversaire pour le frapper d'un foudroyant coup de pied retourné."
+      }
+    },
+    "burning": {
+      "attack": {
+        "name": "Burning Attack",
+        "description": "",
+        "descriptionRp": "Consiste à effectuer une série de mouvements des bras avant de se concentrer et d'envoyer une boule d'énergie moyennement puissante mais très rapide. Trunks du futur nous fit une démonstration de ce sort contre Freezer avant de le découper avec son épée..."
+      },
+      "spin": {
+        "name": "Burning Spin",
+        "description": "Inflige des degats à toutes les personnes sur sa case",
+        "descriptionRp": "Le dragon s'entoure lui et ses ennemis sur la même case d'une gigantesque tornade de feu avant de la faire exploser. Toute personne présente sur sa case est touché. Mais l'intelligence du dragon permet de ne pas frapper les membres de sa propre communauté. Nova Shenron tenta d'éliminer Li Shenron avec cette technique mais il échoua et succomba des effets dévastateurs de cette technique..."
+      }
+    },
+    "boo": {
+      "volayball": {
+        "name": "Ultra Collision Boubou Volley Ball",
+        "description": "",
+        "descriptionRp": "Lance une vague de super beignets galactica pour coincer l'adversaire dans cette vague donnant l'apparence d'un ballon de volley. Puis L'humain-saïyen fonce sur celui-ci pour lui attribuer un énorme smash qui l'écrasera au sol telle une météorite."
+      }
+    },
+    "ghost": {
+      "kamikaze": {
+        "name": "Super Ghost Kamikaze Attack",
+        "description": "Sort extrêmement puissant.",
+        "descriptionRp": "Inventée par Gotrunks, cette technique consiste à faire sortir de sa propre bouche 10 fantômes, puis de les envoyer pour littéralement exploser l'adversaire. A noter cependant qu'invoquer les fantômes fatiguent rapidement l'humain-saïyen."
+      }
+    },
+    "miracle": {
+      "punch": {
+        "name": "Miracle punch",
+        "description": "C'est une attaque normale mais vous avez plus de chance de toucher votre adversaire.",
+        "descriptionRp": "Il s'agit d'un nom inventé par Gotrunks, il effectua ce coup parmi tant d'autres (dont le dynamite kick) contre Majin Boo. il s'agit d'un énorme coup de poing donné de toute ses forces."
+      }
+    },
+    "masenko": {
+      "name": "Masenko",
+      "dodge": "Ton Mazenko a été contré, mais heuresement tu repères le contre et tu l'esquives. Tu ne subis aucun dégâts.",
+      "description": "Il est impossible pour l'ennemi de contrer ce sort.",
+      "descriptionRp": "Met ses mains au niveau du front pour lancer une vague déferlante sur l'adversaire. Moins efficace qu'un Kamehameha, cette technique a été utilisée par Sangohan sur Nappa après que ce dernier ait tué Picolo."
+    },
+    "donut": {
+      "galactica": {
+        "name": "Beignet galactica",
+        "description": "Immobilisé par le beignet galactica de l'humain saiyen, vos points de mouvements sont réduits à zéros et votre puissance est diminuée...",
+        "descriptionRp": "Créé au dessus de soi un cercle d'énergie avec un seul doigt avant de l'envoyer autour de l'adversaire afin de l'immobiliser totalement et de l'handicaper lors de ses prochaines attaques. Inventé par Gotrunks, il l'utilisa contre Majin Boo dans la salle du temps..."
+      }
+    },
+    "wolf": {
+      "fang": {
+        "fist": {
+          "name": "Technique du loup",
+          "description": "",
+          "descriptionRp": "Fonce sur l'adversaire puis le blesse d'une énorme griffure tel un loup bondissant sur sa proie."
+        }
+      }
+    },
+    "sokidan": {
+      "name": "Sokidan",
+      "dodge": "L'ennemi esquive ton sort et fonce sur toi pour t'attaquer. Tu fais aussitôt revenir ta boule Sokidan, et tu parviens légèrement à blesser ta cible.",
+      "description": "",
+      "descriptionRp": "L'humain créé une boule d'énergie où il y concentre une grande partie de sa force puis l'envoie en direction de l'ennemi. La boule Sokidan a l'avantage de suivre son ennemi partout où il ira pour le toucher. Yamcha parvint à blesser l'ancien Dieu de la Terre avec cette technique lors du championnat du monde des arts martiaux."
+    },
+    "trapped": {
+      "gift": {
+        "satan": {
+          "name": "Cadeau piégé de Satan",
+          "description": "",
+          "descriptionRp": "L'humain lance une console de jeux vidéo portable sur la cible, ce qui la divertie. Mais la machine comporte un système explosif très puissant qui explose quelque secondes après qu'on la touche. Ainsi, la cible se retrouve projetée très loin sur la carte, laissant au passage plus de la moitié de ses zénies..."
+        }
+      }
+    },
+    "satan": {
+      "miracle": {
+        "punch": {
+          "name": "Satan Miracle Special Ultra Super Mega Punch",
+          "description": "Lance un enchainements de coups",
+          "descriptionRp": "La technique préférée de notre super héros de classe mondiale Hercule. Il nous fit une démonstration de cette technique contre C-18. Consiste à foncer sur l'adversaire le frappant de toute ses forces d'un gigantesque coup de point dans la figure. "
+        }
+      }
+    },
+    "taiyoken": {
+      "name": "Taiyoken",
+      "description": "Un adversaire vous a aveuglé. Pendant plus d'une demi journée, votre vision restera minimale.",
+      "descriptionRp": "Utilise son front pour faire ricocher les rayons du soleil sur l'adversaire. Si la technique est parfaitement réussie, la cible sera aveuglée un long moment (vision réduite à 1). Spécialité de Tenshinhan qui la dévoile lors d'un championnat du monde des Arts martiaux contre Sangoku. Une particularité de la Morsure du Soleil repose sur le fait qu'elle puisse toucher l'ennemi à une grande distance."
+    },
+    "field": {
+      "force": {
+        "name": "Champ de force",
+        "description": "Réduit les dégats sur les prochaines attaques.",
+        "descriptionRp": "Rassemble ses forces afin de créer une barrière protectrice lui permettant ainsi de moins ressentir la douleur des attaques adversaires.",
+        "major": {
+          "name": "Champ de force majeur",
+          "description": "Réduit plus de dégat sur plus d'attaques que le bouclier mineur.",
+          "descriptionRp": "Version plus puissante du champs de force normal. Peut également être combiné au champs de force classique afin de renforcer la défense de l'humain."
+        }
+      }
+    },
+    "fireball": {
+      "name": "Boule de feu",
+      "description": "",
+      "descriptionRp": "Lance une simple boule de feu sur l'adversaire"
+    },
+    "eyes": {
+      "rays": {
+        "name": "Rayons oculaires",
+        "description": "",
+        "descriptionRp": "Lance des rayons d'énergie sur l'adversaire par les yeux. Cette technique est très similaire à l'eye beam des Cyborgs. Picolo s'en servit contre Sangoku en finale du championnat du monde des arts martiaux."
+      }
+    },
+    "detector": {
+      "destroyer": {
+        "name": "Destructeur de détecteur",
+        "description": "Pris au piège par le sort, votre capacité d'analyse est réduite à néant.",
+        "descriptionRp": "Le Namek lance des rayons d'énergie du bout de son doigt endommageant ainsi tout système d'analyse de l'adversaire. Cette attaque particulièrement stratégique sera parfaite pour ainsi ne pas dévoiler sa puissance à l'ennemi. Un chef Namek s'en servit contre Freezer et ses hommes afin qu'ils ne repèrent pas les Dragons Balls."
+      }
+    },
+    "makankosappo": {
+      "name": "Makankosappo",
+      "description": "",
+      "descriptionRp": "Concentre toute son énergie au bout de deux doigts seulement puis l'envoie sur l'adversaire telle un puissant laser perforateur capable de transpercer et tuer la cible. "
+    },
+    "namekian": {
+      "revenge": {
+        "name": "Vengeance au peuple Namek",
+        "description": "Permet de porter quatre attaques physiques en même temps, avec plus de chance de toucher.",
+        "descriptionRp": "N'oubliant pas le mal que Freezer et ses hommes ont fait à son peuple, le Namek enchaine les attaques sur l'adversaire dans l'énergie de la vengeance. Toute la puissance du peuple Namek est en lui"
+      }
+    },
+    "makosen": {
+      "name": "Makosen",
+      "description": "C'est une attaque physique avec plus de chance de toucher l'ennemi.",
+      "descriptionRp": "L'énergie du Namek est concentrée dans les poings serrés très fermement, puis il les projette sur l'adversaire. Le démon Piccolo l'utilisa contre Sangoku pour lui voler son dragon ball. "
+    },
+    "suicide": {
+      "piccolo": {
+        "name": "Sacrifice de Piccolo",
+        "description": "Vous protègera des attaques adversaires (sauf PNJ) jusqu'à sa mort (ou le temps d'une demie-journée). La protection prend également fin si votre protecteur meurt sans vous protéger.",
+        "descriptionRp": "Le namek est prêt à tout pour sauver ses amis. Pour cela, il choisira un allié à protéger et si celui ci est en danger, alors le namek fera obstacle à l'ennemi et encaissera les coups à sa place jusqu'à sa mort (sauf PNJ) ou le temps d'une demie-journée. Dans cet élan de bravoure, le protecteur bénéficiera d'un bonus de défense jusqu'à sa mort. Piccolo en fit une démonstration en sauvant la vie de Sangohan lors de leur combat contre le Saiyen Nappa."
+      },
+      "nail": {
+        "name": "Sacrifice de Nail",
+        "description": "s'est sacrifié pour vous conférer toute sa puissance",
+        "descriptionRp": "Le mage Namek se sacrifie et confère à son allié toute sa puissance. En outre, son esprit et sa force sont renforcés par le double de l'esprit du lanceur. Sur le point de mourir, Nail utilisa cette technique pour décupler le potentiel de Piccolo, ce qui permet à ce dernier d'être aussi puissant que Freezer à sa première transformation"
+      }
+    },
+    "buku": {
+      "jutsu": {
+        "name": "Danse de l'air",
+        "description": "",
+        "descriptionRp": "Le dragon fonce sur l'adversaire, l'envoi en l'air puis lui porte un enchainement de coups. "
+      }
+    },
+    "boar": {
+      "attack": {
+        "name": "Attaque du sanglier",
+        "description": "",
+        "descriptionRp": "Technique visant à foncer la tête la première sur l'adversaire."
+      }
+    },
+    "triple": {
+      "fireball": {
+        "name": "Triple boules de feu",
+        "description": "",
+        "descriptionRp": "Technique qui permet de lancer rapidement trois boules de feu. Les dégâts causés par cette déflagration sont énormes."
+      }
+    },
+    "shogekiha": {
+      "name": "Shogekiha",
+      "description": "",
+      "descriptionRp": "Produit une onde de choc par le déplacement supersonique d'un corps, pouvant causer de graves dommages."
+    },
+    "planetary": {
+      "dewatering": {
+        "name": "Déssèchement planétaire",
+        "description": "",
+        "descriptionRp": "Le dragon créé une immense boule d'énergie négative et l'envoi sur l'adversaire. La technique handicape l'ennemi en augmentant sa fatigue de 30. Il s'agit de la spécialité de Li Shenron"
+      },
+      "destruction": {
+        "name": "Destruction planétaire",
+        "description": "",
+        "descriptionRp": "Concentre la totalité de sa force en une énorme boule d'énergie puis l'envoie sur l'adversaire. Il est impossible de savoir qui de la boule destructrice de la planète ou du genkidama est la plus dévastatrice"
+      }
+    },
+    "toxic": {
+      "breath": {
+        "name": "Souffle toxique",
+        "description": "Empoisone l'adversaire pour un certain temps.",
+        "descriptionRp": "Permet tel Ryan Sheron d'empoisonner gravement un ennemi grace à son souffle."
+      }
+    },
+    "invocation.shenron": {
+      "divine": {
+        "strike": {
+          "name": "Invocation Shenron : La Frappe Divine",
+          "description": "",
+          "descriptionRp": "Invoque Shenron et exauce un souhait : celui de frapper les ennemis par surprise. Alors Shenron s'envole dans les airs, et lance sur la planète trois immense boules d'énergie divine venant s'écraser contre trois joueurs du camp adverse de l'utilisateur (même s'ils font partie de la même guilde) afin de réduire leur points de vie de moitié, de les paralyser complètement (PM réduits à 0) et de les handicaper (Pas divisés par 1.5)."
+        },
+        "protection": {
+          "name": "Invocation Shenron : La protection divine",
+          "description": "Permet de repousser toutes les attaques physiques pendant 12 heures.",
+          "descriptionRp": "Invoque le dragon sacré Shenron qui offre une protection contre toute attaque physique pendant une demi journée (sorts et vols non compris). Peut également être lancé sur un allié afin qu'il bénéficie du même avantage."
+        },
+        "dream": {
+          "name": "Invocation Shenron : le Dieu des rêves",
+          "description": "Vous êtes transformé en Dieu des rêves, tel Porunga sur Namek. Vos compétences sont décuplés le temps d'une journée. Mais attention, le dragon est très vulnérable pendant cette métamorphose",
+          "descriptionRp": "Le dragon se transforme en Dieu des rêves. Il devient une créature extrêmement puissante, bien plus qu'un Super Saïyen 2. Mais il devient très vulnérable le temps de cette transformation...Le Dieu des rêves apparu pour la première fois sur Namek après l'invocation de Dendé. Cet immense dragon dégage une si puissante aura que même Freezer en fut impressionné"
+        }
+      }
+    },
+    "flash": {
+      "bomber": {
+        "name": "Flash bomber",
+        "description": "",
+        "descriptionRp": "Rayon d'énergie prenant la forme d'une boule ronde quand elle explose sur l'adversaire"
+      }
+    },
+    "eye": {
+      "beam": {
+        "name": "Eye beam",
+        "description": "",
+        "descriptionRp": "Energie concentrée dans les clobes oculaires et libérée par les pupilles sous forme de rayon très puissant."
+      }
+    },
+    "dodompa": {
+      "name": "Dodompa",
+      "description": "",
+      "descriptionRp": "Lance une puissante vague d'énergie d'un seul doigt. Cette technique a été mise au point par le Maitre des grues avant de l'enseigner à Tenshinhan, Chaozu puis au cyborg Taopaïpaï"
+    },
+    "flames": {
+      "hell": {
+        "name": "Flammes de l'enfer",
+        "description": "",
+        "descriptionRp": "Spécialité de C-16, les flammes de l'enfer consistent à envoyer l'adversaire d'un coup violent s'écraser sous la terre puis à lui envoyer de terribles vagues déferlantes tellement puissantes qu'elles en sortent de la terre"
+      }
+    },
+    "dengenki": {
+      "jigokudama": {
+        "name": "Dengenki Jigokudama",
+        "description": "",
+        "descriptionRp": "Puissante technique de Super C-17, le cyborg absorbe toute chose environnante par ses mains pour en faire une énorme sphère d'électricité très destructive qu'il projettera par la suite sur l'adversaire. "
+      }
+    },
+    "assimilation": {
+      "name": "Assimilation",
+      "description": "Permet de lancer un des sorts spéciaux de l'ennemi.",
+      "descriptionRp": "Permet d'assimiler toute chose désirée et de l'intégrer dans sa propre force. Ce qui permet au cyborg de copier un sort spécial de son adversaire."
+    },
+    "endurance": {
+      "name": "Endurance",
+      "description": "Permet de combattre dans des conditions optimales.",
+      "descriptionRp": "Les machines ont la capacités naturelles à se battre des heures sans souffrir de la fatigue, contrairement aux autres races."
+    },
+    "cell": {
+      "decomposition:": {
+        "name": "Décomposition cellulaire",
+        "description": "Permet d'esquiver les attaques magiques. Non utilisable sur un allié.",
+        "descriptionRp": "Utilisée par Janemba, décompose son corps en plusieurs partie à la manière d'un puzzle en relief, permettant ainsi d'esquiver un nombre inimaginable attaques magiques. "
+      },
+      "regeneration": {
+        "name": "Régénération cellulaire",
+        "description": "Une fois vaincu, ton personnage sera automatiquement remis en jeu sans voir son compteur de mort augmenté. Il en sera de même pour l'attaquant qui n'aura pas une victoire de plus à son actif. Seul les 10 zénies seront versés à la guilde dans le cas où l'attaquant est guildé.",
+        "descriptionRp": "Idéal pour dérouter l'adversaire, lorsque le Majin est vaincu, son organisme lui permet de recomposer ses cellules et ainsi le ramener à la vie en parfait état de combattre. Cette technique incroyable est l'une des spécialités de Boubou, Majin Bou et Boo"
+      }
+    },
+    "teleport": {
+      "name": "Déplacement instantané",
+      "description": "",
+      "descriptionRp": "Le Majin se concentre et tente de sentir l'aura de ses ennemis au loin dans son champs de vision puis se téléporte et réapparait face à l'ennemi par surprise. Boo s'en servit pour repérer Sangoku et Végéta du bout de l'univers avant la bataille finale de Dragon Ball."
+    },
+    "toketsuken": {
+      "name": "Toketsuken",
+      "description": "Fais perdre tout ses mouvements et une petite partie de ses PA à l'adversaire.",
+      "descriptionRp": "Envoie un souffle glacial en accumulant son énergie dans sa main, immobilisant ainsi l'adversaire dans un glaçon très épaix."
+    },
+    "strangulation": {
+      "name": "Etranglement lointain",
+      "dodge": "L'ennemi contre ton sort et il riposte. Mais tu avais prévu ce contre et tu l'esquives.",
+      "description": "Ce sort est incontrable.",
+      "descriptionRp": "Le Majin envoie son bras très loin sur l'adversaire pour l'étrangler. Bou s'en servit contre Végéta alors que ce dernier tenta de le retenir pour que Sangoku retrouve ses forces."
+    },
+    "babidi": {
+      "control": {
+        "name": "Contrôle de Babidi",
+        "description": "Au service de Babidi, votre puissance intérieure est libérée...",
+        "descriptionRp": "Se laissant manipuler par Babidi, le malduchi lui offre fidélité et obéissance. En récompense, Babidi décuple sa puissance ce qui en fait un adversaire redoutable et impitoyable. De plus, le nouvel esclave de Babidi peut également libérer la puissance d'un allié que la même manière que Badidi s'y est pris pour lui."
+      }
+    },
+    "crusher": {
+      "ball": {
+        "name": "Crusher ball",
+        "description": "",
+        "descriptionRp": "C'est une spéciale de Jeece du célèbre Commando Ginue ! Envoie de nombreuses boules d'énergie sur l'adversaire. La technique n'est pas particulièrement puissante mais reste tout de même un bon sort pour les nouveaux mages. Jeece nous en fit une démonstration contre Sangoku lorsque celui-ci arriva sur la planète Namek"
+      }
+    },
+    "bodyguard": {
+      "name": "Garde du corps",
+      "description": "Le temps de deux attaques, votre garde du corps subira les attaques à votre place.",
+      "descriptionRp": "Invoquez un garde du corps de Freezer qui encaissera les coups à votre place le temps de 2 attaques subies. Peut être également lancé sur un allié afin de le protéger."
+    },
+    "recoom": {
+      "eraser": {
+        "gun": {
+          "name": "Recoom Eraser Gun",
+          "description": "",
+          "descriptionRp": "L'alien ouvre sa bouche et envoie une gigantesque vague déferlante. Recoom a failli anéantir Végéta avec cette technique lors de la bataille sur Namek."
+        }
+      }
+    },
+    "copy": {
+      "name": "Copie",
+      "description": "Toutes les compétences de votre cible renforcent les votre.",
+      "descriptionRp": "Technique de Baby, l'alien prend possession de son adversaire et voit donc ses compétences renforcées par celles de sa cible. Une cible puissante assure une transformation redoutable. Cette technique de transformation est la seule à être aussi polyvalente..."
+    },
+    "immobilizing": {
+      "power": {
+        "wires": {
+          "name": "Fils d'énergie immobilisants",
+          "description": "",
+          "descriptionRp": "Tels les mercenaires de l'espace, vous êtes capable de tisser des toiles de Ki permettant de réduire les points de mouvements de votre adversaire."
+        }
+      }
+    },
+    "janemba": {
+      "nightmare": {
+        "name": "Janemba Nightmare",
+        "description": "",
+        "descriptionRp": "L'alien immobilise l'adversaire dans un carré d'eau dans les airs, puis donne de nombreux \"Janemba Sword Attack\" afin de renfermer le piège sur la cible mais aussi de l'épuiser physiquement."
+      },
+      "sword": {
+        "attack": {
+          "name": "Janemba Sword attack",
+          "attack": "Tu viens de lancer un gigantesque coup d'épée sur l'adversaire.",
+          "description": "",
+          "descriptionRp": "L'alien brandit une épée légendaire des ténèbres et lance un coup sur l'adversaire. De cette frappe surgit une gigantesque vague tranchante pouvant toucher à une grande distance. Janemba s'en servit contre Sangoku SSJ3 dans le royaume des morts."
+        }
+      }
+    },
+    "revelation": {
+      "power": {
+        "name": "Révélation de pouvoir",
+        "description": "",
+        "descriptionRp": "Le Namek arrivé au stade de Grand Chef, maitrise désormais, le potentiel d'une technique inimaginable : celle de pouvoir révéler la puissance cachée de ses amis. Ce qui permet de quintupler son esprit. Sangohan et Krilin devinrent des guerriers surpuissants grâce au Grand Chef lors de la bataille de Namek."
+      }
+    },
+    "heal": {
+      "dende": {
+        "name": "Soin Dendé",
+        "description": "",
+        "descriptionRp": "Le Namek, blessé au combat invoque le Dieu de la Terre Dendé afin qu'il lui guérisse ses blessures. Dendé peut également venir en aide à un compagnon."
+      }
+    },
+    "tempest": {
+      "hell": {
+        "name": "Tempête de l'enfer",
+        "description": "",
+        "descriptionRp": "Le cyborg détache son avant bras pour lancer une centaine de boules d'énergie sur l'adversaire. Cette technique, spécialité de Super C-17, donne l'impression d'être une véritable arme à feux destructrices. "
+      }
+    },
+    "c16": {
+      "punch": {
+        "name": "C-16 Punch",
+        "description": "",
+        "descriptionRp": "Observé pour la première fois entre Cell et C-16, cela consiste à détacher son poing et l'envoyer sur l'adversaire. La rapidité est telle qu'il est possible que l'adversaire se retrouve assommé un certain temps l'empêchant de se déplacer (points de mouvements divisés par deux). "
+      }
+    },
+    "celestial": {
+      "pact": {
+        "resurrection": {
+          "name": "Pacte Céleste : Ressurection des alliés",
+          "description": "",
+          "descriptionRp": "Le potentiel de cette invocation divine est immense : Porunga et Shenron sont invoqués. Selon la légende, chaque dragon sacré aurait un pouvoir qui lui est propre. Porunga ramène à la vie trois alliés morts sur le champs de bataille, quant à Shenron, il lance par la suite d'immenses sphères protectrices avec un bonus de vivacité et protection aux miraculés. Aucune autre race ne pourra réussir un jour à réaliser un tel miracle."
+        }
+      }
+    },
+    "transformation": {
+      "li": {
+        "sheron": {
+          "name": "Transformation Li Shenron (+ Dragon ball)",
+          "description": "La transformation ultime d'un Dragon dont la puissante est doublement augmentée à l'aide des Dragon ball.",
+          "descriptionRp": "Se transforme en une créature évoluée surpuissante. On raconte que si le Dragon et les Dragon ball sont réunis, alors ensemble ils deviennent le Dragon le plus puissant que l'univers tout entier n'ai jamais vu. Li Shenron fut le seul dragon a avoir bénéficié de cette transformation si difficile à atteindre."
+        }
+      }
+    },
+    "technology": {
+      "capsule": {
+        "corp": {
+          "remote.control": {
+            "name": "Technologie Capsule Corporation : télécommande anti matière",
+            "description": "",
+            "descriptionRp": "L'humain utilise une télécommande anti matière afin de dissoudre définitivement un sort de soutien sur sa cible. Bulma et son père, doté d'une intelligence exceptionnelle ont mis au point ce véritable bijoux électronique qui sera idéal pour l'humain. Mais attention tout de même, l'utilisation de la télécommande semble inefficace sur une cible trop puissante et sa porté se montre un peu limitée."
+          },
+          "training.capsule": {
+            "name": "Capsule Entrainement S3G",
+            "description": "Ta capacité offensive est doublée mais ta défensive est réduite de moitié.",
+            "descriptionRp": "La Capsule d'Entrainement de Simulation de la gravité 3 fois supérieure à celle de la Terre te conférera une puissance de frappe directe surpuissante. Attention, le changement  de gravité te rend plus fort mais réduit fortement ta résistance et tes points de vie. Cette incroyable invention est le fruit du travail intensif des célèbres chercheurs de Capsule Corporation qui ne sont autres que Bulma et son père."
+          }
+        }
+      }
+    },
+    "detection": {
+      "neocybernetic": {
+        "disarmament": {
+          "name": "Détection cybernétique : désarmement de la cible",
+          "description": "",
+          "descriptionRp": "Le cyborg analyse sa cible et repère son armement. Puis il lance le sort Eye Beam de niveau supérieur désarmant ainsi la cible d'un de ses équipements. La détection cybernétique sera parfaite pour affaiblir l'ennemi en créant cette ouverture. Un problème à ne pas négliger cependant : si la cible est trop puissante et contre le sort, alors le lanceur subira une légère décharge électrique réduisant alors sa réserve de Ki. A utiliser avec prudence donc."
+        },
+        "total.disarmament": {
+          "name": "Détection neocybernétique : désarmement total",
+          "description": "",
+          "descriptionRp": "Technique inédite dans l'histoire des cyborgs, ce sort représente la version finale de la Détection cybernétique : désarmement de la cible. La cible se verra déséquipée de l'ensemble de ses équipements sans exception. L'usage de cette redoutable technologie garantie un taux de réussite de 100% sans aucun effet secondaire néfaste pour le lanceur. On raconte même que le docteur Géro n'a pas réussit à maitriser le potentiel immense du désarmement total."
+        }
+      }
+    },
+    "supreme": {
+      "absorption": {
+        "name": "Absorption Suprême",
+        "description": "Votre puissance magique est décuplé grâce à la totalité de l'esprit de votre cible ainsi qu'à une grande partie de sa force ",
+        "descriptionRp": "L'absorption suprême consiste à retirer une partie de son corps et l'envoyer sur la cible afin de l'emprisonner et bénéficier de sa puissance, ce qui permet d'absorber la totalité de son esprit et une grande partie de sa force. Même après la révélation de la puissance de Sangohan par les Dieux, Majin Boo devint l'être le plus puissant de l'univers en absorbant Gotrunks Super Saïyen 3"
+      }
+    },
+    "demoniac": {
+      "torture": {
+        "name": "Torture Démoniaque",
+        "description": "Votre force et votre esprit sont affaiblis. Les effets des objets concernant ces compétences sont annulés.",
+        "descriptionRp": "Permet d'handicaper l'adversaire en diminuant une partie de sa force et de son esprit. Les effets des objets pour ces compétences sont annulés. Le démon Piccolo utilisa cette technique contre Sangoku enfant l'empêchant ainsi de se déplacer. "
+      }
+    },
+    "song": {
+      "tapion": {
+        "name": "Chant de Tapion",
+        "description": "",
+        "descriptionRp": "Vous effectuez la mélodie de Tapion, ce qui augmente considérablement la fatigue de votre adversaire. Cette mélodie fut entendue dans le film animé Dragon Ball Z contre le monstre Hildegarde."
+      },
+      "minosha": {
+        "name": "Chant de Minosha",
+        "description": "",
+        "descriptionRp": "Sort similaire au chant de Tapion mais en plus redoutable, en effet, c'est à présent le Ki que vous pourrez enlever à votre adversaire."
+      }
+    },
+    "metal": {
+      "freeza": {
+        "name": "Métal Freezer",
+        "description": "Grace à la capacité d'un cyborg, vos capacités magiques sont surboostées.",
+        "descriptionRp": "Transforme à l'aide d'un cyborg, l'alien en métal Freezer. Bien que ce dernier fut très facilement vaincu par Trunks du futur, le potentiel développé par cette technique s'avère redoutable."
+      },
+      "cooler": {
+        "name": "Métal Cooler",
+        "description": "Encore plus puissante que la première mutation métallique, cette transformation dépasse même le niveau d'un super saïyen 2.",
+        "descriptionRp": "Transformation ultime pour les aliens, conférant une puissance d'attaque magique supérieure. Composée de plusieurs alliages impénétrables, elle permet même un bonus de défense pour l'alien. Il faut cependant absorber la puissance d'un cyborg d'un même niveau si ce n'est plus. Métal Cooler fut un adversaire redoutable pour Sangoku et ses amis."
+      }
+    },
+    "majin": {
+      "boo": {
+        "name": "Majin Boo",
+        "description": "Absorbé par ta propre énergie négative, ta capacité offensive est doublée mais ta défense est divisée de moitié.",
+        "descriptionRp": "A l'instar de Boubou, après avoir évacuée toute l'énergie négative en toi, celle-ci se matérialise et donne vie à une autre entité qui t'absorbe ensuite afin de créer un être beaucoup plus puissant. Par contre, cette technique très épuisante te rendra plus vulnérable."
+      }
+    },
+    "giant": {
+      "gorilla": {
+        "name": "Gorille Géant",
+        "description": "Transformé en gorille géant, ta puissance d'attaque a fortement augmenté mais en contrepartie ton potentiel défensif en est diminué.",
+        "descriptionRp": "Après ton entrainement avec le Kaïo de la galaxie Sud, tu es maintenant capable de te métamorphoser en gorille géant à la puissance exceptionnelle. On raconte qu'un seul gorille géant est capable de détruire tout un continent à lui seul."
+      }
+    },
+    "war": {
+      "namekian": {
+        "name": "Namek de guerre",
+        "description": "Ton potentiel offensif est doublé mais ta défense se voit diminuée.",
+        "descriptionRp": "Le Kaïo de la galaxie Sud t'as appris qu'il existait une catégorie de Namek destinée au combat. Leur rôle était essentiellement de protéger leurs frères. Après avoir appris les techniques de ces combattants Namek, tu es désormais capable d'augmenter ta puissance. Cependant, le Namek étant d'origine pacifiste, ton corps n'est pas capable de maîtriser totalement cette puissance en outre, ton potentiel défensif sera fortement diminué. Technique à utiliser avec sagesse."
+      }
+    },
+    "genetic": {
+      "mutation": {
+        "name": "Mutation génétique",
+        "description": "Transformé en Alien redoutable, ta puissance offensive directe est accrue. En contrepartie, tu es vulnérable le temps de cette mutation.",
+        "descriptionRp": "Après ton entrainement avec le Kaïo de la galaxie sud, tu es capable à l'instar de Freezer, Cooler ou Bojack de te métamorphoser. Ta puissance de frappe directe sera plus efficace mais la transformation, affaiblissant tes cellules te rendra vulnérable. "
+      }
+    },
+    "neo": {
+      "cyborg": {
+        "name": "Néo-Cyborg",
+        "description": "Transformé en Néo-Cyborg, la perte de ta défense alimente fortement ta puissance frontale. ",
+        "descriptionRp": "Technique incroyable apprise grâce au Kaïo de la galaxie Sud. Le Neo-Cyborg a l'instar de Cell, allie technologie cybernétique et mutation cellulaire à partir d'êtres vivants. Sa puissance d'attaque frontale est redoutable mais certaines cellules ne supportent pas cette évolution. Il en résulte une résistance amoindrie."
+      }
+    },
+    "dragon": {
+      "warrior": {
+        "name": "Dragon guerrier",
+        "description": "Baisse de tes capacités défensives mais puissance frontale fortement accrue.",
+        "descriptionRp": "Les dragons sont des créatures créées par les Dieux. Le Dieu de la Terre créa Shenron destiné à servir les humains, mais d'autres créèrent des dragons moins connus qui étaient destinés à combattre. Ce sont les dragons de guerre. Ces créatures sont très vulnérables mais font preuves d'une puissance légendaire. Il faudra donc faire preuve d'une grande prudence en te transformant en Dragon guerrier."
+      }
+    },
+    "purification": {
+      "name": "Purification",
+      "description": "",
+      "descriptionRp": "Sacrifie cinq points de Ki pour extraire un sort de malus sur sa cible. Cette technique est originaire du peuple Namek qui la transmet à ceux qui le méritent."
+    },
+    "extraction": {
+      "name": "Extraction",
+      "description": "",
+      "descriptionRp": "Sacrifie 7 points de Ki pour extraire un sort de soutien sur la cible. Attention donc à ne pas le confondre avec la purification. Les soigneurs Namek mirent au point cette technique afin de soutenir leurs combattants en fragilisant les défenses ennemies."
+    },
+    "big": {
+      "bang": {
+        "attack": {
+          "name": "Big Bang Attack",
+          "description": "",
+          "descriptionRp": "Rassemble une énorme quantité d'énergie pour la lancer d'un seul bras. L'explosion causé par cette attaque est énorme. Végéta s'en servi pour détruire le corps de C-19 dans son combat contre les cyborgs"
+        }
+      }
+    },
+    "kikoho": {
+      "name": "Kokiho",
+      "description": "",
+      "descriptionRp": "L'humain enchaine la maximum de Kikoho contre l'adversaire. Les effets sont dévastateurs malgré le besoin d'être proche de l'adversaire.Tenshinhan s'en servi contre Cell afin d'aider les Cyborgs C-16 et C-18 à s'enfuir."
+    },
+    "powerball": {
+      "sakura": {
+        "name": "Powerball-O-Sakura",
+        "description": "Sous influence de la lune artificielle, ta capacité offensive est doublée mais  ta capacité défensive est réduite de moitié.",
+        "descriptionRp": "A l'instar de Végéta, tu es désormais capable de créer une lune artificielle en mélangeant une énorme source d'énergie à l'oxygène de l'île. A la première lueur de cette lune, tu te transformeras en puissant gorille géant. Mais la perte trop intense de ton énergie pour la création de cette lune te rendra moins résistant."
+      }
+    }
+  }
+}

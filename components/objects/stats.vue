@@ -1,8 +1,6 @@
 <template>
-    <ul>
-        <li v-for="value, key in data">
-            {{ $t(`objects.details.${key}`, {value}) }}
-        </li>
+    <ul class="stats">
+        <li v-for="value, key in data" v-html="$t(`objects.details.${key}`, {value})"></li>
     </ul>
 </template>
 
