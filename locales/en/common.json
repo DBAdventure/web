@@ -456,7 +456,8 @@
       "error": {
         "1": "Not enough zeni!",
         "2": "You already purchased this spell!",
-        "3": "You can't buy this spell!"
+        "3": "You can't buy this spell!",
+        "4": "You can't buy this spell, you don't meet the requirements!"
       }
     },
     "shop": {
