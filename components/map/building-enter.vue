@@ -105,7 +105,7 @@
                             successMessage = this.$t(
                                 res.data.message,
                                 {
-                                    object: this.$t(res.data.object),
+                                    object: this.$t(res.data.parameters.object),
                                 },
                             );
                             this.$store.dispatch('fetchPlayer');
@@ -118,7 +118,7 @@
                             successMessage = this.$t(
                                 res.data.message,
                                 {
-                                    spell: this.$t(res.data.spell),
+                                    spell: this.$t(res.data.parameters.spell),
                                 },
                             );
                             this.$store.dispatch('fetchPlayer');
