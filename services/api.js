@@ -262,6 +262,13 @@ const api = {
     getGuildRequesters() {
         return makeGetRequest('/guild/members/requester');
     },
+
+    /**
+     * Magic
+     */
+    getSpells() {
+        return makeGetRequest('/magic/spells');
+    },
 };
 
 export default api;

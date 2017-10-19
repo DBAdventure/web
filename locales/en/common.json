@@ -1193,7 +1193,11 @@
     "title": "Team"
   },
   "magic": {
-    "title": "Magic"
+    "title": "Magic",
+    "presentation": {
+      "intro": "<strong>{name}</strong> te voici à la page de la magie.",
+      "text": "Celle-ci te permet de voir les sorts que tu maîtrises et les sorts ayant actuellement un effet sur toi tels que les sorts de soutien.<br />Sache que tout personnage est en mesure de se familiariser avec la magie, y compris les guerriers."
+    }
   },
   "faq": {
     "title": "F.A.Q",

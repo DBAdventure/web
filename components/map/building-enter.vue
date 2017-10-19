@@ -60,7 +60,8 @@
 
 <script type="text/ecmascript-6">
     import {isEmpty} from '~/lib/utils';
-    import Stats from '~/components/objects/stats';
+    import Stats from '~/components/utils/stats';
+    import Requirements from '~/components/utils/requirements';
     import api from '~/services/api';
 
     export default {
@@ -253,7 +254,7 @@
                             [
                                 this.$t(`spells.${params.row.name}.descriptionRp`),
                                 h(
-                                    Stats,
+                                    Requirements,
                                     {
                                         props: {
                                             data: params.row.requirements,

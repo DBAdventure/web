@@ -1,41 +1,21 @@
 <template>
     <div class="account">
-        <h1 class="title title-magic">{{ 'magic.title' | trans }}</h1>
+        <h1 class="title title-magic">{{ $t('magic.title') }}</h1>
         <div>
-            <p>{{ $t('magic.spell.learned') }}</p>
-            <table class="table table-stripped">
-                <thead>
-                    <tr>
-                        <th>{{ $t('name') }}</th>
-                        <th>{{ $t('requirements') }}</th>
-                        <th>{{ $t('description') }}</th>
-                        <th>{{ $t('bonus') }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="playerSpell in currentPlayer.spells">
-                        <td>{{ $t(`${playerSpell.spell.name}.name`) }}</td>
-                        <td>{{ helper.displayRequirements(playerSpell.spell) }}</td>
-                        <td>{{ $t(`${playerSpell.spell.name}.descriptionRp`) }}</td>
-                        <td>
-                            <stats :data="object.bonus" v-if="object.bonus" />
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <p v-html="$t('magic.presentation.intro', {name: currentPlayer.name})"></p>
+            <p v-html="$t('magic.presentation.text')"></p>
+            <Table :columns="spellColumns()" :data="spells"></Table>
         </div>
     </div>
 </template>
 
 <script type="text/ecmascript-6">
     import {mapGetters} from 'vuex';
-    import Stats from '~/components/objects/stats';
+    import api from '~/services/api';
+    import Requirements from '~/components/utils/requirements';
 
     export default {
         middleware: 'auth',
-        components: [
-            Stats,
-        ],
         head() {
             return {
                 title: this.$t('account.magic.title'),
@@ -48,7 +28,48 @@
         },
         data() {
             return {
+                spells: [],
             };
+        },
+        asyncData() {
+            return api.getSpells().then((res) => {
+                return {
+                    spells: res.data,
+                };
+            });
+        },
+        methods: {
+            spellColumns() {
+                return [
+                    {
+                        title: this.$t('object.name'),
+                        align: 'center',
+                        width: 150,
+                        render: (h, params) => h(
+                            'strong',
+                            this.$t(`spells.${params.row.spell.name}.name`),
+                        ),
+                    },
+                    {
+                        title: this.$t('object.description'),
+                        key: 'description',
+                        render: (h, params) => h(
+                            'div',
+                            [
+                                this.$t(`spells.${params.row.spell.name}.descriptionRp`),
+                                h(
+                                    Requirements,
+                                    {
+                                        props: {
+                                            data: params.row.spell.requirements,
+                                        },
+                                    },
+                                ),
+                            ],
+                        ),
+                    },
+                ];
+            },
         },
     };
 </script>
