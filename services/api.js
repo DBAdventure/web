@@ -154,10 +154,10 @@ const api = {
         return makePostRequest(`/building/teleport/${buildingId}`, {where});
     },
     buyObject(buildingId, objectId) {
-        return makePostRequest(`/building/buy/${buildingId}/object/${objectId}`);
+        return makePostRequest(`/building/shop/${buildingId}/object/${objectId}`);
     },
     buySpell(buildingId, spellId) {
-        return makePostRequest(`/building/buy/${buildingId}/spell/${spellId}`);
+        return makePostRequest(`/building/shop/${buildingId}/spell/${spellId}`);
     },
 
     /**
