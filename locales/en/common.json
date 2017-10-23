@@ -506,6 +506,16 @@
       "use": "You can't use this object.",
       "equip": "You can't equip this object.",
       "drop": "You can't drop this object."
+    },
+    "object": {
+      "unequip": "{name} has been unequipped!",
+      "equip": "{name} has been equipped!",
+      "used": "You used {number} {name}!",
+      "drop": "{name} has been drop on the map!",
+      "error": {
+        "teleport": "Not enough movement points",
+        "equip": "{name} can not be equipped right now!"
+      }
     }
   },
   "training": {
@@ -1080,19 +1090,11 @@
     "quantity": "Quantity",
     "give": "Give",
     "name": "Name",
-    "unequip": "{name} has been unequipped!",
-    "equip": "{name} has been equipped!",
     "equipped": "Equipped",
-    "used": "You used {number} {name}!",
-    "drop": "{name} has been drop on the map!",
     "price": "Price",
     "description": "Description",
     "weight": "Weight",
-    "action": "#",
-    "error": {
-      "teleport": "Not enough movement points",
-      "equip": "{name} can not be equipped right now!"
-    }
+    "action": "#"
   },
   "contact": {
     "title": "Contact"
