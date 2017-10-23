@@ -635,7 +635,7 @@
       },
       "give": {
         "zeni": "gives you {zeni} zeni!",
-        "item": "gives you {quantity} {objectName}!"
+        "item": "gives you {quantity} {name}!"
       }
     },
     "guild": {
@@ -750,6 +750,18 @@
       "error": {
         "1": "Inventory is full, can't hold more objects!",
         "3": "He already have this item!"
+      }
+    },
+    "pickup": {
+      "zeni": "You pick up {zeni} Zenis.",
+      "object": "You have some luck, you just found {number} {name}.",
+      "capsule": {
+        "object": "You have some luck, this one gave you {number} {name}.",
+        "damage": "Too bad, this capsule was trapped you lose {damages} points of life."
+      },
+      "error": {
+        "1": "Inventory is full, can't hold more objects!",
+        "3": "You already have this object!"
       }
     }
   },

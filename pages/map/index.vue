@@ -56,7 +56,7 @@
         <div class="search-container container-fluid">
             <template v-if="action">
                 <div class="text-center">
-                    <p v-for="message in parameters.messages">{{ message }}</p>
+                    <p v-for="message in parameters.messages">{{ handleMessage(message) }}</p>
 
                     <template v-if="action === 'analysis'">
                         <Table :columns="analysisColumns()" :data="analysisData()"></Table>
@@ -496,8 +496,15 @@
                     this.action = what;
                     this.handleResult(res, id);
                     this.$Loading.finish();
-                }).catch(() => {
-                    this.raiseError();
+                }).catch((res) => {
+                    if (res.response.data.error) {
+                        this.$Notice.error({
+                            title: this.$t('notice.error'),
+                            desc: this.$t(res.response.data.error),
+                        });
+                    } else {
+                        this.raiseError();
+                    }
                 });
             },
 
@@ -507,6 +514,22 @@
                     this.players[id] = new Player(res.data.target);
                 }
                 this.target = this.players[id];
+            },
+
+            handleMessage(message) {
+                if (message.message) {
+                    const parameters = message.parameters;
+                    if (parameters.name) {
+                        parameters.name = this.$t(parameters.name);
+                    }
+
+                    return this.$t(
+                        message.message,
+                        parameters,
+                    );
+                }
+
+                return message;
             },
         },
     };
