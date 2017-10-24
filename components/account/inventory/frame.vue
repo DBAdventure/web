@@ -104,10 +104,12 @@
 <script type="text/ecmascript-6">
     import api from '~/services/api';
     import ErrorMixin from '~/components/mixins/error';
+    import MessagesMixin from '~/components/mixins/messages';
 
     export default {
         mixins: [
             ErrorMixin,
+            MessagesMixin,
         ],
         props: {
             objects: {
@@ -156,12 +158,7 @@
                 api.unequipObject(objectId).then((res) => {
                     this.$Notice.success({
                         title: this.$t('notice.success'),
-                        desc: this.$t(
-                            res.data.message,
-                            {
-                                name: this.$t(res.data.parameters.name),
-                            },
-                        ),
+                        desc: this.handleMessage(res.data),
                     });
                     this.$emit('reload');
                 }).catch(() => {
@@ -174,12 +171,7 @@
                     res.data.messages.forEach((msg) => {
                         this.$Notice.success({
                             title: this.$t('notice.success'),
-                            desc: this.$t(
-                                msg.message,
-                                {
-                                    name: this.$t(msg.parameters.name),
-                                },
-                            ),
+                            desc: this.handleMessage(msg),
                         });
                     });
                     this.$emit('reload');
@@ -207,12 +199,7 @@
                 api.dropObject(objectId, nb).then((res) => {
                     this.$Notice.success({
                         title: this.$t('notice.success'),
-                        desc: this.$t(
-                            res.data.message,
-                            {
-                                name: this.$t(res.data.parameters.name),
-                            },
-                        ),
+                        desc: this.handleMessage(res.data),
                     });
                     this.$emit('reload');
                 }).catch(() => {
@@ -229,12 +216,7 @@
                 api.useObject(objectId, nb).then((res) => {
                     this.$Notice.success({
                         title: this.$t('notice.success'),
-                        desc: this.$t(
-                            res.data.message,
-                            {
-                                name: this.$t(res.data.parameters.name),
-                            },
-                        ),
+                        desc: this.handleMessage(res.data),
                     });
                     this.$emit('reload');
                 }).catch(() => {

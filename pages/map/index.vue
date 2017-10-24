@@ -56,7 +56,7 @@
         <div class="search-container container-fluid">
             <template v-if="action">
                 <div class="text-center">
-                    <p v-for="message in parameters.messages">{{ handleMessage(message) }}</p>
+                    <p v-for="message in parameters.messages">{{ handleMessages(message) }}</p>
 
                     <template v-if="action === 'analysis'">
                         <Table :columns="analysisColumns()" :data="analysisData()"></Table>
@@ -218,6 +218,7 @@
     import ActionLink from '~/components/map/action-link';
     import BuildingEnter from '~/components/map/building-enter';
     import ErrorMixin from '~/components/mixins/error';
+    import MessagesMixin from '~/components/mixins/messages';
     import PlayersMixin from '~/components/mixins/players';
     import ImageRender from '~/components/map/image-render';
 
@@ -225,6 +226,7 @@
         middleware: 'auth',
         mixins: [
             ErrorMixin,
+            MessagesMixin,
             PlayersMixin,
         ],
         head() {
@@ -514,22 +516,6 @@
                     this.players[id] = new Player(res.data.target);
                 }
                 this.target = this.players[id];
-            },
-
-            handleMessage(message) {
-                if (message.message) {
-                    const parameters = message.parameters;
-                    if (parameters.name) {
-                        parameters.name = this.$t(parameters.name);
-                    }
-
-                    return this.$t(
-                        message.message,
-                        parameters,
-                    );
-                }
-
-                return message;
             },
         },
     };
