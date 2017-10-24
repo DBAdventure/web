@@ -64,7 +64,6 @@
                     </template>
 
                     <template v-if="action === 'give'">
-
                         <Form inline>
                             <FormItem>
                                 <InputNumber :max="currentPlayer.zeni" :min="0" v-model="give.zenis"></InputNumber>
@@ -75,6 +74,15 @@
                         </Form>
 
                         <Table :columns="giveColumns()" :data="giveData()"></Table>
+                    </template>
+
+                    <template v-if="action === 'spell'">
+                        <Select v-model="selectedSpell">
+                            <Option v-for="playerSpell in parameters.playerSpells" :value="playerSpell.id" :key="$t(`spells.${playerSpell.spell.name}.name`)">{{ $t(`spells.${playerSpell.spell.name}.name`) }}</Option>
+                        </Select>
+                        <Button @click.prevent="runAction('spell', target.id)" :disabled="!canCastSpell()">
+                            <img :src="currentPlayer.getActionImagePath('spell')" :alt="$t('map.action.spell', {'AP': settings.player.SPELL_ACTION})" :title="$t('map.action.spell', {'AP': settings.player.SPELL_ACTION})" />                            {{ $t('map.action.spell', {'AP': settings.player.SPELL_ACTION}) }}
+                        </Button>
                     </template>
 
                     <template v-if="action === 'heal' && target.can_be_healed && currentPlayer.action_points >= settings.player.HEAL_ACTION">
@@ -246,6 +254,8 @@
         },
         data() {
             return {
+                selectedAttackType: null,
+                selectedSpell: null,
                 action: null,
                 parameters: {},
                 target: null,
@@ -480,6 +490,9 @@
                     case 'give':
                         prom = api.give(id);
                         break;
+                    case 'spell':
+                        prom = api.spell(id, this.selectedSpell, this.selectedAttackType);
+                        break;
                     case 'building-enter':
                         prom = api.enterBuilding(id).then((res) => {
                             this.action = what;
@@ -495,6 +508,7 @@
 
                 await prom.then(async (res) => {
                     await this.$store.dispatch('fetchPlayer');
+                    this.selectedSpell = null;
                     this.action = what;
                     this.handleResult(res, id);
                     this.$Loading.finish();
@@ -516,6 +530,19 @@
                     this.players[id] = new Player(res.data.target);
                 }
                 this.target = this.players[id];
+            },
+
+            canCastSpell() {
+                if (this.selectedSpell) {
+                    const playerSpell = _.find(
+                        this.parameters.playerSpells,
+                        obj => obj.id === this.selectedSpell,
+                    );
+
+                    return playerSpell && playerSpell.spell.distance <= this.parameters.distance;
+                }
+
+                return false;
             },
         },
     };
