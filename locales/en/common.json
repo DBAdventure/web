@@ -452,7 +452,7 @@
   },
   "building": {
     "magic": {
-      "success": "You successfully purchased {spell}!",
+      "success": "You successfully purchased {name}!",
       "error": {
         "1": "Not enough zeni!",
         "2": "You already purchased this spell!",
@@ -466,7 +466,7 @@
         "2": "Not enough zeni!",
         "3": "You already purchased this item!"
       },
-      "success": "You successfully purchased this {object}!",
+      "success": "You successfully purchased this {name}!",
       "buy": "Buy",
       "no.zeni": "You don't have enought zeni.",
       "already.purchased": {

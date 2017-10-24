@@ -62,9 +62,13 @@
     import {isEmpty} from '~/lib/utils';
     import Stats from '~/components/utils/stats';
     import Requirements from '~/components/utils/requirements';
+    import MessagesMixin from '~/components/mixins/messages';
     import api from '~/services/api';
 
     export default {
+        mixins: [
+            MessagesMixin,
+        ],
         components: {
             Stats,
         },
@@ -103,12 +107,7 @@
                 switch (what) {
                     case 'buy':
                         await api.buyObject(this.building.id, data).then((res) => {
-                            successMessage = this.$t(
-                                res.data.message,
-                                {
-                                    object: this.$t(res.data.parameters.object),
-                                },
-                            );
+                            successMessage = this.handlMessage(res.data);
                             this.$store.dispatch('fetchPlayer');
                         }).catch((err) => {
                             errorMessage = this.$t(err.response.data.error);
@@ -116,12 +115,7 @@
                         break;
                     case 'buySpell':
                         await api.buySpell(this.building.id, data).then((res) => {
-                            successMessage = this.$t(
-                                res.data.message,
-                                {
-                                    spell: this.$t(res.data.parameters.spell),
-                                },
-                            );
+                            successMessage = this.handlMessage(res.data);
                             this.$store.dispatch('fetchPlayer');
                         }).catch((err) => {
                             errorMessage = this.$t(err.response.data.error);
