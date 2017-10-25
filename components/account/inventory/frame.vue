@@ -158,7 +158,7 @@
                 api.unequipObject(objectId).then((res) => {
                     this.$Notice.success({
                         title: this.$t('notice.success'),
-                        desc: this.handleMessage(res.data),
+                        desc: this.handleMessages(res.data),
                     });
                     this.$emit('reload');
                 }).catch(() => {
@@ -171,7 +171,7 @@
                     res.data.messages.forEach((msg) => {
                         this.$Notice.success({
                             title: this.$t('notice.success'),
-                            desc: this.handleMessage(msg),
+                            desc: this.handleMessages(msg),
                         });
                     });
                     this.$emit('reload');
@@ -199,7 +199,7 @@
                 api.dropObject(objectId, nb).then((res) => {
                     this.$Notice.success({
                         title: this.$t('notice.success'),
-                        desc: this.handleMessage(res.data),
+                        desc: this.handleMessages(res.data),
                     });
                     this.$emit('reload');
                 }).catch(() => {
@@ -216,7 +216,7 @@
                 api.useObject(objectId, nb).then((res) => {
                     this.$Notice.success({
                         title: this.$t('notice.success'),
-                        desc: this.handleMessage(res.data),
+                        desc: this.handleMessages(res.data),
                     });
                     this.$emit('reload');
                 }).catch(() => {
