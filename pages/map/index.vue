@@ -78,7 +78,10 @@
 
                     <template v-if="action === 'spell'">
                         <Select v-model="selectedSpell">
-                            <Option v-for="playerSpell in parameters.playerSpells" :value="playerSpell.id" :key="$t(`spells.${playerSpell.spell.name}.name`)">{{ $t(`spells.${playerSpell.spell.name}.name`) }}</Option>
+                            <Option v-for="playerSpell in parameters.playerSpells" :value="playerSpell.id" :key="$t(`spells.${playerSpell.spell.name}.name`)">
+                                {{ $t(`spells.${playerSpell.spell.name}.name`) }}
+                                ({{ playerSpell.spell.requirements.ki }} KI)
+                            </Option>
                         </Select>
                         <Button @click.prevent="runAction('spell', target.id)" :disabled="!canCastSpell()">
                             <img :src="currentPlayer.getActionImagePath('spell')" :alt="$t('map.action.spell', {'AP': settings.player.SPELL_ACTION})" :title="$t('map.action.spell', {'AP': settings.player.SPELL_ACTION})" />                            {{ $t('map.action.spell', {'AP': settings.player.SPELL_ACTION}) }}
@@ -508,7 +511,9 @@
 
                 await prom.then(async (res) => {
                     await this.$store.dispatch('fetchPlayer');
-                    this.selectedSpell = null;
+                    if (what !== 'spell') {
+                        this.selectedSpell = null;
+                    }
                     this.action = what;
                     this.handleResult(res, id);
                     this.$Loading.finish();
