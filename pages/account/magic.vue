@@ -32,11 +32,9 @@
             };
         },
         asyncData() {
-            return api.getSpells().then((res) => {
-                return {
-                    spells: res.data,
-                };
-            });
+            return api.getSpells().then(res => ({
+                spells: res.data,
+            }));
         },
         methods: {
             spellColumns() {

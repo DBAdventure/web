@@ -16,6 +16,6 @@
 
                 return this.$t(message);
             },
-        }
+        },
     };
 </script>
