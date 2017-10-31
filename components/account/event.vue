@@ -11,7 +11,7 @@
         </template>
 
         <div class="event-body">
-            <span class="event-meta pull-right">{{ $moment(event.createdAt).format('lll') }}</span>
+            <span class="event-meta pull-right">{{ $moment(event.created_at).format('lll') }}</span>
             <h4 class="event-title">
                 <template v-if="event.event_type.name === 'player'">
                     <strong v-if="isReceived">{{ displayPlayerName(event.player) }} received:</strong>
