@@ -95,7 +95,7 @@
             </div>
         </div>
 
-        <Table :columns="statsColumns" :data="statsData" stripped size="small" width="625px" border></Table>
+        <Table :columns="statsColumns" :data="statsData" stripped size="small" width="625" border></Table>
 
         <div>
             <p>
