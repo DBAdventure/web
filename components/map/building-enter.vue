@@ -203,7 +203,7 @@
                     },
                     {
                         title: this.$t('object.action'),
-                        width: 70,
+                        width: 100,
                         align: 'center',
                         render: (h, params) => h(
                             'Button',
@@ -260,7 +260,7 @@
                     },
                     {
                         title: this.$t('object.action'),
-                        width: 70,
+                        width: 100,
                         align: 'center',
                         render: (h, params) => h(
                             'Button',
