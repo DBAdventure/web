@@ -69,7 +69,7 @@
   "actionPoints": "Points d'action",
   "movementPoints": "Points de mouvement",
   "health": "Vie",
-  "ki": "KI",
+  "ki": "Ki",
   "class": "Classe",
   "side": "Côté",
   "previous": "Précédent",
@@ -397,7 +397,7 @@
       "text": "Personnage",
       "health": "Vie: {h} / {maxH}",
       "ap": "Action: {AP} / {maxAp}",
-      "ki": "KI: {ki} / {maxKi}",
+      "ki": "Ki: {ki} / {maxKi}",
       "mp": "Mouvement: {mp} / {maxMp}",
       "fp": "Fatigue: {fp} / {maxFp}",
       "plus": "(+1 dans {time} minutes)",
@@ -433,7 +433,7 @@
       "text": "Bien le bonjour, {name}.<br/>Je crois déceler en toi un très grand mage, avide de savoir et en quête de nouvelles techniques. Tes pas t'ont conduit au bon endroit !<br/>En effet je puis tenter de t'apprendre, les meilleurs sorts correspondant à la race à laquelle tu appartiens.<br/>Cependant mes précieux enseignements te couteront, bien entendu, quelques malheureux zénis...<br/>Avant de commencer, sache que seules tes propres compétences entreront en jeu.<br/>Pour acquérir le nouveau sort que tu convoites, les bonus dus à ton équipement ne seront pas pris en compte."
     },
     "bank": {
-      "text": "Bienvenue dans la {name}.<br />You have {goldBar} gold bars!<br />Je te propose de mettre tes Zénis à l'abri dans nos coffres.<br />Attention cependant, ce service n'est pas gratuit...",
+      "text": "Bienvenue dans la {name}.<br />Vous avez {goldBar} gold bars!<br />Je te propose de mettre tes Zénis à l'abri dans nos coffres.<br />Attention cependant, ce service n'est pas gratuit...",
       "deposit": "Combien veux tu déposer de Zénis ?<br />(20 Zénis => 1 lingot)",
       "withdraw": "Combien veux tu retirer de lingots ?<br />(1 lingot => 18 Zénis)",
       "event.name": "Bank de Pilaf",
@@ -527,581 +527,580 @@
       "require": "Require 1 point d'entrainement and 5 points d'action."
     },
     "you": {
-      "have": "Vous avez:",
-      "skill": "{skillPoints} Skill points",
-      "action": "{actionPoints} Action points"
+      "have": "Vous avez :",
+      "skill": "{skillPoints} points d'entraînement",
+      "action": "{actionPoints} points d'action"
     },
     "health": {
-      "title": "Health: {value}",
-      "description": "Increase your max health to 45 units.",
-      "increase": "Increase max health"
+      "title": "Vie : {value}",
+      "description": "Augmente votre maximum de vie de 45 unités.",
+      "increase": "Augmenter la vie max"
     },
     "ki": {
-      "title": "Ki: {value}",
-      "description": "Increase your max ki to 2 units.",
-      "increase": "Increase max ki"
+      "title": "Ki : {value}",
+      "description": "Augmenter votre maximum de Ki de 2 unités.",
+      "increase": "Augmenter le Ki max"
     },
     "strength": {
-      "title": "Strength: {value}",
-      "description": "Increase your physical strength and your capability to carry objects.",
-      "increase": "Increase strength"
+      "title": "Force : {value}",
+      "description": "Augmenter votre force physique et votre capacité à porter des objets.",
+      "increase": "Augmenter la force"
     },
     "resistance": {
-      "title": "Resistance: {value}",
+      "title": "Résistance : {value}",
       "description": "Permet de mieux résister à tout type d'attaque, améliore légèrement ta capacité à porter des objets.",
-      "increase": "Increase resistance"
+      "increase": "Augmenter la résistance"
     },
     "accuracy": {
-      "title": "Accuracy: {value}",
+      "title": "Précision: {value}",
       "description": "Permet d'être plus précis lors des actions autre que la magie.",
-      "increase": "Increase accuracy"
+      "increase": "Augmenter la précision"
     },
     "agility": {
-      "title": "Agility: {value}",
+      "title": "Agilité: {value}",
       "description": "Permet de mieux esquiver les coups et de mieux voler ses adversaires.",
-      "increase": "Increase agility"
+      "increase": "Augmenter l'agilité"
     },
     "vision": {
       "title": "Vision: {value}",
       "description": "Permet de voir plus loin sur la carte.",
-      "increase": "Increase vision"
+      "increase": "Augmenter la vision"
     },
     "intellect": {
-      "title": "Intellect: {value}",
+      "title": "Intelligence: {value}",
       "description": "Permet de mieux se familiariser avec la magie.",
-      "increase": "Increase intellect"
+      "increase": "Augmenter l'intelligence"
     },
     "analysis": {
-      "title": "Analysis: {value}",
+      "title": "Analyse: {value}",
       "description": "Permet de mieux évaluer les compétences des autres joueurs et de s'adapter à tout type de situation.",
-      "increase": "Increase analysis"
+      "increase": "Augmenter l'analyse"
     },
     "skill": {
-      "title": "Skill: {value}",
+      "title": "Talent: {value}",
       "description": "Permet de résister aux sorts et de mieux soigner",
-      "increase": "Increase skill"
+      "increase": "Augmenter le talent"
     }
   },
   "event": {
     "action": {
       "spell": {
-        "dodge": "cast a spell you but you dodge it",
-        "reallyFailed": "really failed his spell, but you lose {damages} points of life",
-        "failed": "failed his spell, but you lose {damages} points of life",
-        "moderatelySucceeded": "moderately succeeded his spell, but you lose {damages} points of life",
-        "succeeded": "succeeded his spell and you lose {damages} points of life",
-        "nice": "made a nice hit and you lose {damages} points of life",
-        "critic": "made a critical hit and you lose {damages} points of life",
-        "master": "made a master stroke and you lose {damages} points of life"
+        "dodge": "lance un sort mais vous l'esquivez",
+        "reallyFailed": "a vraiment échoué son sort, mais vous perdez {damages} points de vie",
+        "failed": "échoue son sort, mais vous perdez {damages} points de vie",
+        "moderatelySucceeded": "a modérément réussi son sort, mais vous perdez {damages} points de vie",
+        "succeeded": "a réussi son sort et vous perdez {damages} points de vie",
+        "nice": "a fait un joli coup et vous perdez {damages} points de vie",
+        "critic": "a fait un coup critique et vous perdez {damages} points de vie",
+        "master": "a fait un coup de maître et vous perdez {damages} points de vie"
       },
       "attack": {
         "dodge": "attacked you but you dodge it",
-        "reallyFailed": "really failed his attack, but you lose {damages} points of life",
-        "failed": "failed his attack, but you lose {damages} points of life",
-        "moderatelySucceeded": "moderately succeeded his attack, but you lose {damages} points of life",
-        "succeeded": "succeeded his attack and you lose {damages} points of life",
-        "nice": "made a nice hit and you lose {damages} points of life",
-        "critic": "made a critical hit and you lose {damages} points of life",
-        "master": "made a master stroke and you lose {damages} points of life",
-        "killed": "You die and you lose 30% of your action points!",
-        "npc": "made an attack and you lose {damages} points of life"
+        "reallyFailed": "really failed his attack, mais vous perdez {damages} points de vie",
+        "failed": "failed his attack, mais vous perdez {damages} points de vie",
+        "moderatelySucceeded": "a modérément réussi son attaque, mais vous perdez {damages} points de vie",
+        "succeeded": "a réussi son attaque et vous perdez {damages} points de vie",
+        "nice": "a fait un joli coup et vous perdez {damages} points de vie",
+        "critic": "a fait un coup critique et vous perdez {damages} points de vie",
+        "master": "a fait un coup de maïtre et vous perdez {damages} points de vie",
+        "killed": "vous mourrez et vous et vous perdez 30% de vos points d'actions !",
+        "npc": "a fait une attaque et vous perdez {damages} points de vie"
       },
       "steal": {
-        "completelyMissed": "has completely missed his steal, you lose {zenisLost} Zénis",
-        "missed": "has missed his steal, you lose {zenisLost} Zénis",
-        "moderatelySuccessful": "has moderately successful his steal, you lose {zenisLost} Zénis",
-        "successful": "has successfully his steal, you lose {zenisLost} Zénis",
-        "wellSuccessful": "has did well his steal, you lose {zenisLost} Zénis",
-        "veryWell": "has very well steal you, you lose {zenisLost} Zénis",
-        "perfectly": "has perfectly steal you, you lose {zenisLost} Zénis"
+        "completelyMissed": "a complètement raté son vol, vous perdez {zenisLost} Zénis",
+        "missed": "a raté son vol, vous perdez {zenisLost} Zénis",
+        "moderatelySuccessful": "a modérément réussi son vol, vous perdez {zenisLost} Zénis",
+        "successful": "a réussi on vol, vous perdez {zenisLost} Zénis",
+        "wellSuccessful": "a bien réussi on vol, vous perdez {zenisLost} Zénis",
+        "veryWell": "a très bien réussi son vol, vous perdez {zenisLost} Zénis",
+        "perfectly": "vous a parfaitement volé, vous perdez {zenisLost} Zénis"
       },
       "heal": {
-        "fatigue": "has decreased your fatigue by {fatiguePoints}",
-        "completelyMissed": "has completely missed his heal, but you gain {healPoints} points of life",
-        "missed": "has missed his heal, but you gain {healPoints} points of life",
-        "moderatelySuccessful": "has moderately successful his heal, but you gain {healPoints} points of life",
-        "successful": "has successfully his heal, you gain {healPoints} points of life",
-        "wellSuccessful": "has did well his heal, you gain {healPoints} points of life",
-        "veryWell": "has very well heal you, you gain {healPoints} points of life",
-        "perfectly": "has perfectly heal you, you gain {healPoints} points of life"
+        "fatigue": "has descendu votre fatigue de {fatiguePoints}",
+        "completelyMissed": "a complètement raté son soin, mais vous récupérez {healPoints} points de vie",
+        "missed": "a raté son soin, mais vous récupérez {healPoints} points de vie",
+        "moderatelySuccessful": "a modérément réussi son soin, mais vous récupérez {healPoints} points de vie",
+        "successful": "a réussi son soin, vous récupérez {healPoints} points de vie",
+        "wellSuccessful": "a bien réussi son soin, vous récupérez {healPoints} points de vie",
+        "veryWell": "a très bien réussi you, you gain {healPoints} points of life",
+        "perfectly": "vous a parfaitement soigné, you gain {healPoints} points of life"
       },
       "slap": {
-        "damages": "gives you a slap!! You lose 1 point of life and 1 point of betrayal.",
-        "killed": "gives you a masterful slap!! You die and you loose 30% of your action points!"
+        "damages": "vous a donné une gifle !! Vous perdez 1 point de vie et 1 point de trahison.",
+        "killed": "vous a donné une gifle magistral !! Vous mourrez et perdez 30% de vos points d'action !"
       },
       "give": {
-        "zeni": "gives you {zeni} zeni!",
-        "item": "gives you {quantity} {name}!"
+        "zeni": "vous donne {zeni} Zénis!",
+        "item": "vous donne {quantity} {name}!"
       }
     },
     "guild": {
-      "leave": "{name} just leave the guild!"
+      "leave": "{name} vient de quitter la guilde !"
     }
   },
   "action": {
-    "convert": "Convert 20 PA to 40 MP",
-    "headPrice": "You've just killed someone whose head was prices, you won {headPrice} Zénis",
-    "betray": "You betray your camp. You risk losing all your side points.",
-    "revenge": "You take revenge. You will not gain any side points",
-    "betrayPoints": "For having betrayed your camp, you gain 1 betrayal point.",
-    "killed": "You killed him!",
+    "convert": "Convertir 20 PA en 40 PM",
+    "headPrice": "Vous venez de tuer quelqu'un dont la tête était mise à prix, vous gagnez {headPrice} Zénis",
+    "betray": "Vous trahisez votre camp. Vous risquez de perdre tous vos points de côté.",
+    "revenge": "Vous vous vengez. Vous ne gagnerez aucun points de côté",
+    "betrayPoints": "Pour avoir trahis votre camp, vous gagnez 1 point de trahison.",
+    "killed": "Vous l'avez tué !",
     "kill": {
-      "battlePoints": "You win 20 extra battle points for this kill.",
-      "revenge": "By killing your opponent, you have just raised your revenge against him..."
+      "battlePoints": "Vous gagnez 20 points de combat supplémentaire pour l'avoir tué.",
+      "revenge": "En tuant votre adversaire, vous venez de vous venger de lui ..."
     },
     "back": {
-      "map": "Back to the map"
+      "map": "Retour à la carte"
     },
     "spell": {
-      "cast": "You cast {name}",
-      "dodge": "Spell dodge!",
-      "reallyFailed": "Spell really failed",
-      "failed": "Spell failed",
-      "mediocre": "Mediocre spell",
-      "successful": "Successful hit",
-      "nice": "Nice hit!",
-      "critical": "Critical hit!",
-      "master": "Master stroke!",
-      "damages": "You make him {damages} of damages."
+      "cast": "Vous lancez {name}",
+      "dodge": "Sort esquivé !",
+      "reallyFailed": "Sort vraiment échoué",
+      "failed": "Sort échoué",
+      "mediocre": "Sort médiocre",
+      "successful": "Coup réussi",
+      "nice": "Joli coup!",
+      "critical": "Coup critique!",
+      "master": "Coup de maître!",
+      "damages": "Vous lui infligez {damages} dégâts."
     },
     "attack": {
       "dodge": "Hit dodge!",
       "reallyFailed": "Hit really failed",
       "failed": "Hit failed",
       "mediocre": "Mediocre stroke",
-      "successful": "Successful hit",
-      "nice": "Nice hit!",
-      "critical": "Critical hit!",
-      "master": "Master stroke!",
-      "damages": "You make him {damages} of damages."
+      "successful": "Coup réussi",
+      "nice": "Joli coup!",
+      "critical": "Coup critique!",
+      "master": "Coup de maître!",
+      "damages": "Vous lui infligez {damages} dégâts."
     },
     "slap": {
-      "damages": "You stick him a slap! He loses 1 point of life and 1 point of betrayal.",
-      "killed": "You stick him a slap! he loses his last point of life and he dies.",
-      "battlePoints": "You earn 10 battle points for killing him by this way."
+      "damages": "Vous lui collez une gifle! Il perd 1 point de vie et 1 point de trahison.",
+      "killed": "Vous lui collez une giffle ! il perd son dernier point de vie et meurt.",
+      "battlePoints": "Vous gagnez 10 points de combat supplémentaire pour l'avoir tué de cette façon."
     },
     "steal": {
-      "completelyMissed": "You completely missed",
-      "missed": "You missed",
-      "moderatelySuccessful": "You moderately succeeded",
-      "successful": "You succeeded",
-      "wellSuccessful": "You did it well",
-      "veryWell": "You did it very well",
-      "perfectly": "You perfectly steal",
+      "completelyMissed": "Vous avez complètement raté.",
+      "missed": "Vous raté",
+      "moderatelySuccessful": "Moyennement réussi",
+      "successful": "Réussi",
+      "wellSuccessful": "Vous l'avez bien fait",
+      "veryWell": "Vous l'avez très bien réussi",
+      "perfectly": "Vous l'avez parfaitement réussi",
       "zeni": {
-        "added": "You gain {zenisAdded} Zénis."
+        "added": "Vous gagnez {zenisAdded} Zénis."
       }
     },
     "heal": {
       "fatigue": {
-        "decrease": "Fatigue decreased by {fatiguePoints}",
-        "disappear": "Fatigue disappeared"
+        "decrease": "Fatigue diminuée de {fatiguePoints}",
+        "disappear": "Fatigue disparue"
       },
-      "restore": "You restore {healPoints} points of life",
-      "completelyMissed": "You completely missed your heal",
-      "missed": "You missed your heal",
-      "moderatelySuccessful": "You moderately succeeded your heal",
-      "successful": "You succeeded your heal",
-      "wellSuccessful": "You did it well",
-      "veryWell": "You did it very well",
-      "perfectly": "You perfectly heal"
+      "restore": "Vous lui redonnez {healPoints} points de vie",
+      "completelyMissed": "Vous avez complètement raté votre soin",
+      "missed": "Vous ratez votre soin",
+      "moderatelySuccessful": "Vous avez moyennement réussi votre soin",
+      "successful": "Vous avez réussi votre soin",
+      "wellSuccessful": "Vous avez bien réussi votre soin",
+      "veryWell": "Vous avez très bien réussi votre soin",
+      "perfectly": "Vous avez parfaitement réussi votre soin"
     },
     "analysis": {
-      "resistance": "Resistance",
+      "resistance": "Résistance",
       "vision": "Vision",
-      "intellect": "Intellect",
-      "agility": "Agility",
-      "accuracy": "Accuracy",
-      "skill": "Skill",
-      "strength": "Strength",
-      "analysis": "Analysis",
+      "intellect": "Intelligence",
+      "agility": "Agilité",
+      "accuracy": "Précision",
+      "skill": "Talent",
+      "strength": "Force",
+      "analysis": "Analyse",
       "zeni": "Zénis",
-      "fatiguePoints": "Fatigue points",
-      "actionPoints": "Action points",
-      "movementPoints": "Movement points",
-      "health": "Health",
+      "fatiguePoints": "Points de fatigue",
+      "actionPoints": "Points d'action",
+      "movementPoints": "Points de mouvement",
+      "health": "Vie",
       "ki": "Ki",
-      "class": "Class",
-      "catastrophic": "Catastrophic evaluation",
-      "reallyFailed": "Really failed evaluation",
-      "failed": "Failed evaluation",
-      "moderatelySuccessful": "Moderately successful evaluation",
-      "successful": "Evaluation successful",
-      "wellSuccessful": "Evaluation very well",
-      "excellent": "Excellent evaluation"
+      "class": "Classe",
+      "catastrophic": "Évaluation catastrophique",
+      "reallyFailed": "Vous avez vraiment raté l'évaluation",
+      "failed": "Évaluation ratée",
+      "moderatelySuccessful": "Évaluation moyennement réussie",
+      "successful": "Évaluation réussie",
+      "wellSuccessful": "Évaluation très bien réussi",
+      "excellent": "Évaluation parfaite"
     },
     "battle": {
-      "points": "You receive {battlePoints} battle points"
+      "points": "Vous recevez {battlePoints} points de combat"
     },
     "level": {
-      "up": "You gain a level, you are now level {level}"
+      "up": "Vous gagnez un niveau, vous êtes maintenant niveau {level}"
     },
     "give": {
-      "text": "Give him",
-      "textObject": "Give",
+      "text": "Lui donner",
+      "textObject": "Donner",
       "success": {
-        "zenis": "You gave him {zenis} Zénis",
-        "object": "You gave him {name}"
+        "zenis": "Vous lui donnez {zenis} Zénis",
+        "object": "Vous lui avez donné {name}"
       },
       "error": {
-        "1": "Inventory is full, can't hold more objects!",
-        "3": "He already have this item!"
+        "1": "L'inventaire est plein, vous ne pouvez pas porter plus d'objets !",
+        "3": "Il possède déjà cette objet !"
       }
     },
     "pickup": {
-      "zeni": "You pick up {zeni} Zénis.",
-      "object": "You have some luck, you just found {number} {name}.",
+      "zeni": "Vous ramassez {zeni} Zénis.",
+      "object": "Vous avez de la chance, vous trouvez {number} {name}.",
       "capsule": {
-        "object": "You have some luck, this one gave you {number} {name}.",
-        "damage": "Too bad, this capsule was trapped you lose {damages} points of life."
+        "object": "Vous avez de la chance, celle-ci vous donne {number} {name}.",
+        "damage": "Dommage, cette capsule était piégée, vous perdez {damages} points de vie."
       },
       "error": {
         "1": "Inventory is full, can't hold more objects!",
-        "3": "You already have this object!"
+        "3": "Il possède déjà cette objet !"
       }
     }
   },
   "ranking": {
-    "title": "Ranking",
-    "text": "This page allow you to view the rank of all players on the island.",
-    "playerSearch": "To search someone, click on the raking type and type his name in the field above.",
-    "search": "Search",
-    "rankBy": "Ranking by:",
-    "battlePoints": "Battle Points",
+    "title": "Classement",
+    "text": "Cette page vous permet de voir le rang de tous les joueurs présent sur l'île.",
+    "playerSearch": "Pour chercher quelqu'un, choissiez le type de classement et tapez son nom.",
+    "search": "Rechercher",
+    "rankBy": "Classement par:",
+    "battlePoints": "Points de combat",
     "serialKillers": "Serial Killers",
     "assassins": "Assassins",
-    "crusaders": "Crusaders",
-    "bounty": "Bounty hunters",
-    "hunters": "Hunters",
-    "victims": "Victims",
+    "crusaders": "Champion",
+    "bounty": "Chasseurs de primes",
+    "hunters": "Chasseurs",
+    "victims": "Victimes",
     "description": {
-      "serialKillers": "killers of all targets expect HQ",
-      "assassins": "killers of good guys",
-      "crusaders": "killers of bad guys",
-      "hunters": "killers of NPC",
-      "victims": "most killed",
+      "serialKillers": "tueurs de toute cibles hormis les QG",
+      "assassins": "tueurs de gentils",
+      "crusaders": "tueurs de méchants",
+      "hunters": "tueurs de PNJ",
+      "victims": "les plus tués",
       "hq": {
-        "hitters": "number of hit on HQ",
-        "terrors": "number of damage on HQ",
-        "killers": "killers of HQ"
+        "hitters": "nombre de coups donné au QG",
+        "terrors": "nombre de dégâts au QG",
+        "killers": "tueurs de QG"
       }
     },
     "slap": {
-      "given": "Slaps given",
-      "taken": "Slaps taken"
+      "given": "Gifles données",
+      "taken": "Gifles reçues"
     },
     "hq": {
-      "hitters": "HQ Hitters",
-      "terrors": "HQ terrors",
-      "killers": "HQ killers"
+      "hitters": "Frappeurs de QG",
+      "terrors": "Terreurs de QG",
+      "killers": "Tueurs de QG"
     }
   },
   "player": {
     "class": {
-      "warrior": "Warrior",
+      "warrior": "Guerrier",
       "champion": "Champion",
-      "lordPlains": "Lord of the plains",
+      "lordPlains": "Seigneur des plaines",
       "berserker": "Berserker",
-      "templar": "Templar",
+      "templar": "Templier",
       "paladin": "Paladin",
-      "gladiator": "Gladiator",
-      "imperialGuard": "Imperial guard",
-      "magus": "Magus",
+      "gladiator": "Gladiateur",
+      "imperialGuard": "Garde impérial",
+      "magus": "Mage",
       "medium": "Medium",
-      "illusionist": "Illusionist",
-      "imperialMagus": "Imperial magus",
+      "illusionist": "Illusionniste",
+      "imperialMagus": "Mage impérial",
       "sage": "Sage",
-      "warMagus": "War magus",
-      "healer": "Healer",
-      "blackMagus": "Black magus",
-      "thief": "Thief",
-      "imperialNinja": "Imperial ninja",
-      "medicalNinja": "Medical ninja",
+      "warMagus": "Mage de guerre",
+      "healer": "Soigneur",
+      "blackMagus": "Mage noir",
+      "thief": "Voleur",
+      "imperialNinja": "Ninja impérial",
+      "medicalNinja": "Ninja médical",
       "scout": "Scout",
-      "specialist": "Specialist",
-      "soldierStone": "Soldier of stone",
-      "imperialHealer": "Imperial healer",
-      "priest": "Priest",
-      "plainsHealer": "Healer of the plains",
-      "highHealer": "High healer",
-      "bishop": "Bishop",
-      "highResearcher": "High researcher",
+      "specialist": "Spécialiste",
+      "soldierStone": "Soldat de pierre",
+      "imperialHealer": "Soigneur impérial",
+      "priest": "Prêtre",
+      "plainsHealer": "Soigneur des plaines",
+      "highHealer": "Haut soigneur",
+      "bishop": "Évêque",
+      "highResearcher": "Chercheur",
       "none": ""
     }
   },
   "guild": {
-    "join": "Join this guild",
-    "createdBy": "Created by",
+    "join": "Rejoindre cette guilde",
+    "createdBy": "Crée par",
     "request": {
-      "deleted": "Your previous request was deleted!"
+      "deleted": "Votre précédente requête a été supprimée !"
     },
     "create": {
-      "deleted": "You just leave this guild, and because it wasn't validated yet, you get your money back!"
+      "deleted": "Vous venez de quitter la guilde, et parce qu'elle n'avait pas encore été validée vous récupérez votre argent !"
     },
-    "deleted": "You just delete your guild. Hope you did the right choice!",
-    "left": "Guild left. Hope you did the right choice!",
-    "history": "History",
+    "deleted": "Vous venez de supprimer votre guilde. Espérant que vous ayez fait le bon choix !",
+    "left": "Vous quittez la guilde. Espérant que vous ayez fait le bon choix !",
+    "history": "Histoire",
     "action": "Action",
-    "leave": "Leave guild",
-    "viewOthers": "View other guilds",
+    "leave": "Quitter la guilde",
+    "viewOthers": "Voir les autres guildes",
     "send": {
-      "message": "Send message to members"
+      "message": "Envoyer un message aux membres"
     },
     "admin": {
-      "title": "Administrate",
+      "title": "Administrer",
       "menu": {
-        "requester": "View requester",
-        "fired": "Fired someone",
-        "rank": "Manage rank",
-        "general": "Appoint a member"
+        "requester": "Voir les requêtes",
+        "fired": "Virer quelqu'un",
+        "rank": "Gérer les rangs",
+        "general": "Nommez un membre"
       },
       "player": {
         "request": {
-          "accept": "Accept",
-          "decline": "Decline"
+          "accept": "Accepter",
+          "decline": "Décliner"
         },
-        "fired": "Fired",
-        "rank": "Rank"
+        "fired": "Virer",
+        "rank": "Rang"
       }
     },
     "player": {
       "not": {
-        "enabled": "They don't accept your request for the moment"
+        "enabled": "Ils nous pas accepté votre requête pour le moment."
       }
     },
-    "members": "View all members",
-    "requester": "View all requesters",
-    "message": "Chef's message",
-    "events": "Events",
-    "create": "Create guild",
-    "view": "View all guilds",
-
+    "members": "Voir tous les membres",
+    "requester": "Voir toutes les requêtes",
+    "message": "Message du chef",
+    "events": "Evénements",
+    "create": "Créer une guilde",
+    "view": "Voir les guildes",
     "buttons": {
-      "view": "View",
-      "join": "Join"
+      "view": "Voir",
+      "join": "Rejoindre"
     },
-    "shortName": "Short name",
-    "name": "Name",
-    "created": "Guild has been created, but you must wait for a validation by an administrator.",
-    "sendMessage": "Send message to all members of the guild",
+    "shortName": "Nom court",
+    "name": "Nom",
+    "created": "La guilde a été créée, mais doit être validée par un administrateur.",
+    "sendMessage": "Envoyer un message à tous les membres",
     "ranking": {
-      "intra": "Browse intra-guild ranking"
+      "intra": "Regarder le classement intra-guilde"
     },
     "not": {
-      "enabled": "Guild is not enabled yet.",
-      "guilded": "You currently don't have a guild."
+      "enabled": "La guilde n'est pas encore validée.",
+      "guilded": "Vous n'avez pas de guilde."
     },
-    "rank": "Guild rank",
+    "rank": "Rang",
     "stats": {
-      "location": "Location",
-      "lastConnection": "Last connection",
+      "location": "Localisation",
+      "lastConnection": "Dernière connexion",
       "zeni": "Zénis",
       "killed": {
-        "good": "Good killed",
-        "bad": "Bad killed",
-        "npc": "Npc killed"
+        "good": "Gentils tués",
+        "bad": "Méchant tués",
+        "npc": "PNJ tués"
       }
     }
   },
   "miscellaneous": {
-    "title": "Player information",
-    "side": "Side: {side}",
-    "name": "Name: {name}",
-    "race": "Race: {race}",
-    "level": "Level: {level}",
-    "search": "Searching for player:",
+    "title": "Information sur le joueur",
+    "side": "<strong>Côté :</strong> {side}",
+    "name": "<strong>Nom :</strong> {name}",
+    "race": "<strong>Race :</strong> {race}",
+    "level": "<strong>Niveau :</strong> {level}",
+    "search": "<strong>Joueur recherché:</strong>",
     "killed": {
-      "all": "All players killed",
-      "good": "Good killed: {nb}",
-      "bad": "Bad killed: {nb}",
-      "npc": "Npc killed: {nb}"
+      "all": "Tous les joueurs tués",
+      "good": "Gentils : {nb}",
+      "bad": "Méchants : {nb}",
+      "npc": "PNJ : {nb}"
     },
-    "lastConnection": "Last connection"
+    "lastConnection": "<strong>Dernière connexion</strong> : {date}"
   },
   "inbox": {
-    "title": "Inbox",
-    "write": "Write",
-    "inbox": "Inbox",
-    "outbox": "Outbox",
+    "title": "Messagerie",
+    "write": "Érire",
+    "inbox": "Boîte de réception",
+    "outbox": "Boîte d'envoie",
     "archive": "Archive",
-    "archivebox": "Archive box",
+    "archivebox": "Boîte d'archive",
     "status": "Status",
     "date": "Date",
-    "sender": "Sender",
-    "recipient": "Recipient",
-    "subject": "Subject",
+    "sender": "Expéditeur",
+    "recipient": "Destinataire",
+    "subject": "Sujet",
     "actions": "Actions",
-    "read": "Read",
-    "back": "Back",
-    "reply": "Reply",
-    "delete": "Delete",
+    "read": "Lire",
+    "back": "Retour",
+    "reply": "Répondre",
+    "delete": "Supprimer",
     "info": {
-      "read": ": Read",
-      "unread": ": Unread",
-      "deleted": ": Deleted",
-      "from": "From: ",
-      "to": "To: ",
-      "date": "Created at: ",
-      "subject": "Subject: ",
-      "message": "Message: "
+      "read": ": Lire",
+      "unread": ": Non lu",
+      "deleted": ": Supprimé",
+      "from": "De : ",
+      "to": "À: ",
+      "date": "Créé le : ",
+      "subject": "Sujet: ",
+      "message": "Message : "
     },
     "clear": {
-      "inbox": "Clear inbox messages",
-      "outbox": "Clear outbox messages",
-      "archive": "Clear archive",
-      "read": "Only clear messages read",
+      "inbox": "Effacer les messages reçus",
+      "outbox": "Effacer les messages de la boîte d'envoi",
+      "archive": "Effacer les archives",
+      "read": "Effacer seulement les messages lus",
       "guild": {
-        "outbox": "Clear messages sent to the guild"
+        "outbox": "Effacer les messages envoyés à la guilde"
       }
     },
     "guild": {
-      "write": "Write to guild's members",
-      "outbox": "Message sent to the guild"
+      "write": "Écrire aux membres de la guilde",
+      "outbox": "Message envoyés aux membres de la guilde"
     },
     "message": {
-      "sent": "Message sent to {names}"
+      "sent": "Message envoyé à {names}"
     }
   },
   "home": {
-    "title": "Home",
+    "title": "Accueil",
     "list": {
       "nb": {
-        "objects": "Number of objects: {nbObjects}",
-        "buildings": "Number of buildings: {nbBuildings}",
-        "activePlayers": "Number of active players: {nbActivePlayers}",
-        "activeNpc": "Number of active Npc: {nbActiveNpc}",
-        "guilds": "Number of guilds: {nbGuilds}"
+        "objects": "Nombre d'objets: {nbObjects}",
+        "buildings": "Nombre de bâtiments: {nbBuildings}",
+        "activePlayers": "Nombre de joueurs actifs: {nbActivePlayers}",
+        "activeNpc": "Nombdre de PNJ: {nbActiveNpc}",
+        "guilds": "Nombre de guilde: {nbGuilds}"
       }
     },
     "edito": {
-      "title": "Game master's note:",
+      "title": "Note des mâitres du jeu :",
       "text": "DBAdventure est un jeu massivement multijoueur gratuit qui n'a besoin que de ton navigateur web pour marcher.<br /> Pénètre ces terres créées par l'infâme pilaf, et choisis un camp ainsi qu'une race.<br /> Seras tu gentil, méchant ?<br /> Un Humain, un Namek, un Saïyen, un Humain-Saïyen, un Alien, un Cyborg, un Dragon, ou encore un Majin ?<br />Choisis bien avant de te mettre au combat, car l'aventure ne fait que commencer...<br />"
     },
     "info": {
-      "title": "Some information about the game:"
+      "title": "Quelques informations à propos du jeu:"
     },
     "news": {
       "created": {
-        "by": "by {by} on {date}"
+        "by": "par {by} le {date}"
       }
     }
   },
   "choice": {
-    "character": "-> Choice your character",
-    "group": "-> Choice group",
-    "clothes": "-> Choice his clothes"
+    "character": "-> Choix du personnage",
+    "group": "-> Choix du gorupe",
+    "clothes": "-> Choix des vêtements"
   },
   "profile": {
-    "you": "You are:",
-    "level": "Your level is:",
-    "position": "You are in:",
-    "side": "Side:",
-    "race": "Race:",
-    "rank": "Rank:",
-    "class": "Class:",
-    "target": "You target is:",
-    "headPrice": "Your head is priced to:",
+    "you": "Vous êtes :",
+    "level": "Votre niveau :",
+    "position": "Vous êtes en :",
+    "side": "Côté :",
+    "race": "Race :",
+    "rank": "Rang :",
+    "class": "Classe :",
+    "target": "Votre cible :",
+    "headPrice": "Votre tête est mise à prix à :",
     "player": {
-      "health": "Health: {h} / {maxH}",
-      "ap": "Action points: {AP} / {maxAp}",
-      "ki": "Ki points: {ki} / {maxKi}",
-      "mp": "Movement points: {mp} / {maxMp}",
-      "fp": "Fatigue points: {fp} / {maxFp}",
-      "bp": "Battle points: {bp} / {maxBp}"
+      "health": "Vie: {h} / {maxH}",
+      "ap": "Points d'action: {AP} / {maxAp}",
+      "ki": "Points de Ki: {ki} / {maxKi}",
+      "mp": "Points de mouvement: {mp} / {maxMp}",
+      "fp": "Points de fatigue: {fp} / {maxFp}",
+      "bp": "Points de combat: {bp} / {maxBp}"
     },
     "stats": {
-      "normal": "Default",
-      "objects": "Objects",
+      "normal": "Defaut",
+      "objects": "Objets",
       "total": "Total",
-      "zeni": "You have <strong>{value}</strong> Zénis",
-      "stolenZéni": "You have stolen <strong>{value}</strong> Zénis",
-      "avgStolenZéni": "Average stolen Zénis: <strong>{value}</strong>",
-      "nbActionStolenZéni": "Number of steal: <strong>{value}</strong>",
-      "betrayals": "You have betrayed <strong>{value}</strong> times your friends",
-      "sidePoints": "You have <strong>{value}</strong> side points",
-      "bountyHunter": "Bounty hunter: <strong>{value}</strong> targets executed",
-      "nbAnalysis": "Number of analysis: <strong>{value}</strong>",
-      "nbDodge": "Number of dodged hits: <strong>{value}</strong>",
-      "healthGiven": "Health restored: <strong>{value}</strong>",
-      "nbHealthGiven": "Number of heal given: <strong>{value}</strong>",
-      "avgHealthGiven": "Average amount of health restored: <strong>{value}</strong>",
-      "nbSpell": "Number of spell cast: <strong>{value}</strong>",
-      "nbSlapGiven": "Number of slap given: <strong>{value}</strong>",
-      "nbSlapTaken": "Number of slap taken: <strong>{value}</strong>",
-      "nbDamageHq": "You have inflicted <strong>{value}</strong> damage(s) to Hq(s)",
-      "nbHitHq": "You gave <strong>{value}</strong> hit to Hq(s)",
-      "avgDamageHq": "Average damage by hit for Hq(s): <strong>{value}</strong>",
-      "nbKillHq": "You destroyed <strong>{value}</strong> Hq(s)",
+      "zeni": "Vous avez <strong>{value}</strong> Zénis",
+      "stolenZéni": "Vous avez volé <strong>{value}</strong> Zénis",
+      "avgStolenZéni": "Moyenne de Zénis volés: <strong>{value}</strong>",
+      "nbActionStolenZéni": "Nombre de vol : <strong>{value}</strong>",
+      "betrayals": "Vous avez trahis <strong>{value}</strong> fois vos amis",
+      "sidePoints": "Vous avez <strong>{value}</strong> points de côté",
+      "bountyHunter": "Chasseur de primes : <strong>{value}</strong> cibles tuées",
+      "nbAnalysis": "Nombre d'analyse : <strong>{value}</strong>",
+      "nbDodge": "Nombre de coup esquivés : <strong>{value}</strong>",
+      "healthGiven": "Points de vie restaurés : <strong>{value}</strong>",
+      "nbHealthGiven": "Nombre de soins effectués : <strong>{value}</strong>",
+      "avgHealthGiven": "Moyenne des soins : <strong>{value}</strong>",
+      "nbSpell": "Nombre de sorts lancés : <strong>{value}</strong>",
+      "nbSlapGiven": "Nombre de gilfes données : <strong>{value}</strong>",
+      "nbSlapTaken": "Nombre de gifles reçues: <strong>{value}</strong>",
+      "nbDamageHq": "Vous avez infligés <strong>{value}</strong> dégâts aux QG",
+      "nbHitHq": "Vous avez donné <strong>{value}</strong> coups aux QG",
+      "avgDamageHq": "Moyenne des dégats infligés aux QG: <strong>{value}</strong>",
+      "nbKillHq": "Vous avez détruit <strong>{value}</strong> QG",
 
-      "nbDamageGood": "You have inflicted <strong>{value}</strong> damage(s) to Good guy(s)",
-      "nbHitGood": "You gave <strong>{value}</strong> hit to Good guy(s)",
-      "avgDamageGood": "Average damage by hit for Good guy(s): <strong>{value}</strong>",
-      "nbKillGood": "You killed <strong>{value}</strong> Good guy(s)",
+      "nbDamageGood": "Vous avez infligé <strong>{value}</strong> dégâts aux Gentils",
+      "nbHitGood": "Vous avez donné <strong>{value}</strong> coups aux Gentils",
+      "avgDamageGood": "Moyenne des dégats infligés aux Gentils: <strong>{value}</strong>",
+      "nbKillGood": "Vous avez tué <strong>{value}</strong> Gentils",
 
-      "nbDamageBad": "You have inflicted <strong>{value}</strong> damage(s) to Bad guy(s)",
-      "nbHitBad": "You gave <strong>{value}</strong> hit to Bad guy(s)",
-      "avgDamageBad": "Average damage by hit for Bad guy(s): <strong>{value}</strong>",
-      "nbKillBad": "You killed <strong>{value}</strong> Bad guy(s)",
+      "nbDamageBad": "Vous avez infligé <strong>{value}</strong> dégâts aux Méchants",
+      "nbHitBad": "Vous avez donné <strong>{value}</strong> coups aux Méchants",
+      "avgDamageBad": "Moyenne des dégats infligés aux Méchants: <strong>{value}</strong>",
+      "nbKillBad": "Vous avez tué <strong>{value}</strong> Méchants",
 
-      "nbDamageNpc": "You have inflicted <strong>{value}</strong> damage(s) to Npc(s)",
-      "nbHitNpc": "You gave <strong>{value}</strong> hit to Npc(s)",
-      "avgDamageNpc": "Average damage by hit for Npc(s): <strong>{value}</strong>",
-      "nbKillNpc": "You killed <strong>{value}</strong> Npc(s)",
+      "nbDamageNpc": "Vous avez infligé <strong>{value}</strong> dégâts aux PNJ",
+      "nbHitNpc": "Vous avez donné <strong>{value}</strong> coups aux PNJ",
+      "avgDamageNpc": "Moyenne des dégats infligés aux PNJ: <strong>{value}</strong>",
+      "nbKillNpc": "Vous avez tué <strong>{value}</strong> Npc(s)",
 
-      "nbTotalKill": "You killed a total of <strong>{value}</strong> people",
-      "nbDeahtCount": "You are dead <strong>{value}</strong> times"
+      "nbTotalKill": "Vous avez tué un total de <strong>{value}</strong> personnages",
+      "nbDeahtCount": "Vous êtes mort <strong>{value}</strong> fois"
     }
   },
   "events": {
-    "target": "You have suffered",
-    "player": "Of which you are the author",
-    "nothing": "Nothing happened yet"
+    "target": "Vous avez reçu",
+    "player": "Dont vous êtes l'auteur",
+    "nothing": "Rien n'est encore arrivé"
   },
   "bonus": {
     "percent": {
-      "health": "Restore health percent",
-      "fatigue": "Restore fatigue percent",
-      "ki": "Restore Ki percent"
+      "health": "Restaure un pourcentage de santé",
+      "fatigue": "Restaure un pourcentage de fatigue",
+      "ki": "Restaure un pourcentage de Ki"
     },
-    "health": "Restore health",
-    "fatigue": "Restore fatigue",
-    "ki": "Restore ki",
-    "teleport": "Teleport",
+    "health": "Restaure la vie",
+    "fatigue": "Restaure la fatigue",
+    "ki": "Restaure le Ki",
+    "teleport": "Téléporte",
     "points": {
-      "action": "Add action points",
-      "movement": "Add movement points"
+      "action": "Ajoute des points d'action",
+      "movement": "Ajoute des points de mouvement"
     },
     "max": {
-      "ki": "Maximum Ki",
-      "health": "Maximum health"
+      "ki": "Ki maximum",
+      "health": "Vie maximum"
     },
-    "strength": "Strength",
-    "accuracy": "Accuracy",
-    "agility": "Agility",
-    "analysis": "Analysis",
-    "skill": "Skill",
-    "resistance": "Resistance",
+    "strength": "Force",
+    "accuracy": "Précision",
+    "agility": "Agilité",
+    "analysis": "Analyse",
+    "skill": "Talent",
+    "resistance": "Résistance",
     "vision": "Vision",
-    "intellect": "Intellect",
+    "intellect": "Intelligence",
     "needed": {
-      "strength": "Strength needed",
-      "accuracy": "Accuracy needed",
-      "agility": "Agility needed",
-      "analysis": "Analysis needed",
-      "skill": "Skill needed",
-      "resistance": "Resistance needed",
-      "vision": "Vision needed",
-      "intellect": "Intellect needed"
+      "strength": "Force nécessaire",
+      "accuracy": "Précision nécessaire",
+      "agility": "Agilité nécessaire",
+      "analysis": "Analyse nécessaire",
+      "skill": "Talent nécessaire",
+      "resistance": "Résistance nécessaire",
+      "vision": "Vision nécessaire",
+      "intellect": "Intelligence nécessaide"
     }
   },
   "object": {
-    "quantity": "Quantity",
-    "give": "Give",
-    "name": "Name",
-    "equipped": "Equipped",
-    "price": "Price",
+    "quantity": "Quantité",
+    "give": "Donner",
+    "name": "Nom",
+    "equipped": "Équiper",
+    "price": "Prix",
     "description": "Description",
-    "weight": "Weight",
+    "weight": "Poids",
     "action": "#"
   },
   "contact": {
@@ -1203,7 +1202,7 @@
     "title": "Team"
   },
   "magic": {
-    "title": "Magic",
+    "title": "Magie",
     "presentation": {
       "intro": "<strong>{name}</strong> te voici à la page de la magie.",
       "text": "Celle-ci te permet de voir les sorts que tu maîtrises et les sorts ayant actuellement un effet sur toi tels que les sorts de soutien.<br />Sache que tout personnage est en mesure de se familiariser avec la magie, y compris les guerriers."
@@ -1243,73 +1242,63 @@
     ]
   },
   "account": {
-    "enabled": "Your account is now activated!",
-    "title": "Account",
+    "enabled": "Votre compte est maintenant activé !",
+    "title": "Compte",
     "created": {
-      "title": "Account created",
-      "description": "You should have receive a mail to confirm your account."
+      "title": "Compte créé",
+      "description": "Vous allez recevoir un e-mail de confirmation."
     },
     "inventory": {
-      "title": "Inventory"
+      "title": "Inventaire"
     },
     "magic": {
-      "title": "Magic"
+      "title": "Magie"
     },
     "appearance": {
-      "failed": "Failed to change appearance",
-      "success": "New appearance saved!"
+      "failed": "Echec lors du changement d'apparance",
+      "success": "Nouvelle apparance sauvegardée !"
     }
   },
   "error": {
     "home": "Back to the home page",
     "not": {
-      "connected": "You are not connected",
-      "exists": "This page does not exists",
-      "guilded": "You don't have a guild yet"
+      "connected": "Vous n'êtes pas connecté",
+      "exists": "Cette page n'existe pas",
+      "guilded": "Vous n'avez pas encore de guilde"
     },
-    "forbidden": "Forbidden",
+    "forbidden": "Interdit",
     "bad": {
-      "credentials": "Your username or password are incorrect."
+      "credentials": "Votre login et votre mot de passe ne sont pas correct."
     },
-    "generic": "Oops, something went wrong",
+    "generic": "Oups, quelque chose s'est mal passé",
     "move": {
-      "forbidden": "You are not able to move here!"
+      "forbidden": "Vous ne pouvez vous déplacer ici !"
     },
     "convert": {
-      "forbidden": "You are not able to convert!"
+      "forbidden": "Vous ne pouvez pas convertir !"
     },
     "teleport": {
-      "forbidden": "Can not teleport"
+      "forbidden": "Impossible de se téléporter"
     }
   },
-  "strap": {
-    "limit": "Limit reached ({limit} items max).",
-    "loading": "Loading...",
-    "minLength": "Min. Length",
-    "notSelected": "Nothing Selected",
-    "required": "Required",
-    "search": "Search",
-    "minCharacters": "Min {value}",
-    "maxCharacters": "{value} remaining characters"
-  },
   "field": {
-    "nomatch": "Field does not match",
-    "empty": "Field is empty"
+    "nomatch": "Le champ ne correspond pas",
+    "empty": "Le champ est vide"
   },
-  "This page could not be found": "This page could not be found",
+  "This page could not be found": "Cette page n'existe pas",
   "modal": {
     "confirm": {
-      "title": "Are you sure?",
-      "drop": "Do you really want to drop this item?",
-      "use": "Do you really want to use this item?",
+      "title": "Êtes-vous sûr ?",
+      "drop": "Voulez-vous vraiment jeter cet objet ?",
+      "use": "Voulez-vous vraiment utiliser cet objet ?",
       "guild": {
-        "leave": "Do you really want to leave this guild?"
+        "leave": "Voulez-vous vraiment quitter la guilde ?"
       }
     }
   },
   "notice": {
-    "success": "Success",
-    "error": "Error",
-    "generic": "Whoops, something went wrong...Unexpected Error."
+    "success": "Succés",
+    "error": "Erreur",
+    "generic": "Oups, quelque chose s'est mal passé ... Erreur inattendue."
   }
 }

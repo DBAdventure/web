@@ -390,16 +390,17 @@
         async asyncData({query}) {
             let writeTo;
             if (query.write) {
-                const {data} = await api.getPlayerInfo(query.write);
-                if (!isEmpty(data.player)) {
-                    writeTo = data.player.name;
-                }
+                await api.getPlayerInfo(query.write).then((res) => {
+                    if (!isEmpty(res.data.player)) {
+                        writeTo = res.data.player.name;
+                    }
+                }).catch(() => {});
             }
 
             return api.getInboxDirectory().then(res => ({
                 messages: res.data.messages,
                 writeTo,
-            }));
+            })).catch(() => {});
         },
     };
 </script>

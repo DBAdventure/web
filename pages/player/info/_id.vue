@@ -8,7 +8,7 @@
                 <td>
                     <div class="stats">
                         <h1>{{ $t('miscellaneous.title') }}</h1>
-                        <p>{{ $t('miscellaneous.name', {name: target.getDisplayName()}) }}</p>
+                        <p v-html="$t('miscellaneous.name', {name: target.getDisplayName()})"></p>
 
                         <p v-if="$store.state.player.connected">
                             <router-link :to="{path: '/account/inbox', query: {write: target.id}}">
@@ -16,23 +16,23 @@
                             </router-link>
                         </p>
 
-                        <p v-if="target.side">{{ $t('miscellaneous.side', {side: $t(target.side.name)}) }}</p>
-                        <p v-if="target.race">{{ $t('miscellaneous.race', {race: $t(target.race.name)}) }}</p>
-                        <p v-if="target.level">{{ $t('miscellaneous.level', {race: target.level}) }}</p>
+                        <p v-if="target.side" v-html="$t('miscellaneous.side', {side: $t(target.side.name)})"></p>
+                        <p v-if="target.race" v-html="$t('miscellaneous.race', {race: $t(target.race.name)})"></p>
+                        <p v-if="target.level" v-html="$t('miscellaneous.level', {level: target.level})"></p>
 
                         <p v-if="target.target">
                             {{ $t('miscellaneous.search') }}
                             <router-link :to="`/player/info/${target.target.id}`">{{ target.target.getDisplayName() }}</router-link>
                         </p>
 
-                        <p>{{ $t('miscellaneous.killed.all') }}</p>
-                        <ul>
-                            <li>{{ $t('miscellaneous.killed.good', {nb: target.nb_kill_good}) }}</li>
-                            <li>{{ $t('miscellaneous.killed.bad', {nb: target.nb_kill_bad}) }}</li>
-                            <li>{{ $t('miscellaneous.killed.npc', {nb: target.nb_kill_npc}) }}</li>
-                        </ul>
+                        <dl>
+                            <dt>{{ $t('miscellaneous.killed.all') }}</dt>
+                            <dd v-html="$t('miscellaneous.killed.good', {nb: target.nb_kill_good})"></dd>
+                            <dd v-html="$t('miscellaneous.killed.bad', {nb: target.nb_kill_bad})"></dd>
+                            <dd v-html="$t('miscellaneous.killed.npc', {nb: target.nb_kill_npc})"></dd>
+                        </dl>
 
-                        <p v-if="target.last_login">{{ $t('miscellaneous.lastConnection', {date: target.last_login}) }}</p>
+                        <p v-if="target.last_login" v-html="$t('miscellaneous.lastConnection', {date: $moment(target.last_login).format('ll') })"></p>
                     </div>
                 </td>
             </tr>

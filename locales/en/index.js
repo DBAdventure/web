@@ -1,6 +1,6 @@
+import iview from 'iview/dist/locale/en-US';
 import buildings from './buildings';
 import common from './common';
-import iview from './iview';
 import objects from './objects';
 import spells from './spells';
 
