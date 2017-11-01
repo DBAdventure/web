@@ -15,9 +15,7 @@
         },
         async asyncData({params, error, redirect}) {
             return api.confirmAccount(params.id, params.token).then(
-                () => {
-                    redirect('/', {enabled: true});
-                },
+                () => redirect('/', {enabled: true}),
             ).catch(() => {
                 error({
                     message: 'error.not.exists',
