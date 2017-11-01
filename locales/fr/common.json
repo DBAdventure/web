@@ -1,1 +1,1315 @@
-{}
+{
+  "pilaf": {
+    "island": "Île de Pilaf",
+    "world": "Monde de Pilaf"
+  },
+  "bear": {
+    "den": "L'antre de l'ours"
+  },
+  "search": "Rechercher",
+  "edit": "Editer",
+  "delete": "Supprimer",
+  "name": "Nom",
+  "username": "Login",
+  "email": "Email",
+  "image": "Image",
+  "price": "Prix",
+  "description": "Description",
+  "weight": "Poids",
+  "appearance": "Apparence",
+  "level": "Niveau",
+  "save": "Sauvegarder",
+  "requirements": "Conditions",
+  "good": "Gentil",
+  "bad": "Méchant",
+  "npc": "PNJ",
+  "heaven": "Paradis",
+  "hell": "Enfer",
+  "password": "Mot de passe",
+  "saiyajins": "Saïyens",
+  "saiyajin": "Saïyen",
+  "human-saiyajins": "Humain-Saïyens",
+  "human-saiyajin": "Humain-Saïyen",
+  "humans": "Humains",
+  "human": "Humain",
+  "namekians": "Nameks",
+  "namekian": "Namek",
+  "dragons": "Dragons",
+  "dragon": "Dragon",
+  "aliens": "Aliens",
+  "alien": "Alien",
+  "cyborgs": "Cyborgs",
+  "cyborg": "Cyborg",
+  "majins": "Majins",
+  "majin": "Majin",
+  "predator": "Predateur",
+  "ghost": "Fantôme",
+  "insect": "Insecte",
+  "reptilian": "Reptile",
+  "demon": "Démon",
+  "hydra": "Hydre",
+  "human-soldier": "Soldat Humain",
+  "warrior": "Guerrier",
+  "magus": "Mage",
+  "thief": "Voleur",
+  "healer": "Soigneur",
+  "analyst": "Analyste",
+  "ranger": "Ranger",
+  "close": "Fermer",
+  "resistance": "Résistance",
+  "vision": "Vision",
+  "intellect": "Intelligence",
+  "agility": "Agilité",
+  "accuracy": "Précision",
+  "skill": "Talent",
+  "strength": "Force",
+  "analysis": "Analyse",
+  "zeni": "Zénis",
+  "fatiguePoints": "Points de fatigue",
+  "actionPoints": "Points d'action",
+  "movementPoints": "Points de mouvement",
+  "health": "Vie",
+  "ki": "KI",
+  "class": "Classe",
+  "side": "Côté",
+  "previous": "Précédent",
+  "next": "Suivant",
+  "guilds": "Guildes",
+  "login": {
+    "text": "Login",
+    "signin": "S'inscrire"
+  },
+  "forgot": {
+    "password": "Mot de passe oublié"
+  },
+  "stats": {
+    "players": {
+      "active": "Joueurs actifs",
+      "good": "Gentils",
+      "bad": "Méchants"
+    }
+  },
+  "header": {
+    "settings": "Paramètres",
+    "profile": "Profile",
+    "training": {
+      "room": "Salle d'entraïnement"
+    },
+    "logout": "Se déconnecter",
+    "appearance": "Apparence",
+    "admin": "Admin",
+    "connected": "<strong>{nb}</strong> joueur(s) en ligne"
+  },
+  "form": {
+    "invalid": "Ce formulaire n'est pas valide",
+    "add": {
+      "recipient": "Ajouter un destinataire",
+      "bonus": "Ajouter un bonus",
+      "requirements": "Ajouter une condition"
+    },
+    "recipient": "Destinataire",
+    "description": "Description",
+    "price": "Prix",
+    "remove": "Supprimer",
+    "password": "Mot de passe",
+    "passwordConfirm": "Confirmation du mot de passe",
+    "email": "Email",
+    "emailConfirm": "Confirmation de l'email",
+    "login": "Login",
+    "name": "Nom",
+    "image": "Image",
+    "shortName": "Nom court",
+    "history": "Histoire",
+    "create": "Crée",
+    "subject": "Sujet",
+    "message": "Message",
+    "send": "Envoyer",
+    "choice": {
+      "appearance": "Choisir l'apparence"
+    },
+    "bank": {
+      "deposit": "Déposer",
+      "withdraw": "Retirer"
+    },
+    "wanted": {
+      "setprice": "Mettre un prix sur sa tête"
+    }
+  },
+  "register": {
+    "title": "Inscription",
+    "text": "Inscription",
+    "welcome": "Bienvenue dans cette nouvelle aventure!",
+    "intro": "Nous allons faire ensemble la création de ton personnage, ne néglige donc surtout pas cette étape.",
+    "personalinfo": "Informations personnelles",
+    "speciality": "Spécialité du personnage",
+    "specialityIntro": "Au cours du jeu, tu affronteras des joueurs divers et variés. Certain seront des mages pour attaquer de loin, d'autre des soigneurs pour protéger leurs amis etc. Et pour ton personnage, quelle sera sa spécialité ? Retrouve ci-dessous la liste des classes officielles de Dbadventure V3 et fais ton choix. Il te sera possible de combiner plusieurs classes ou bien changer d'orientation en cours de jeu mais ça ne sera pas facile. Choisis l'orientation initiale de ton personnage pour améliorer certaines de ses compétences de départ.",
+    "advantages": "Avantages",
+    "weakness": "Inconvénients",
+    "stats": "Statistics",
+    "various": "Divers",
+    "viewSpell": "Voir les sorts",
+    "appearance": {
+      "title": "A présent, choisis la race et l'apparence de ton personnage.",
+      "warning": "L'apparence de ton personnage n'a d'importance que pour la classe <strong>Mage</strong> car chaque race possède des sorts différents. Fais donc bien attention au choix de la race de ton personnage si tu es mage. Dans le cas contraire, choisis simplement l'apparence en fonction de tes goûts sans prendre en compte les descriptions des races."
+    },
+    "warrior": {
+      "intro": "Puissant et robuste, vous combattrez au corps à corps. Vous vous épuisez moins que les autres classes. Très efficace contre tout type d'adversaire, seuls les voleurs réussiront à parer vos attaques. Le guerrier sera un parfait membre d'une unité d'attaque mais dépendra de ses coéquipiers pour savoir qui frapper sans foncer tête baissée au risque de se faire prendre au dépourvu.",
+      "advantages": [
+        "Efficace contre la plupart des classes",
+        "Fatigue atténuée",
+        "Capacité à supporter de lourds équipements et objets consommables",
+        "Défense"
+      ],
+      "weakness": [
+        "Attaque contre les voleurs",
+        "Moins efficace dans les un contre un"
+      ],
+      "stats": "770 points de vie, 10 force, 9 précision, 5 résistance, 3 agilité"
+    },
+    "magus": {
+      "intro": "Doté d'une intelligence supérieure, vous vous distinguerez des autres classes par la diversité de votre talent : apprenez des sorts puissants pouvant toucher au loin, protégez vos alliés grâce à la magie, handicapez l'ennemi avec des sorts spéciaux ou encore, dcéuplez votre puissance en vous métamorphosant en une créature redoutable. Pourtant, derrière ces vertus remarquables se cache un revers de la lame : votre seule arme est votre esprit, donc sans sort de défense, vous représentez une proie facile à vaincre sans compter que vous vous épuisez facilement.",
+      "advantages": [
+        "Attaques magiques variées et puissantes",
+        "Capacité à toucher à distance"
+      ],
+      "weakness": [
+        "Consomment plus d'énergie que les autres classes",
+        "Défense"
+      ],
+      "stats": "365 points de vie, 15 esprit, 3 analyse, 4 talent, 5 vision, 3 résistance, 15 de Ki + sort de base maîtrisé"
+    },
+    "thief": {
+      "intro": "Votre faible puissance sera largement compensée par votre capacité à parer les attaques des guerriers. Comme le soigneur, vous ne souffrez pas de la fatigue lors de vos vols. Richesse semble bien définir votre avenir mais ce ne sera pas chose facile, il faudra bien ouvrir l'oeil si vous ne souhaitez pas succomber facilement à la puissance dévastatrice des mages. Classe rusée donc, mais à surveiller.",
+      "advantages": [
+        "Capacité à voler pour réapprovisionner les troupes",
+        "Défense contre les guerriers",
+        "Infatigable lors de tentative de vols"
+      ],
+      "weakness": [
+        "Puissance",
+        "Défense magique"
+      ],
+      "stats": "500 points de vie, 15 agilité, 11 précision, 5 force, 2 analyse"
+    },
+    "healer": {
+      "intro": "Classe aux nombreuses vertus. Votre savoir vous permet de guérir vos frères blessés aux combats. Rétablissez leur vivacité grâce à la médecine. Les mages auront bien du mal à vous faire tomber étant donné que vous maitrisez parfaitement les soins à appliquer face à tout type de magie. Les soigneurs ne souffrent pas de la fatigue lors de leurs actions médicales. Sachez également que certain habitants de l'île affirment avoir vu des soigneurs réaliser de véritables miracles comme par exemple rendre la vue ou estomper un empoisonnement.",
+      "advantages": [
+        "Excellent soutien en bataille",
+        "Défense magique"
+      ],
+      "weakness": [
+        "Attaque"
+      ],
+      "stats": "500 points de vie, 17 talent, 7 esprit, 4 force et 9 de Ki"
+    },
+    "analyst": {
+      "intro": "Classe défensive tacticienne indispensable à la bataille, effectuez un compte rendu de l'ennemi, déterminez sa principale qualité, son orientation, son arsenal et bien plus encore. Jouez en équipe avec les voleurs en leur informant des trésors à dérober. Aidez les soigneurs en leur indiquant quels sont vos frères à bout de souffle ou sous influence de malédiction. Cette classe représente le soutien exceptionnel lors des grandes guerres, sans compter qu'elle est capable de bien observer les attaques de ses adversaires lui permettant ainsi de bien se défendre face à tout type d'attaque. On regrette cependant que cette immense qualité ne se retrouve pas côté offensif de l'analyste...",
+      "advantages": [
+        "Classe furtive, vous ne laissez aucune trace de votre passage",
+        "Permet d'élaborer de multiples stratégies menant à la victoire",
+        "Défense générale",
+        "Soutien"
+      ],
+      "weakness": [
+        "Attaque",
+        "Gestion très difficile"
+      ],
+      "stats": "500 points de vie, 15 analyse, 5 vision,  5 force, 3 agilité, 3 résistance et 4 précision"
+    },
+    "ranger": {
+      "intro": "",
+      "advantages": [],
+      "weakness": [],
+      "stats": "770 points de vie, 10 force, 9 précision, 5 résistance, 3 agilité"
+    },
+    "humans": {
+      "intro": "Face à la puissance remarquable des autre races, les mages humains ont du s'adapter et apprendre des sorts pouvant rivaliser avec les plus grands combattants de l'île. Pour cette troisième époque, la race humaine a usée de toute sa technologie de pointe pour maitriser des sorts de défense et de malus permettant à la fois de défendre ses alliés comme handicaper l'adversaire. Un mage humain sera un membre fondamental d'une unité de combattants car il saura protéger ses alliés, handicaper l'ennemi et même avantager ses frères offensifs en désactivant les sorts de soutien de l'ennemi.",
+      "advantages": [
+        "Race équilibrée",
+        "Sorts spéciaux variés",
+        "Sort de défense et combinable avec les cyborgs",
+        "Soutien exceptionnel"
+      ]
+    },
+    "human-saiyajins": {
+      "intro": "L'union des humains et des saïyens donna naissance à cette race exceptionnelle comblant à la fois les défauts de ses pères et offrant une diversité de sorts. Un mage humain saïyen est très polyvalent, son talent a de quoi rendre jaloux les autre races. Il peut se transformer en un combattant redoutable, handicaper l'ennemi en réduisant ses points de mouvements ou encore frapper plusieurs cibles à la fois. On retrouve là toute l'influence de la puissance saïyenne et la tacticité des humains chez le mage humain saïyen.",
+      "advantages": [
+        "3 sorts de transformation",
+        "Sorts spéciaux dévastateurs"
+      ]
+    },
+    "namekians": {
+      "intro": "Autrefois, les Nameks d'origine pacifiste, n'avaient que peu de combattants. Mais face à la menace que représentent leurs adversaires pour leur peuple, les Nameks ont exploité du mieux que possible leur intelligence supérieure à de très nombreuses races afin de créer des mages surpuissants n'ayant désormais plus rien à voir avec leurs ancêtres. Ces nouveaux combattants savent économiser leurs points de mouvements, protéger leurs amis ou même décupler leur puissance en se sacrifiant pour eux. Et comme si cela ne suffisait pas, un mage Namek est même capable de tuer en un coup et d'imiter partiellement les capacités des autres classes (vol, soin).",
+      "advantages": [
+        "Economie des points de mouvements",
+        "Sorts spéciaux remarquables",
+        "Capable d'imiter d'autres classes",
+        "Sort ultime dévastateur"
+      ]
+    },
+    "saiyajins": {
+      "intro": "Dotée d'une puissance sans limite, cette race légendaire bénéficie de nombreux sorts de transformation avec en complément la capacité d'éloigner l'ennemi. Les saïyens sont tellement avide de puissance qu'ils en négligent la défense ou les contre face aux sorts spéciaux de l'adversaire. Un saïyen représentera donc pour cette troisième époque, l'attaquant idéal à condition d'assurer sa sécurité à l'aide des autres races et classes.",
+      "advantages": [
+        "4 sorts de transformation",
+        "Sorts mystérieux au potentiel caché",
+        "1 sort spécial"
+      ]
+    },
+    "aliens": {
+      "intro": "Représentant le pire cauchemar pour des peuples ayant été réduits à l'esclavage, les mages aliens seront des adversaires très difficiles à combattre. Grâce au talent des mercenaires de l'espace, de Freezer, Cooler, Janemba ou encore Tapion et Minosha, les mages aliens peuvent se vanter de posséder le plus grand nombre de sorts spéciaux parmi toutes les races. Pour résumé leur potentiel, ils excellent dans tous les domaines, que ce soit en termes d'attaque, de soutien ou de défense.",
+      "advantages": [
+        "Sorts très variés et handicapant sérieusement l'adversaire",
+        "Défense",
+        "2 transformations"
+      ]
+    },
+    "cyborgs": {
+      "intro": "Tacticien défensif, le mage cyborg se remarquera par son énorme potentiel défensif mais également ses sorts tactiques pouvant réduire les points de mouvement adverses mais aussi désarmant la cible. Il sait jouer en équipe avec les mages humains afin de créer des barrières défensives optimales. A travers les âges, ces êtres cybernétiques réalisèrent l'immense avantage de leur résistance robotique. Ainsi, ils développèrent encore et encore cette incroyable endurance du combat leur permettant pour cette troisième époque, de bénéficier de mages cyborgs pouvant lancer de puissants sorts nécessitant une consommation de Ki très réduite.",
+      "advantages": [
+        "Défense",
+        "Soutien",
+        "Sorts spéciaux",
+        "Consommation de Ki fortement réduite"
+      ]
+    },
+    "majins": {
+      "intro": "La puissance des mages majins ne cesse de s'intensifier à travers les âges. Pour cette troisième époque, ils se sont eux aussi entrainés dur afin de maitriser de nouvelles techniques impressionnantes. Comme les Nameks, ils savent économiser leurs points de mouvements, et encore plus efficacement qu'à la précédente époque. Les grandes nouveautés pour le mage Majin reposent sur la maitrise de la résurrection et l'absorption suprême pouvant décupler très fortement le potentiel offensif de celui-ci. Une panoplie de stratégie s'offre donc à cette race.",
+      "advantages": [
+        "Race équilibrée",
+        "Potentiel offensif infini",
+        "Réssurection",
+        "Economie de points de mouvements",
+        "Soutien grâce au contrôle de Babidi"
+      ]
+    },
+    "dragons": {
+      "intro": "Créatures légendaires, cette race bénéficie de sorts très variés. Les dragons se distinguent des autres races par leurs attaques ayant de nombreux effets négatifs pour l&#9;adversaire et bénéfiques pour les alliés. On raconte même qu'ils sont capables de réaliser des miracles comme décupler leur puissance à l'aide des fameuses Dragon Ball ou encore ramener à la vie leurs amis vaincus au combat. Mais attention cependant à la consommation de Ki très élevée pouvant épuiser très vite le Dragon...",
+      "advantages": [
+        "Un total de 13 sorts !",
+        "Sort de soutien protecteur",
+        "Sorts spéciaux nombreux, très puissants, variés et inégalables",
+        "Capable d'accroitre sa puissance grâce aux Dragon Ball"
+      ]
+    },
+    "objects": {
+      "title": "Afin de t'épauler un peu dès le début de l'aventure, tu auras à ta disposition ces objets ci-dessous dès ta première connexion au jeu :",
+      "objects": [
+        "2 potions de fatigue",
+        "1 senzu",
+        "5 baies sauvages"
+      ]
+    }
+  },
+  "map": {
+    "title": "Carte",
+    "legend": {
+      "title": "Légende",
+      "me": "Ma position",
+      "guild": "Membres de la guilde",
+      "npcs": "Pnjs",
+      "buildings": "Bâtiments"
+    },
+    "refresh": "Rafraîchir",
+    "distance": "est en {x}/{y}, à une distance de {distance}.",
+    "nearYou": "est à côté de toi.",
+    "noOne": "Tu ne vois personne",
+    "player": {
+      "distance": "est en {x}/{y}, il est au niveau {level}, à une distance de {distance}.",
+      "nearYou": "est à côté de toi, il est au niveau {level}",
+      "info": "<span class=\"{sideClass}\">{side}</span> | <span class=\"{raceClass}\">{race}</span> {class}"
+    },
+    "building": {
+      "enter": "Entrer",
+      "teleport": "Téléporter",
+      "wanted": "Mettre un prix sur sa tête"
+    },
+    "object": {
+      "pickup": "Ramasser"
+    },
+    "action": {
+      "pickup": "Ramasser ({AP} PA)",
+      "attack": "Attaquer ({AP} PA)",
+      "steal": "Voler ({AP} PA)",
+      "give": "Donner ({AP} PA)",
+      "slap": "Gifler ({AP} PA)",
+      "analysis": "Analyser ({AP} PA)",
+      "heal": "Soigner ({AP} PA)",
+      "spell": "Lancer un sort ({AP} PA)",
+      "attack-betray": "Attaquer (trahison) ({AP} PA)",
+      "attack-revenge": "Attaquer (vengeance) ({AP} PA)",
+      "self": {
+        "heal": "Se soigner ({AP} PA)"
+      },
+      "again": {
+        "steal": "Voler encore pour {AP} PA",
+        "attack": "Attaquer encore pour {AP} PA",
+        "attack-betray": "Attaquer encore (trahison) ({AP} PA)",
+        "attack-revenge": "Attaquer encore (vengeance) ({AP} PA)",
+        "spell": "Lancer un nouveau sort pour {AP} PA",
+        "heal": "Soigner à nouveau pour {AP} PA",
+        "slap": "Gifler une fois de plus pour {AP} PA",
+        "analysis": "Analyser à nouveau {AP} PA",
+        "give": "Donner autre chose pour {AP} PA"
+      }
+    }
+  },
+  "movements": {
+    "points": {
+      "six": "Se déplacer pour 6 points",
+      "five": "Se déplacer  5 points"
+    }
+  },
+  "menu": {
+    "home": "Accueil",
+    "forum": "Forum",
+    "faq": "F.A.Q",
+    "team": "Team",
+    "contact": "Contact",
+    "inbox": "Messagerie",
+    "magic": "Magie",
+    "rules": {
+      "supports": "Règles et support"
+    },
+    "ranking": "Classement",
+    "history": "Histoire",
+    "inventory": "Inventaire",
+    "dashboard": "Dashboard",
+    "guild": {
+      "text": "Guilde"
+    },
+    "movement": {
+      "text": "Mouvement"
+    },
+    "connection": {
+      "text": "Connexion"
+    },
+    "game": {
+      "text": "Jeu"
+    },
+    "map": {
+      "text": "Carte",
+      "mini": "Minicarte",
+      "name": "Carte: {mapName}",
+      "position": "Position: {x} / {y}",
+      "zeni": "Zéni: {zeni}"
+    },
+    "player": {
+      "text": "Personnage",
+      "health": "Vie: {h} / {maxH}",
+      "ap": "Action: {AP} / {maxAp}",
+      "ki": "KI: {ki} / {maxKi}",
+      "mp": "Mouvement: {mp} / {maxMp}",
+      "fp": "Fatigue: {fp} / {maxFp}",
+      "plus": "(+1 dans {time} minutes)",
+      "minus": "(-1 dans {time} minutes)"
+    }
+  },
+  "game": {
+    "teleport": {
+      "text": "Bienvenu dans the {name} téléporteur, où voulez-vous allez ?",
+      "link": "Se téléporter dans le {where}",
+      "where": {
+        "n": "Nord",
+        "ne": "Nord est",
+        "nw": "Nord ouest",
+        "s": "Sud",
+        "se": "Sud est",
+        "sw": "Sud ouest",
+        "e": "Est",
+        "w": "Ouest"
+      }
+    },
+    "attack": {
+      "protect": "Pilaf du haut de son palais vous écrase en empêchant ainsi de déranger ce petit personnage"
+    },
+    "lose": {
+      "life": "Vous perdez {damages} points de vie."
+    },
+    "dead": "Vous êtes mort, vous vous téléportez en {x} / {y} dans votre point de départ.",
+    "shop": {
+      "text": "Bienvenue {player}, te voici dans le {name}.<br/><br/>J'ai à ta disposition d'intéressants articles, malheuresement, mon stock est très faible à la suite du cataclysme. Bien entendu, Ce que je te propose n'est pas gratuit et je ne prends en contre partie que la monnaie d'usage sur cette île : les zénis à l'effigie de notre Maître Pilaf.<br/>Ces articles, une fois en ta possession, peuvent être revendus dans n'importe quelles autres boutiques de cette île.<br/>Pour ce qui est des zénis, ne t'inquiète pas trop pour en trouver. Pilaf m'empêche d'en avoir trop en prélevant son impôt . Il en jette ensuite par les fenêtres de son chateau, et tu pourras en trouver sous tes pas si tu parcours notre vaste île !<br/>Si tu recherches des objets aux vertues plus conséquent, je te conseille de parcourir l'île et de discuter avec les habitants. Tu pourras sans doute faire des affaires intéressantes..."
+    },
+    "magic": {
+      "text": "Bien le bonjour, {name}.<br/>Je crois déceler en toi un très grand mage, avide de savoir et en quête de nouvelles techniques. Tes pas t'ont conduit au bon endroit !<br/>En effet je puis tenter de t'apprendre, les meilleurs sorts correspondant à la race à laquelle tu appartiens.<br/>Cependant mes précieux enseignements te couteront, bien entendu, quelques malheureux zénis...<br/>Avant de commencer, sache que seules tes propres compétences entreront en jeu.<br/>Pour acquérir le nouveau sort que tu convoites, les bonus dus à ton équipement ne seront pas pris en compte."
+    },
+    "bank": {
+      "text": "Bienvenue dans la {name}.<br />You have {goldBar} gold bars!<br />Je te propose de mettre tes Zénis à l'abri dans nos coffres.<br />Attention cependant, ce service n'est pas gratuit...",
+      "deposit": "Combien veux tu déposer de Zénis ?<br />(20 Zénis => 1 lingot)",
+      "withdraw": "Combien veux tu retirer de lingots ?<br />(1 lingot => 18 Zénis)",
+      "event.name": "Bank de Pilaf",
+      "interest": "Tu gagnes {goldBar} barre(s) d'or grâce aux intérêts bancaires"
+    },
+    "wanted": {
+      "text": "Bienvenue {player}, te voici dans le {name}.<br/><br/>Sur cette île maudite, plusieurs personnes sont détestées. Tu peux, grâce à moi et à mes confrères, déposer des Zénis, afin de mettre une tête à prix. Celui qui abattra une cible ainsi désignée, remportera la cagnotte.<br />Attention, je n'accepte les mises qu'à partir de {minimalAmount} Zénis minimun.",
+      "not.enough.zeni": "Pas assez de Zénis",
+      "target": "Cible",
+      "amount": "Montant"
+    }
+  },
+  "building": {
+    "magic": {
+      "success": "Vous avez acheté avec succés {name} !",
+      "error": {
+        "1": "Pas assez de Zénis!",
+        "2": "Vous avez déjà ce sort !",
+        "3": "Vous ne pouvez pas acheter ce sort !",
+        "4": "Vous ne pouvez pas acheter ce sort, vous ne remplissez pas les conditions !"
+      }
+    },
+    "shop": {
+      "error": {
+        "1": "L'inventaire est plein, vous ne pouez portez plus d'objets !",
+        "2": "Pas assez de Zénis !",
+        "3": "Vous avez déjà acheté cet objet !"
+      },
+      "success": "Vous avez acheté avec succès  {name}!",
+      "buy": "Acheter",
+      "no.zeni": "Vous n'avez pas assez de Zénis !",
+      "already.purchased": {
+        "spell": "Vous avez déjà acehté ce sort !"
+      }
+    },
+    "already": {
+      "purchased": "Déjà acheté !"
+    },
+    "bank": {
+      "deposit": {
+        "zeni": "Vous venez de déposer {goldBar} barre(s) d'or, vous en avez maintenant {goldBank} en banque."
+      },
+      "withdraw": {
+        "zeni": "Vous venez de retirer {goldBar} barre(s) d'or, vous en avez maintenant {goldBank} en banque."
+      }
+    }
+  },
+  "inventory": {
+    "choose": "Choisir l'obje",
+    "unequip": "Déséquiper",
+    "equip": "Equiper",
+    "use": "Utiliser",
+    "drop": "Jeter",
+    "no": {
+      "items": "Pas d'objet."
+    },
+    "cap": "Coiffe",
+    "accessory": "Accessoire",
+    "vision": "Vision",
+    "outfit": "Tenue",
+    "shield": "Bouclier",
+    "weapon": "Arme",
+    "shoes": "Chaussures",
+    "weight": "Poids de l'inventaire : {weight} / {maxWeight}",
+    "cant": {
+      "use": "Vous ne pouvez utiliser cet objet.",
+      "equip": "Vous ne pouvez équiper cet objet.",
+      "drop": "Vous ne pouvez jeter cet objet."
+    },
+    "object": {
+      "unequip": "{name} a été déséquippé !",
+      "equip": "{name} a été équipé!",
+      "used": "Vous utilisez {number} {name}!",
+      "drop": "{name} a été jeté sur la carte !",
+      "error": {
+        "teleport": "Pas assez de points de mouvements !",
+        "equip": "{name} ne peut pas être équipé pour le moment !"
+      }
+    }
+  },
+  "training": {
+    "title": "Salle d'entrainement",
+    "room": "Salle d'entrainement",
+    "success": "Capacité améliorée !",
+    "error": "Impossible d'améliorer cette capacité !",
+    "capacity": "Capacité",
+    "action": "Action",
+    "text": "Cette page te permet d'entraîner ton personnage afin de le rendre plus puissant,<br /> et ce, grâce aux points de compétences que tu gagneras en montant de niveau.",
+    "info": "Information : Pour certaines compétences telles que la force ou la magie par exemple, un point ajouté ne signifie pas un point de dégâts en plus.",
+    "increase": {
+      "require": "Require 1 point d'entrainement and 5 points d'action."
+    },
+    "you": {
+      "have": "Vous avez:",
+      "skill": "{skillPoints} Skill points",
+      "action": "{actionPoints} Action points"
+    },
+    "health": {
+      "title": "Health: {value}",
+      "description": "Increase your max health to 45 units.",
+      "increase": "Increase max health"
+    },
+    "ki": {
+      "title": "Ki: {value}",
+      "description": "Increase your max ki to 2 units.",
+      "increase": "Increase max ki"
+    },
+    "strength": {
+      "title": "Strength: {value}",
+      "description": "Increase your physical strength and your capability to carry objects.",
+      "increase": "Increase strength"
+    },
+    "resistance": {
+      "title": "Resistance: {value}",
+      "description": "Permet de mieux résister à tout type d'attaque, améliore légèrement ta capacité à porter des objets.",
+      "increase": "Increase resistance"
+    },
+    "accuracy": {
+      "title": "Accuracy: {value}",
+      "description": "Permet d'être plus précis lors des actions autre que la magie.",
+      "increase": "Increase accuracy"
+    },
+    "agility": {
+      "title": "Agility: {value}",
+      "description": "Permet de mieux esquiver les coups et de mieux voler ses adversaires.",
+      "increase": "Increase agility"
+    },
+    "vision": {
+      "title": "Vision: {value}",
+      "description": "Permet de voir plus loin sur la carte.",
+      "increase": "Increase vision"
+    },
+    "intellect": {
+      "title": "Intellect: {value}",
+      "description": "Permet de mieux se familiariser avec la magie.",
+      "increase": "Increase intellect"
+    },
+    "analysis": {
+      "title": "Analysis: {value}",
+      "description": "Permet de mieux évaluer les compétences des autres joueurs et de s'adapter à tout type de situation.",
+      "increase": "Increase analysis"
+    },
+    "skill": {
+      "title": "Skill: {value}",
+      "description": "Permet de résister aux sorts et de mieux soigner",
+      "increase": "Increase skill"
+    }
+  },
+  "event": {
+    "action": {
+      "spell": {
+        "dodge": "cast a spell you but you dodge it",
+        "reallyFailed": "really failed his spell, but you lose {damages} points of life",
+        "failed": "failed his spell, but you lose {damages} points of life",
+        "moderatelySucceeded": "moderately succeeded his spell, but you lose {damages} points of life",
+        "succeeded": "succeeded his spell and you lose {damages} points of life",
+        "nice": "made a nice hit and you lose {damages} points of life",
+        "critic": "made a critical hit and you lose {damages} points of life",
+        "master": "made a master stroke and you lose {damages} points of life"
+      },
+      "attack": {
+        "dodge": "attacked you but you dodge it",
+        "reallyFailed": "really failed his attack, but you lose {damages} points of life",
+        "failed": "failed his attack, but you lose {damages} points of life",
+        "moderatelySucceeded": "moderately succeeded his attack, but you lose {damages} points of life",
+        "succeeded": "succeeded his attack and you lose {damages} points of life",
+        "nice": "made a nice hit and you lose {damages} points of life",
+        "critic": "made a critical hit and you lose {damages} points of life",
+        "master": "made a master stroke and you lose {damages} points of life",
+        "killed": "You die and you lose 30% of your action points!",
+        "npc": "made an attack and you lose {damages} points of life"
+      },
+      "steal": {
+        "completelyMissed": "has completely missed his steal, you lose {zenisLost} Zénis",
+        "missed": "has missed his steal, you lose {zenisLost} Zénis",
+        "moderatelySuccessful": "has moderately successful his steal, you lose {zenisLost} Zénis",
+        "successful": "has successfully his steal, you lose {zenisLost} Zénis",
+        "wellSuccessful": "has did well his steal, you lose {zenisLost} Zénis",
+        "veryWell": "has very well steal you, you lose {zenisLost} Zénis",
+        "perfectly": "has perfectly steal you, you lose {zenisLost} Zénis"
+      },
+      "heal": {
+        "fatigue": "has decreased your fatigue by {fatiguePoints}",
+        "completelyMissed": "has completely missed his heal, but you gain {healPoints} points of life",
+        "missed": "has missed his heal, but you gain {healPoints} points of life",
+        "moderatelySuccessful": "has moderately successful his heal, but you gain {healPoints} points of life",
+        "successful": "has successfully his heal, you gain {healPoints} points of life",
+        "wellSuccessful": "has did well his heal, you gain {healPoints} points of life",
+        "veryWell": "has very well heal you, you gain {healPoints} points of life",
+        "perfectly": "has perfectly heal you, you gain {healPoints} points of life"
+      },
+      "slap": {
+        "damages": "gives you a slap!! You lose 1 point of life and 1 point of betrayal.",
+        "killed": "gives you a masterful slap!! You die and you loose 30% of your action points!"
+      },
+      "give": {
+        "zeni": "gives you {zeni} zeni!",
+        "item": "gives you {quantity} {name}!"
+      }
+    },
+    "guild": {
+      "leave": "{name} just leave the guild!"
+    }
+  },
+  "action": {
+    "convert": "Convert 20 PA to 40 MP",
+    "headPrice": "You've just killed someone whose head was prices, you won {headPrice} Zénis",
+    "betray": "You betray your camp. You risk losing all your side points.",
+    "revenge": "You take revenge. You will not gain any side points",
+    "betrayPoints": "For having betrayed your camp, you gain 1 betrayal point.",
+    "killed": "You killed him!",
+    "kill": {
+      "battlePoints": "You win 20 extra battle points for this kill.",
+      "revenge": "By killing your opponent, you have just raised your revenge against him..."
+    },
+    "back": {
+      "map": "Back to the map"
+    },
+    "spell": {
+      "cast": "You cast {name}",
+      "dodge": "Spell dodge!",
+      "reallyFailed": "Spell really failed",
+      "failed": "Spell failed",
+      "mediocre": "Mediocre spell",
+      "successful": "Successful hit",
+      "nice": "Nice hit!",
+      "critical": "Critical hit!",
+      "master": "Master stroke!",
+      "damages": "You make him {damages} of damages."
+    },
+    "attack": {
+      "dodge": "Hit dodge!",
+      "reallyFailed": "Hit really failed",
+      "failed": "Hit failed",
+      "mediocre": "Mediocre stroke",
+      "successful": "Successful hit",
+      "nice": "Nice hit!",
+      "critical": "Critical hit!",
+      "master": "Master stroke!",
+      "damages": "You make him {damages} of damages."
+    },
+    "slap": {
+      "damages": "You stick him a slap! He loses 1 point of life and 1 point of betrayal.",
+      "killed": "You stick him a slap! he loses his last point of life and he dies.",
+      "battlePoints": "You earn 10 battle points for killing him by this way."
+    },
+    "steal": {
+      "completelyMissed": "You completely missed",
+      "missed": "You missed",
+      "moderatelySuccessful": "You moderately succeeded",
+      "successful": "You succeeded",
+      "wellSuccessful": "You did it well",
+      "veryWell": "You did it very well",
+      "perfectly": "You perfectly steal",
+      "zeni": {
+        "added": "You gain {zenisAdded} Zénis."
+      }
+    },
+    "heal": {
+      "fatigue": {
+        "decrease": "Fatigue decreased by {fatiguePoints}",
+        "disappear": "Fatigue disappeared"
+      },
+      "restore": "You restore {healPoints} points of life",
+      "completelyMissed": "You completely missed your heal",
+      "missed": "You missed your heal",
+      "moderatelySuccessful": "You moderately succeeded your heal",
+      "successful": "You succeeded your heal",
+      "wellSuccessful": "You did it well",
+      "veryWell": "You did it very well",
+      "perfectly": "You perfectly heal"
+    },
+    "analysis": {
+      "resistance": "Resistance",
+      "vision": "Vision",
+      "intellect": "Intellect",
+      "agility": "Agility",
+      "accuracy": "Accuracy",
+      "skill": "Skill",
+      "strength": "Strength",
+      "analysis": "Analysis",
+      "zeni": "Zénis",
+      "fatiguePoints": "Fatigue points",
+      "actionPoints": "Action points",
+      "movementPoints": "Movement points",
+      "health": "Health",
+      "ki": "Ki",
+      "class": "Class",
+      "catastrophic": "Catastrophic evaluation",
+      "reallyFailed": "Really failed evaluation",
+      "failed": "Failed evaluation",
+      "moderatelySuccessful": "Moderately successful evaluation",
+      "successful": "Evaluation successful",
+      "wellSuccessful": "Evaluation very well",
+      "excellent": "Excellent evaluation"
+    },
+    "battle": {
+      "points": "You receive {battlePoints} battle points"
+    },
+    "level": {
+      "up": "You gain a level, you are now level {level}"
+    },
+    "give": {
+      "text": "Give him",
+      "textObject": "Give",
+      "success": {
+        "zenis": "You gave him {zenis} Zénis",
+        "object": "You gave him {name}"
+      },
+      "error": {
+        "1": "Inventory is full, can't hold more objects!",
+        "3": "He already have this item!"
+      }
+    },
+    "pickup": {
+      "zeni": "You pick up {zeni} Zénis.",
+      "object": "You have some luck, you just found {number} {name}.",
+      "capsule": {
+        "object": "You have some luck, this one gave you {number} {name}.",
+        "damage": "Too bad, this capsule was trapped you lose {damages} points of life."
+      },
+      "error": {
+        "1": "Inventory is full, can't hold more objects!",
+        "3": "You already have this object!"
+      }
+    }
+  },
+  "ranking": {
+    "title": "Ranking",
+    "text": "This page allow you to view the rank of all players on the island.",
+    "playerSearch": "To search someone, click on the raking type and type his name in the field above.",
+    "search": "Search",
+    "rankBy": "Ranking by:",
+    "battlePoints": "Battle Points",
+    "serialKillers": "Serial Killers",
+    "assassins": "Assassins",
+    "crusaders": "Crusaders",
+    "bounty": "Bounty hunters",
+    "hunters": "Hunters",
+    "victims": "Victims",
+    "description": {
+      "serialKillers": "killers of all targets expect HQ",
+      "assassins": "killers of good guys",
+      "crusaders": "killers of bad guys",
+      "hunters": "killers of NPC",
+      "victims": "most killed",
+      "hq": {
+        "hitters": "number of hit on HQ",
+        "terrors": "number of damage on HQ",
+        "killers": "killers of HQ"
+      }
+    },
+    "slap": {
+      "given": "Slaps given",
+      "taken": "Slaps taken"
+    },
+    "hq": {
+      "hitters": "HQ Hitters",
+      "terrors": "HQ terrors",
+      "killers": "HQ killers"
+    }
+  },
+  "player": {
+    "class": {
+      "warrior": "Warrior",
+      "champion": "Champion",
+      "lordPlains": "Lord of the plains",
+      "berserker": "Berserker",
+      "templar": "Templar",
+      "paladin": "Paladin",
+      "gladiator": "Gladiator",
+      "imperialGuard": "Imperial guard",
+      "magus": "Magus",
+      "medium": "Medium",
+      "illusionist": "Illusionist",
+      "imperialMagus": "Imperial magus",
+      "sage": "Sage",
+      "warMagus": "War magus",
+      "healer": "Healer",
+      "blackMagus": "Black magus",
+      "thief": "Thief",
+      "imperialNinja": "Imperial ninja",
+      "medicalNinja": "Medical ninja",
+      "scout": "Scout",
+      "specialist": "Specialist",
+      "soldierStone": "Soldier of stone",
+      "imperialHealer": "Imperial healer",
+      "priest": "Priest",
+      "plainsHealer": "Healer of the plains",
+      "highHealer": "High healer",
+      "bishop": "Bishop",
+      "highResearcher": "High researcher",
+      "none": ""
+    }
+  },
+  "guild": {
+    "join": "Join this guild",
+    "createdBy": "Created by",
+    "request": {
+      "deleted": "Your previous request was deleted!"
+    },
+    "create": {
+      "deleted": "You just leave this guild, and because it wasn't validated yet, you get your money back!"
+    },
+    "deleted": "You just delete your guild. Hope you did the right choice!",
+    "left": "Guild left. Hope you did the right choice!",
+    "history": "History",
+    "action": "Action",
+    "leave": "Leave guild",
+    "viewOthers": "View other guilds",
+    "send": {
+      "message": "Send message to members"
+    },
+    "admin": {
+      "title": "Administrate",
+      "menu": {
+        "requester": "View requester",
+        "fired": "Fired someone",
+        "rank": "Manage rank",
+        "general": "Appoint a member"
+      },
+      "player": {
+        "request": {
+          "accept": "Accept",
+          "decline": "Decline"
+        },
+        "fired": "Fired",
+        "rank": "Rank"
+      }
+    },
+    "player": {
+      "not": {
+        "enabled": "They don't accept your request for the moment"
+      }
+    },
+    "members": "View all members",
+    "requester": "View all requesters",
+    "message": "Chef's message",
+    "events": "Events",
+    "create": "Create guild",
+    "view": "View all guilds",
+
+    "buttons": {
+      "view": "View",
+      "join": "Join"
+    },
+    "shortName": "Short name",
+    "name": "Name",
+    "created": "Guild has been created, but you must wait for a validation by an administrator.",
+    "sendMessage": "Send message to all members of the guild",
+    "ranking": {
+      "intra": "Browse intra-guild ranking"
+    },
+    "not": {
+      "enabled": "Guild is not enabled yet.",
+      "guilded": "You currently don't have a guild."
+    },
+    "rank": "Guild rank",
+    "stats": {
+      "location": "Location",
+      "lastConnection": "Last connection",
+      "zeni": "Zénis",
+      "killed": {
+        "good": "Good killed",
+        "bad": "Bad killed",
+        "npc": "Npc killed"
+      }
+    }
+  },
+  "miscellaneous": {
+    "title": "Player information",
+    "side": "Side: {side}",
+    "name": "Name: {name}",
+    "race": "Race: {race}",
+    "level": "Level: {level}",
+    "search": "Searching for player:",
+    "killed": {
+      "all": "All players killed",
+      "good": "Good killed: {nb}",
+      "bad": "Bad killed: {nb}",
+      "npc": "Npc killed: {nb}"
+    },
+    "lastConnection": "Last connection"
+  },
+  "inbox": {
+    "title": "Inbox",
+    "write": "Write",
+    "inbox": "Inbox",
+    "outbox": "Outbox",
+    "archive": "Archive",
+    "archivebox": "Archive box",
+    "status": "Status",
+    "date": "Date",
+    "sender": "Sender",
+    "recipient": "Recipient",
+    "subject": "Subject",
+    "actions": "Actions",
+    "read": "Read",
+    "back": "Back",
+    "reply": "Reply",
+    "delete": "Delete",
+    "info": {
+      "read": ": Read",
+      "unread": ": Unread",
+      "deleted": ": Deleted",
+      "from": "From: ",
+      "to": "To: ",
+      "date": "Created at: ",
+      "subject": "Subject: ",
+      "message": "Message: "
+    },
+    "clear": {
+      "inbox": "Clear inbox messages",
+      "outbox": "Clear outbox messages",
+      "archive": "Clear archive",
+      "read": "Only clear messages read",
+      "guild": {
+        "outbox": "Clear messages sent to the guild"
+      }
+    },
+    "guild": {
+      "write": "Write to guild's members",
+      "outbox": "Message sent to the guild"
+    },
+    "message": {
+      "sent": "Message sent to {names}"
+    }
+  },
+  "home": {
+    "title": "Home",
+    "list": {
+      "nb": {
+        "objects": "Number of objects: {nbObjects}",
+        "buildings": "Number of buildings: {nbBuildings}",
+        "activePlayers": "Number of active players: {nbActivePlayers}",
+        "activeNpc": "Number of active Npc: {nbActiveNpc}",
+        "guilds": "Number of guilds: {nbGuilds}"
+      }
+    },
+    "edito": {
+      "title": "Game master's note:",
+      "text": "DBAdventure est un jeu massivement multijoueur gratuit qui n'a besoin que de ton navigateur web pour marcher.<br /> Pénètre ces terres créées par l'infâme pilaf, et choisis un camp ainsi qu'une race.<br /> Seras tu gentil, méchant ?<br /> Un Humain, un Namek, un Saïyen, un Humain-Saïyen, un Alien, un Cyborg, un Dragon, ou encore un Majin ?<br />Choisis bien avant de te mettre au combat, car l'aventure ne fait que commencer...<br />"
+    },
+    "info": {
+      "title": "Some information about the game:"
+    },
+    "news": {
+      "created": {
+        "by": "by {by} on {date}"
+      }
+    }
+  },
+  "choice": {
+    "character": "-> Choice your character",
+    "group": "-> Choice group",
+    "clothes": "-> Choice his clothes"
+  },
+  "profile": {
+    "you": "You are:",
+    "level": "Your level is:",
+    "position": "You are in:",
+    "side": "Side:",
+    "race": "Race:",
+    "rank": "Rank:",
+    "class": "Class:",
+    "target": "You target is:",
+    "headPrice": "Your head is priced to:",
+    "player": {
+      "health": "Health: {h} / {maxH}",
+      "ap": "Action points: {AP} / {maxAp}",
+      "ki": "Ki points: {ki} / {maxKi}",
+      "mp": "Movement points: {mp} / {maxMp}",
+      "fp": "Fatigue points: {fp} / {maxFp}",
+      "bp": "Battle points: {bp} / {maxBp}"
+    },
+    "stats": {
+      "normal": "Default",
+      "objects": "Objects",
+      "total": "Total",
+      "zeni": "You have <strong>{value}</strong> Zénis",
+      "stolenZéni": "You have stolen <strong>{value}</strong> Zénis",
+      "avgStolenZéni": "Average stolen Zénis: <strong>{value}</strong>",
+      "nbActionStolenZéni": "Number of steal: <strong>{value}</strong>",
+      "betrayals": "You have betrayed <strong>{value}</strong> times your friends",
+      "sidePoints": "You have <strong>{value}</strong> side points",
+      "bountyHunter": "Bounty hunter: <strong>{value}</strong> targets executed",
+      "nbAnalysis": "Number of analysis: <strong>{value}</strong>",
+      "nbDodge": "Number of dodged hits: <strong>{value}</strong>",
+      "healthGiven": "Health restored: <strong>{value}</strong>",
+      "nbHealthGiven": "Number of heal given: <strong>{value}</strong>",
+      "avgHealthGiven": "Average amount of health restored: <strong>{value}</strong>",
+      "nbSpell": "Number of spell cast: <strong>{value}</strong>",
+      "nbSlapGiven": "Number of slap given: <strong>{value}</strong>",
+      "nbSlapTaken": "Number of slap taken: <strong>{value}</strong>",
+      "nbDamageHq": "You have inflicted <strong>{value}</strong> damage(s) to Hq(s)",
+      "nbHitHq": "You gave <strong>{value}</strong> hit to Hq(s)",
+      "avgDamageHq": "Average damage by hit for Hq(s): <strong>{value}</strong>",
+      "nbKillHq": "You destroyed <strong>{value}</strong> Hq(s)",
+
+      "nbDamageGood": "You have inflicted <strong>{value}</strong> damage(s) to Good guy(s)",
+      "nbHitGood": "You gave <strong>{value}</strong> hit to Good guy(s)",
+      "avgDamageGood": "Average damage by hit for Good guy(s): <strong>{value}</strong>",
+      "nbKillGood": "You killed <strong>{value}</strong> Good guy(s)",
+
+      "nbDamageBad": "You have inflicted <strong>{value}</strong> damage(s) to Bad guy(s)",
+      "nbHitBad": "You gave <strong>{value}</strong> hit to Bad guy(s)",
+      "avgDamageBad": "Average damage by hit for Bad guy(s): <strong>{value}</strong>",
+      "nbKillBad": "You killed <strong>{value}</strong> Bad guy(s)",
+
+      "nbDamageNpc": "You have inflicted <strong>{value}</strong> damage(s) to Npc(s)",
+      "nbHitNpc": "You gave <strong>{value}</strong> hit to Npc(s)",
+      "avgDamageNpc": "Average damage by hit for Npc(s): <strong>{value}</strong>",
+      "nbKillNpc": "You killed <strong>{value}</strong> Npc(s)",
+
+      "nbTotalKill": "You killed a total of <strong>{value}</strong> people",
+      "nbDeahtCount": "You are dead <strong>{value}</strong> times"
+    }
+  },
+  "events": {
+    "target": "You have suffered",
+    "player": "Of which you are the author",
+    "nothing": "Nothing happened yet"
+  },
+  "bonus": {
+    "percent": {
+      "health": "Restore health percent",
+      "fatigue": "Restore fatigue percent",
+      "ki": "Restore Ki percent"
+    },
+    "health": "Restore health",
+    "fatigue": "Restore fatigue",
+    "ki": "Restore ki",
+    "teleport": "Teleport",
+    "points": {
+      "action": "Add action points",
+      "movement": "Add movement points"
+    },
+    "max": {
+      "ki": "Maximum Ki",
+      "health": "Maximum health"
+    },
+    "strength": "Strength",
+    "accuracy": "Accuracy",
+    "agility": "Agility",
+    "analysis": "Analysis",
+    "skill": "Skill",
+    "resistance": "Resistance",
+    "vision": "Vision",
+    "intellect": "Intellect",
+    "needed": {
+      "strength": "Strength needed",
+      "accuracy": "Accuracy needed",
+      "agility": "Agility needed",
+      "analysis": "Analysis needed",
+      "skill": "Skill needed",
+      "resistance": "Resistance needed",
+      "vision": "Vision needed",
+      "intellect": "Intellect needed"
+    }
+  },
+  "object": {
+    "quantity": "Quantity",
+    "give": "Give",
+    "name": "Name",
+    "equipped": "Equipped",
+    "price": "Price",
+    "description": "Description",
+    "weight": "Weight",
+    "action": "#"
+  },
+  "contact": {
+    "title": "Contact"
+  },
+  "history": {
+    "title": "History"
+  },
+  "rules": {
+    "title": "Rules",
+    "chapter": {
+      "1": {
+        "title": "Chapitre I",
+        "sections": {
+          "site": {
+            "title": "Le site",
+            "text1": "DBAdventure, est un jeu de rôle. Tours par tours, tu gagnes des PA, un toutes les demi-heures, le maximun est de 60. Au délà de cette limite tu ne gagnes plus rien. Comme tu le sais, sur chaque jeu il y a des règles, nous te demandons de bien les respecter, sinon tu verras ton personnage ou tes personnages supprimé(s).<br/>Bon jeu.<br/>L'équipe.",
+            "text2": "Le multicompte est interdit sous peine de suppression de tous les personnages du joueur."
+          },
+          "game": {
+            "title": "Le jeu",
+            "text1": "DBAdventure est un jeu massivement multijoueur gratuit qui n'a besoin que d'un navigateur web pour marcher.<br/> Pénétre les terres créées par l'infâme pilaf, choisis un camp ainsi qu'une race. Tu pourras être gentil, méchant, un Humain, un Namek, un Saïyen, un Humain-Saïyen, un Alien, un Cyborg, un Dragon, ou encore un Malduchi."
+          }
+        }
+      },
+      "2": {
+        "title": "Chapitre II",
+        "sections": {
+          "option": {
+            "title": "Option du personnage",
+            "text1": "Une fois inscrit, tu auras le droit de modifier les informations que tu auras saisies.",
+            "text2": "Mot de passe",
+            "text3": "Apparence et histoire",
+            "text4": "Email et Login",
+            "text5": "Supprimer ou hiberner ton compte"
+          },
+          "character": {
+            "title": "Personnages",
+            "text1": "Un personnage est gentil ou méchant, aucune différence, tu es juste prêt à disposer d'un camp.<br/>Cela peut changer par la suite, on peut passer de gentil en méchant en tuant un gentil et inversement pour les méchants.",
+            "text2": "Apparence : un personnage peut aussi choisir sa race ; Un Humain, un Namek, un Saïyen, un Humain-Saïyen, un Alien, un Cyborg, un Dragon, ou encore un Malduchi. La race sert en premier lieu pour les sorts des mages, puis pour l'apparence. Chaque races a ses sorts et ses apparences."
+          }
+        }
+      },
+      "3": {
+        "title": "Chapitre III",
+        "sections": {
+          "map": {
+            "title": "La carte",
+            "text1": "La carte se trouve dans le menu \"Personnage\". Bien sûr, tu n'en vois qu'une petite partie qui représente l'endroit où tu te situes. Tu es le personnage au milieu de la carte et sur cette carte apparaissent plusieurs choses :",
+            "text2": "<strong>Le type de terrain:</strong> la terre (en vert), le désert (en jaune), ces terrains n'affectent en rien tes déplacement, et il y a aussi l'eau (en bleu), qui délimite la carte et qui est infranchissable...",
+            "text3": "<strong>Les joueurs :</strong> tu peux voir tous les joueurs à proximité (quand il y a trop de joueurs sur une case, un groupe de personnages est representé) et si tu es sur la même case que certains, tu peux effectuer des actions sur eux.",
+            "text4": "<strong>Les bâtiments :</strong> Magasins, bâtiments de tête à prix, informations...",
+            "text5": "<strong>Respawns :</strong> quand un personnage est créé ou qu'il meurt, il apparaît dans son respawn. Il y a deux respawns qui sont le paradis et l'enfer. Dans le respawn, on ne peut rien faire à part se déplacer, donner, et acheter des objets. <br/>Pour effectuer plus d'actions, il faut aller sur le champ de bataille, et pour y aller, il faut accéder aux téléporteurs."
+          },
+          "building": {
+            "title": "Bâtiments",
+            "text1": "<strong>Magasin :</strong> lieu où l'on achète les objets du jeu. Une partie de des Zénis utilisés sont reversés sur la carte.",
+            "text2": "<strong>Tête à prix : </strong>lieu où l'on peut mettre les têtes à prix.",
+            "text3": "<strong>Téléporteur :</strong> permet d'aller du respawn au champ de bataille.",
+            "text4": "<strong>QG :</strong> bâtiment des guildes."
+          }
+        }
+      },
+      "4": {
+        "title": "Chapitre IV",
+        "sections": {
+          "abbreviations": {
+            "title": "Les PA, BP, PC, PV et Z",
+            "text1": "<strong>Les PA :</strong> Ce sont les points de déplacement. On gagne un point toutes les 5 minutes et on peut avoir une réserve de 100 PA.",
+            "text2": "<strong>Les BP :</strong> Quand on \"attaque\", \"soigne\", \"analyse\" ou \"vole\", on gagne des Bp. Les Bp sont les points qui font monter ta barre d'expérience (dans la rubriqued Statistiques du personnage). Tu gagnes plus ou moins de Bp.",
+            "text3": "<strong>Les PC :</strong> ce sont les points qui servent dans la rubrique compétence. Ces points permettent d'augmenter ta vie, ton ki, ta force, ta résistance, ta précision, ton agilité, ta vision, ton analyse et ton talent. Ces points sont gagnés seulement quand tu passes le level.",
+            "text4": "<strong>Les PDC :</strong> les points de côtés, signifient que tu es le meilleur des gentils ou des méchants, ceux-là augmentent en fonction de ton nombre de frags et grâce à cela tu obtiens un rang.",
+            "text5": "<strong>Les PV :</strong> Les pv sont les points de vie.",
+            "text6": "<strong>Les Z :</strong> les Zénis constituent l'argent du jeu."
+          },
+          "actions": {
+            "title": "Les Actions",
+            "text1": "<strong>Déplacement :</strong> (PM : les points de mouvement) on peut se déplacer en haut, en bas, à gauche, à droite, cette action coûte 6Pm, on peut aussi se déplacer en diagonale, cette action coûte 7Pm. La réserve totale de PM est de 150 unités.",
+            "text2": "<strong>Lancer un sort :</strong> Permet de lancer un sort sur un adversaire ou un allié. Le lancer coute 6 Pas et consomme du Ki.",
+            "text3": "<strong>Attaque :</strong> l'attaque coûte 5 Pa, on enlève des PV à l'adversaire et on gagne des BP. On peut rater son coup, faire un coup normal, un joli coup, un coup critique ou un coup de maître. L'adversaire peut aussi esquiver le coup, là on gagne 0 Bp. La commande \"attaquer ce membre de la guilde\" nous permet de ne pas basculer dans le camp adverse même si on tue un joueur du même camp que soi et donc de ne pas perdre ses points de cotés. (Voir chapitre II, 2)",
+            "text4": "<strong>Soins :</strong> action qui coûte 4Pa, on donne des Pv et on gagne des Bp. On peut aussi louper son soin et de ce fait, ne rien gagner.",
+            "text5": "<strong>Vol :</strong> action qui coûte 3 Pa, et sert à voler des Zénis et grâce a cela, gagner des Bp.",
+            "text6": "<strong>Ramasser :</strong> action qui coûte 1 Pa, et sert à ramasser le Zénis ou autres objets sur la carte.",
+            "text7": "<strong>Torgnole :</strong> elle ne coûte pas de Pa, inflige 1 de dégât et enlève 1 point de trahison. C'est pour les cas de vengeance."
+          },
+          "ranks": {
+            "title": "Les Rangs",
+            "text1": "Les rangs varient selon les races, 11 rangs par race, un total de 88 rangs. Ceux ci sont calculés,par rapport au plus grand ou plus petit nombre de points de côtés selon la race.<br/>Exemple :<br/>Sangohan a 50 points de côtés, le maximun est Sangoky qui en a 100.<br/>Pourcentage = (50*100)/100 donc 50%.<br/>A partir de ce pourcentage, tu as par exemplele rang est Super saïyen si tu es Saïyen."
+          },
+          "level": {
+            "title": "Changement de niveau",
+            "text1": "Pour passer de niveau rien de plus simple suffit d'attaquer quelqu'un, de soigner ou voler."
+          }
+        }
+      }
+    }
+  },
+  "team": {
+    "title": "Team"
+  },
+  "magic": {
+    "title": "Magic",
+    "presentation": {
+      "intro": "<strong>{name}</strong> te voici à la page de la magie.",
+      "text": "Celle-ci te permet de voir les sorts que tu maîtrises et les sorts ayant actuellement un effet sur toi tels que les sorts de soutien.<br />Sache que tout personnage est en mesure de se familiariser avec la magie, y compris les guerriers."
+    }
+  },
+  "faq": {
+    "title": "F.A.Q",
+    "questions": [
+      {
+        "title": "Le jeu est il payant ?",
+        "content": "Non c'est un jeu gratuit ouvert a tous."
+      },
+      {
+        "title": "Quel logiciel utiliser ?",
+        "content": "Vous avez seulement besoin de votre navigateur web."
+      },
+      {
+        "title": "C'est quoi un PA ? PM ? Et le ki ?",
+        "content": "Un PA est un point d'action, vous en gagnez un toutes les demi heures, pas besoin d'être connecté pour en gagner, ceux-ci vous permettront de faire toutes les actions possibles du jeu.<br/>Un PM est un point de mouvement, vous engagnez aussi toutes les demis heures.<br/>Quant au Ki ce sont en quelque sorte les point de pouvoirs, magie si vous préférez."
+      },
+      {
+        "title": "Je suis mort et il devait y avoir X PA et j'en ai reçu moins pourquoi ?",
+        "content": "A chaque fois que vous mourez vous perdez 30 % des PA que vous possédiez juste avant votre mort."
+      },
+      {
+        "title": "Pourquoi je ne peux pas attaquer un ennemi ?",
+        "content": "Pour l'attaquer il vous faut 5 PA, ainsi qu'être sur sa case, vous ne pouvez pas attaquer quelqu'un de votre camp, quelle que soit sa race, son côté, ou même sa classe."
+      },
+      {
+        "title": "Quelqu'un me demande mon mot de passe dois-je lui donner ?",
+        "content": "Nous n'avons nullement besoin de votre mot de passe, si une personne vous le demande rapportez directement son nom, par messagerie ou sur le forum nous nous ferons un plaisirde lui donner une correction (fouet ou autre selon envie), enfin bref : <strong>Aucun membre de l'équipe de vous demandera votre mot de passe.</strong>"
+      },
+      {
+        "title": "Si je trahis un copain que se passe t-il ? Et si je le tue ?",
+        "content": "Si vous l'attaquez juste une fois vous augmenterez vos points de trahison de un, plus vous attaquerez de copain, plus vous augmenterez en trahison.<br/>Si vous le tuez, vous changerez de côté, et vous perdrez tout vos points de côté. De plus celui ci aura la possibilité de se venger."
+      }
+    ]
+  },
+  "account": {
+    "enabled": "Your account is now activated!",
+    "title": "Account",
+    "created": {
+      "title": "Account created",
+      "description": "You should have receive a mail to confirm your account."
+    },
+    "inventory": {
+      "title": "Inventory"
+    },
+    "magic": {
+      "title": "Magic"
+    },
+    "appearance": {
+      "failed": "Failed to change appearance",
+      "success": "New appearance saved!"
+    }
+  },
+  "error": {
+    "home": "Back to the home page",
+    "not": {
+      "connected": "You are not connected",
+      "exists": "This page does not exists",
+      "guilded": "You don't have a guild yet"
+    },
+    "forbidden": "Forbidden",
+    "bad": {
+      "credentials": "Your username or password are incorrect."
+    },
+    "generic": "Oops, something went wrong",
+    "move": {
+      "forbidden": "You are not able to move here!"
+    },
+    "convert": {
+      "forbidden": "You are not able to convert!"
+    },
+    "teleport": {
+      "forbidden": "Can not teleport"
+    }
+  },
+  "strap": {
+    "limit": "Limit reached ({limit} items max).",
+    "loading": "Loading...",
+    "minLength": "Min. Length",
+    "notSelected": "Nothing Selected",
+    "required": "Required",
+    "search": "Search",
+    "minCharacters": "Min {value}",
+    "maxCharacters": "{value} remaining characters"
+  },
+  "field": {
+    "nomatch": "Field does not match",
+    "empty": "Field is empty"
+  },
+  "This page could not be found": "This page could not be found",
+  "modal": {
+    "confirm": {
+      "title": "Are you sure?",
+      "drop": "Do you really want to drop this item?",
+      "use": "Do you really want to use this item?",
+      "guild": {
+        "leave": "Do you really want to leave this guild?"
+      }
+    }
+  },
+  "notice": {
+    "success": "Success",
+    "error": "Error",
+    "generic": "Whoops, something went wrong...Unexpected Error."
+  }
+}

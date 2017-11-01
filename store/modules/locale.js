@@ -4,7 +4,7 @@ import * as types from '../mutation-types';
 
 export const state = () => ({
     locales: ['en', 'fr'],
-    locale: 'en',
+    locale: 'fr',
 });
 
 const actions = {
@@ -14,7 +14,7 @@ const actions = {
             let locale = langs[0].split('-')[0];
 
             if (!settings.languages.includes(locale)) {
-                locale = 'en';
+                locale = 'fr';
             }
 
             commit(types.LOCALE, locale);
