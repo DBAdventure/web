@@ -6,7 +6,10 @@
 }
 
 .ivu-table-cell {
-    word-break: break-word;
+    word-break: normal;
+    .ivu-btn {
+        margin-bottom: 10px;
+    }
 }
 
 .ivu-btn {
