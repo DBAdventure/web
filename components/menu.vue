@@ -10,6 +10,7 @@
                             <li v-html="$t('menu.map.name', {mapName: $t(currentPlayer.map.name)})"></li>
                             <li v-html="$t('menu.map.position', {x: currentPlayer.x, y: currentPlayer.y})"></li>
                             <li v-html="$t('menu.map.zeni', {zeni: currentPlayer.zeni})"></li>
+                            <li v-html="$t('menu.player.level', {level: currentPlayer.level})"></li>
                         </ul>
                         <div class="bars">
                             <span v-html="$t('menu.player.health', {h: currentPlayer.health, maxH: currentPlayer.total_max_health})"></span>
@@ -247,8 +248,7 @@
                 api.move(where).then(() => {
                     this.$store.dispatch('reloadMap');
                     this.$store.dispatch('fetchPlayer');
-                }).catch((e) => {
-                    console.log(e);
+                }).catch(() => {
                     this.$Notice.error({
                         title: this.$t('notice.error'),
                         desc: this.$t('error.move.forbidden'),

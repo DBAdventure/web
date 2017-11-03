@@ -108,8 +108,7 @@
                 what: res.data.what,
                 type: res.data.type,
                 who: res.data.who,
-            })).catch((e) => {
-                console.log(e);
+            })).catch(() => {
                 error({
                     message: 'page.not.found',
                     statusCode: 404,

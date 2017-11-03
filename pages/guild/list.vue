@@ -168,7 +168,7 @@
                 api.joinGuild(id).then(() => {
                     this.$Notice.success({
                         title: this.$t('notice.success'),
-                        desc: this.$t('guild.joined'),
+                        desc: this.$t('guild.request.created'),
                     });
                     this.$router.push('/guild');
                 }).catch(() => {

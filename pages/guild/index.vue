@@ -23,10 +23,24 @@
         <template v-else>
             <h1 class="title title-default">{{ currentPlayer.getGuild().name }}</h1>
             <template v-if="!currentPlayer.getGuild().enabled">
-                {{ $t('guild.not.enabled') }}
+                <p>{{ $t('guild.not.enabled') }}</p>
+                <Poptip
+                    confirm
+                    :title="$t('modal.confirm.guild.cancel')"
+                    @on-ok="leaveGuild()"
+                >
+                    <a href="#" @click.prevent="">{{ $t('guild.cancel') }}</a>
+                </Poptip>
             </template>
             <template v-else-if="!currentPlayer.guild_player.enabled">
-                {{ $t('guild.player.not.enabled') }}
+                <p>{{ $t('guild.player.not.enabled') }}</p>
+                <Poptip
+                    confirm
+                    :title="$t('modal.confirm.guild.request.leave')"
+                    @on-ok="leaveGuild()"
+                >
+                    <a href="#" @click.prevent="">{{ $t('guild.request.cancel') }}</a>
+                </Poptip>
             </template>
             <template v-else>
                 <guild-menu />
@@ -42,6 +56,7 @@
 
 <script type="text/ecmascript-6">
     import {mapGetters} from 'vuex';
+    import api from '~/services/api';
     import GuildMenu from '~/components/guild/menu';
 
     export default {
@@ -64,6 +79,22 @@
             ...mapGetters([
                 'currentPlayer',
             ]),
+        },
+        methods: {
+            leaveGuild() {
+                this.$Loading.start();
+                api.leaveGuild().then((res) => {
+                    const messages = res.data.messages.map(e => this.$t(e));
+                    this.$Notice.success({
+                        title: this.$t('notice.success'),
+                        desc: messages.join('\n'),
+                    });
+                    this.$Loading.finish();
+                    this.$store.dispatch('fetchPlayer');
+                }).catch(() => {
+                    this.raiseError();
+                });
+            },
         },
     };
 </script>

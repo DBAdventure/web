@@ -395,6 +395,7 @@
       "zeni": "<strong>Zénis :</strong> {zeni}"
     },
     "player": {
+      "level": "<strong>Niveau :</strong> {level}",
       "text": "Personnage",
       "health": "<strong>Vie :</strong> {h} / {maxH}",
       "ap": "<strong>Action :</strong> {ap} / {maxAp}",
@@ -834,7 +835,9 @@
     "join": "Rejoindre cette guilde",
     "createdBy": "Crée par",
     "request": {
-      "deleted": "Votre précédente requête a été supprimée !"
+      "cancel": "Annuler votre demande ?",
+      "deleted": "Votre précédente requête a été supprimée !",
+      "created": "Vous venez de postuler dans cette guilde, il faut maintenant attendre validation !"
     },
     "create": {
       "deleted": "Vous venez de quitter la guilde, et parce qu'elle n'avait pas encore été validée vous récupérez votre argent !"
@@ -1293,7 +1296,11 @@
       "drop": "Voulez-vous vraiment jeter cet objet ?",
       "use": "Voulez-vous vraiment utiliser cet objet ?",
       "guild": {
-        "leave": "Voulez-vous vraiment quitter la guilde ?"
+        "cancel": "Voulez-vous vraiment annuler votre création de guilde ?",
+        "leave": "Voulez-vous vraiment quitter la guilde ?",
+        "request": {
+          "leave": "Voulez-vous vraiment annuler votre demande de rejoindre cette guilde ?"
+        }
       }
     }
   },
