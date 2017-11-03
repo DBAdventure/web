@@ -1,150 +1,150 @@
 {
   "objects": {
     "details": {
-      "health_percent": "Restore <span class=\"bold\">{value} health percent</span>",
-      "health": "Restore <span class=\"bold\">{value} health</span>",
-      "fatigue_percent": "Remove <span class=\"bold\">{value} fatigue percent</span>",
-      "fatigue": "Remove <span class=\"bold\">{value} fatigue</span>",
-      "ki_percent": "Restore <span class=\"bold\">{value} KI percent</span>",
-      "ki": "Restore <span class=\"bold\">{value} KI</span>",
-      "action_point": "Restore <span class=\"bold\">{value} action points</span>",
-      "movement_point": "Restore <span class=\"bold\">{value} movement points</span>",
-      "teleport": "Teleport you in <span class=\"bold\">{value}</span>",
+      "health_percent": "Restaure <span class=\"bold\">{value}% de vie</span>",
+      "health": "Restaure <span class=\"bold\">{value} points de vie</span>",
+      "fatigue_percent": "Enlève <span class=\"bold\">{value}% de fatigue</span>",
+      "fatigue": "Enlève <span class=\"bold\">{value} points de fatigue</span>",
+      "ki_percent": "Restaure <span class=\"bold\">{value}% de KI</span>",
+      "ki": "Restaure <span class=\"bold\">{value} points de KI</span>",
+      "action_point": "Restaure <span class=\"bold\">{value} points d'action</span>",
+      "movement_point": "Restaure <span class=\"bold\">{value} points de mouvement</span>",
+      "teleport": "Vous téléporte au <span class=\"bold\">{value}</span>",
       "max_ki": "Maximum KI: <span class=\"bold\">{value}</span>",
-      "max_health": "Maximum Health: <span class=\"bold\">{value}</span>",
-      "strength": "Strength: <span class=\"bold\">{value}</span>",
-      "accuracy": "Accuracy: <span class=\"bold\">{value}</span>",
-      "agility": "Agility: <span class=\"bold\">{value}</span>",
-      "analysis": "Analysis: <span class=\"bold\">{value}</span>",
-      "skill": "Skill: <span class=\"bold\">{value}</span>",
-      "intellect": "Intellect: <span class=\"bold\">{value}</span>",
-      "resistance": "Resistance: <span class=\"bold\">{value}</span>",
-      "vision": "Vision: <span class=\"bold\">{value}</span>",
-      "level": "Level: <span class=\"bold\">{value}</span>"
+      "max_health": "Vie maximum : <span class=\"bold\">{value}</span>",
+      "strength": "Force : <span class=\"bold\">{value}</span>",
+      "accuracy": "Précision : <span class=\"bold\">{value}</span>",
+      "agility": "Agilité : <span class=\"bold\">{value}</span>",
+      "analysis": "Analyse : <span class=\"bold\">{value}</span>",
+      "skill": "Talent : <span class=\"bold\">{value}</span>",
+      "intellect": "Intelligence : <span class=\"bold\">{value}</span>",
+      "resistance": "Résistance : <span class=\"bold\">{value}</span>",
+      "vision": "Vision : <span class=\"bold\">{value}</span>",
+      "level": "Niveau : <span class=\"bold\">{value}</span>"
     },
-    "zeni": "Zeni",
-    "box": "Box",
-    "bush": "Bush",
+    "zeni": "Zéni",
+    "box": "Coffre",
+    "bush": "Buisson",
     "capsule": {
-      "blue": "Capsule blue",
-      "red": "Capsule red",
+      "blue": "Capsule bleu",
+      "red": "Capsule rouge",
       "orange": "Capsule orange",
-      "green": "Capsule green",
-      "black": "Capsule black"
+      "green": "Capsule verte",
+      "black": "Capsule noire"
     },
-    "sign": "Sign",
+    "sign": "Pancarte",
     "lantern": {
-      "name": "Lantern",
+      "name": "Lanterne",
       "description": "Cette lanterne, dont la flamme ne s'étend jamais permet de voir normalement. Votre vision ne diminue pas la nuit."
     },
     "radar": {
       "name": "Radar",
-      "description": "Created by Bulma, it allows to find the Dragon balls."
+      "description": "Créé par Bulmal, il permet de retrouver les Dragon balls."
     },
     "map": {
-      "name": "Map",
-      "description": "The map of the island. Allow you to watch your position, all buildings and all your friends."
+      "name": "Carte",
+      "description": "La carte de l'île Permettez-vous de regarder votre position, tous les bâtiments et tous vos amis."
     },
     "senzu": {
       "name": "Senzu",
-      "description": "Restores all your life, ki and remove fatigue."
+      "description": "Restaure toute ta vie, Ki et élimine la fatigue."
     },
     "pear": {
-      "name": "Pear",
-      "description": "Beautiful pear, restores 25 percent of your life."
+      "name": "Poire",
+      "description": "Belle poire, restaure 25 pour cent de votre vie."
     },
     "berries": {
-      "name": "Wild berries",
-      "description": "Small bays found on the ground. Restores 30 health."
+      "name": "Baies sauvages",
+      "description": "Petites baies trouvées sur le terrain. Rend 30 points de vie"
     },
     "potion": {
       "life": {
-        "name": "Potion of life",
-        "description": "Restores 50% of your maximum health."
+        "name": "Potion de vie",
+        "description": "Restaure 50% de votre maximum de santé."
       },
       "fatigue": {
-        "name": "Potion of fatigue",
-        "description": "Reduces your fatigue by 50."
+        "name": "Potion de fatigue",
+        "description": "Réduit votre fatigue de 50."
       },
       "ki": {
         "little": {
-          "name": "Little potion of ki",
-          "description": "Redonne 10 de ki."
+          "name": "Petite potion de Ki",
+          "description": "Redonne 10 de Ki."
         },
         "medium": {
-          "name": "Medium potion of ki",
-          "description": "Redonne 20 de ki."
+          "name": "Moyenne potion de Ki",
+          "description": "Redonne 20 de Ki."
         },
         "big": {
-          "name": "Big potion of ki",
-          "description": "Redonne 50 de ki."
+          "name": "Grosse potion de Ki",
+          "description": "Redonne 50 de Ki."
         }
       }
     },
     "teleport": {
       "hq": {
-        "name": "Magical cloud",
-        "description": "This cloud can be used at any time, allows you to teleport to your HQ for 10 movement points."
+        "name": "Nuage magique",
+        "description": "Ce nuage peut être utilisé à tout moment, vous permet de vous téléporter à votre QG pour 10 points de mouvement."
       },
       "cloud": {
         "1": {
-          "name": "Teleport cloud n°1",
-          "description": "This beautiful cloud will teleport you to the North of the island for 10MP."
+          "name": "Nuage magique n°1",
+          "description": "Ce beau nuage vous téléportera au nord de l'île pour 10 points de mouvement."
         },
         "2": {
-          "name": "Teleport cloud n°2",
-          "description": "This beautiful cloud will teleport you to the Northeast of the island for 10MP."
+          "name": "Nuage magique n°2",
+          "description": "Ce beau nuage vous téléportera au Nord-Est de l'île pour 10 points de mouvement"
         },
         "3": {
-          "name": "Teleport cloud n°3",
-          "description": "This beautiful cloud will teleport you to the East of the island for 10MP."
+          "name": "Nuage magique n°3",
+          "description": "Ce beau nuage vous téléportera à l'Est de l'île pour 10 points de mouvement"
         },
         "4": {
-          "name": "Teleport cloud n°4",
-          "description": "This beautiful cloud will teleport you to the Southeast of the island for 10MP."
+          "name": "Nuage magique n°4",
+          "description": "Ce beau nuage vous téléportera au Sud-Est de l'île pour 10 points de mouvement"
         },
         "5": {
-          "name": "Teleport cloud n°5",
-          "description": "This beautiful cloud will teleport you to the South of the island for 10MP."
+          "name": "Nuage magique n°5",
+          "description": "Ce beau nuage vous téléportera au Sud de l'île pour 10 points de mouvement"
         },
         "6": {
-          "name": "Teleport cloud n°6",
-          "description": "This beautiful cloud will teleport you to the South West of the island for 10MP."
+          "name": "Nuage magique n°6",
+          "description": "Ce beau nuage vous téléportera au Sud-Ouest de l'île pour 10 points de mouvement"
         },
         "7": {
-          "name": "Teleport cloud n°7",
-          "description": "This beautiful cloud will teleport you to the West of the island for 10MP."
+          "name": "Nuage magique n°7",
+          "description": "Ce beau nuage vous téléportera à l'Ouest West de l'île pour 10 points de mouvement"
         },
         "8": {
-          "name": "Teleport cloud n°8",
-          "description": "This beautiful cloud will teleport you to the North West of the island for 10MP."
+          "name": "Nuage magique n°8",
+          "description": "Ce beau nuage vous téléportera au Nord-Ouest de l'île pour 10 points de mouvement"
         }
       }
     },
     "weapon": {
       "murasaki": {
-        "name": "Ninja Murasaki's Broken Saber",
-        "description": "Long and precise Saber. Yajirobé cut the tail of the giant Vegeta monkey with this weapon."
+        "name": "Sabre brisé du Ninja Murasaki",
+        "description": "Un sabre cassé apportant un minimum de puissance."
       },
       "yajirobe": {
-        "name": "Yajirobe's saber",
-        "description": "Long and precise Saber. Yajirobé cut the tail of the giant Vegeta monkey with this weapon."
+        "name": "Sabre de Yajirobé",
+        "description": "Sabre long et précis. Yajirobé coupa la queue du singe géant Végéta avec cette arme."
       },
       "tao": {
-        "name": "Tao Pai Pai's blade",
-        "description": "A powerfull blade."
+        "name": "Fine Lame de Tao Paï Paï",
+        "description": "Une lame puissante et précise."
       },
       "sangohan": {
-        "name": "Sangohan's Sword",
-        "description": "The sword that accompanied Sangohan during the infernal training that the latter had to overcome. It was Piccolo, his trainer who became his greatest friend afterwards who gave him this weapon."
+        "name": "Épée de Sangohan",
+        "description": "L'épée qui accompagna Sangohan durant l'entrainement infernal que ce dernier ait du surmonter. C'est Piccolo, son entraineur devenu son plus grand ami par la suite qui lui fit don de cette arme."
       },
       "ocarina": {
-        "name": "Ocarina of Tapion",
-        "description": "A mysterious instrument that made the hero Tapion famous by allowing him to enclose in his own body the upper part of the monster Hildegarde."
+        "name": "Ocarina de Tapion",
+        "description": "Un instrument mystérieux qui rendit célèbre le héros Tapion en lui permettant d'enfermer dans son propre corps la partie supérieure du monstre Hildegarde."
       },
       "roshi": {
-        "name": "Master Roshi's stick",
-        "description": "The stick of the famous master of martial arts Tortue Géniale. This weapon is powerful, rather light but is made of wood only, which makes it easily breakable."
+        "name": "Bâton de Tortue Géniale",
+        "description": "Le bâton du célèbre maitre des arts martiaux Tortue Géniale. Cette arme est puissante, plutôt légère mais est composée de bois uniquement, ce qui la rend donc facilement cassable."
       },
       "power.pole": {
         "name": "Bâton magique de San Goku",
@@ -170,21 +170,21 @@
     "vision": {
       "king": {
         "kai": {
-          "name": "Antennas of King Kai",
-          "description": "Heavy, but incredibly effective, these antennas allowed King Kai to spot the aura of enemies such as Freezer from the other end of the universe."
+          "name": "Antennes du roi Kaïo",
+          "description": "Lourdes, mais incroyablement efficaces, ces antennes ont permis à Maitre Kaïo de repérer l'aura d'ennemis tels que Freezer de l'autre bout de l'univers."
         }
       },
       "glasses": {
-        "name": "Glasses of King Kai",
-        "description": "Glasses of King Kai, they are versatile compared to those of the Earth."
+        "name": "Lunettes du roi Kaïo",
+        "description": "Lunettes du Roi Kaïo, elles sont polyvalentes comparées à celles de la Terre."
       },
       "shen": {
-        "name": "Glasses of Master Shen",
-        "description": "Glasses of Master Shen, they protect well from the sun thus allowing to see well in the distance."
+        "name": "Lunettes du Mâitre des Grues",
+        "description": "Les lunettes du maitre des Grues. Elles protègent bien du soleil permettant ainsi de bien voir au loin."
       },
       "compass": {
-        "name": "Compass",
-        "description": "A small compass to help you navigate."
+        "name": "Boussole",
+        "description": "Une petite boussole pour vous aider à vous orienter."
       },
       "roshi": {
         "name": "Lunettes de Tortue Géniale",
@@ -192,8 +192,8 @@
       },
       "detector": {
         "sayajin": {
-          "name": "Sayajin detector",
-          "description": "Sophisticated enough, this device can analyze your targets."
+          "name": "Détecteur Saïyen",
+          "description": "Assez sophistiqué, cet appareil permet d'analyser vos cibles."
         },
         "last": {
           "name": "Détecteur dernière génération",
@@ -203,31 +203,31 @@
     },
     "shield": {
       "link": {
-        "name": "Link's shield",
-        "description": "The Link shield offers the best resistance to physical attacks."
+        "name": "Bouclier de Link",
+        "description": "Le bouclier de Link offre la meilleure résistance aux attaques physiques. Réduit légèrement les dégâts magiques."
       },
       "viking": {
-        "name": "Viking shield",
-        "description": "Wonderful shield, medium strength."
+        "name": "Bouclier Viking",
+        "description": "Magnifique bouclier, résistance moyenne."
       },
       "iron": {
-        "name": "Iron shield",
-        "description": "This sield is heavy, strong, but it is cursed."
+        "name": "Bouclier en fer",
+        "description": "Ce bouclier est lourd, résistant mais il est maudit."
       },
       "wood": {
-        "name": "Wood shield",
-        "description": "A simple wooden shield, it protects little but it is very light."
+        "name": "Bouclier en bois",
+        "description": "Un simple bouclier en bois, il protège peu mais il est très léger."
       },
       "wood2": {
         "name": "Bouclier en bois amélioré",
         "description": "Toujours aussi léger, ce bouclier permet une résistance très efficace."
       },
       "mirror": {
-        "name": "Ultimate Mirror shield",
-        "description": "The ultimate shield protects and returns magical attacks. Its design is beautiful. It takes a certain resistance to be able to carry this immense shield."
+        "name": "Bouclier Miroir Ultime",
+        "description": "L'ultime bouclier protège et renvoie les attaques magiques. Son design est magnifique. Il faut une certaine résistance pour pouvoir porter cet immense bouclier."
       },
       "rusty": {
-        "name": "Rusty shield",
+        "name": "Bouclier rouillé",
         "description": "Malgré son usure, la résistance qu'il offre est remarquable."
       },
       "medical": {
@@ -237,12 +237,12 @@
     },
     "amulet": {
       "bido": {
-        "name": "Bido Necklace",
-        "description": "Bido Necklace"
+        "name": "Collier de Bido",
+        "description": "Collier de Bido"
       },
       "king.vegeta": {
-        "name": "Amulet of King Vegeta",
-        "description": "Amulet of the legendary King Vegeta."
+        "name": "Amullette du Roi Vegeta",
+        "description": "L'amulette du légendaire Roi Végéta."
       },
       "gokua": {
         "name": "Boucles de Gokua",

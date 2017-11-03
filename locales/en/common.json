@@ -377,7 +377,7 @@
     "ranking": "Ranking",
     "history": "History",
     "inventory": "Inventory",
-    "dashboard": "Dashboard",
+    "dashboard": "Events",
     "guild": {
       "text": "Guild"
     },
@@ -501,7 +501,7 @@
     "shield": "Shield",
     "weapon": "Weapon",
     "shoes": "Shoes",
-    "weight": "Weight of the inventory: {weight} / {maxWeight}",
+    "weight": "Weight of the inventory: {weight} / {maxWeight} KG",
     "cant": {
       "use": "You can't use this object.",
       "equip": "You can't equip this object.",

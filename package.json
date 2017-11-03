@@ -5,7 +5,7 @@
     "author": "pierre.rambaud86@gmail.com",
     "private": true,
     "scripts": {
-        "dev": "node server.js",
+        "dev": "rm -rf .cache && node server.js",
         "build": "nuxt build",
         "lint": "eslint -c .eslintrc.js --ext .js,.vue ."
     },

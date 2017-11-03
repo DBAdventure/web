@@ -9,8 +9,8 @@
   "search": "Rechercher",
   "edit": "Editer",
   "delete": "Supprimer",
-  "name": "Nom",
-  "username": "Login",
+  "name": "Pseudo",
+  "username": "Identifiant",
   "email": "Email",
   "image": "Image",
   "price": "Prix",
@@ -76,8 +76,8 @@
   "next": "Suivant",
   "guilds": "Guildes",
   "login": {
-    "text": "Login",
-    "signin": "S'inscrire"
+    "text": "Identifiant",
+    "signin": "Se connecter"
   },
   "forgot": {
     "password": "Mot de passe oublié"
@@ -115,7 +115,8 @@
     "passwordConfirm": "Confirmation du mot de passe",
     "email": "Email",
     "emailConfirm": "Confirmation de l'email",
-    "login": "Login",
+    "login": "Identifiant",
+    "pseudo": "Pseudo",
     "name": "Nom",
     "image": "Image",
     "shortName": "Nom court",
@@ -373,7 +374,7 @@
     "ranking": "Classement",
     "history": "Histoire",
     "inventory": "Inventaire",
-    "dashboard": "Dashboard",
+    "dashboard": "Événements",
     "guild": {
       "text": "Guilde"
     },
@@ -497,7 +498,7 @@
     "shield": "Bouclier",
     "weapon": "Arme",
     "shoes": "Chaussures",
-    "weight": "Poids de l'inventaire : {weight} / {maxWeight}",
+    "weight": "Poids de l'inventaire : {weight} / {maxWeight} KG",
     "cant": {
       "use": "Vous ne pouvez utiliser cet objet.",
       "equip": "Vous ne pouvez équiper cet objet.",
@@ -1134,7 +1135,7 @@
             "text1": "Une fois inscrit, tu auras le droit de modifier les informations que tu auras saisies.",
             "text2": "Mot de passe",
             "text3": "Apparence et histoire",
-            "text4": "Email et Login",
+            "text4": "Email et Identifiant",
             "text5": "Supprimer ou hiberner ton compte"
           },
           "character": {
@@ -1268,7 +1269,7 @@
     },
     "forbidden": "Interdit",
     "bad": {
-      "credentials": "Votre login et votre mot de passe ne sont pas correct."
+      "credentials": "Votre identifiant et votre mot de passe ne sont pas correct."
     },
     "generic": "Oups, quelque chose s'est mal passé",
     "move": {
