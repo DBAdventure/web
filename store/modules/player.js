@@ -47,9 +47,8 @@ const actions = {
 
     logout({commit}) {
         api.logout().then(() => {}).catch(() => {});
-        instance.post('/session/clear').then(() => {
-            commit(types.PLAYER, null);
-        });
+        instance.post('/session/clear').then(() => {}).catch(() => {});
+        commit(types.PLAYER, null);
     },
 };
 

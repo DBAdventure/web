@@ -66,10 +66,14 @@
                 },
             };
         },
-        asyncData() {
+        asyncData({store}) {
+            if (!store.state.player.connected) {
+                return {};
+            }
+
             return api.getEvents().then(res => ({
                 events: res.data,
-            }));
+            })).catch(() => {});
         },
     };
 </script>

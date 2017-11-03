@@ -31,10 +31,14 @@
                 spells: [],
             };
         },
-        asyncData() {
+        asyncData({store}) {
+            if (!store.state.player.connected) {
+                return {};
+            }
+
             return api.getSpells().then(res => ({
                 spells: res.data,
-            }));
+            })).catch(() => {});
         },
         methods: {
             spellColumns() {

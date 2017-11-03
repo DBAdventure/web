@@ -93,12 +93,16 @@
                 });
             },
         },
-        asyncData() {
+        asyncData({store}) {
+            if (!store.state.player.connected) {
+                return {};
+            }
+
             return api.getInventoryObjects().then(res => (
                 {
                     objects: res.data,
                 }
-            ));
+            )).catch(() => {});
         },
     };
 </script>

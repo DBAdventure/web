@@ -68,7 +68,7 @@
                 {
                     appearances: res.data,
                 }
-            ));
+            )).catch(() => {});
         },
         mounted() {
             this.player_race = this.currentPlayer.race.id;

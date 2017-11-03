@@ -387,7 +387,11 @@
                 });
             }
         },
-        async asyncData({query}) {
+        async asyncData({store, query}) {
+            if (!store.state.player.connected) {
+                return {};
+            }
+
             let writeTo;
             if (query.write) {
                 await api.getPlayerInfo(query.write).then((res) => {

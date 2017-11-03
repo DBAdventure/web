@@ -179,12 +179,16 @@
                 });
             },
         },
-        asyncData() {
+        asyncData({store}) {
+            if (!store.state.player.connected) {
+                return {};
+            }
+
             return api.getGuilds().then(res => (
                 {
                     guilds: res.data.guilds,
                 }
-            ));
+            )).catch(() => {});
         },
     };
 </script>
