@@ -497,7 +497,7 @@
     "outfit": "Tenue",
     "shield": "Bouclier",
     "weapon": "Arme",
-    "shoes": "Chaussures",
+    "shoes": "Bottes",
     "weight": "Poids de l'inventaire : {weight} / {maxWeight} KG",
     "cant": {
       "use": "Vous ne pouvez utiliser cet objet.",

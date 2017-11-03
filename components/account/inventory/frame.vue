@@ -1,30 +1,32 @@
 <template>
-    <div class="text-center">
+    <div :class="{'inventory-modal': modal}" class="text-center">
         <template v-if="modal">
-            <template v-if="objects[type]">
-                <div v-if="isOneEquipped">
-                    <div class="equiped" v-for="playerObject in objects[type]" v-if="playerObject.equipped">
-                        <Poptip :title="$t(`objects.${playerObject.object.name}.name`)"
-                                :content="$t(`objects.${playerObject.object.name}.description`)"
-                                placement="top"
-                                width="300"
-                                trigger="hover">
-                            <img :src="`/images/objects/${playerObject.object.image}`" @click.prevent="choose()" /><br/>
-                            <Button size="small" type="primary" @click.prevent="unequip(playerObject.object.id)">
-                                {{ $t('inventory.unequip') }}
-                            </Button>
-                        </Poptip>
+            <div class="inventory-box">
+                <template v-if="objects[type]">
+                    <div v-if="isOneEquipped">
+                        <div class="equiped" v-for="playerObject in objects[type]" v-if="playerObject.equipped">
+                            <Poptip :title="$t(`objects.${playerObject.object.name}.name`)"
+                                    :content="$t(`objects.${playerObject.object.name}.description`)"
+                                    placement="top"
+                                    width="300"
+                                    trigger="hover">
+                                <img :src="`/images/objects/${playerObject.object.image}`" @click.prevent="choose()" /><br/>
+                                <Button size="small" type="primary" @click.prevent="unequip(playerObject.object.id)">
+                                    {{ $t('inventory.unequip') }}
+                                </Button>
+                            </Poptip>
+                        </div>
                     </div>
-                </div>
-                <div v-else>
-                    <Button size="small" type="primary" @click.prevent="choose()">
-                        {{ $t('inventory.choose') }}
-                    </Button>
-                </div>
-            </template>
-            <template v-else>
-                {{ $t('inventory.no.items') }}
-            </template>
+                    <div v-else>
+                        <Button size="small" type="primary" @click.prevent="choose()">
+                            {{ $t('inventory.choose') }}
+                        </Button>
+                    </div>
+                </template>
+                <template v-else>
+                    {{ $t('inventory.no.items') }}
+                </template>
+            </div>
 
             <Modal v-model="displayModal" effect="fade" :width="500">
                 <div class="inventory clearfix" v-if="objects[type]">

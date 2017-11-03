@@ -283,6 +283,15 @@ body {
     border-color: $default-color;
     color: $default-color;
   }
+  .type-title {
+    color: $default-color;
+  }
+  td {
+    .inventory-box {
+      background-color: $background-light-color;
+      border-color: $default-color;
+    }
+  }
 }
 
 .ivu-form {

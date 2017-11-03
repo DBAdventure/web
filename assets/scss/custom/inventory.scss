@@ -14,6 +14,22 @@
   td {
     text-align: center;
     border: none;
+    vertical-align: middle;
+    .inventory-modal {
+      width: 70px;
+      margin: 0 auto;
+
+      .inventory-box {
+        display: table-cell;
+        vertical-align: middle;
+        font-size: 11px;
+        width: 70px;
+        height: 70px;
+        border-style: solid;
+        border-width: thin;
+        margin: 0 auto;
+      }
+    }
   }
   a:hover{
     text-decoration: none;
