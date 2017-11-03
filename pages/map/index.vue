@@ -278,7 +278,7 @@
             this.$store.watch(state => state.game.mapReload, (value) => {
                 if (value) {
                     this.back();
-                    this.$store.state.game.mapReload = false;
+                    this.$store.dispatch('reloadMap', false);
                 }
             });
 

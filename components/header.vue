@@ -34,7 +34,7 @@
                     <li class="divider"></li>
                     <template v-if="currentPlayer.is_admin">
                         <li>
-                            <a href="/admin/">
+                            <a href="/admin/" target="_blank">
                                 <Icon type="nuclear"></Icon>
                                 {{ $t('header.admin')}}
                             </a>

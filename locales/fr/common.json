@@ -390,17 +390,17 @@
     "map": {
       "text": "Carte",
       "mini": "Minicarte",
-      "name": "Carte: {mapName}",
-      "position": "Position: {x} / {y}",
-      "zeni": "Zéni: {zeni}"
+      "name": "<strong>Carte :</strong> {mapName}",
+      "position": "<strong>Position :</strong> {x} / {y}",
+      "zeni": "<strong>Zénis :</strong> {zeni}"
     },
     "player": {
       "text": "Personnage",
-      "health": "Vie: {h} / {maxH}",
-      "ap": "Action: {AP} / {maxAp}",
-      "ki": "Ki: {ki} / {maxKi}",
-      "mp": "Mouvement: {mp} / {maxMp}",
-      "fp": "Fatigue: {fp} / {maxFp}",
+      "health": "<strong>Vie :</strong> {h} / {maxH}",
+      "ap": "<strong>Action :</strong> {ap} / {maxAp}",
+      "ki": "<strong>Ki :</strong> {ki} / {maxKi}",
+      "mp": "<strong>Mouvement :</strong> {mp} / {maxMp}",
+      "fp": "<strong>Fatigue :</strong> {fp} / {maxFp}",
       "plus": "(+1 dans {time} minutes)",
       "minus": "(-1 dans {time} minutes)"
     }

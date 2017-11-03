@@ -7,12 +7,12 @@
                 <div class="player-info">
                     <div class="submenu">
                         <ul>
-                            <li>{{ $t('menu.map.name', {"mapName": $t(currentPlayer.map.name)}) }}</li>
-                            <li>{{ $t('menu.map.position', {"x": currentPlayer.x, "y": currentPlayer.y}) }}</li>
-                            <li>{{ $t('menu.map.zeni', {"zeni": currentPlayer.zeni}) }}</li>
+                            <li v-html="$t('menu.map.name', {mapName: $t(currentPlayer.map.name)})"></li>
+                            <li v-html="$t('menu.map.position', {x: currentPlayer.x, y: currentPlayer.y})"></li>
+                            <li v-html="$t('menu.map.zeni', {zeni: currentPlayer.zeni})"></li>
                         </ul>
                         <div class="bars">
-                            {{ $t('menu.player.health', {"h": currentPlayer.health, "maxH": currentPlayer.total_max_health}) }}
+                            <span v-html="$t('menu.player.health', {h: currentPlayer.health, maxH: currentPlayer.total_max_health})"></span>
                             <div class="progress">
                                 <div class="progress-bar progress-bar-danger"
                                      role="progressbar"
@@ -23,7 +23,7 @@
                                 </div>
                             </div>
 
-                            {{ $t('menu.player.ki', {"ki": currentPlayer.ki, "maxKi": currentPlayer.total_max_ki}) }}
+                            <span v-html="$t('menu.player.ki', {ki: currentPlayer.ki, maxKi: currentPlayer.total_max_ki})"></span>
                             {{ $t('menu.player.plus', {"time": currentPlayer.getTimeRemaining('ki_points')}) }}
                             <div class="progress">
                                 <div class="progress-bar progress-bar-info"
@@ -35,7 +35,7 @@
                                 </div>
                             </div>
 
-                            {{ $t('menu.player.ap', {"ap": currentPlayer.action_points, "maxAp": currentPlayer.max_action_points}) }}
+                            <span v-html="$t('menu.player.ap', {ap: currentPlayer.action_points, maxAp: currentPlayer.max_action_points})"></span>
                             {{ $t('menu.player.plus', {"time": currentPlayer.getTimeRemaining('action_points')}) }}
                             <div class="progress">
                                 <div class="progress-bar progress-bar-warning"
@@ -47,7 +47,7 @@
                                 </div>
                             </div>
 
-                            {{ $t('menu.player.mp', {"mp": currentPlayer.movement_points, "maxMp": currentPlayer.max_movement_points}) }}
+                            <span v-html="$t('menu.player.mp', {mp: currentPlayer.movement_points, maxMp: currentPlayer.max_movement_points})"></span>
                             {{ $t('menu.player.plus', {"time": currentPlayer.getTimeRemaining('movement_points')}) }}
                             <div class="progress">
                                 <div class="progress-bar progress-bar-success"
@@ -59,7 +59,7 @@
                                 </div>
                             </div>
 
-                            {{ $t('menu.player.fp', {"fp": currentPlayer.fatigue_points, "maxFp": currentPlayer.max_fatigue_points}) }}
+                            <span v-html="$t('menu.player.fp', {fp: currentPlayer.fatigue_points, maxFp: currentPlayer.max_fatigue_points})"></span>
                             {{ $t('menu.player.minus', {"time": currentPlayer.getTimeRemaining('fatigue_points')}) }}
                             <div class="progress">
                                 <div class="progress-bar"
@@ -245,9 +245,10 @@
             },
             move(where) {
                 api.move(where).then(() => {
-                    this.$store.state.game.mapReload = true;
+                    this.$store.dispatch('reloadMap');
                     this.$store.dispatch('fetchPlayer');
-                }).catch(() => {
+                }).catch((e) => {
+                    console.log(e);
                     this.$Notice.error({
                         title: this.$t('notice.error'),
                         desc: this.$t('error.move.forbidden'),

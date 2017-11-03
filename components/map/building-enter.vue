@@ -123,7 +123,7 @@
                         break;
                     case 'teleport':
                         await api.teleport(this.building.id, data).then(() => {
-                            this.$store.state.game.mapReload = true;
+                            this.$store.dispatch('reloadMap');
                             this.$store.dispatch('fetchPlayer');
                         }).catch(() => {
                             errorMessage = this.$t('error.teleport.forbidden');
