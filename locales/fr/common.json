@@ -637,7 +637,8 @@
       }
     },
     "guild": {
-      "leave": "{name} vient de quitter la guilde !"
+      "leave": "vient de quitter la guilde !",
+      "request": "a fait une demande pour rejoindre la guilde !"
     }
   },
   "action": {
@@ -832,6 +833,11 @@
     }
   },
   "guild": {
+    "title": {
+      "events": "Événements",
+      "members": "Les Membres",
+      "requesters": "Les Requêtes"
+    },
     "join": "Rejoindre cette guilde",
     "createdBy": "Crée par",
     "request": {
@@ -1059,7 +1065,10 @@
   "events": {
     "target": "Vous avez reçu",
     "player": "Dont vous êtes l'auteur",
-    "nothing": "Rien n'est encore arrivé"
+    "nothing": "Rien n'est encore arrivé",
+    "event": {
+      "received": "{name} a reçu :"
+    }
   },
   "bonus": {
     "percent": {

@@ -6,20 +6,13 @@
         <template v-else-if="player && !player.isPlayer()">
             <img class="pull-left" :src="player.getImagePath()"/>
         </template>
-        <template v-else-if="event.event_type.name === 'bank'">
-            <img class="pull-left" src="/images/buildings/bank.png" />
-        </template>
 
         <div class="event-body">
             <span class="event-meta pull-right">{{ $moment(event.created_at).format('lll') }}</span>
             <h4 class="event-title">
                 <template v-if="event.event_type.name === 'player'">
-                    <strong v-if="isReceived">{{ $t('events.event.received', {name: getPlayer(event.player).getDisplayName()}) }}</strong>
-                    <template v-else>
-                        {{ player.getDisplayName() }}
-                    </template>
+                    {{ getPlayer(event.player).getDisplayName() }}
                 </template>
-                <strong v-else-if="event.event_type.name === 'bank'">{{ $t('game.bank.event.name') }}</strong>
             </h4>
             <p class="summary">
                 <template v-if="event.event_type.name === 'player'">

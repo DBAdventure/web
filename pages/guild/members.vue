@@ -4,6 +4,7 @@
 
         <guild-menu />
 
+        <h1 class="subtitle text-center">{{ $t('guild.title.members') }}</h1>
         <Table :columns="membersColumns()" :data="guildPlayers"></Table>
     </div>
 </template>

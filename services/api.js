@@ -256,6 +256,9 @@ const api = {
     createGuild(postData) {
         return makePostRequest('/guild/create', postData);
     },
+    getGuildEvents() {
+        return makeGetRequest('/guild/events');
+    },
     getGuildMembers() {
         return makeGetRequest('/guild/members');
     },
