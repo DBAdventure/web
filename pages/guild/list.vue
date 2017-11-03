@@ -1,34 +1,30 @@
 <template>
-    <div>
+    <div id="guild">
         <h1 class="title title-default">{{ $t('guilds') }}</h1>
 
         <Table :columns="guildsColumns()" :data="guildsData()"></Table>
 
-        <template v-if="selectedGuild">
+        <div v-if="selectedGuild" class="guild-description">
+            <h1 class="subtitle text-center">{{ selectedGuild.shortName}} {{ selectedGuild.name }}</h1>
+            <div class="creator">
+                <p>{{ $t('guild.createdBy')}}
+                    <router-link :to="`/player/info/${getPlayer(selectedGuild.created_by).id}`">
+                        <img :src="getPlayer(selectedGuild.created_by).getImagePath()" />
+                        {{ selectedGuild.created_by.name }}
+                    </router-link>
+                </p>
+            </div>
+
+            <h2 class="little-title">{{ $t('guild.history') }}</h2>
+            <template v-for="line in selectedGuild.history.split('\n')">{{ line }}<br></template>
+
             <div v-if="!currentPlayer.guild_player">
                 <Button @click.prevent="join(selectedGuild.id)">{{ $t('guild.join') }}</Button>
             </div>
+            <h2 class="little-title">{{ $t('guild.membersList') }}</h2>
+            <Table :columns="guildPlayersColumns()" :data="selectedGuildPlayers"></Table>
 
-            <div id="guildes_desc">
-                <div class="titrev2">
-                    <div id="guildes_nom">
-                        {{ selectedGuild.shortName}} {{ selectedGuild.name }}
-                    </div>
-                    <div id="guildes_createur">
-                        {{ $t('guild.createdBy')}}
-                        <router-link class="pull-left" :to="`/player/info/${getPlayer(selectedGuild.created_by).id}`">
-                            <img :src="getPlayer(selectedGuild.created_by).getImagePath()" />
-                            {{ selectedGuild.created_by.name }}
-                        </router-link>
-                    </div>
-                </div>
-
-                <h2>{{ $t('guild.history') }}</h2>
-                <template v-for="line in selectedGuild.history.split('\n')">{{ line }}<br></template>
-
-                <Table :columns="guildPlayersColumns()" :data="selectedGuildPlayers"></Table>
-            </div>
-        </template>
+        </div>
     </div>
 </template>
 
@@ -151,15 +147,17 @@
                     this.selectedGuild = null;
                 } else {
                     guild.players.forEach((guildPlayer) => {
-                        const player = this.getPlayer(guildPlayer.player);
-                        const result = {
-                            id: player.id,
-                            level: player.level,
-                            name: player.name,
-                            image_path: player.getImagePath(),
-                        };
+                        if (guildPlayer.enabled) {
+                            const player = this.getPlayer(guildPlayer.player);
+                            const result = {
+                                id: player.id,
+                                level: player.level,
+                                name: player.name,
+                                image_path: player.getImagePath(),
+                            };
 
-                        this.selectedGuildPlayers.push(result);
+                            this.selectedGuildPlayers.push(result);
+                        }
                     });
                     this.selectedGuild = guild;
                 }

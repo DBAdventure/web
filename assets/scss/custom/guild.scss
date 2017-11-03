@@ -14,4 +14,14 @@
     .title-guild-message {
         background-position: 0 -6px;
     }
+
+    .guild-description {
+        .little-title {
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 12px;
+            text-align: center;
+            text-decoration: underline;
+        }
+    }
 }

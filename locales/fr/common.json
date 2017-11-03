@@ -121,7 +121,7 @@
     "image": "Image",
     "shortName": "Nom court",
     "history": "Histoire",
-    "create": "Crée",
+    "create": "Créer",
     "subject": "Sujet",
     "message": "Message",
     "send": "Envoyer",
@@ -874,6 +874,7 @@
       }
     },
     "members": "Voir tous les membres",
+    "membersList": "Les membres",
     "requester": "Voir toutes les requêtes",
     "message": "Message du chef",
     "events": "Evénements",
