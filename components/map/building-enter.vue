@@ -11,7 +11,7 @@
 
         <template v-if="type === 'shop'">
             <div class="text-left" v-html="$t('game.shop.text', {player: me.name, name: $t(`buildings.${building.name}`) })"></div>
-            <Table :columns="shopColumns()" :data="objects"></Table>
+            <Table :columns="shopColumns()" :data="objects" width="600"></Table>
         </template>
 
         <template v-if="type === 'wanted'">
@@ -53,7 +53,7 @@
         <template v-if="type ==='magic'">
             <div class="text-left" v-html="$t('game.magic.text', {player: me.name, name: $t(`buildings.${building.name}`)})"></div>
 
-            <Table :columns="shopSpellColumns()" :data="objects"></Table>
+            <Table :columns="shopSpellColumns()" :data="objects" width="600"></Table>
         </template>
     </div>
 </template>
@@ -153,6 +153,7 @@
                     {
                         align: 'center',
                         width: 90,
+                        fixed: 'left',
                         render: (h, params) => h(
                             'div',
                             {
@@ -166,6 +167,7 @@
                         title: this.$t('object.name'),
                         align: 'center',
                         width: 90,
+                        fixed: 'left',
                         render: (h, params) => h(
                             'strong',
                             this.$t(`objects.${params.row.name}.name`),
@@ -179,7 +181,7 @@
                     },
                     {
                         title: this.$t('object.weight'),
-                        width: 80,
+                        width: 70,
                         key: 'weight',
                         align: 'center',
                     },
