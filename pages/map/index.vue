@@ -225,6 +225,7 @@
     import settings from '~/config/general.config';
     import api from '~/services/api';
     import Player from '~/lib/player';
+    import {EventBus} from '~/lib/bus';
     import {isEmpty, entries} from '~/lib/utils';
     import ActionLink from '~/components/map/action-link';
     import BuildingEnter from '~/components/map/building-enter';
@@ -275,11 +276,8 @@
         },
         async mounted() {
             await this.loadMap();
-            this.$store.watch(state => state.game.mapReload, (value) => {
-                if (value) {
-                    this.back();
-                    this.$store.dispatch('reloadMap', false);
-                }
+            EventBus.$on('reload-map', () => {
+                this.back();
             });
 
             this.$on('run-action', (options) => {

@@ -227,6 +227,7 @@
 <script type="text/ecmascript-6">
     import {mapGetters} from 'vuex';
     import api from '~/services/api';
+    import {EventBus} from '~/lib/bus';
 
     export default {
         methods: {
@@ -246,7 +247,7 @@
             },
             move(where) {
                 api.move(where).then(() => {
-                    this.$store.dispatch('reloadMap');
+                    EventBus.$emit('reload-map');
                     this.$store.dispatch('fetchPlayer');
                 }).catch(() => {
                     this.$Notice.error({

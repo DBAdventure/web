@@ -59,6 +59,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+    import {EventBus} from '~/lib/bus';
     import {isEmpty} from '~/lib/utils';
     import Stats from '~/components/utils/stats';
     import Requirements from '~/components/utils/requirements';
@@ -123,7 +124,7 @@
                         break;
                     case 'teleport':
                         await api.teleport(this.building.id, data).then(() => {
-                            this.$store.dispatch('reloadMap');
+                            EventBus.$emit('reload-map');
                             this.$store.dispatch('fetchPlayer');
                         }).catch(() => {
                             errorMessage = this.$t('error.teleport.forbidden');

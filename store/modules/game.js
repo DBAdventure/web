@@ -5,7 +5,6 @@ import * as types from '../mutation-types';
 const state = () => ({
     style: null,
     data: {},
-    mapReload: false,
 });
 
 const actions = {
@@ -22,9 +21,6 @@ const actions = {
             Math.floor(Math.random() * 20) + 1,
         );
     },
-    reloadMap({commit}, value = true) {
-        commit(types.GAME_MAP_RELOAD, value);
-    },
 };
 
 const mutations = {
@@ -33,9 +29,6 @@ const mutations = {
     },
     [types.GAME_STYLE](state, style) {
         state.style = `theme-${style}`;
-    },
-    [types.GAME_MAP_RELOAD](state, value) {
-        state.mapReload = value;
     },
 };
 
