@@ -3,7 +3,7 @@
         <h1 class="title title-map">{{ $t('map.title') }}</h1>
 
         <div class="map-container text-center">
-            <table class="map" border="0" cellspacing="0" cellpadding="0" :width="(borders.yEnd - (borders.yStart + 1)) * 100 - 75">
+            <table class="map" border="0" cellspacing="0" cellpadding="0" :width="(borders.xEnd - (borders.xStart - 1)) * 100 + 25">
                 <thead>
                     <tr>
                         <th class="map-refresh">
