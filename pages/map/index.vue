@@ -286,10 +286,10 @@
         },
         methods: {
             async back() {
+                await this.loadMap();
                 this.action = null;
                 this.parameters = {};
                 this.target = null;
-                await this.loadMap();
             },
             async loadMap() {
                 this.$Loading.start();
