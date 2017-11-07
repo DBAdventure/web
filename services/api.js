@@ -150,6 +150,12 @@ const api = {
     enterBuilding(id) {
         return makeGetRequest(`/building/enter/${id}`);
     },
+    deposit(buildingId, deposit) {
+        return makePostRequest(`/building/bank/${buildingId}/deposit`, {deposit});
+    },
+    withdraw(buildingId, withdraw) {
+        return makePostRequest(`/building/bank/${buildingId}/withdraw`, {withdraw});
+    },
     teleport(buildingId, where) {
         return makePostRequest(`/building/teleport/${buildingId}`, {where});
     },

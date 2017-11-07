@@ -32,23 +32,17 @@
         </template>
 
         <template v-if="type === 'bank'">
-            <div class="text-left" v-html="$t('game.bank.text', {player: me.name, name: building.name, goldBar: goldbar})"></div>
+            <div class="text-left" v-html="$t('game.bank.text', {name: $t(`buildings.${building.name}`), goldBar: goldBar})"></div>
 
             <p v-html="$t('game.bank.deposit')" />
-            <form class="form-inline" method="post" @submit.prevent="deposit()">
-                <div class="form-group">
-                    <input class="form-control" placeholder="0" type="text" name="deposit"/>
-                </div>
-                <button type="submit" class="btn btn-default">{{ $t('form.bank.deposit') }}</button>
-            </form>
+            <Input v-model="depositAmount" number>
+                <Button slot="append" icon="archive" @click.prevent="runAction('deposit', depositAmount)"></Button>
+            </Input>
 
             <p v-html="$t('game.bank.withdraw')"/>
-            <form class="form-inline" method="post" @submit.prevent="withdraw()">
-                <div class="form-group">
-                    <input class="form-control" placeholder="0" type="text" name="withdraw"/>
-                </div>
-                <button type="submit" class="btn btn-default">{{ $t('form.bank.withdraw') }}</button>
-            </form>
+            <Input v-model="withdrawAmount" number>
+                <Button slot="append" icon="upload" @click.prevent="runAction('withdraw', withdrawAmount)"></Button>
+            </Input>
         </template>
         <template v-if="type ==='magic'">
             <div class="text-left" v-html="$t('game.magic.text', {player: me.name, name: $t(`buildings.${building.name}`)})"></div>
@@ -94,11 +88,14 @@
         data() {
             return {
                 availableMoves: ['n', 'ne', 'e', 'se', 's', 'sw', 'w', 'nw'],
+                withdrawAmount: 0,
+                depositAmount: 0,
+                goldBank: this.objects.zeni,
             };
         },
         computed: {
             goldBar() {
-                return !isEmpty(this.objects.zeni) ? this.objects.zeni : 0;
+                return !isEmpty(this.goldBank) ? this.goldBank : 0;
             },
         },
         methods: {
@@ -108,7 +105,7 @@
                 switch (what) {
                     case 'buy':
                         await api.buyObject(this.building.id, data).then((res) => {
-                            successMessage = this.handlMessage(res.data);
+                            successMessage = this.handleMessages(res.data);
                             this.$store.dispatch('fetchPlayer');
                         }).catch((err) => {
                             errorMessage = this.$t(err.response.data.error);
@@ -116,7 +113,7 @@
                         break;
                     case 'buySpell':
                         await api.buySpell(this.building.id, data).then((res) => {
-                            successMessage = this.handlMessage(res.data);
+                            successMessage = this.handleMessages(res.data);
                             this.$store.dispatch('fetchPlayer');
                         }).catch((err) => {
                             errorMessage = this.$t(err.response.data.error);
@@ -128,6 +125,24 @@
                             this.$store.dispatch('fetchPlayer');
                         }).catch(() => {
                             errorMessage = this.$t('error.teleport.forbidden');
+                        });
+                        break;
+                    case 'deposit':
+                        await api.deposit(this.building.id, data).then((res) => {
+                            successMessage = this.handleMessages(res.data);
+                            this.$store.dispatch('fetchPlayer');
+                            this.goldBank = res.data.parameters.goldBank;
+                        }).catch((err) => {
+                            errorMessage = this.$t(err.response.data.error);
+                        });
+                        break;
+                    case 'withdraw':
+                        await api.withdraw(this.building.id, data).then((res) => {
+                            successMessage = this.handleMessages(res.data);
+                            this.$store.dispatch('fetchPlayer');
+                            this.goldBank = res.data.parameters.goldBank;
+                        }).catch((err) => {
+                            errorMessage = this.$t(err.response.data.error);
                         });
                         break;
                     default:

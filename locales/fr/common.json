@@ -435,11 +435,11 @@
       "text": "Bien le bonjour, {name}.<br/>Je crois déceler en toi un très grand mage, avide de savoir et en quête de nouvelles techniques. Tes pas t'ont conduit au bon endroit !<br/>En effet je puis tenter de t'apprendre, les meilleurs sorts correspondant à la race à laquelle tu appartiens.<br/>Cependant mes précieux enseignements te couteront, bien entendu, quelques malheureux zénis...<br/>Avant de commencer, sache que seules tes propres compétences entreront en jeu.<br/>Pour acquérir le nouveau sort que tu convoites, les bonus dus à ton équipement ne seront pas pris en compte."
     },
     "bank": {
-      "text": "Bienvenue dans la {name}.<br />Vous avez {goldBar} gold bars!<br />Je te propose de mettre tes Zénis à l'abri dans nos coffres.<br />Attention cependant, ce service n'est pas gratuit...",
+      "text": "Bienvenue dans la <strong>{name}</strong>.<br />Vous avez {goldBar} lingot(s) !<br />Je te propose de mettre tes Zénis à l'abri dans nos coffres.<br />Attention cependant, ce service n'est pas gratuit...",
       "deposit": "Combien veux tu déposer de Zénis ?<br />(20 Zénis => 1 lingot)",
       "withdraw": "Combien veux tu retirer de lingots ?<br />(1 lingot => 18 Zénis)",
       "event.name": "Bank de Pilaf",
-      "interest": "Tu gagnes {goldBar} barre(s) d'or grâce aux intérêts bancaires"
+      "interest": "Tu gagnes {goldBar} lingot(s) grâce aux intérêts bancaires"
     },
     "wanted": {
       "text": "Bienvenue {player}, te voici dans le {name}.<br/><br/>Sur cette île maudite, plusieurs personnes sont détestées. Tu peux, grâce à moi et à mes confrères, déposer des Zénis, afin de mettre une tête à prix. Celui qui abattra une cible ainsi désignée, remportera la cagnotte.<br />Attention, je n'accepte les mises qu'à partir de {minimalAmount} Zénis minimun.",
@@ -476,10 +476,12 @@
     },
     "bank": {
       "deposit": {
-        "zeni": "Vous venez de déposer {goldBar} barre(s) d'or, vous en avez maintenant {goldBank} en banque."
+        "zeni": "Vous venez de déposer {goldBar} lingot(s), vous en avez maintenant {goldBank} en banque.",
+        "error": "Vous ne pouvez pas déposer cette somme, le minimum étant de 20 Zénis !"
       },
       "withdraw": {
-        "zeni": "Vous venez de retirer {goldBar} barre(s) d'or, vous en avez maintenant {goldBank} en banque."
+        "zeni": "Vous venez de retirer {goldBar} lingot(s), vous en avez maintenant {goldBank} en banque.",
+        "error": "Vous ne pouvez pas retirer cette somme !"
       }
     }
   },
