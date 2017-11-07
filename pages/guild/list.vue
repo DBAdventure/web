@@ -23,7 +23,6 @@
             </div>
             <h2 class="little-title">{{ $t('guild.membersList') }}</h2>
             <Table :columns="guildPlayersColumns()" :data="selectedGuildPlayers"></Table>
-
         </div>
     </div>
 </template>
