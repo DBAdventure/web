@@ -301,6 +301,7 @@
                     this.borderYRange = _.range(this.borders.yStart, this.borders.yEnd + 1);
                     this.borderXRange = _.range(this.borders.xStart, this.borders.xEnd + 1);
                     this.$Loading.finish();
+                    this.centerMap();
                 });
             },
             itemsByDistance(data, isPlayer) {
@@ -546,6 +547,16 @@
                 }
 
                 return false;
+            },
+            centerMap() {
+                this.$nextTick(() => {
+                    const mapContainer = document.querySelector('.map-container');
+                    const map = document.querySelector('.map-container .map');
+                    mapContainer.scrollTo(
+                        Math.round((map.offsetWidth - mapContainer.offsetWidth) / 2),
+                        Math.round((map.offsetHeight - mapContainer.offsetHeight) / 2),
+                    );
+                });
             },
         },
     };
