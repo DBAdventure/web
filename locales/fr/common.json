@@ -917,16 +917,16 @@
   },
   "miscellaneous": {
     "title": "Information sur le joueur",
-    "side": "<strong>Côté :</strong> {side}",
+    "side": "<strong>Côté :</strong> <span class=\"{sideClass}\">{side}</span>",
     "name": "<strong>Nom :</strong> {name}",
-    "race": "<strong>Race :</strong> {race}",
+    "race": "<strong>Race :</strong> <span class=\"{raceClass}\">{race}</span>",
     "level": "<strong>Niveau :</strong> {level}",
     "search": "<strong>Joueur recherché:</strong>",
     "killed": {
       "all": "Tous les joueurs tués",
-      "good": "Gentils : {nb}",
-      "bad": "Méchants : {nb}",
-      "npc": "PNJ : {nb}"
+      "good": "<strong>Gentils :</strong> {nb}",
+      "bad": "<strong>Méchants :</strong> {nb}",
+      "npc": "<strong>PNJ :</strong> {nb}"
     },
     "lastConnection": "<strong>Dernière connexion</strong> : {date}"
   },

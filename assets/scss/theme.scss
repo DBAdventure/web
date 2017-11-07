@@ -317,3 +317,12 @@ body {
         }
     }
 }
+.player-stats {
+  border-color: $default-color;
+
+  h2 {
+    border-color: $default-color;
+    color: $text-color;
+    background-color: $background-default-color;
+  }
+}
