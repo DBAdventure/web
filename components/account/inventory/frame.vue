@@ -32,7 +32,7 @@
 
             <Modal v-model="displayModal" effect="fade" :width="500">
                 <div class="inventory clearfix" v-if="objects[type]">
-                    <div v-for="playerObject in objects[type]" v-if="!playerObject.equipped">
+                    <div v-for="playerObject in getNotEquippedObjects()">
                         <Poptip :title="$t(`objects.${playerObject.object.name}.name`)"
                                 :content="$t(`objects.${playerObject.object.name}.description`)"
                                 placement="top"
@@ -158,27 +158,42 @@
             }
         },
         methods: {
-            unequip(objectId) {
-                api.unequipObject(objectId).then((res) => {
+            getNotEquippedObjects() {
+                const result = [];
+                if (this.objects[this.type]) {
+                    Object.values(this.objects[this.type]).forEach((object) => {
+                        if (!object.equipped) {
+                            result.push(object);
+                        }
+                    });
+                }
+
+                if (result.length === 0) {
+                    this.displayModal = false;
+                }
+
+                return result;
+            },
+            async unequip(objectId) {
+                await api.unequipObject(objectId).then((res) => {
                     this.$Notice.success({
                         title: this.$t('notice.success'),
                         desc: this.handleMessages(res.data),
                     });
-                    this.$emit('reload');
                 }).catch(() => {
                     this.raiseError();
-                    this.$emit('reload');
                 });
+                await this.$emit('reload');
             },
-            equip(objectId) {
-                api.equipObject(objectId).then((res) => {
+            async equip(objectId) {
+                await api.equipObject(objectId).then(async (res) => {
                     res.data.messages.forEach((msg) => {
                         this.$Notice.success({
                             title: this.$t('notice.success'),
                             desc: this.handleMessages(msg),
                         });
                     });
-                    this.$emit('reload');
+                    await this.$emit('reload');
                 }).catch((err) => {
                     if (err.response.data.error) {
                         this.$Notice.error({
@@ -191,45 +206,46 @@
                             desc: this.$t('notice.generic'),
                         });
                     }
-                    this.$emit('reload');
                 });
             },
-            drop(objectId) {
+            async drop(objectId) {
                 let nb = 1;
                 if (this.selectedObjects[objectId]) {
                     nb = this.selectedObjects[objectId];
                 }
 
-                api.dropObject(objectId, nb).then((res) => {
+                await api.dropObject(objectId, nb).then((res) => {
                     this.$Notice.success({
                         title: this.$t('notice.success'),
                         desc: this.handleMessages(res.data),
                     });
-                    this.$emit('reload');
                 }).catch(() => {
                     this.raiseError();
-                    this.$emit('reload');
                 });
+                await this.$emit('reload');
             },
-            use(objectId) {
+            async use(objectId) {
                 let nb = 1;
                 if (this.selectedObjects[objectId]) {
                     nb = this.selectedObjects[objectId];
                 }
 
-                api.useObject(objectId, nb).then((res) => {
+                await api.useObject(objectId, nb).then((res) => {
                     this.$Notice.success({
                         title: this.$t('notice.success'),
                         desc: this.handleMessages(res.data),
                     });
-                    this.$emit('reload');
                 }).catch(() => {
                     this.raiseError();
-                    this.$emit('reload');
                 });
+                await this.$emit('reload');
             },
             choose() {
-                this.displayModal = true;
+                if (this.getNotEquippedObjects().length > 0) {
+                    this.displayModal = true;
+                } else {
+                    this.displayModal = false;
+                }
             },
         },
     };
