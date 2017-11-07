@@ -22,7 +22,7 @@
                             :background="`/media/${map[x][y]['file']}`"
                             class="text-center">
                             <template v-for="building in itemsList(items.buildings, x, y)">
-                                <image-render :x="x" :y="y" :image="`/images/${building.entity.image}`" :title="$t(`buildings.${building.entity.name}`)"/>
+                                <image-render :x="x" :y="y" :image="`/images/buildings/${building.entity.image}`" :title="$t(`buildings.${building.entity.name}`)"/>
                             </template>
 
                             <template v-if="itemsList(items.players, x, y).length > 2">
@@ -140,7 +140,7 @@
                 <template v-for="buildings, distance in itemsByDistance(items.buildings)">
                     <div class="row row-object" v-for="building in buildings">
                         <div class="col-lg-2 text-center">
-                            <image-render :x="building.x" :y="building.y" :image="`/images/${building.image}`" :title="$t(`buildings.${building.name}`)"/>
+                            <image-render :x="building.x" :y="building.y" :image="`/images/buildings/${building.image}`" :title="$t(`buildings.${building.name}`)"/>
                         </div>
                         <div class="col-lg-10">
                             {{ $t(`buildings.${building.name}`) }}

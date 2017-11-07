@@ -487,7 +487,7 @@
   },
   "inventory": {
     "choose": "Choisir",
-    "unequip": "Déséquiper",
+    "unequip": "Retirer",
     "equip": "Equiper",
     "use": "Utiliser",
     "drop": "Jeter",
