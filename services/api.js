@@ -118,6 +118,9 @@ const api = {
     confirmAccount(id, token) {
         return makePostRequest(`/account/confirm/${id}/${token}`);
     },
+    saveSettings(data) {
+        return makePostRequest('/account/settings', data);
+    },
 
     /**
      * Inventory

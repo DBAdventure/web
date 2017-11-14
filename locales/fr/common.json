@@ -1259,6 +1259,7 @@
   },
   "account": {
     "enabled": "Votre compte est maintenant activé !",
+    "saved": "Vos informations ont été mises à jours !",
     "title": "Compte",
     "created": {
       "title": "Compte créé",

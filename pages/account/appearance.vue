@@ -26,7 +26,7 @@
                 :placeholder="$t('choice.character')"
                 clearable
                 required>
-                <Option v-for="value, key in appearances[player_race]" :key="key" :value="key">{{ value.label }} {{ key }}</Option>
+                <Option v-for="value, key in appearances[player_race]" :key="key" :value="key">{{ value.label }}</Option>
             </Select>
 
             <Select

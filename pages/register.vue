@@ -7,7 +7,7 @@
         <Form ref="registerForm" id="register-form" class="form-horizontal" :rules="registerRules" :model="player">
             <h2>{{ $t('register.personalinfo') }}</h2>
 
-            <Form-item :label="$t('form.pseudo')" :label-width="150" prop="username" required>
+            <Form-item :label="$t('form.pseudo')" :label-width="150" prop="name" required>
                 <Input name="name"
                        :placeholder="$t('form.pseudo')"
                        v-model="player.name"
