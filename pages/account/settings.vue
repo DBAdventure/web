@@ -61,10 +61,7 @@
                 callback();
             };
             const validatePassCheck = (rule, value, callback) => {
-                console.log('here');
-                console.log(value);
-                console.log(this.player.password);
-                if (_.trim(value) !== this.player.password) {
+                if (_.trim(this.player.password) !== '' && _.trim(value) !== this.player.password) {
                     callback(new Error(this.$t('field.nomatch')));
                 } else {
                     callback();
@@ -110,8 +107,6 @@
         methods: {
             handleSubmit() {
                 this.$refs.settingsForm.validate((valid) => {
-                    console.log(valid);
-                    console.log('here');
                     if (valid) {
                         this.$Loading.start();
                         api.saveSettings({player_settings: this.player}).then(() => {
