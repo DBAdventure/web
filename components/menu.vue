@@ -76,25 +76,28 @@
                 </div>
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <router-link to="/account">{{ $t('menu.dashboard') }}</router-link>
-                    </li>
-                    <li class="list-group-item">
-                        <router-link to="/account/magic">{{ $t('menu.magic') }}</router-link>
-                    </li>
-                    <li class="list-group-item">
                         <router-link to="/map">{{ $t('menu.map.text') }}</router-link>
                     </li>
                     <li class="list-group-item" v-if="currentPlayer.has_mini_map">
                         <router-link to="/map/mini">{{ $t('menu.map.mini') }}</router-link>
                     </li>
                     <li class="list-group-item">
+                        <router-link to="/account">{{ $t('menu.dashboard') }}</router-link>
+                    </li>
+                    <li class="list-group-item">
+                        <router-link to="/account/magic">{{ $t('menu.magic') }}</router-link>
+                    </li>
+                    <li class="list-group-item">
                         <router-link to="/account/inventory">{{ $t('menu.inventory') }}</router-link>
                     </li>
                     <li class="list-group-item">
-                        <router-link to="/guild">{{ $t('menu.guild.text') }}</router-link>
+                        <router-link to="/account/inbox">{{ $t('menu.inbox') }} <span class="badge">{{ $store.state.game.data.unreadMessages }}</span></router-link>
                     </li>
                     <li class="list-group-item">
-                        <router-link to="/account/inbox">{{ $t('menu.inbox') }} <span class="badge">{{ $store.state.game.data.unreadMessages }}</span></router-link>
+                        <router-link to="/guild">{{ $t('menu.guild.text') }}</router-link>
+                        <template v-if="currentPlayer.guild_player && currentPlayer.guild_player.enabled">
+                            <span>( {{ currentPlayer.getGuild().nb_members }} / {{ currentPlayer.getGuild().nb_max_members }})</span>
+                        </template>
                     </li>
                 </ul>
             </div>

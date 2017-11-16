@@ -58,9 +58,11 @@
     import {mapGetters} from 'vuex';
     import api from '~/services/api';
     import GuildMenu from '~/components/guild/menu';
+    import ErrorMixin from '~/components/mixins/error';
 
     export default {
         middleware: 'auth',
+        mixins: [ErrorMixin],
         components: {
             GuildMenu,
         },
@@ -81,19 +83,20 @@
             ]),
         },
         methods: {
-            leaveGuild() {
+            async leaveGuild() {
                 this.$Loading.start();
-                api.leaveGuild().then((res) => {
+                await api.leaveGuild().then((res) => {
                     const messages = res.data.messages.map(e => this.$t(e));
                     this.$Notice.success({
                         title: this.$t('notice.success'),
                         desc: messages.join('\n'),
                     });
                     this.$Loading.finish();
-                    this.$store.dispatch('fetchPlayer');
                 }).catch(() => {
                     this.raiseError();
                 });
+
+                this.$store.dispatch('fetchPlayer');
             },
         },
     };

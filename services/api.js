@@ -274,6 +274,9 @@ const api = {
     getGuildRequesters() {
         return makeGetRequest('/guild/members/requester');
     },
+    adminRequest(id, decision) {
+        return makePostRequest(`/guild/admin/requester/${id}`, {decision});
+    },
 
     /**
      * Magic

@@ -69,19 +69,21 @@
             };
         },
         methods: {
-            leaveGuild() {
+            async leaveGuild() {
                 this.$Loading.start();
-                api.leaveGuild().then((res) => {
+                await api.leaveGuild().then((res) => {
                     const messages = res.data.messages.map(e => this.$t(e));
                     this.$Notice.success({
                         title: this.$t('notice.success'),
                         desc: messages.join('\n'),
                     });
                     this.$Loading.finish();
-                    this.$router.push('/guild');
+                    this.$router.push('/guild', {force: true});
                 }).catch(() => {
                     this.raiseError();
                 });
+
+                this.$store.dispatch('fetchPlayer');
             },
         },
     };

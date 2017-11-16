@@ -640,7 +640,13 @@
     },
     "guild": {
       "leave": "vient de quitter la guilde !",
-      "request": "a fait une demande pour rejoindre la guilde !"
+      "request": "a fait une demande pour rejoindre la guilde !",
+      "admin": {
+        "request": {
+          "accept": "a accepté la demande de {name}",
+          "decline": "a décliné la demande de {name}"
+        }
+      }
     }
   },
   "action": {
@@ -865,7 +871,7 @@
         "requester": "Voir les requêtes",
         "fired": "Virer quelqu'un",
         "rank": "Gérer les rangs",
-        "general": "Nommez un membre"
+        "general": "Nommez un administrateur"
       },
       "player": {
         "request": {
