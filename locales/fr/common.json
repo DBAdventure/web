@@ -642,6 +642,7 @@
       "leave": "vient de quitter la guilde !",
       "request": "a fait une demande pour rejoindre la guilde !",
       "admin": {
+        "fired": "a viré {name}",
         "request": {
           "accept": "a accepté la demande de {name}",
           "decline": "a décliné la demande de {name}"
@@ -866,6 +867,9 @@
       "message": "Envoyer un message aux membres"
     },
     "admin": {
+      "bad": {
+        "request": "Requête impossible !"
+      },
       "title": "Administrer",
       "menu": {
         "requester": "Voir les requêtes",
@@ -880,7 +884,12 @@
         },
         "fired": "Virer",
         "rank": "Rang"
-      }
+      },
+      "requester": {
+        "declined": "La demande a été déclinée !",
+        "accepted": "La demande a été acceptée !"
+      },
+      "fired": "{name} a été viré de la guilde"
     },
     "player": {
       "not": {

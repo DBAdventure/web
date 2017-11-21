@@ -556,7 +556,7 @@
         },
         computed: {
             selectedImage() {
-                let image = this.player.appearance.image;
+                let {image} = this.player.appearance;
                 if (isEmpty(image)) {
                     if (this.player.race === 1) {
                         image = 'H.png';

@@ -3,7 +3,7 @@
         methods: {
             handleMessages(data) {
                 if (data.message) {
-                    const parameters = data.parameters;
+                    const {parameters} = data;
                     if (parameters && parameters.name) {
                         parameters.name = this.$t(parameters.name);
                     }

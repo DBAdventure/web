@@ -68,7 +68,13 @@
                         {type: 'string', required: true, message: this.$t('field.required.name')},
                     ],
                     shortName: [
-                        {type: 'string', required: true, min: 3, max: 5, message: this.$t('field.required.shortName')},
+                        {
+                            type: 'string',
+                            required: true,
+                            min: 3,
+                            max: 5,
+                            message: this.$t('field.required.shortName'),
+                        },
                     ],
                     history: [
                         {type: 'string', required: true, message: this.$t('field.required.history')},

@@ -189,6 +189,46 @@
                     });
                 }
 
+                if (this.page === this.pages.members) {
+                    columns.push({
+                        title: this.$t('guild.rank'),
+                        key: 'rank_name',
+                    });
+                    columns.push({
+                        title: this.$t('guild.stats.zeni'),
+                        key: 'zeni',
+                        align: 'center',
+                    });
+                    columns.push({
+                        title: this.$t('guild.stats.location'),
+                        key: 'location',
+                    });
+                    columns.push({
+                        title: this.$t('guild.action'),
+                        align: 'center',
+                        render: (h, params) => h(
+                            'div',
+                            [
+                                h(
+                                    'Button',
+                                    {
+                                        props: {
+                                            type: 'error',
+                                            size: 'small',
+                                        },
+                                        on: {
+                                            click: () => {
+                                                this.runAction('fired', params.row);
+                                            },
+                                        },
+                                    },
+                                    this.$t('guild.admin.player.fired'),
+                                ),
+                            ],
+                        ),
+                    });
+                }
+
                 return columns;
             },
 
@@ -239,6 +279,7 @@
             },
 
             async runAction(what, player) {
+                this.$Loading.start();
                 let errorMessage;
                 let successMessage;
                 switch (what) {
@@ -247,7 +288,16 @@
                         await api.adminRequest(player.guild_player, what === 'accept').then((res) => {
                             successMessage = this.handleMessages(res.data);
                             this.$store.dispatch('fetchPlayer');
-                            this.page = null;
+                            this.getRequesters();
+                        }).catch((err) => {
+                            errorMessage = this.$t(err.response.data.error);
+                        });
+                        break;
+                    case 'fired':
+                        await api.adminFired(player.guild_player).then((res) => {
+                            successMessage = this.handleMessages(res.data);
+                            this.$store.dispatch('fetchPlayer');
+                            this.getMembers();
                         }).catch((err) => {
                             errorMessage = this.$t(err.response.data.error);
                         });
@@ -261,6 +311,7 @@
                         title: this.$t('notice.success'),
                         desc: successMessage,
                     });
+                    this.$Loading.finish();
                 }
 
                 if (errorMessage) {
@@ -268,6 +319,7 @@
                         title: this.$t('notice.error'),
                         desc: errorMessage,
                     });
+                    this.$Loading.error();
                 }
             },
         },
