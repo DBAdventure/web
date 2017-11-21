@@ -197,7 +197,7 @@
                                 <template v-if="distance == 0">
                                     <action-link :player="enemy" :me="currentPlayer" what="slap" v-if="enemy.isPlayer() && enemy.betrayals > 0 && currentPlayer.action_points >= settings.player.SLAP_ACTION"/>
                                     <action-link :player="enemy" :me="currentPlayer" what="give" v-if="enemy.isPlayer() && currentPlayer.action_points >= settings.player.GIVE_ACTION"/>
-                                    <action-link :player="enemy" :me="currentPlayer" what="analysis" v-if="currentPlayer.action_points >= settings.player.ANALYSIS_ACTION"/>
+                                    <action-link :player="enemy" :me="currentPlayer" what="analysis" v-if="currentPlayer.action_points >= settings.player.ANALYSIS_ACTION && map[enemy.x][enemy.y].bonus == settings.map.TYPE_DEFAULT"/>
                                     <action-link :player="enemy" :me="currentPlayer" what="steal" v-if="currentPlayer.action_points >= settings.player.STEAL_ACTION && map[enemy.x][enemy.y].bonus == settings.map.TYPE_DEFAULT" />
                                     <action-link :player="enemy" :me="currentPlayer" what="heal" v-if="currentPlayer.action_points >= settings.player.HEAL_ACTION && enemy.can_be_healed"/>
 
