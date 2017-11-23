@@ -30,6 +30,7 @@ module.exports = {
         {value: 6, label: 'ranger'},
     ],
     guild: {
+        ROLE_PLAYER: 'ROLE_PLAYER',
         ROLE_ADMIN: 'ROLE_ADMIN',
         ROLE_MODO: 'ROLE_MODO',
     },

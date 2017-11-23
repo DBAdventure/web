@@ -31,7 +31,35 @@
         <template v-if="page === pages.requesters || page === pages.members">
             <Table :columns="guildPlayersColumns()" :data="guildPlayers"></Table>
         </template>
-        <template v-if="page == pages.settings">
+
+        <template v-if="page === pages.settings">
+            <Form ref="settingsForm" id="settings-form" :rules="settingsRules" :model="guild" :label-width="150">
+                <FormItem :label="$t('form.history')" prop="history">
+                    <Input v-model="guild.history" type="textarea" :autosize="{minRows: 2,maxRows: 8}"></Input>
+                </FormItem>
+                <FormItem :label="$t('form.message')" prop="message">
+                    <Input v-model="guild.message" type="textarea" :autosize="{minRows: 2,maxRows: 8}"></Input>
+                </FormItem>
+                <Button type="primary" @click.prevent="handleSettingsSubmit()" long>{{ $t('save') }}</Button>
+            </Form>
+        </template>
+
+        <template v-if="page === pages.ranks">
+            <Form ref="ranksForm" id="ranks-form" :rules="ranksRules" :model="ranks" :label-width="150">
+                <FormItem :label="$t('form.ranks.player')" prop="ROLE_PLAYER">
+                    <Input v-model="ranks.ROLE_PLAYER" type="text"></Input>
+                </FormItem>
+                <FormItem :label="$t('form.ranks.modo')" prop="ROLE_MODO">
+                    <Input v-model="ranks.ROLE_MODO" type="text"></Input>
+                </FormItem>
+                <FormItem :label="$t('form.ranks.admin')" prop="ROLE_ADMIN">
+                    <Input v-model="ranks.ROLE_ADMIN" type="text"></Input>
+                </FormItem>
+                <Button type="primary" @click.prevent="handleRanksSubmit()" long>{{ $t('save') }}</Button>
+            </Form>
+        </template>
+
+        <template v-if="page === pages.general">
             <Form ref="settingsForm" id="settings-form" :rules="settingsRules" :model="guild" :label-width="150">
                 <FormItem :label="$t('form.history')" prop="history">
                     <Input v-model="guild.history" type="textarea" :autosize="{minRows: 2,maxRows: 8}"></Input>
@@ -46,6 +74,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+    import _ from 'lodash';
     import {mapGetters} from 'vuex';
     import settings from '~/config/general.config';
     import api from '~/services/api';
@@ -79,6 +108,19 @@
             ]),
         },
         data() {
+            const uniqueRankName = (rule, value, callback) => {
+                if (_.trim(value) === '') {
+                    callback(new Error('field.empty'));
+                } else if ((value === this.ranks.ROLE_PLAYER && rule.field !== 'ROLE_PLAYER') ||
+                           (value === this.ranks.ROLE_MODO && rule.field !== 'ROLE_MODO') ||
+                           (value === this.ranks.ROLE_ADMIN && rule.field !== 'ROLE_ADMIN')
+                ) {
+                    callback(new Error(this.$t('field.match')));
+                } else {
+                    callback();
+                }
+            };
+
             return {
                 settings,
                 guildPlayers: [],
@@ -87,12 +129,17 @@
                     requesters: 1,
                     members: 2,
                     ranks: 3,
-                    admin: 4,
+                    general: 4,
                     settings: 5,
                 },
                 guild: {
                     history: '',
                     message: '',
+                },
+                ranks: {
+                    ROLE_PLAYER: '',
+                    ROLE_MODO: '',
+                    ROLE_ADMIN: '',
                 },
                 settingsRules: {
                     history: [
@@ -100,6 +147,20 @@
                     ],
                     message: [
                         {type: 'string', required: false},
+                    ],
+                },
+                ranksRules: {
+                    ROLE_PLAYER: [
+                        {type: 'string', required: true},
+                        {validator: uniqueRankName},
+                    ],
+                    ROLE_MODO: [
+                        {type: 'string', required: true},
+                        {validator: uniqueRankName},
+                    ],
+                    ROLE_ADMIN: [
+                        {type: 'string', required: true},
+                        {validator: uniqueRankName},
                     ],
                 },
             };
@@ -266,6 +327,23 @@
                 this.page = this.pages.settings;
             },
 
+            async manageRanks() {
+                const {ranks} = this.currentPlayer.getGuild();
+                this.ranks[this.settings.guild.ROLE_PLAYER] = _.find(
+                    ranks,
+                    {role: this.settings.guild.ROLE_PLAYER},
+                ).name;
+                this.ranks[this.settings.guild.ROLE_MODO] = _.find(
+                    ranks,
+                    {role: this.settings.guild.ROLE_MODO},
+                ).name;
+                this.ranks[this.settings.guild.ROLE_ADMIN] = _.find(
+                    ranks,
+                    {role: this.settings.guild.ROLE_ADMIN},
+                ).name;
+                this.page = this.pages.ranks;
+            },
+
             async runAction(what, player) {
                 this.$Loading.start();
                 let errorMessage;
@@ -316,6 +394,34 @@
                     if (valid) {
                         this.$Loading.start();
                         api.adminSettings({guild_settings: this.guild}).then(() => {
+                            this.$Notice.success({
+                                title: this.$t('notice.success'),
+                                desc: this.$t('guild.admin.saved'),
+                            });
+                            this.$store.dispatch('fetchPlayer');
+                        }).catch((err) => {
+                            if (err.response.data.error) {
+                                this.$Notice.error({
+                                    title: this.$t('notice.error'),
+                                    desc: err.response.data.error,
+                                });
+                            } else {
+                                this.$Notice.error({
+                                    title: this.$t('notice.error'),
+                                    desc: this.$t('notice.generic'),
+                                });
+                            }
+                        });
+                        this.$Loading.finish();
+                    }
+                });
+            },
+
+            handleRanksSubmit() {
+                this.$refs.ranksForm.validate((valid) => {
+                    if (valid) {
+                        this.$Loading.start();
+                        api.adminRanks({guild_ranks: this.ranks}).then(() => {
                             this.$Notice.success({
                                 title: this.$t('notice.success'),
                                 desc: this.$t('guild.admin.saved'),

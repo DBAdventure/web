@@ -134,6 +134,11 @@
     },
     "wanted": {
       "setprice": "Mettre un prix sur sa tête"
+    },
+    "ranks": {
+      "player": "Joueur",
+      "modo": "Modérateur",
+      "admin": "Administrateur"
     }
   },
   "register": {
@@ -1327,6 +1332,7 @@
   },
   "field": {
     "nomatch": "Le champ ne correspond pas",
+    "match": "La valeur existe déjà",
     "empty": "Le champ est vide"
   },
   "This page could not be found": "Cette page n'existe pas",

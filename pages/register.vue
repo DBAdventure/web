@@ -452,7 +452,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-    import {random} from 'lodash';
+    import {random, trim} from 'lodash';
     import settings from '~/config/general.config';
     import api from '~/services/api';
     import ErrorMixin from '~/components/mixins/error';
@@ -470,7 +470,7 @@
         },
         data() {
             const validatePass = (rule, value, callback) => {
-                if (value === '') {
+                if (trim(value) === '') {
                     callback(new Error(this.$t('field.empty')));
                 } else {
                     if (this.player.password_confirm !== '') {
@@ -480,7 +480,7 @@
                 }
             };
             const validatePassCheck = (rule, value, callback) => {
-                if (value === '') {
+                if (trim(value) === '') {
                     callback(new Error(this.$t('field.empty')));
                 } else if (value !== this.player.password) {
                     callback(new Error(this.$t('field.nomatch')));
@@ -489,7 +489,7 @@
                 }
             };
             const validateEmail = (rule, value, callback) => {
-                if (value === '') {
+                if (trim(value) === '') {
                     callback(new Error('field.empty'));
                 } else {
                     if (this.player.email_confirm !== '') {
@@ -499,7 +499,7 @@
                 }
             };
             const validateEmailCheck = (rule, value, callback) => {
-                if (value === '') {
+                if (trim(value) === '') {
                     callback(new Error('field.empty'));
                 } else if (value !== this.player.email) {
                     callback(new Error(this.$t('field.nomatch')));
