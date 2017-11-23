@@ -286,6 +286,9 @@ const api = {
     adminRanks(postData) {
         return makePostRequest('/guild/admin/ranks', postData);
     },
+    adminGeneral(id, postData) {
+        return makePostRequest(`/guild/admin/ranks/${id}`, postData);
+    },
 
     /**
      * Magic
