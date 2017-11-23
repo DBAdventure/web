@@ -28,7 +28,7 @@
 
         <h1 v-if="page" class="subtitle text-center">{{ $t(`guild.admin.titles.pages.${page}`) }}</h1>
 
-        <template v-if="page === pages.requester || page === pages.members">
+        <template v-if="page === pages.requesters || page === pages.members">
             <Table :columns="guildPlayersColumns()" :data="guildPlayers"></Table>
         </template>
         <template v-if="page == pages.settings">
