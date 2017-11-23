@@ -280,6 +280,9 @@ const api = {
     adminFired(id) {
         return makePostRequest(`/guild/admin/fired/${id}`);
     },
+    adminSettings(postData) {
+        return makePostRequest('/guild/admin/settings', postData);
+    },
 
     /**
      * Magic

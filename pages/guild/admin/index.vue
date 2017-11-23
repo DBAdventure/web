@@ -12,6 +12,9 @@
             <li>
                 <a href="#" @click.prevent="getMembers()">{{ $t('guild.admin.menu.fired') }}</a>
             </li>
+            <li>
+                <a href="#" @click.prevent="manageSettings()">{{ $t('guild.admin.menu.settings') }}</a>
+            </li>
 
             <template v-if="currentPlayer.getGuildRank() === settings.guild.ROLE_ADMIN">
                 <li>
@@ -23,56 +26,22 @@
             </template>
         </ul>
 
+        <h1 v-if="page" class="subtitle text-center">{{ $t(`guild.admin.titles.pages.${page}`) }}</h1>
 
-        <Table :columns="guildPlayersColumns()" :data="guildPlayers" v-if="page"></Table>
-        <!-- <table class="table table-stripped">
-             <thead>
-             <tr>
-             <th>{{ 'name' | trans }}</th>
-             <th>{{ 'level' | trans }}</th>
-             <th>{{ 'guild.rank' | trans }}</th>
-             <th>{{ 'guild.stats.location' | trans }}</th>
-             <th>{{ 'guild.action' | trans }}</th>
-             </tr>
-             </thead>
-             <tbody>
-             <tr>
-             <td>
-             <router-link class="pull-left" :to="`/player/info/${player.id}`"><img :src="guildPlayer.player.getImagePath()" /></router-link>
-             </td>
-             <td>{{ guildPlayer.player.level }}</td>
-             <td>{{ guildPlayer.rank.name }}</td>
-             <td>{{ guildPlayer.player.map.name | trans }} ( {{ guildPlayer.player.x }} / {{ guildPlayer.player.y }} )</td>
-             <td>
-             <!-- <a href="{{ path('guild.admin.fired', {"id": guildPlayer.id}) }}">{{ 'guild.admin.player.fired' | trans }}</a> -->
-        <!-- </td>
-             </tr>
-             </tbody>
-             </table> -->
-        <!-- Requester -->
-        <!-- <table class="table table-stripped">
-             <thead>
-             <tr>
-             <th>{{ 'name' | trans }}</th>
-             <th>{{ 'level' | trans }}</th>
-             <th>{{ 'guild.stats.location' | trans }}</th>
-             <th>{{ 'guild.action' | trans }}</th>
-             </tr>
-             </thead>
-             <tbody>
-             <tr>
-             <td>
-             <router-link class="pull-left" :to="`/player/info/${player.id}`"><img :src="guildPlayer.player.getImagePath()" /></router-link>
-             </td>
-             <td>{{ guildPlayer.player.level }}</td>
-             <td>{{ guildPlayer.player.map.name | trans }} ( {{ guildPlayer.player.x }} / {{ guildPlayer.player.y }} )</td>
-             <td>
-             <!-- <a href="{{ path('guild.admin.requester.decision', {"id": guildPlayer.id, "decision": "accept"}) }}">{{ 'guild.admin.player.request.accept' | trans }}</a>
-             <a href="{{ path('guild.admin.requester.decision', {"id": guildPlayer.id, "decision": "decline"}) }}">{{ 'guild.admin.player.request.decline' | trans }}</a> -->
-        <!-- </td>
-             </tr>
-             </tbody>
-             </table> -->
+        <template v-if="page === pages.requester || page === pages.members">
+            <Table :columns="guildPlayersColumns()" :data="guildPlayers"></Table>
+        </template>
+        <template v-if="page == pages.settings">
+            <Form ref="settingsForm" id="settings-form" :rules="settingsRules" :model="guild" :label-width="150">
+                <FormItem :label="$t('form.history')" prop="history">
+                    <Input v-model="guild.history" type="textarea" :autosize="{minRows: 2,maxRows: 8}"></Input>
+                </FormItem>
+                <FormItem :label="$t('form.message')" prop="message">
+                    <Input v-model="guild.message" type="textarea" :autosize="{minRows: 2,maxRows: 8}"></Input>
+                </FormItem>
+                <Button type="primary" @click.prevent="handleSettingsSubmit()" long>{{ $t('save') }}</Button>
+            </Form>
+        </template>
     </div>
 </template>
 
@@ -119,6 +88,19 @@
                     members: 2,
                     ranks: 3,
                     admin: 4,
+                    settings: 5,
+                },
+                guild: {
+                    history: '',
+                    message: '',
+                },
+                settingsRules: {
+                    history: [
+                        {type: 'string', required: true},
+                    ],
+                    message: [
+                        {type: 'string', required: false},
+                    ],
                 },
             };
         },
@@ -278,6 +260,12 @@
                 return this.guildPlayers;
             },
 
+            async manageSettings() {
+                this.guild.history = this.currentPlayer.getGuild().history;
+                this.guild.message = this.currentPlayer.getGuild().message;
+                this.page = this.pages.settings;
+            },
+
             async runAction(what, player) {
                 this.$Loading.start();
                 let errorMessage;
@@ -321,6 +309,34 @@
                     });
                     this.$Loading.error();
                 }
+            },
+
+            handleSettingsSubmit() {
+                this.$refs.settingsForm.validate((valid) => {
+                    if (valid) {
+                        this.$Loading.start();
+                        api.adminSettings({guild_settings: this.guild}).then(() => {
+                            this.$Notice.success({
+                                title: this.$t('notice.success'),
+                                desc: this.$t('guild.admin.saved'),
+                            });
+                            this.$store.dispatch('fetchPlayer');
+                        }).catch((err) => {
+                            if (err.response.data.error) {
+                                this.$Notice.error({
+                                    title: this.$t('notice.error'),
+                                    desc: err.response.data.error,
+                                });
+                            } else {
+                                this.$Notice.error({
+                                    title: this.$t('notice.error'),
+                                    desc: this.$t('notice.generic'),
+                                });
+                            }
+                        });
+                        this.$Loading.finish();
+                    }
+                });
             },
         },
     };

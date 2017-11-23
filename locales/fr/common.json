@@ -646,7 +646,8 @@
         "request": {
           "accept": "a accepté la demande de {name}",
           "decline": "a décliné la demande de {name}"
-        }
+        },
+        "settings": "a modifié le message et l'histoire de la guilde"
       }
     }
   },
@@ -867,15 +868,26 @@
       "message": "Envoyer un message aux membres"
     },
     "admin": {
+      "saved": "Informations de la guilde sauvegardées !",
       "bad": {
         "request": "Requête impossible !"
       },
       "title": "Administrer",
+      "titles": {
+        "pages": {
+          "1": "Les requêtes en cours.",
+          "2": "Les membres",
+          "3": "Les rangs",
+          "4": "Nommer des modérateurs / administrateurs",
+          "5": "Paramètres"
+        }
+      },
       "menu": {
         "requester": "Voir les requêtes",
         "fired": "Virer quelqu'un",
         "rank": "Gérer les rangs",
-        "general": "Nommez un administrateur"
+        "general": "Nommez un administrateur",
+        "settings": "Paramètres"
       },
       "player": {
         "request": {
