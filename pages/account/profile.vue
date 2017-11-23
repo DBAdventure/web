@@ -101,7 +101,7 @@
             <p>
                 <span v-html="$t('profile.stats.zeni', {value: currentPlayer.zeni})"></span></br>
                 <span v-html="$t('profile.stats.stolenZeni', {value: currentPlayer.stats.nb_stolen_zeni})"></span></br>
-                <span v-html="$t('profile.stats.avgStolenZeni', {value: currentPlayer.stats.nb_stolen_zeni / (currentPlayer.stats.nb_action_stolen_zeni == 0 ? 1 : currentPlayer.stats.nb_action_stolen_zeni)})"></span></br>
+                <span v-html="$t('profile.stats.avgStolenZeni', {value: calculateAvg(currentPlayer.stats.nb_stolen_zeni, currentPlayer.stats.nb_action_stolen_zeni)})"></span></br>
                 <span v-html="$t('profile.stats.nbActionStolenZeni', {value: currentPlayer.stats.nb_action_stolen_zeni})"></span>
             </p>
 
@@ -117,7 +117,7 @@
             <p>
                 <span v-html="$t('profile.stats.healthGiven', {value: currentPlayer.stats.nb_total_health_given})"></span></br>
                 <span v-html="$t('profile.stats.nbHealthGiven', {value: currentPlayer.stats.nb_health_given})"></span></br>
-                <span v-html="$t('profile.stats.avgHealthGiven', {value: currentPlayer.stats.nb_total_health_given / (currentPlayer.stats.nb_health_given == 0 ? 1 : currentPlayer.stats.nb_health_given)})"></span></br>
+                <span v-html="$t('profile.stats.avgHealthGiven', {value: calculateAvg(currentPlayer.stats.nb_total_health_given, currentPlayer.stats.nb_health_given)})"></span></br>
             </p>
 
             <p>
@@ -129,28 +129,28 @@
             <p>
                 <span v-html="$t('profile.stats.nbDamageHq', {value: currentPlayer.stats.nb_damage_hq})"></span></br>
                 <span v-html="$t('profile.stats.nbHitHq', {value: currentPlayer.stats.nb_hit_hq})"></span></br>
-                <span v-html="$t('profile.stats.avgDamageHq', {value: currentPlayer.stats.nb_damage_hq / (currentPlayer.stats.nb_hit_hq == 0 ? 1 : currentPlayer.stats.nb_hit_hq)})"></span></br>
+                <span v-html="$t('profile.stats.avgDamageHq', {value: calculateAvg(currentPlayer.stats.nb_damage_hq, currentPlayer.stats.nb_hit_hq)})"></span></br>
                 <span v-html="$t('profile.stats.nbKillHq', {value: currentPlayer.stats.nb_kill_hq})"></span></br>
             </p>
 
             <p>
                 <span v-html="$t('profile.stats.nbDamageGood', {value: currentPlayer.stats.nb_damage_good})"></span></br>
                 <span v-html="$t('profile.stats.nbHitGood', {value: currentPlayer.stats.nb_hit_good})"></span></br>
-                <span v-html="$t('profile.stats.avgDamageGood', {value: currentPlayer.stats.nb_damage_good / (currentPlayer.stats.nb_hit_good == 0 ? 1 : currentPlayer.stats.nb_hit_good)})"></span></br>
+                <span v-html="$t('profile.stats.avgDamageGood', {value: calculateAvg(currentPlayer.stats.nb_damage_good, currentPlayer.stats.nb_hit_good)})"></span></br>
                 <span v-html="$t('profile.stats.nbKillGood', {value: currentPlayer.stats.nb_kill_good})"></span></br>
             </p>
 
             <p>
                 <span v-html="$t('profile.stats.nbDamageBad', {value: currentPlayer.stats.nb_damage_bad})"></span></br>
                 <span v-html="$t('profile.stats.nbHitBad', {value: currentPlayer.stats.nb_hit_bad})"></span></br>
-                <span v-html="$t('profile.stats.avgDamageBad', {value: currentPlayer.stats.nb_damage_bad / (currentPlayer.stats.nb_hit_bad == 0 ? 1 : currentPlayer.stats.nb_hit_bad)})"></span></br>
+                <span v-html="$t('profile.stats.avgDamageBad', {value: calculateAvg(currentPlayer.stats.nb_damage_bad, currentPlayer.stats.nb_hit_bad)})"></span></br>
                 <span v-html="$t('profile.stats.nbKillBad', {value: currentPlayer.stats.nb_kill_bad})"></span></br>
             </p>
 
             <p>
                 <span v-html="$t('profile.stats.nbDamageNpc', {value: currentPlayer.stats.nb_damage_npc})"></span></br>
                 <span v-html="$t('profile.stats.nbHitNpc', {value: currentPlayer.stats.nb_hit_npc})"></span></br>
-                <span v-html="$t('profile.stats.avgDamageNpc', {value: currentPlayer.stats.nb_damage_npc / (currentPlayer.stats.nb_hit_npc == 0 ? 1 : currentPlayer.stats.nb_hit_npc)})"></span></br>
+                <span v-html="$t('profile.stats.avgDamageNpc', {value: calculateAvg(currentPlayer.stats.nb_damage_npc, currentPlayer.stats.nb_hit_npc)})"></span></br>
                 <span v-html="$t('profile.stats.nbKillNpc', {value: currentPlayer.stats.nb_kill_npc})"></span></br>
             </p>
 
@@ -344,6 +344,9 @@
                 }
 
                 return '';
+            },
+            calculateAvg(total, nb) {
+                return Number(total / (nb === 0 ? 1 : nb)).toFixed(2);
             },
         },
     };
