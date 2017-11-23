@@ -23,11 +23,6 @@
                 </router-link>
             </li>
             <li>
-                <router-link to="/account/inbox?write=guild">
-                    {{ $t('guild.send.message') }}
-                </router-link>
-            </li>
-            <li>
                 <router-link to="/ranking?type=guild">
                     {{ $t('guild.ranking.intra') }}
                 </router-link>
