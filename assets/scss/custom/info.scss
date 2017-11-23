@@ -16,3 +16,18 @@
     margin: 0 -20px 10px -20px;
   }
 }
+
+.account {
+    .profile-table {
+        td.spacing {
+            padding-left: 20px;
+        }
+    }
+    .profile-data,
+    .profile-table {
+        margin-bottom: 20px;
+    }
+    .profile-data {
+        margin-top: 20px;
+    }
+}

@@ -1,19 +1,19 @@
 <template>
     <div class="account">
         <h1 class="title title-profile">{{ $t('header.profile') }}</h1>
-        <table width="600">
+        <table width="600" class="profile-table">
             <tbody>
                 <tr>
-                    <td width="150" height="150" align="center" valign="middle">
+                    <td width="100" height="100" align="center" valign="middle" :background="`/media/${currentPlayer.case.file}`">
                         <img :src="currentPlayer.getImagePath()"/>
                     </td>
-                    <td>
+                    <td class="spacing">
                         {{ $t('profile.you') }} <strong>{{ currentPlayer.name }}</strong><br/>
                         {{ $t('profile.level') }} <strong>{{ currentPlayer.level }}</strong><br/>
                         {{ $t('profile.position') }} <strong>{{ currentPlayer.x }} / {{ currentPlayer.y }}</strong><br/>
                         {{ $t('profile.side') }} <strong>{{ $t(currentPlayer.side.name) }}</strong><br/>
                     </td>
-                    <td>
+                    <td class="spacing">
                         {{ $t('profile.race') }} <strong>{{ $t(currentPlayer.race.name) }}</strong><br/>
                         {{ $t('profile.rank') }} <strong>{{ $t(currentPlayer.rank.name) }}</strong><br/>
                         {{ $t('profile.class') }} <strong>{{ $t(currentPlayer.class) }}</strong><br/>
@@ -27,7 +27,7 @@
             </tbody>
         </table>
 
-        <div>
+        <div class="profile-data">
             {{ $t('profile.player.health', {"h": currentPlayer.health, "maxH": currentPlayer.total_max_health}) }}
             <div class="progress">
                 <div class="progress-bar progress-bar-danger"
@@ -97,7 +97,7 @@
 
         <Table :columns="statsColumns" :data="statsData" stripped size="small" width="625" border></Table>
 
-        <div>
+        <div class="profile-data">
             <p>
                 <span v-html="$t('profile.stats.zeni', {value: currentPlayer.zeni})"></span></br>
                 <span v-html="$t('profile.stats.stolenZeni', {value: currentPlayer.stats.nb_stolen_zeni})"></span></br>
