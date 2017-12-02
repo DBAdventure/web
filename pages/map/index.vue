@@ -143,7 +143,7 @@
                             <image-render :x="building.x" :y="building.y" :image="`/images/buildings/${building.image}`" :title="building.name"/>
                         </div>
                         <div class="col-lg-10">
-                            {{ $t(`buildings.${building.name}`) }}
+                            {{ building.name }}
                             <template v-if="distance == 0">
                                 {{ $t('map.nearYou') }}
                             </template>
@@ -399,7 +399,7 @@
                         align: 'center',
                         render: (h, params) => h(
                             'strong',
-                            this.$t(`objects.${params.row.object.name}.name`),
+                            params.row.object.name,
                         ),
                     },
                     {
@@ -453,7 +453,7 @@
                     await this.$store.dispatch('fetchPlayer');
                     this.$Notice.success({
                         title: this.$t('notice.success'),
-                        desc: this.$t('action.give.success.object', {name: this.$t(`objects.${playerObject.object.name}.name`)}),
+                        desc: this.$t('action.give.success.object', {name: playerObject.object.name}),
                     });
                     this.handleResult(res, this.target.id);
                     this.$Loading.finish();
