@@ -5,8 +5,8 @@
                 <div v-if="isOneEquipped">
                     <div class="equiped" v-for="playerObject in objects[type]" v-if="playerObject.equipped">
                         <div class="inventory-box">
-                            <Poptip :title="$t(`objects.${playerObject.object.name}.name`)"
-                                    :content="$t(`objects.${playerObject.object.name}.description`)"
+                            <Poptip :title="playerObject.object.name"
+                                    :content="playerObject.object.description"
                                     placement="top"
                                     width="300"
                                     trigger="hover">
@@ -33,8 +33,8 @@
             <Modal v-model="displayModal" effect="fade" :width="500">
                 <div class="inventory clearfix" v-if="objects[type]">
                     <div v-for="playerObject in getNotEquippedObjects()">
-                        <Poptip :title="$t(`objects.${playerObject.object.name}.name`)"
-                                :content="$t(`objects.${playerObject.object.name}.description`)"
+                        <Poptip :title="playerObject.object.name"
+                                :content="playerObject.object.description"
                                 placement="top"
                                 width="300"
                                 trigger="hover"
@@ -65,8 +65,8 @@
         <template v-else>
             <div class="inventory list clearfix" v-if="objects[type]">
                 <div v-for="playerObject in objects[type]" v-if="!playerObject.equipped">
-                    <Poptip :title="$t(`objects.${playerObject.object.name}.name`)"
-                            :content="$t(`objects.${playerObject.object.name}.description`)"
+                    <Poptip :title="playerObject.object.name"
+                            :content="playerObject.object.description"
                             placement="top"
                             width="300"
                             trigger="hover">

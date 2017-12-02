@@ -10,7 +10,7 @@
         </template>
 
         <template v-if="type === 'shop'">
-            <div class="text-left" v-html="$t('game.shop.text', {player: me.name, name: $t(`buildings.${building.name}`) })"></div>
+            <div class="text-left" v-html="$t('game.shop.text', {player: me.name, name: building.name})"></div>
             <Table :columns="shopColumns()" :data="objects" width="600"></Table>
         </template>
 
@@ -32,7 +32,7 @@
         </template>
 
         <template v-if="type === 'bank'">
-            <div class="text-left" v-html="$t('game.bank.text', {name: $t(`buildings.${building.name}`), goldBar: goldBar})"></div>
+            <div class="text-left" v-html="$t('game.bank.text', {name: building.name, goldBar: goldBar})"></div>
 
             <p v-html="$t('game.bank.deposit')" />
             <Input v-model="depositAmount" number>
@@ -45,7 +45,7 @@
             </Input>
         </template>
         <template v-if="type ==='magic'">
-            <div class="text-left" v-html="$t('game.magic.text', {player: me.name, name: $t(`buildings.${building.name}`)})"></div>
+            <div class="text-left" v-html="$t('game.magic.text', {player: me.name, name: building.name})"></div>
 
             <Table :columns="shopSpellColumns()" :data="objects" width="600"></Table>
         </template>
