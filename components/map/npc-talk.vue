@@ -9,18 +9,22 @@
         <p v-for="line in npc.history.split('\n')">{{ line }}</p>
 
         <dl>
-            <dt>Ramène moi</dt>
+            <dt>{{ $t('game.quest.give.title') }}</dt>
             <dd v-for="npcNeeded in npc.npc_needed">{{ npcNeeded.number }} {{ $t(npcNeeded.race.name) }}</dd>
-            <dd v-for="npcObjectNeeded in npc.npc_objects_needed">{{ npcObjectNeeded.number }} {{ $t(npcObjectNeeded.npc_object.name) }}</dd>
             <dd v-for="objectNeeded in npc.objects_needed">{{ objectNeeded.number }} {{ $t(objectNeeded.object.name) }}</dd>
-            <dt>Tu gagneras</dt>
+            <dd v-for="npcObjectNeeded in npc.npc_objects_needed">{{ $t('game.quest.needed.npcObjects', {number: npcObjectNeeded.number, name: npcObjectNeeded.npc_object.name, list: npcObjectNeeded.npc_object.list.join(', ')}) }}</dd>
+            <dt>{{ $t('game.quest.gain.title') }}</dt>
             <dd v-for="gainObject in npc.gain_objects">{{ gainObject.number }} {{ $t(gainObject.object.name) }}</dd>
-            <dd>{{ npc.gain_zeni }}</dd>
-            <dd>{{ npc.gain_battle_points }}</dd>
+            <dd>{{ $t('game.quest.gain.zeni', {zeni: npc.gain_zeni}) }}</dd>
+            <dd>{{ $t('game.quest.gain.battlePoints', {bp: npc.gain_battle_points}) }}</dd>
         </dl>
 
         <p><strong>{{ $t('requirements.name') }}</strong></p>
         <requirements :data="npc.requirements" />
+
+        <Button type="primary" size="small" v-if="quest === null" @click.prevent="runAction('accept')">
+            {{ $t('game.quest.accept')}}
+        </Button>
     </div>
 </template>
 
@@ -41,9 +45,9 @@
                 type: Object,
                 required: true,
             },
-            me: {
+            quest: {
                 type: Object,
-                required: true,
+                required: false,
             },
         },
         data() {
@@ -56,7 +60,7 @@
                 let successMessage;
                 switch (what) {
                     case 'accept':
-                        await api.buyObject(this.building.id, data).then((res) => {
+                        await api.acceptQuest(this.npc.id, data).then((res) => {
                             successMessage = this.handleMessages(res.data);
                             this.$store.dispatch('fetchPlayer');
                         }).catch((err) => {

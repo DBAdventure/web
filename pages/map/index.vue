@@ -112,7 +112,7 @@
                     </template>
 
                     <template v-if="action == 'talk'">
-                        <npc-talk :npc="parameters.quest" :me="currentPlayer" />
+                        <npc-talk :npc="parameters.quest" :quest="parameters.player_quest" />
                     </template>
 
                     <div class="text-center buttons">

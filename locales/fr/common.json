@@ -457,7 +457,19 @@
     },
     "quest": {
       "by": "Par : {name}",
-      "history": "Histoire :"
+      "history": "Histoire :",
+      "accept": "Accepter la quête",
+      "give": {
+        "title": "Ramenez moi :"
+      },
+      "needed": {
+        "npcObjects": "{number} {name} pouvant se trouver sur {list}"
+      },
+      "gain": {
+        "title": "Vous gagnerez :",
+        "zeni": "{zeni} Zenis",
+        "battlePoints": "{bp} Points de combat"
+      }
     }
   },
   "building": {
@@ -1364,7 +1376,7 @@
     "generic": "Oups, quelque chose s'est mal passé ... Erreur inattendue."
   },
   "requirements": {
-    "name": "Conditions",
+    "name": "Condition(s)",
     "details": {
       "ki": "KI: <span class=\"bold\">{value}</span>",
       "strength": "Force : <span class=\"bold\">{value}</span>",
