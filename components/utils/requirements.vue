@@ -1,6 +1,6 @@
 <template>
     <ul class="requirements">
-        <li v-for="value, key in data" v-html="$t(`spells.details.${key}`, {value})"></li>
+        <li v-for="value, key in data" v-html="$t(`requirements.details.${key}`, {value})"></li>
     </ul>
 </template>
 

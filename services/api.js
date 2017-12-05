@@ -249,6 +249,9 @@ const api = {
 
         return makePostRequest(`/action/give/${id}/${objectId}`);
     },
+    talkToNpc(id) {
+        return makeGetRequest(`/action/talk/${id}`);
+    },
 
     /**
      * Guild
@@ -295,6 +298,13 @@ const api = {
      */
     getSpells() {
         return makeGetRequest('/magic/spells');
+    },
+
+    /**
+     * Quests
+     */
+    getQuests() {
+        return makeGetRequest('/quest/player');
     },
 };
 

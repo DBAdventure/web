@@ -109,6 +109,9 @@ body {
     &.title-magic {
       background-image: url($images-path + '/title-magic.jpg');
     }
+    &.title-quest {
+      background-image: url($images-path + '/title-quest.jpg');
+    }
   }
 }
 

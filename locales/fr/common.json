@@ -19,7 +19,6 @@
   "appearance": "Apparence",
   "level": "Niveau",
   "save": "Sauvegarder",
-  "requirements": "Conditions",
   "good": "Gentil",
   "bad": "Méchant",
   "npc": "PNJ",
@@ -333,6 +332,7 @@
       "pickup": "Ramasser"
     },
     "action": {
+      "talk": "Parler",
       "pickup": "Ramasser ({AP} PA)",
       "attack": "Attaquer ({AP} PA)",
       "steal": "Voler ({AP} PA)",
@@ -382,6 +382,9 @@
     "dashboard": "Événements",
     "guild": {
       "text": "Guilde"
+    },
+    "quest": {
+      "text": "Quêtes"
     },
     "movement": {
       "text": "Mouvement"
@@ -451,6 +454,10 @@
       "not.enough.zeni": "Pas assez de Zénis",
       "target": "Cible",
       "amount": "Montant"
+    },
+    "quest": {
+      "by": "Par : {name}",
+      "history": "Histoire :"
     }
   },
   "building": {
@@ -1105,6 +1112,7 @@
     }
   },
   "bonus": {
+    "name": "Bonus",
     "percent": {
       "health": "Restaure un pourcentage de santé",
       "fatigue": "Restaure un pourcentage de fatigue",
@@ -1354,5 +1362,20 @@
     "success": "Succés",
     "error": "Erreur",
     "generic": "Oups, quelque chose s'est mal passé ... Erreur inattendue."
+  },
+  "requirements": {
+    "name": "Conditions",
+    "details": {
+      "ki": "KI: <span class=\"bold\">{value}</span>",
+      "strength": "Force : <span class=\"bold\">{value}</span>",
+      "accuracy": "Précision : <span class=\"bold\">{value}</span>",
+      "agility": "Agilité : <span class=\"bold\">{value}</span>",
+      "analysis": "Analyse : <span class=\"bold\">{value}</span>",
+      "skill": "Talent : <span class=\"bold\">{value}</span>",
+      "intellect": "Intelligence : <span class=\"bold\">{value}</span>",
+      "resistance": "Résistance : <span class=\"bold\">{value}</span>",
+      "vision": "Vision : <span class=\"bold\">{value}</span>",
+      "level": "Niveau : <span class=\"bold\">{value}</span>"
+    }
   }
 }

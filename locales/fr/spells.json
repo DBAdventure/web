@@ -1,17 +1,5 @@
 {
   "spells": {
-    "details": {
-      "ki": "KI: <span class=\"bold\">{value}</span>",
-      "strength": "Strength: <span class=\"bold\">{value}</span>",
-      "accuracy": "Accuracy: <span class=\"bold\">{value}</span>",
-      "agility": "Agility: <span class=\"bold\">{value}</span>",
-      "analysis": "Analysis: <span class=\"bold\">{value}</span>",
-      "skill": "Skill: <span class=\"bold\">{value}</span>",
-      "intellect": "Intellect: <span class=\"bold\">{value}</span>",
-      "resistance": "Resistance: <span class=\"bold\">{value}</span>",
-      "vision": "Vision: <span class=\"bold\">{value}</span>",
-      "level": "Level: <span class=\"bold\">{value}</span>"
-    },
     "energy": {
       "ray": {
         "name": "Rayon d'énergie",

@@ -6,10 +6,13 @@
                     <div class="equiped" v-for="playerObject in objects[type]" v-if="playerObject.equipped">
                         <div class="inventory-box">
                             <Poptip :title="playerObject.object.name"
-                                    :content="playerObject.object.description"
                                     placement="top"
                                     width="300"
                                     trigger="hover">
+                                <div slot="content">
+                                    <object-description :object="playerObject.object" />
+                                </div>
+
                                 <img :src="`/images/objects/${playerObject.object.image}`" @click.prevent="choose()" /><br/>
                             </Poptip>
                         </div>
@@ -34,11 +37,13 @@
                 <div class="inventory clearfix" v-if="objects[type]">
                     <div v-for="playerObject in getNotEquippedObjects()">
                         <Poptip :title="playerObject.object.name"
-                                :content="playerObject.object.description"
                                 placement="top"
                                 width="300"
                                 trigger="hover"
                                 class="image-block">
+                            <div slot="content">
+                                <object-description :object="playerObject.object" />
+                            </div>
                             <img :src="`/images/objects/${playerObject.object.image}`" />
                         </Poptip>
                         <br/>
@@ -66,10 +71,12 @@
             <div class="inventory list clearfix" v-if="objects[type]">
                 <div v-for="playerObject in objects[type]" v-if="!playerObject.equipped">
                     <Poptip :title="playerObject.object.name"
-                            :content="playerObject.object.description"
                             placement="top"
                             width="300"
                             trigger="hover">
+                        <div slot="content">
+                            <object-description :object="playerObject.object" />
+                        </div>
                         <img :src="`/images/objects/${playerObject.object.image}`" />
                     </Poptip>
                     <br/>
@@ -109,12 +116,16 @@
     import api from '~/services/api';
     import ErrorMixin from '~/components/mixins/error';
     import MessagesMixin from '~/components/mixins/messages';
+    import ObjectDescription from '~/components/object/description';
 
     export default {
         mixins: [
             ErrorMixin,
             MessagesMixin,
         ],
+        components: {
+            ObjectDescription,
+        },
         props: {
             objects: {
                 type: [Object, Array],

@@ -85,6 +85,9 @@
                         <router-link to="/account">{{ $t('menu.dashboard') }}</router-link>
                     </li>
                     <li class="list-group-item">
+                        <router-link to="/account/quest">{{ $t('menu.quest.text') }}</router-link>
+                    </li>
+                    <li class="list-group-item">
                         <router-link to="/account/magic">{{ $t('menu.magic') }}</router-link>
                     </li>
                     <li class="list-group-item">

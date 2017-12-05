@@ -1,6 +1,6 @@
 <template>
     <ul class="stats">
-        <li v-for="value, key in data" v-html="$t(`objects.details.${key}`, {value})"></li>
+        <li v-for="value, key in data" v-html="$t(`objects.details.${key}`, {value: getValue(key, value)})"></li>
     </ul>
 </template>
 
@@ -10,6 +10,15 @@
             data: {
                 type: [Object, Array],
                 required: true,
+            },
+        },
+        methods: {
+            getValue(key, value) {
+                if (key === 'teleport') {
+                    return this.$t(`game.teleport.where.${value}`);
+                }
+
+                return value;
             },
         },
     };

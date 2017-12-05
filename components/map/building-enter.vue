@@ -36,13 +36,13 @@
 
             <p v-html="$t('game.bank.deposit')" />
             <Input v-model="depositAmount" number>
-                <Button slot="append" icon="archive" @click.prevent="runAction('deposit', depositAmount)"></Button>
+            <Button slot="append" icon="archive" @click.prevent="runAction('deposit', depositAmount)"></Button>
             </Input>
 
             <p v-html="$t('game.bank.withdraw')"/>
             <Input v-model="withdrawAmount" number>
-                <Button slot="append" icon="upload" @click.prevent="runAction('withdraw', withdrawAmount)"></Button>
-            </Input>
+            <Button slot="append" icon="upload" @click.prevent="runAction('withdraw', withdrawAmount)"></Button>
+                    </Input>
         </template>
         <template v-if="type ==='magic'">
             <div class="text-left" v-html="$t('game.magic.text', {player: me.name, name: building.name})"></div>
@@ -182,16 +182,15 @@
                     {
                         title: this.$t('object.name'),
                         align: 'center',
-                        width: 90,
-                        fixed: 'left',
+                        width: 120,
                         render: (h, params) => h(
                             'strong',
-                            this.$t(`objects.${params.row.name}.name`),
+                            params.row.name,
                         ),
                     },
                     {
                         title: this.$t('object.price'),
-                        width: 70,
+                        width: 100,
                         key: 'price',
                         align: 'center',
                     },
@@ -203,26 +202,68 @@
                     },
                     {
                         title: this.$t('object.description'),
+                        width: 200,
                         key: 'description',
-                        render: (h, params) => h(
-                            'div',
-                            [
-                                this.$t(`objects.${params.row.name}.description`),
-                                h(
-                                    Stats,
-                                    {
-                                        props: {
-                                            data: params.row.bonus,
+                        render: (h, params) => {
+                            const data = [params.row.description];
+                            if (Object.keys(params.row.bonus).length > 0) {
+                                data.push(
+                                    h(
+                                        'div',
+                                        {
+                                            class: {
+                                                details: true,
+                                            },
                                         },
-                                    },
-                                ),
-                            ],
-                        ),
+                                        [
+                                            h('strong', this.$t('bonus.name')),
+                                            h(
+                                                Stats,
+                                                {
+                                                    props: {
+                                                        data: params.row.bonus,
+                                                    },
+                                                },
+                                            ),
+                                        ],
+                                    ),
+                                );
+                            }
+                            if (Object.keys(params.row.requirements).length > 0) {
+                                data.push(
+                                    h(
+                                        'div',
+                                        {
+                                            class: {
+                                                details: true,
+                                            },
+                                        },
+                                        [
+                                            h('strong', this.$t('requirements.name')),
+                                            h(
+                                                Requirements,
+                                                {
+                                                    props: {
+                                                        data: params.row.requirements,
+                                                    },
+                                                },
+                                            ),
+                                        ],
+                                    ),
+                                );
+                            }
+
+                            return h(
+                                'div',
+                                data,
+                            );
+                        },
                     },
                     {
                         title: this.$t('object.action'),
                         width: 100,
                         align: 'center',
+                        fixed: 'right',
                         render: (h, params) => h(
                             'Button',
                             {

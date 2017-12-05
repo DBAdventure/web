@@ -40,6 +40,10 @@
                             <template v-for="object in itemsList(items.objects, x, y)">
                                 <image-render :x="x" :y="y" :image="`/images/objects/map/${object.entity.map_object_type.image}`" :title="$t(`objects.${object.entity.map_object_type.name}`)"/>
                             </template>
+
+                            <template v-for="quest in itemsList(items.quests, x, y)">
+                                <image-render :x="x" :y="y" :image="`/images/avatars/npc_quest/${quest.entity.image}`" :title="quest.entity.npc_name"/>
+                            </template>
                         </td>
                     </tr>
                 </tbody>
@@ -107,6 +111,10 @@
                         <building-enter :building="parameters.building" :type="parameters.type" :objects="parameters.objects" :me="currentPlayer" />
                     </template>
 
+                    <template v-if="action == 'talk'">
+                        <npc-talk :npc="parameters.quest" :me="currentPlayer" />
+                    </template>
+
                     <div class="text-center buttons">
                         <Button @click.prevent="back()">{{ $t('action.back.map') }}</Button>
                     </div>
@@ -114,6 +122,29 @@
             </template>
 
             <template v-else>
+                <template v-for="quests, distance in itemsByDistance(items.quests)">
+                    <div class="row row-object" v-for="quest in quests">
+                        <div class="col-lg-2 text-center">
+                            <image-render :x="quest.x" :y="quest.y" :image="`/images/avatars/npc_quest/${quest.image}`" :title="quest.name"/>
+                        </div>
+                        <div class="col-lg-10">
+                            {{ quest.npc_name }}
+                            <template v-if="distance == 0">
+                                {{ $t('map.nearYou') }}
+                            </template>
+                            <template v-else>
+                                {{ $t('map.distance', {'x': quest.x, 'y': quest.y, 'distance': distance} )}}
+                            </template>
+
+                            <div class="actions" v-if="distance == 0">
+                                <a href="#" @click.prevent="runAction('talk', quest.id)">
+                                    <img :src="currentPlayer.getActionImagePath('info')" :alt="$t('map.action.talk')" :title="$t('map.action.talk')" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
                 <template v-for="objects, distance in itemsByDistance(items.objects)">
                     <div class="row row-object" v-for="object in objects">
                         <div class="col-lg-2 text-center">
@@ -228,6 +259,7 @@
     import {EventBus} from '~/lib/bus';
     import {isEmpty, entries} from '~/lib/utils';
     import ActionLink from '~/components/map/action-link';
+    import NpcTalk from '~/components/map/npc-talk';
     import BuildingEnter from '~/components/map/building-enter';
     import ErrorMixin from '~/components/mixins/error';
     import MessagesMixin from '~/components/mixins/messages';
@@ -247,9 +279,10 @@
             };
         },
         components: {
+            ActionLink,
             BuildingEnter,
             ImageRender,
-            ActionLink,
+            NpcTalk,
         },
         computed: {
             ...mapGetters([
@@ -497,6 +530,15 @@
                         break;
                     case 'building-enter':
                         prom = api.enterBuilding(id).then((res) => {
+                            this.action = what;
+                            this.parameters = res.data;
+                            this.$Loading.finish();
+                        }).catch(() => {
+                            this.raiseError();
+                        });
+                        return;
+                    case 'talk':
+                        prom = api.talkToNpc(id).then((res) => {
                             this.action = what;
                             this.parameters = res.data;
                             this.$Loading.finish();

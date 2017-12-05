@@ -331,6 +331,7 @@
       "pickup": "Pick up"
     },
     "action": {
+      "talk": "Talk",
       "pickup": "Pick up ({AP} AP)",
       "attack": "Attack ({AP} AP)",
       "steal": "Steal ({AP} AP)",
