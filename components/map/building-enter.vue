@@ -55,8 +55,8 @@
 <script type="text/ecmascript-6">
     import {EventBus} from '~/lib/bus';
     import {isEmpty} from '~/lib/utils';
-    import Stats from '~/components/utils/stats';
     import Requirements from '~/components/utils/requirements';
+    import ObjectDescription from '~/components/object/description';
     import MessagesMixin from '~/components/mixins/messages';
     import api from '~/services/api';
 
@@ -64,9 +64,6 @@
         mixins: [
             MessagesMixin,
         ],
-        components: {
-            Stats,
-        },
         props: {
             building: {
                 type: Object,
@@ -204,60 +201,14 @@
                         title: this.$t('object.description'),
                         width: 200,
                         key: 'description',
-                        render: (h, params) => {
-                            const data = [params.row.description];
-                            if (Object.keys(params.row.bonus).length > 0) {
-                                data.push(
-                                    h(
-                                        'div',
-                                        {
-                                            class: {
-                                                details: true,
-                                            },
-                                        },
-                                        [
-                                            h('strong', this.$t('bonus.name')),
-                                            h(
-                                                Stats,
-                                                {
-                                                    props: {
-                                                        data: params.row.bonus,
-                                                    },
-                                                },
-                                            ),
-                                        ],
-                                    ),
-                                );
-                            }
-                            if (Object.keys(params.row.requirements).length > 0) {
-                                data.push(
-                                    h(
-                                        'div',
-                                        {
-                                            class: {
-                                                details: true,
-                                            },
-                                        },
-                                        [
-                                            h('strong', this.$t('requirements.name')),
-                                            h(
-                                                Requirements,
-                                                {
-                                                    props: {
-                                                        data: params.row.requirements,
-                                                    },
-                                                },
-                                            ),
-                                        ],
-                                    ),
-                                );
-                            }
-
-                            return h(
-                                'div',
-                                data,
-                            );
-                        },
+                        render: (h, params) => h(
+                            ObjectDescription,
+                            {
+                                props: {
+                                    object: params.row,
+                                },
+                            },
+                        ),
                     },
                     {
                         title: this.$t('object.action'),
