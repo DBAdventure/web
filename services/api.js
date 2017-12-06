@@ -252,6 +252,9 @@ const api = {
     talkToNpc(id) {
         return makeGetRequest(`/action/talk/${id}`);
     },
+    acceptQuest(id) {
+        return makePostRequest(`/action/talk/${id}`);
+    },
 
     /**
      * Guild

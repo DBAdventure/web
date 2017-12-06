@@ -10,11 +10,11 @@
 
         <dl>
             <dt>{{ $t('game.quest.give.title') }}</dt>
-            <dd v-for="npcNeeded in npc.npc_needed">{{ npcNeeded.number }} {{ $t(npcNeeded.race.name) }}</dd>
-            <dd v-for="objectNeeded in npc.objects_needed">{{ objectNeeded.number }} {{ $t(objectNeeded.object.name) }}</dd>
-            <dd v-for="npcObjectNeeded in npc.npc_objects_needed">{{ $t('game.quest.needed.npcObjects', {number: npcObjectNeeded.number, name: npcObjectNeeded.npc_object.name, list: npcObjectNeeded.npc_object.list.join(', ')}) }}</dd>
+            <dd v-for="npcNeeded in npc.npcs_needed">{{ npcNeeded.number }} {{ $t(npcNeeded.race.name) }}</dd>
+            <dd v-for="objectNeeded in npc.objects_needed">{{ objectNeeded.number }} {{ objectNeeded.object.name }}</dd>
+            <dd v-for="npcObjectNeeded in npc.npc_objects_needed">{{ $t('game.quest.needed.npcObjects', {number: npcObjectNeeded.number, name: npcObjectNeeded.npc_object.name, list: getRaces(npcObjectNeeded.npc_object.races).join(', ')}) }}</dd>
             <dt>{{ $t('game.quest.gain.title') }}</dt>
-            <dd v-for="gainObject in npc.gain_objects">{{ gainObject.number }} {{ $t(gainObject.object.name) }}</dd>
+            <dd v-for="gainObject in npc.gain_objects">{{ gainObject.number }} {{ gainObject.object.name }}</dd>
             <dd>{{ $t('game.quest.gain.zeni', {zeni: npc.gain_zeni}) }}</dd>
             <dd>{{ $t('game.quest.gain.battlePoints', {bp: npc.gain_battle_points}) }}</dd>
         </dl>
@@ -55,6 +55,14 @@
             };
         },
         methods: {
+            getRaces(data) {
+                const races = [];
+                data.forEach((d) => {
+                    races.push(this.$t(d.name));
+                });
+
+                return races;
+            },
             async runAction(what, data) {
                 let errorMessage;
                 let successMessage;

@@ -100,7 +100,7 @@
                         <action-link :player="target" :me="currentPlayer" what="steal" v-if="currentPlayer.action_points >= settings.player.STEAL_ACTION" message-key="map.action.again.steal"/>
                     </template>
 
-                    <template v-if="(action === 'attack' || action == 'attack-betray' || action == 'attack-revenge') && currentPlayer.action_points >= settings.player.ATTACK_ACTION">
+                    <template v-if="(action === 'attack' || action == 'attack-betray' || action == 'attack-revenge') && currentPlayer.action_points >= settings.player.ATTACK_ACTION && !parameters.isDead">
                         <action-link :player="target" :me="currentPlayer" what="attack-betray" v-if="target.side.id === currentPlayer.side.id" message-key="map.action.again.attack-betray"/>
                         <action-link :player="target" :me="currentPlayer" what="attack" message-key="map.action.again.attack" v-else/>
 
