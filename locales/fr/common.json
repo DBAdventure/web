@@ -469,6 +469,17 @@
         "title": "Vous gagnerez :",
         "zeni": "{zeni} Zenis",
         "battlePoints": "{bp} Points de combat"
+      },
+      "presentation": {
+        "title": "<strong>{npcName}</strong> ({x} / {y} sur {mapName}) : {title}"
+      },
+      "npc": {
+        "finished": "",
+        "kill": "Tu viens de tuer un <strong>{name}</strong> pour la quête : <strong>{questName}</strong>.",
+        "object": {
+          "found": "En tuant ce monstre tu viens de gagner <strong>{name}</strong> pour la quête : <strong>{questName}</strong>. <br />",
+          "notFound": "Tu n'as pas trouvé de <strong>{name}</strong> sur ce monstre, pour la quête : <strong>{questName}</strong>.<br />"
+        }
       }
     }
   },
@@ -1319,6 +1330,9 @@
     },
     "inventory": {
       "title": "Inventaire"
+    },
+    "quest": {
+      "title": "Quêtes"
     },
     "magic": {
       "title": "Magie"

@@ -47,7 +47,9 @@
 
                 <template v-if="currentPlayer.getGuild().message">
                     <h1 class="title title-guild-message">{{ $t('guild.message') }}</h1>
-                    <p v-for="line in currentPlayer.getGuild().message.split('\n')">{{ line }}</p>
+                    <p>
+                        <template v-for="line in currentPlayer.getGuild().message.split('\n')">{{ line }}<br></template>
+                    </p>
                 </template>
             </template>
         </template>

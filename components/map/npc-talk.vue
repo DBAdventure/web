@@ -4,9 +4,12 @@
             <img :src="`/images/avatars/npc_quest/${npc.image}`" />
             <h2>{{ npc.name }}</h2>
         </div>
+
         <p>{{ $t('game.quest.by', {name: npc.npc_name}) }}</p>
         <p>{{ $t('game.quest.history') }}</p>
-        <p v-for="line in npc.history.split('\n')">{{ line }}</p>
+        <p>
+            <template v-for="line in npc.history.split('\n')">{{ line }}<br></template>
+        </p>
 
         <dl>
             <dt>{{ $t('game.quest.give.title') }}</dt>
@@ -29,16 +32,14 @@
 </template>
 
 <script type="text/ecmascript-6">
-    import Requirements from '~/components/utils/requirements';
     import MessagesMixin from '~/components/mixins/messages';
+    import QuestMixin from '~/components/mixins/quest';
     import api from '~/services/api';
 
     export default {
-        components: {
-            Requirements,
-        },
         mixins: [
             MessagesMixin,
+            QuestMixin,
         ],
         props: {
             npc: {
@@ -50,19 +51,7 @@
                 required: false,
             },
         },
-        data() {
-            return {
-            };
-        },
         methods: {
-            getRaces(data) {
-                const races = [];
-                data.forEach((d) => {
-                    races.push(this.$t(d.name));
-                });
-
-                return races;
-            },
             async runAction(what, data) {
                 let errorMessage;
                 let successMessage;

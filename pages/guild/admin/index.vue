@@ -411,7 +411,7 @@
                                 rank_name: guildPlayer.rank.name,
                                 image_path: player.getImagePath(),
                                 zeni: guildPlayer.zeni,
-                                location: `${this.$t(guildPlayer.player.map.name)} ( ${guildPlayer.player.x} / ${guildPlayer.player.y})`,
+                                location: `${guildPlayer.player.map.name} ( ${guildPlayer.player.x} / ${guildPlayer.player.y})`,
                             };
 
                             this.guildPlayers.push(result);
@@ -466,7 +466,7 @@
                                 rank_name: guildPlayer.rank.name,
                                 image_path: player.getImagePath(),
                                 zeni: guildPlayer.zeni,
-                                location: `${this.$t(guildPlayer.player.map.name)} ( ${guildPlayer.player.x} / ${guildPlayer.player.y})`,
+                                location: `${guildPlayer.player.map.name} ( ${guildPlayer.player.x} / ${guildPlayer.player.y})`,
                             };
 
                             this.guildPlayers.push(result);

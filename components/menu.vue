@@ -7,7 +7,7 @@
                 <div class="player-info">
                     <div class="submenu">
                         <ul>
-                            <li v-html="$t('menu.map.name', {mapName: $t(currentPlayer.map.name)})"></li>
+                            <li v-html="$t('menu.map.name', {mapName: currentPlayer.map.name})"></li>
                             <li v-html="$t('menu.map.position', {x: currentPlayer.x, y: currentPlayer.y})"></li>
                             <li v-html="$t('menu.map.zeni', {zeni: currentPlayer.zeni})"></li>
                             <li v-html="$t('menu.player.level', {level: currentPlayer.level})"></li>
