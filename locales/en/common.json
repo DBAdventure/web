@@ -1,8 +1,4 @@
 {
-  "pilaf": {
-    "island": "Pilaf's Island",
-    "world": "Pilaf's World"
-  },
   "bear": {
     "den": "Den of the bear"
   },
@@ -23,8 +19,6 @@
   "good": "Good",
   "bad": "Bad",
   "npc": "Npc",
-  "heaven": "Heaven",
-  "hell": "Hell",
   "password": "Password",
   "saiyajins": "Saiyajins",
   "saiyajin": "Saiyajin",

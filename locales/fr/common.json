@@ -1,11 +1,4 @@
 {
-  "pilaf": {
-    "island": "Île de Pilaf",
-    "world": "Monde de Pilaf"
-  },
-  "bear": {
-    "den": "L'antre de l'ours"
-  },
   "search": "Rechercher",
   "edit": "Editer",
   "delete": "Supprimer",
@@ -22,8 +15,6 @@
   "good": "Gentil",
   "bad": "Méchant",
   "npc": "PNJ",
-  "heaven": "Paradis",
-  "hell": "Enfer",
   "password": "Mot de passe",
   "saiyajins": "Saïyens",
   "saiyajin": "Saïyen",
