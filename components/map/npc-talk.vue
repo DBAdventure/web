@@ -1,29 +1,6 @@
 <template>
     <div class="text-left">
-        <div class="text-center">
-            <img :src="`/images/avatars/npc_quest/${npc.image}`" />
-            <h2>{{ npc.name }}</h2>
-        </div>
-
-        <p>{{ $t('game.quest.by', {name: npc.npc_name}) }}</p>
-        <p>{{ $t('game.quest.history') }}</p>
-        <p>
-            <template v-for="line in npc.history.split('\n')">{{ line }}<br></template>
-        </p>
-
-        <dl>
-            <dt>{{ $t('game.quest.give.title') }}</dt>
-            <dd v-for="npcNeeded in npc.npcs_needed">{{ npcNeeded.number }} {{ $t(npcNeeded.race.name) }}</dd>
-            <dd v-for="objectNeeded in npc.objects_needed">{{ objectNeeded.number }} {{ objectNeeded.object.name }}</dd>
-            <dd v-for="npcObjectNeeded in npc.npc_objects_needed">{{ $t('game.quest.needed.npcObjects', {number: npcObjectNeeded.number, name: npcObjectNeeded.npc_object.name, list: getRaces(npcObjectNeeded.npc_object.races).join(', ')}) }}</dd>
-            <dt>{{ $t('game.quest.gain.title') }}</dt>
-            <dd v-for="gainObject in npc.gain_objects">{{ gainObject.number }} {{ gainObject.object.name }}</dd>
-            <dd>{{ $t('game.quest.gain.zeni', {zeni: npc.gain_zeni}) }}</dd>
-            <dd>{{ $t('game.quest.gain.battlePoints', {bp: npc.gain_battle_points}) }}</dd>
-        </dl>
-
-        <p><strong>{{ $t('requirements.name') }}</strong></p>
-        <requirements :data="npc.requirements" />
+        <quest-display :quest="npc" :playerQuest="quest" />
 
         <Button type="primary" size="small" v-if="quest === null" @click.prevent="runAction('accept')">
             {{ $t('game.quest.accept')}}
@@ -33,13 +10,15 @@
 
 <script type="text/ecmascript-6">
     import MessagesMixin from '~/components/mixins/messages';
-    import QuestMixin from '~/components/mixins/quest';
+    import QuestDisplay from '~/components/quest/display';
     import api from '~/services/api';
 
     export default {
+        components: {
+            QuestDisplay,
+        },
         mixins: [
             MessagesMixin,
-            QuestMixin,
         ],
         props: {
             npc: {

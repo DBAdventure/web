@@ -462,7 +462,7 @@
         "battlePoints": "{bp} Points de combat"
       },
       "presentation": {
-        "title": "<strong>{npcName}</strong> ({x} / {y} sur {mapName}) : {title}"
+        "title": "<strong>{npcName}</strong> ({x} / {y} sur {mapName}) : <strong>{title}</strong>"
       },
       "npc": {
         "finished": "",

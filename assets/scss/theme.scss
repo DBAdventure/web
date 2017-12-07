@@ -195,13 +195,22 @@ body {
 }
 
 #home-news {
-  >dl {
+  > dl {
     dt {
       background: $background-news-color;
       strong {
         color: $text-color;
       }
     }
+  }
+}
+.quest {
+  .quest-title {
+    border-color: $default-color;
+    background: $background-news-color;
+  }
+  .quest-content {
+    border-color: $default-color;
   }
 }
 
