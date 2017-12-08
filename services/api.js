@@ -252,7 +252,7 @@ const api = {
     talkToNpc(id) {
         return makeGetRequest(`/action/talk/${id}`);
     },
-    acceptQuest(id) {
+    askQuest(id) {
         return makePostRequest(`/action/talk/${id}`);
     },
 

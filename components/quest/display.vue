@@ -12,12 +12,21 @@
             <dl>
                 <dt>{{ $t('game.quest.give.title') }}</dt>
                 <dd v-for="npcNeeded in quest.npcs_needed">
+                    <template v-if="playerQuest">
+                        {{ playerQuest.npcs[npcNeeded.race.id] || 0 }} /
+                    </template>
                     {{ npcNeeded.number }} {{ $t(npcNeeded.race.name) }}
                 </dd>
                 <dd v-for="objectNeeded in quest.objects_needed">
+                    <template v-if="playerQuest && playerObjects">
+                        {{ findInInventory(objectNeeded.object) }} /
+                    </template>
                     {{ objectNeeded.number }} {{ objectNeeded.object.name }}
                 </dd>
                 <dd v-for="npcObjectNeeded in quest.npc_objects_needed">
+                    <template v-if="playerQuest">
+                        {{ playerQuest.npc_objects[npcObjectNeeded.npc_object.id] || 0 }} /
+                    </template>
                     {{ $t('game.quest.needed.npcObjects', {number: npcObjectNeeded.number, name: npcObjectNeeded.npc_object.name, list: getRaces(npcObjectNeeded.npc_object.races).join(', ')}) }}
                 </dd>
 
@@ -35,11 +44,17 @@
 
             <p><strong>{{ $t('requirements.name') }}</strong></p>
             <requirements :data="quest.requirements" />
+
+            <p class="quest-status" v-if="playerQuest">
+                <span v-html="$t('game.quest.status.text')" />
+                <span v-html="$t(`game.quest.status.${playerQuest.status}`)" />
+            </p>
         </div>
     </div>
 </template>
 
 <script type="text/ecmascript-6">
+    import _ from 'lodash';
     import Requirements from '~/components/utils/requirements';
 
     export default {
@@ -55,8 +70,59 @@
                 type: Object,
                 required: false,
             },
+            playerObjects: {
+                type: Object,
+                required: false,
+                default: () => ({}),
+            },
+        },
+        beforeMount() {
+            this.checkQuestResult();
         },
         methods: {
+            checkQuestResult() {
+                if (!this.playerQuest) {
+                    return false;
+                }
+
+                let canBeDone = true;
+                this.quest.npcs_needed.forEach((obj) => {
+                    if (this.playerQuest.npcs[obj.race.id] < obj.number) {
+                        canBeDone = false;
+                    }
+                });
+                this.quest.npc_objects_needed.forEach((obj) => {
+                    if (this.playerQuest.npc_objects[obj.npc_object.id] < obj.number) {
+                        canBeDone = false;
+                    }
+                });
+                this.quest.objects_needed.forEach((obj) => {
+                    if (this.findInInventory(obj.object) < obj.number) {
+                        canBeDone = false;
+                    }
+                });
+
+                this.$emit('input', canBeDone);
+                return canBeDone;
+            },
+            findInInventory(object) {
+                let number = 0;
+                let result;
+                Object.values(this.playerObjects).forEach((playerObjects) => {
+                    result = _.result(
+                        _.find(
+                            playerObjects,
+                            obj => (obj.object.id === object.id),
+                        ),
+                        'number',
+                    );
+
+                    if (result) {
+                        number = result;
+                    }
+                });
+                return number;
+            },
             getRaces(data) {
                 const races = [];
                 data.forEach((d) => {
@@ -65,7 +131,6 @@
 
                 return races;
             },
-
         },
     };
 </script>

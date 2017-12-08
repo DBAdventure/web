@@ -3,7 +3,7 @@
         <h1 class="title title-quest">{{ $t('account.quest.title') }}</h1>
 
         <template v-for="playerQuest in playerQuests">
-            <quest-display :quest="playerQuest.quest" :playerQuest="playerQuest" />
+            <quest-display :quest="playerQuest.quest" :playerQuest="playerQuest" :playerObjects="playerObjects" />
         </template>
     </div>
 </template>
@@ -31,6 +31,7 @@
         data() {
             return {
                 playerQuests: [],
+                playerObjects: {},
             };
         },
         asyncData({store}) {
@@ -39,8 +40,9 @@
             }
 
             return api.getQuests().then(res => ({
-                playerQuests: res.data,
-            })).catch(() => {});
+                playerQuests: res.data.player_quests,
+                playerObjects: res.data.player_objects,
+            }));
         },
     };
 </script>

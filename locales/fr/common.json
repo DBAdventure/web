@@ -450,8 +450,9 @@
       "by": "Par : {name}",
       "history": "Histoire :",
       "accept": "Accepter la quête",
+      "return": "Terminer la quête",
       "give": {
-        "title": "Ramenez moi :"
+        "title": "Vous devez ramener :"
       },
       "needed": {
         "npcObjects": "{number} {name} pouvant se trouver sur {list}"
@@ -463,6 +464,12 @@
       },
       "presentation": {
         "title": "<strong>{npcName}</strong> ({x} / {y} sur {mapName}) : <strong>{title}</strong>"
+      },
+      "status": {
+        "text": "Status :",
+        "0": "En cours",
+        "1": "Terminée",
+        "2": "Temps écoulé"
       },
       "npc": {
         "finished": "",

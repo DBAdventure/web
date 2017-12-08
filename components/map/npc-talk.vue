@@ -1,9 +1,13 @@
 <template>
     <div class="text-left">
-        <quest-display :quest="npc" :playerQuest="quest" />
+        <quest-display :quest="quest" :playerQuest="playerQuest" :playerObjects="playerObjects" v-model="questResult" />
 
-        <Button type="primary" size="small" v-if="quest === null" @click.prevent="runAction('accept')">
+        <Button type="primary" size="small" v-if="playerQuest === null" @click.prevent="runAction('talk')">
             {{ $t('game.quest.accept')}}
+        </Button>
+
+        <Button type="primary" size="small" v-if="playerQuest !== null && questResult" @click.prevent="runAction('talk')">
+            {{ $t('game.quest.return')}}
         </Button>
     </div>
 </template>
@@ -21,22 +25,31 @@
             MessagesMixin,
         ],
         props: {
-            npc: {
+            quest: {
                 type: Object,
                 required: true,
             },
-            quest: {
+            playerQuest: {
+                type: Object,
+                required: false,
+            },
+            playerObjects: {
                 type: Object,
                 required: false,
             },
         },
+        data() {
+            return {
+                questResult: false,
+            };
+        },
         methods: {
-            async runAction(what, data) {
+            async runAction(what) {
                 let errorMessage;
                 let successMessage;
                 switch (what) {
-                    case 'accept':
-                        await api.acceptQuest(this.npc.id, data).then((res) => {
+                    case 'talk':
+                        await api.askQuest(this.quest.id).then((res) => {
                             successMessage = this.handleMessages(res.data);
                             this.$store.dispatch('fetchPlayer');
                         }).catch((err) => {
