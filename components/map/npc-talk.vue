@@ -6,16 +6,18 @@
             {{ $t('game.quest.accept')}}
         </Button>
 
-        <Button type="primary" size="small" v-if="playerQuest !== null && questResult" @click.prevent="runAction('talk')">
+
+        <Button type="primary" size="small" v-if="playerQuest !== null && playerQuest.is_in_progress && questResult" @click.prevent="runAction('talk')">
             {{ $t('game.quest.return')}}
         </Button>
     </div>
 </template>
 
 <script type="text/ecmascript-6">
+    import {EventBus} from '~/lib/bus';
+    import api from '~/services/api';
     import MessagesMixin from '~/components/mixins/messages';
     import QuestDisplay from '~/components/quest/display';
-    import api from '~/services/api';
 
     export default {
         components: {
@@ -45,33 +47,24 @@
         },
         methods: {
             async runAction(what) {
-                let errorMessage;
-                let successMessage;
                 switch (what) {
                     case 'talk':
                         await api.askQuest(this.quest.id).then((res) => {
-                            successMessage = this.handleMessages(res.data);
-                            this.$store.dispatch('fetchPlayer');
+                            res.data.messages.forEach((msg) => {
+                                this.$Notice.success({
+                                    title: this.$t('notice.success'),
+                                    desc: this.handleMessages(msg),
+                                });
+                            });
+                            EventBus.$emit('reload-map');
                         }).catch((err) => {
-                            errorMessage = this.$t(err.response.data.error);
+                            this.$Notice.error({
+                                title: this.$t('notice.error'),
+                                desc: this.$t(err.response.data.error),
+                            });
                         });
                         break;
                     default:
-                        return;
-                }
-
-                if (successMessage) {
-                    this.$Notice.success({
-                        title: this.$t('notice.success'),
-                        desc: successMessage,
-                    });
-                }
-
-                if (errorMessage) {
-                    this.$Notice.error({
-                        title: this.$t('notice.error'),
-                        desc: errorMessage,
-                    });
                 }
             },
         },

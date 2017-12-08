@@ -459,7 +459,7 @@
       },
       "gain": {
         "title": "Vous gagnerez :",
-        "zeni": "{zeni} Zenis",
+        "zeni": "{zeni} Zénis",
         "battlePoints": "{bp} Points de combat"
       },
       "presentation": {
@@ -804,6 +804,24 @@
       "error": {
         "1": "Inventory is full, can't hold more objects!",
         "3": "Il possède déjà cette objet !"
+      }
+    },
+    "talk": {
+      "quest": {
+        "finished": "Quête terminée !",
+        "gain": {
+          "zeni": "Vous gagnez {zeni} Zénis",
+          "battlePoints": "Vous gagnez {battlePoints} points de combat",
+          "object": "Vous gagnez {number} {name}"
+        },
+        "not": {
+          "finished": "Vous n'avez pas encore terminé cette quête !"
+        },
+        "already": {
+          "finished": "Vous avez déjà terminé cette quête !",
+          "object": "Vous possédez déjà {name} ou votre inventaire est plein, vous gagnez {zeni} Zénis en contrepartie !"
+        },
+        "conditions": "Vous ne pouvez pas faire cette quête, vous ne remplissez pas les conditions !"
       }
     }
   },

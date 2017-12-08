@@ -12,19 +12,19 @@
             <dl>
                 <dt>{{ $t('game.quest.give.title') }}</dt>
                 <dd v-for="npcNeeded in quest.npcs_needed">
-                    <template v-if="playerQuest">
+                    <template v-if="playerQuest && playerQuest.is_in_progress">
                         {{ playerQuest.npcs[npcNeeded.race.id] || 0 }} /
                     </template>
                     {{ npcNeeded.number }} {{ $t(npcNeeded.race.name) }}
                 </dd>
                 <dd v-for="objectNeeded in quest.objects_needed">
-                    <template v-if="playerQuest && playerObjects">
+                    <template v-if="playerQuest && playerObjects && playerQuest.is_in_progress">
                         {{ findInInventory(objectNeeded.object) }} /
                     </template>
                     {{ objectNeeded.number }} {{ objectNeeded.object.name }}
                 </dd>
                 <dd v-for="npcObjectNeeded in quest.npc_objects_needed">
-                    <template v-if="playerQuest">
+                    <template v-if="playerQuest && playerQuest.is_in_progress">
                         {{ playerQuest.npc_objects[npcObjectNeeded.npc_object.id] || 0 }} /
                     </template>
                     {{ $t('game.quest.needed.npcObjects', {number: npcObjectNeeded.number, name: npcObjectNeeded.npc_object.name, list: getRaces(npcObjectNeeded.npc_object.races).join(', ')}) }}
