@@ -2,9 +2,14 @@
     <div class="account">
         <h1 class="title title-quest">{{ $t('account.quest.title') }}</h1>
 
-        <template v-for="playerQuest in playerQuests">
-            <quest-display :quest="playerQuest.quest" :playerQuest="playerQuest" :playerObjects="playerObjects" />
-        </template>
+        <div v-if="playerQuests.length">
+            <template v-for="playerQuest in playerQuests">
+                <quest-display :quest="playerQuest.quest" :playerQuest="playerQuest" :playerObjects="playerObjects" />
+            </template>
+        </div>
+        <div v-else>
+            {{ $('game.quest.empty') }}
+        </div>
     </div>
 </template>
 

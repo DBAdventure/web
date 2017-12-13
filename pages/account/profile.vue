@@ -16,7 +16,7 @@
                     <td class="spacing">
                         {{ $t('profile.race') }} <strong>{{ $t(currentPlayer.race.name) }}</strong><br/>
                         {{ $t('profile.rank') }} <strong>{{ $t(currentPlayer.rank.name) }}</strong><br/>
-                        {{ $t('profile.class') }} <strong>{{ $t(currentPlayer.class) }}</strong><br/>
+                        {{ $t('profile.class') }} <strong>{{ currentPlayer.class }}</strong><br/>
                         <template v-if="currentPlayer.target">
                             {{ $t('profile.class') }} <strong>{{ currentPlayer.target.displayName }}</strong><br/>
                         </template>

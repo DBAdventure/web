@@ -144,7 +144,9 @@
                     </ul>
 
                     <div class="text-center" v-if="currentPlayer.canConvert()">
-                        <strong><a href="#" @click.prevent="convert">{{ $t('action.convert') }}</a></strong>
+                        <Button class="convert" :loading="loadingConvert" @click.prevent="convert" size="small" shape="circle">
+                            {{ $t('action.convert') }}
+                        </Button>
                     </div>
                 </div>
             </div>
@@ -255,14 +257,15 @@
                 api.move(where).then(() => {
                     EventBus.$emit('reload-map');
                     this.$store.dispatch('fetchPlayer');
-                }).catch(() => {
+                }).catch((err) => {
                     this.$Notice.error({
                         title: this.$t('notice.error'),
-                        desc: this.$t('error.move.forbidden'),
+                        desc: this.$t(err.response.data.error),
                     });
                 });
             },
             convert() {
+                this.loadingConvert = true;
                 api.convert().then(() => {
                     this.$store.dispatch('fetchPlayer');
                 }).catch(() => {
@@ -270,6 +273,8 @@
                         title: this.$t('notice.error'),
                         desc: this.$t('error.convert.forbidden'),
                     });
+                }).finally(() => {
+                    this.loadingConvert = false;
                 });
             },
         },
@@ -277,6 +282,7 @@
             return {
                 password: null,
                 username: null,
+                loadingConvert: false,
             };
         },
         computed: {

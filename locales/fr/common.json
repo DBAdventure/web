@@ -81,7 +81,7 @@
   },
   "header": {
     "settings": "Paramètres",
-    "profile": "Profile",
+    "profile": "Mon personnage",
     "training": {
       "room": "Salle d'entraïnement"
     },
@@ -451,6 +451,7 @@
       "history": "Histoire :",
       "accept": "Accepter la quête",
       "return": "Terminer la quête",
+      "empty": "Aucune quête n'a été commencée ou terminée.",
       "give": {
         "title": "Vous devez ramener :"
       },
@@ -632,9 +633,9 @@
         "master": "a fait un coup de maître et vous perdez {damages} points de vie"
       },
       "attack": {
-        "dodge": "attacked you but you dodge it",
-        "reallyFailed": "really failed his attack, mais vous perdez {damages} points de vie",
-        "failed": "failed his attack, mais vous perdez {damages} points de vie",
+        "dodge": "a attaqué mais vous l'avez esquivé",
+        "reallyFailed": "a vaiment échoué son attaque, mais vous perdez {damages} points de vie",
+        "failed": "a échoué son attaque, mais vous perdez {damages} points de vie",
         "moderatelySucceeded": "a modérément réussi son attaque, mais vous perdez {damages} points de vie",
         "succeeded": "a réussi son attaque et vous perdez {damages} points de vie",
         "nice": "a fait un joli coup et vous perdez {damages} points de vie",
@@ -1104,9 +1105,9 @@
       "objects": "Objets",
       "total": "Total",
       "zeni": "Vous avez <strong>{value}</strong> Zénis",
-      "stolenZéni": "Vous avez volé <strong>{value}</strong> Zénis",
-      "avgStolenZéni": "Moyenne de Zénis volés: <strong>{value}</strong>",
-      "nbActionStolenZéni": "Nombre de vol : <strong>{value}</strong>",
+      "stolenZeni": "Vous avez volé <strong>{value}</strong> Zénis",
+      "avgStolenZeni": "Moyenne de Zénis volés: <strong>{value}</strong>",
+      "nbActionStolenZeni": "Nombre de vol : <strong>{value}</strong>",
       "betrayals": "Vous avez trahis <strong>{value}</strong> fois vos amis",
       "sidePoints": "Vous avez <strong>{value}</strong> points de côté",
       "bountyHunter": "Chasseur de primes : <strong>{value}</strong> cibles tuées",
@@ -1371,7 +1372,8 @@
     },
     "generic": "Oups, quelque chose s'est mal passé",
     "move": {
-      "forbidden": "Vous ne pouvez vous déplacer ici !"
+      "forbidden": "Ce déplacement est impossible !",
+      "empty": "Tu n'as plus assez de points de mouvement !"
     },
     "convert": {
       "forbidden": "Vous ne pouvez pas convertir !"
@@ -1402,7 +1404,7 @@
   },
   "notice": {
     "success": "Succés",
-    "error": "Erreur",
+    "error": "Action impossible",
     "generic": "Oups, quelque chose s'est mal passé ... Erreur inattendue."
   },
   "requirements": {

@@ -13,7 +13,7 @@
   max-height: 600px;
   min-height: 300px;
   overflow: auto;
-  width: 600px;
+  width: 630px;
   .map {
     margin: 0 auto;
     table-layout: fixed;
@@ -41,7 +41,9 @@
 .search-container {
   display: table;
   padding-right: 0;
+  padding-left: 0;
   width: 100%;
+  margin-top: 20px;
   .row {
     display: table-row;
     .col-lg-2,

@@ -88,6 +88,10 @@
       text-transform: none !important;
     }
   }
+
+  .convert {
+    font-size: 10px;
+  }
 }
 
 #menu #move-block {
@@ -97,6 +101,7 @@
   padding: 0;
   position: relative;
   list-style: none;
+
 
   li {
     margin: 0;

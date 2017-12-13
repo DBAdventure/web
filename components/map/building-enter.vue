@@ -11,7 +11,7 @@
 
         <template v-if="type === 'shop'">
             <div class="text-left" v-html="$t('game.shop.text', {player: me.name, name: building.name})"></div>
-            <Table :columns="shopColumns()" :data="objects" width="600"></Table>
+            <Table :columns="shopColumns()" :data="objects" width="630" stripe border></Table>
         </template>
 
         <template v-if="type === 'wanted'">
@@ -47,7 +47,7 @@
         <template v-if="type ==='magic'">
             <div class="text-left" v-html="$t('game.magic.text', {player: me.name, name: building.name})"></div>
 
-            <Table :columns="shopSpellColumns()" :data="objects" width="600"></Table>
+            <Table :columns="shopSpellColumns()" :data="objects" width="630" stripe border></Table>
         </template>
     </div>
 </template>
@@ -166,7 +166,6 @@
                     {
                         align: 'center',
                         width: 90,
-                        fixed: 'left',
                         render: (h, params) => h(
                             'div',
                             {
@@ -177,44 +176,47 @@
                         ),
                     },
                     {
-                        title: this.$t('object.name'),
-                        align: 'center',
-                        width: 120,
+                        title: this.$t('object.description'),
+                        key: 'description',
                         render: (h, params) => h(
-                            'strong',
-                            params.row.name,
+                            'div',
+                            [
+                                h(
+                                    'p',
+                                    [
+                                        h(
+                                            'strong',
+                                            params.row.name,
+                                        ),
+                                    ],
+                                ),
+                                h(
+                                    ObjectDescription,
+                                    {
+                                        props: {
+                                            object: params.row,
+                                        },
+                                    },
+                                ),
+                            ],
                         ),
                     },
                     {
                         title: this.$t('object.price'),
-                        width: 100,
+                        width: 80,
                         key: 'price',
                         align: 'center',
                     },
                     {
                         title: this.$t('object.weight'),
-                        width: 70,
+                        width: 65,
                         key: 'weight',
                         align: 'center',
                     },
                     {
-                        title: this.$t('object.description'),
-                        width: 200,
-                        key: 'description',
-                        render: (h, params) => h(
-                            ObjectDescription,
-                            {
-                                props: {
-                                    object: params.row,
-                                },
-                            },
-                        ),
-                    },
-                    {
                         title: this.$t('object.action'),
-                        width: 100,
+                        width: 90,
                         align: 'center',
-                        fixed: 'right',
                         render: (h, params) => h(
                             'Button',
                             {
@@ -245,12 +247,6 @@
                         ),
                     },
                     {
-                        title: this.$t('object.price'),
-                        width: 70,
-                        key: 'price',
-                        align: 'center',
-                    },
-                    {
                         title: this.$t('object.description'),
                         key: 'description',
                         render: (h, params) => h(
@@ -269,8 +265,14 @@
                         ),
                     },
                     {
+                        title: this.$t('object.price'),
+                        width: 70,
+                        key: 'price',
+                        align: 'center',
+                    },
+                    {
                         title: this.$t('object.action'),
-                        width: 100,
+                        width: 90,
                         align: 'center',
                         render: (h, params) => h(
                             'Button',
