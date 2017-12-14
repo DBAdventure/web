@@ -34,6 +34,9 @@ module.exports = {
         ROLE_ADMIN: 'ROLE_ADMIN',
         ROLE_MODO: 'ROLE_MODO',
     },
+    map_object_type: {
+        TYPE_SIGN: 9,
+    },
     map: {
         TYPE_DEFAULT: 0,
         TYPE_IMPASSABLE: 1,

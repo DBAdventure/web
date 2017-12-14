@@ -160,7 +160,10 @@
                             </template>
 
                             <div class="actions" v-if="distance == 0">
-                                <a href="#" @click.prevent="runAction('pickup', object.id)">
+                                <a href="#" @click.prevent="runAction('pickup', object.id)" v-if="object.map_object_type.id === settings.map_object_type.TYPE_SIGN">
+                                    <img :src="currentPlayer.getActionImagePath('info')" :alt="$t('map.action.view')" :title="$t('map.action.view')" />
+                                </a>
+                                <a href="#" @click.prevent="runAction('pickup', object.id)" v-else>
                                     <img :src="currentPlayer.getActionImagePath('pickup')" :alt="$t('map.action.pickup', {'AP': settings.player.PICKUP_ACTION})" :title="$t('map.action.pickup', {'AP': settings.player.PICKUP_ACTION})" />
                                 </a>
                             </div>
