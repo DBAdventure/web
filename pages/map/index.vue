@@ -376,7 +376,9 @@
             groupNames(group) {
                 const names = [];
                 group.forEach((player) => {
-                    names.push(this.getPlayer(player.entity).getDisplayName());
+                    if (this.currentPlayer.id !== player.entity.id) {
+                        names.push(this.getPlayer(player.entity).getDisplayName());
+                    }
                 });
 
                 return names.join(', ');
