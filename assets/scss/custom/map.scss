@@ -46,11 +46,12 @@
   margin-top: 20px;
   .row {
     display: table-row;
-    .col-lg-2,
-    .col-lg-10 {
+    .col-left,
+    .col-right {
       vertical-align: middle;
       display: table-cell;
       float: none;
+      padding: 5px;
       .actions {
         float: right;
         a {

@@ -324,6 +324,7 @@
     },
     "action": {
       "talk": "Parler",
+      "info": "Plus d'informations",
       "pickup": "Ramasser ({AP} PA)",
       "attack": "Attaquer ({AP} PA)",
       "steal": "Voler ({AP} PA)",
@@ -712,10 +713,10 @@
       "damages": "Vous lui infligez {damages} dégâts."
     },
     "attack": {
-      "dodge": "Hit dodge!",
-      "reallyFailed": "Hit really failed",
-      "failed": "Hit failed",
-      "mediocre": "Mediocre stroke",
+      "dodge": "Coup esquivé !",
+      "reallyFailed": "Coup vraiment échoué !",
+      "failed": "Coup raté !",
+      "mediocre": "Coup moyen",
       "successful": "Coup réussi",
       "nice": "Joli coup!",
       "critical": "Coup critique!",

@@ -124,10 +124,10 @@
             <template v-else>
                 <template v-for="quests, distance in itemsByDistance(items.quests)">
                     <div class="row row-object" v-for="quest in quests">
-                        <div class="col-lg-2 text-center">
+                        <div class="col-left text-center">
                             <image-render :x="quest.x" :y="quest.y" :image="`/images/avatars/npc_quest/${quest.image}`" :title="quest.name"/>
                         </div>
-                        <div class="col-lg-10">
+                        <div class="col-right">
                             {{ quest.npc_name }}
                             <template v-if="distance == 0">
                                 {{ $t('map.nearYou') }}
@@ -147,10 +147,10 @@
 
                 <template v-for="objects, distance in itemsByDistance(items.objects)">
                     <div class="row row-object" v-for="object in objects">
-                        <div class="col-lg-2 text-center">
+                        <div class="col-left text-center">
                             <image-render :x="object.x" :y="object.y" :image="`/images/objects/map/${object.map_object_type.image}`" :title="$t(`objects.${object.map_object_type.name}`)"/>
                         </div>
-                        <div class="col-lg-10">
+                        <div class="col-right">
                             {{ $t(`objects.${object.map_object_type.name}`) }}
                             <template v-if="distance == 0">
                                 {{ $t('map.nearYou') }}
@@ -170,10 +170,10 @@
 
                 <template v-for="buildings, distance in itemsByDistance(items.buildings)">
                     <div class="row row-object" v-for="building in buildings">
-                        <div class="col-lg-2 text-center">
+                        <div class="col-left text-center">
                             <image-render :x="building.x" :y="building.y" :image="`/images/buildings/${building.image}`" :title="building.name"/>
                         </div>
-                        <div class="col-lg-10">
+                        <div class="col-right">
                             {{ building.name }}
                             <template v-if="distance == 0">
                                 {{ $t('map.nearYou') }}
@@ -201,10 +201,10 @@
 
                 <template v-for="players, distance in itemsByDistance(items.players, true)">
                     <div class="row row-object" v-for="enemy in players" v-if="enemy.id != currentPlayer.id">
-                        <div class="col-lg-2 text-center">
+                        <div class="col-left text-center">
                             <image-render :x="enemy.x" :y="enemy.y" :image="enemy.getImagePath()" :title="enemy.getDisplayName()"/>
                         </div>
-                        <div class="col-lg-10">
+                        <div class="col-right">
                             <strong>
                                 <router-link v-if="enemy.isPlayer()" :to="`/player/info/${enemy.id}`">{{ enemy.getDisplayName() }}</router-link>
                                 <template v-else>{{ enemy.getDisplayName() }}</template>
@@ -223,6 +223,10 @@
                             <div class="actions">
                                 <router-link :to="{path: '/account/inbox', query: {write: enemy.id}}" v-if="enemy.isPlayer()">
                                     <img :src="enemy.getActionImagePath('write')" :alt="$t('inbox.write')" :title="$t('inbox.write')" />
+                                </router-link>
+
+                                <router-link :to="`/player/info/${enemy.id}`" v-if="enemy.isPlayer()">
+                                    <img :src="enemy.getActionImagePath('info')" :alt="$t('map.action.info')" :title="$t('map.action.info')" />
                                 </router-link>
 
                                 <template v-if="distance == 0">
