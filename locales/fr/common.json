@@ -57,7 +57,7 @@
   "zeni": "Zénis",
   "fatiguePoints": "Points de fatigue",
   "actionPoints": "Points d'action",
-  "movementPoints": "Points de mouvement",
+  "movementPoints": "Points de mouvements",
   "health": "Vie",
   "ki": "Ki",
   "class": "Classe",
@@ -260,7 +260,7 @@
       ]
     },
     "cyborgs": {
-      "intro": "Tacticien défensif, le mage cyborg se remarquera par son énorme potentiel défensif mais également ses sorts tactiques pouvant réduire les points de mouvement adverses mais aussi désarmant la cible. Il sait jouer en équipe avec les mages humains afin de créer des barrières défensives optimales. A travers les âges, ces êtres cybernétiques réalisèrent l'immense avantage de leur résistance robotique. Ainsi, ils développèrent encore et encore cette incroyable endurance du combat leur permettant pour cette troisième époque, de bénéficier de mages cyborgs pouvant lancer de puissants sorts nécessitant une consommation de Ki très réduite.",
+      "intro": "Tacticien défensif, le mage cyborg se remarquera par son énorme potentiel défensif mais également ses sorts tactiques pouvant réduire les points de mouvements adverses mais aussi désarmant la cible. Il sait jouer en équipe avec les mages humains afin de créer des barrières défensives optimales. A travers les âges, ces êtres cybernétiques réalisèrent l'immense avantage de leur résistance robotique. Ainsi, ils développèrent encore et encore cette incroyable endurance du combat leur permettant pour cette troisième époque, de bénéficier de mages cyborgs pouvant lancer de puissants sorts nécessitant une consommation de Ki très réduite.",
       "advantages": [
         "Défense",
         "Soutien",
@@ -398,9 +398,9 @@
       "level": "<strong>Niveau :</strong> {level}",
       "text": "Personnage",
       "health": "<strong>Vie :</strong> {h} / {maxH}",
-      "ap": "<strong>Action :</strong> {ap} / {maxAp}",
+      "ap": "<strong>PA :</strong> {ap} / {maxAp}",
       "ki": "<strong>Ki :</strong> {ki} / {maxKi}",
-      "mp": "<strong>Mouvement :</strong> {mp} / {maxMp}",
+      "mp": "<strong>Pmvts :</strong> {mp} / {maxMp}",
       "fp": "<strong>Fatigue :</strong> {fp} / {maxFp}",
       "plus": "(+1 dans {time} minutes)",
       "minus": "(-1 dans {time} minutes)"
@@ -766,7 +766,7 @@
       "zeni": "Zénis",
       "fatiguePoints": "Points de fatigue",
       "actionPoints": "Points d'action",
-      "movementPoints": "Points de mouvement",
+      "movementPoints": "Points de mouvements",
       "health": "Vie",
       "ki": "Ki",
       "class": "Classe",
@@ -1094,12 +1094,12 @@
     "target": "Votre cible :",
     "headPrice": "Votre tête est mise à prix à :",
     "player": {
-      "health": "Vie: {h} / {maxH}",
-      "ap": "Points d'action: {AP} / {maxAp}",
-      "ki": "Points de Ki: {ki} / {maxKi}",
-      "mp": "Points de mouvement: {mp} / {maxMp}",
-      "fp": "Points de fatigue: {fp} / {maxFp}",
-      "bp": "Points de combat: {bp} / {maxBp}"
+      "health": "Vie : {h} / {maxH}",
+      "ap": "Points d'action : {AP} / {maxAp}",
+      "ki": "Points de Ki : {ki} / {maxKi}",
+      "mp": "Points de mouvements : {mp} / {maxMp}",
+      "fp": "Points de fatigue : {fp} / {maxFp}",
+      "bp": "Points de combat : {bp} / {maxBp}"
     },
     "stats": {
       "normal": "Defaut",
@@ -1165,7 +1165,7 @@
     "teleport": "Téléporte",
     "points": {
       "action": "Ajoute des points d'action",
-      "movement": "Ajoute des points de mouvement"
+      "movement": "Ajoute des points de mouvements"
     },
     "max": {
       "ki": "Ki maximum",
@@ -1275,7 +1275,7 @@
           },
           "actions": {
             "title": "Les Actions",
-            "text1": "<strong>Déplacement :</strong> (PM : les points de mouvement) on peut se déplacer en haut, en bas, à gauche, à droite, cette action coûte 6Pm, on peut aussi se déplacer en diagonale, cette action coûte 7Pm. La réserve totale de PM est de 150 unités.",
+            "text1": "<strong>Déplacement :</strong> (PM : les points de mouvements) on peut se déplacer en haut, en bas, à gauche, à droite, cette action coûte 6Pm, on peut aussi se déplacer en diagonale, cette action coûte 7Pm. La réserve totale de PM est de 150 unités.",
             "text2": "<strong>Lancer un sort :</strong> Permet de lancer un sort sur un adversaire ou un allié. Le lancer coute 6 Pas et consomme du Ki.",
             "text3": "<strong>Attaque :</strong> l'attaque coûte 5 Pa, on enlève des PV à l'adversaire et on gagne des BP. On peut rater son coup, faire un coup normal, un joli coup, un coup critique ou un coup de maître. L'adversaire peut aussi esquiver le coup, là on gagne 0 Bp. La commande \"attaquer ce membre de la guilde\" nous permet de ne pas basculer dans le camp adverse même si on tue un joueur du même camp que soi et donc de ne pas perdre ses points de cotés. (Voir chapitre II, 2)",
             "text4": "<strong>Soins :</strong> action qui coûte 4Pa, on donne des Pv et on gagne des Bp. On peut aussi louper son soin et de ce fait, ne rien gagner.",
@@ -1318,7 +1318,7 @@
       },
       {
         "title": "C'est quoi un PA ? PM ? Et le ki ?",
-        "content": "Un PA est un point d'action, vous en gagnez un toutes les demi heures, pas besoin d'être connecté pour en gagner, ceux-ci vous permettront de faire toutes les actions possibles du jeu.<br/>Un PM est un point de mouvement, vous engagnez aussi toutes les demis heures.<br/>Quant au Ki ce sont en quelque sorte les point de pouvoirs, magie si vous préférez."
+        "content": "Un PA est un point d'action, vous en gagnez un toutes les demi heures, pas besoin d'être connecté pour en gagner, ceux-ci vous permettront de faire toutes les actions possibles du jeu.<br/>Un PM est un point de mouvements, vous engagnez aussi toutes les demis heures.<br/>Quant au Ki ce sont en quelque sorte les point de pouvoirs, magie si vous préférez."
       },
       {
         "title": "Je suis mort et il devait y avoir X PA et j'en ai reçu moins pourquoi ?",
@@ -1374,7 +1374,7 @@
     "generic": "Oups, quelque chose s'est mal passé",
     "move": {
       "forbidden": "Ce déplacement est impossible !",
-      "empty": "Tu n'as plus assez de points de mouvement !"
+      "empty": "Tu n'as plus assez de points de mouvements !"
     },
     "convert": {
       "forbidden": "Vous ne pouvez pas convertir !"

@@ -6,7 +6,7 @@
         </div>
         <div class="quest-content">
             <p>
-                <template v-for="line in quest.history.split('\n')">{{ line }}<br></template>
+                <template v-for="line in quest.history.split('\n')"><span v-html="line"></span><br></template>
             </p>
 
             <dl>
@@ -30,19 +30,21 @@
                     {{ $t('game.quest.needed.npcObjects', {number: npcObjectNeeded.number, name: npcObjectNeeded.npc_object.name, list: getRaces(npcObjectNeeded.npc_object.races).join(', ')}) }}
                 </dd>
 
-                <dt>{{ $t('game.quest.gain.title') }}</dt>
-                <dd v-for="gainObject in quest.gain_objects">
-                    {{ gainObject.number }} {{ gainObject.object.name }}
-                </dd>
-                <dd>
-                    {{ $t('game.quest.gain.zeni', {zeni: quest.gain_zeni}) }}
-                </dd>
-                <dd>
-                    {{ $t('game.quest.gain.battlePoints', {bp: quest.gain_battle_points}) }}
-                </dd>
+                <template v-if="quest.gain_objects.length > 0 && quest.gain_zeni > 0 && quest.gain_battle_points > 0">
+                    <dt>{{ $t('game.quest.gain.title') }}</dt>
+                    <dd v-for="gainObject in quest.gain_objects">
+                        {{ gainObject.number }} {{ gainObject.object.name }}
+                    </dd>
+                    <dd>
+                        {{ $t('game.quest.gain.zeni', {zeni: quest.gain_zeni}) }}
+                    </dd>
+                    <dd>
+                        {{ $t('game.quest.gain.battlePoints', {bp: quest.gain_battle_points}) }}
+                    </dd>
+                </template>
             </dl>
 
-            <p><strong>{{ $t('requirements.name') }}</strong></p>
+            <p v-if="quest.requirements.length > 0"><strong>{{ $t('requirements.name') }}</strong></p>
             <requirements :data="quest.requirements" />
 
             <p class="quest-status" v-if="playerQuest">
