@@ -810,6 +810,7 @@
     },
     "talk": {
       "quest": {
+        "accepted": "Quête acceptée !",
         "finished": "Quête terminée !",
         "gain": {
           "zeni": "Vous gagnez {zeni} Zénis",
