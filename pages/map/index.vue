@@ -60,7 +60,7 @@
         <div class="search-container container-fluid">
             <template v-if="action">
                 <div class="text-center">
-                    <p v-for="message in parameters.messages">{{ handleMessages(message) }}</p>
+                    <p v-for="message in parameters.messages"><span v-html="handleMessages(message)" /></p>
 
                     <template v-if="action === 'analysis'">
                         <Table :columns="analysisColumns()" :data="analysisData()"></Table>
