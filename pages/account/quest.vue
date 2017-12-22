@@ -8,7 +8,7 @@
             </template>
         </div>
         <div v-else>
-            {{ $('game.quest.empty') }}
+            {{ $t('game.quest.empty') }}
         </div>
     </div>
 </template>
