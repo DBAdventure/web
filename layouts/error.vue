@@ -1,48 +1,22 @@
 <template>
-    <div id="main">
-        <dba-header></dba-header>
-
-        <div class="middle container-fluid" :class="$store.state.game.style">
-            <dba-menu></dba-menu>
-
-            <div id="content">
-                <div class="border-top">&nbsp;</div>
-                <div class="body">
-                    <div class="error-page">
-                        <div>
-                            <h1 class="error-code">{{ error.statusCode }}</h1>
-                            <div class="error-wrapper-message">
-                                <h2 class="error-message">{{ $t(error.message) }}</h2>
-                            </div>
-                            <p v-if="error.statusCode === 404">
-                                <nuxt-link class="error-link" to="/">{{ $t('error.home') }}</nuxt-link>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="border-bottom">&nbsp;</div>
+    <div class="error-page">
+        <div>
+            <h1 class="error-code">{{ error.statusCode }}</h1>
+            <div class="error-wrapper-message">
+                <h2 class="error-message">{{ $t(error.message) }}</h2>
             </div>
-            <div class="clearfix">&nbsp;</div>
+            <p v-if="error.statusCode === 404">
+                <nuxt-link class="error-link" to="/">{{ $t('error.home') }}</nuxt-link>
+            </p>
         </div>
-
-        <dba-footer></dba-footer>
     </div>
 </template>
 
 <script type="text/ecmascript-6">
-    import DbaHeader from '~/components/header';
-    import DbaMenu from '~/components/menu';
-    import DbaFooter from '~/components/footer';
-
     export default {
-        layout: 'default',
+        layout: 'error',
         name: 'nuxt-error',
         props: ['error'],
-        components: {
-            DbaHeader,
-            DbaMenu,
-            DbaFooter,
-        },
         head() {
             return {
                 title: this.$t(this.error.message) || 'An error occured',
