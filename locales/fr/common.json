@@ -336,7 +336,8 @@
       "attack-betray": "Attaquer (trahison) ({AP} PA)",
       "attack-revenge": "Attaquer (vengeance) ({AP} PA)",
       "self": {
-        "heal": "Se soigner ({AP} PA)"
+        "heal": "Se soigner ({AP} PA)",
+        "spell": "Se lancer un sort ({AP} PA)"
       },
       "again": {
         "steal": "Voler encore pour {AP} PA",

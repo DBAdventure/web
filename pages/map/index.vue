@@ -55,6 +55,10 @@
                 <img :src="currentPlayer.getActionImagePath('heal')" :alt="$t('map.action.heal', {'AP': settings.player.HEAL_ACTION})" :title="$t('map.action.heal', {'AP': settings.player.HEAL_ACTION})" />
                 {{ $t('map.action.self.heal', {'AP': settings.player.HEAL_ACTION}) }}
             </Button>
+            <Button @click.prevent="runAction('spell', currentPlayer.id)" v-if="currentPlayer.action_points >= settings.player.SPELL_ACTION">
+                <img :src="currentPlayer.getActionImagePath('spell')" :alt="$t('map.action.spell', {'AP': settings.player.SPELL_ACTION})" :title="$t('map.action.spell', {'AP': settings.player.SPELL_ACTION})" />
+                {{ $t('map.action.self.spell', {'AP': settings.player.SPELL_ACTION}) }}
+            </Button>
         </div>
 
         <div class="search-container container-fluid">
@@ -594,7 +598,7 @@
                         obj => obj.id === this.selectedSpell,
                     );
 
-                    return playerSpell && playerSpell.spell.distance <= this.parameters.distance;
+                    return playerSpell && this.parameters.distance <= playerSpell.spell.distance;
                 }
 
                 return false;
