@@ -1,6 +1,6 @@
-# DBAdventure
+# DBAdventure [![Build Status](https://travis-ci.org/DBAdventure/web.svg?branch=master)](https://travis-ci.org/DBAdventure/web)
 
-DBAdventure, the fronted for web app.
+DBAdventure, the fronted for web app build with [Nuxt](https://github.com/nuxt/nuxt.js/)
 
 ## Procedures
 
