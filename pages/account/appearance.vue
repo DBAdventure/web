@@ -1,19 +1,59 @@
 <template>
     <div>
-        <h1 class="title title-appearance">{{ $t('appearance') }}</h1>
+        <h1 class="title title-appearance">
+            {{ $t('appearance') }}
+        </h1>
         <table class="table-appearance">
             <tbody>
                 <tr>
-                    <td align="center" width="75" height="75" background="/media/map/day/grass_0.png">
-                        <img class="perso-images" type="image" :src="selectedImage" border="0">
+                    <td
+                        align="center"
+                        width="75"
+                        height="75"
+                        background="/media/map/day/grass_0.png"
+                    >
+                        <img
+                            class="perso-images"
+                            type="image"
+                            :src="selectedImage"
+                            border="0"
+                        >
                     </td>
-                    <td align="center" width="10" height="75"></td>
-                    <td align="center" width="75" height="75" background="/media/map/day/sand_0.png">
-                        <img class="perso-images" type="image" :src="selectedImage" border="0">
+                    <td
+                        align="center"
+                        width="10"
+                        height="75"
+                    />
+                    <td
+                        align="center"
+                        width="75"
+                        height="75"
+                        background="/media/map/day/sand_0.png"
+                    >
+                        <img
+                            class="perso-images"
+                            type="image"
+                            :src="selectedImage"
+                            border="0"
+                        >
                     </td>
-                    <td align="center" width="10" height="75"></td>
-                    <td align="center" width="75" height="75" background="/media/map/day/ground_0.png">
-                        <img class="perso-images" type="image" :src="selectedImage" border="0">
+                    <td
+                        align="center"
+                        width="10"
+                        height="75"
+                    />
+                    <td
+                        align="center"
+                        width="75"
+                        height="75"
+                        background="/media/map/day/ground_0.png"
+                    >
+                        <img
+                            class="perso-images"
+                            type="image"
+                            :src="selectedImage"
+                            border="0"
+                        >
                     </td>
                 </tr>
             </tbody>
@@ -25,18 +65,38 @@
                 v-model="player_appearance.type"
                 :placeholder="$t('choice.character')"
                 clearable
-                required>
-                <Option v-for="value, key in appearances[player_race]" :key="key" :value="key">{{ value.label }}</Option>
+                required
+            >
+                <Option
+                    v-for="(value, key) in appearances[player_race]"
+                    :key="key"
+                    :value="key"
+                >
+                    {{ value.label }}
+                </Option>
             </Select>
 
             <Select
                 v-if="player_appearance.type !== null && appearances[player_race]"
                 v-model="player_appearance.image"
-                required>
-                <Option v-for="value, key in appearances[player_race][player_appearance.type].value" :key="key" :value="value">{{ key }}</Option>
+                required
+            >
+                <Option
+                    v-for="(value, key) in appearances[player_race][player_appearance.type].value"
+                    :key="key"
+                    :value="value"
+                >
+                    {{ key }}
+                </Option>
             </Select>
 
-            <Button type="primary" @click.prevent="handleSubmit()" long>{{ $t('save') }}</Button>
+            <Button
+                type="primary"
+                @click.prevent="handleSubmit()"
+                long
+            >
+                {{ $t('save') }}
+            </Button>
         </div>
     </div>
 </template>
@@ -64,7 +124,7 @@
             };
         },
         asyncData() {
-            return api.getAppearanceData().then(res => (
+            return api.getAppearanceData().then((res) => (
                 {
                     appearances: res.data,
                 }
@@ -81,7 +141,7 @@
                     break;
                 }
             }
-            /* eslint-enable no-restricted-syntax */
+        /* eslint-enable no-restricted-syntax */
         },
         computed: {
             ...mapGetters([

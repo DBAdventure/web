@@ -1,6 +1,8 @@
 <template>
     <div class="history">
-        <h1 class="title title-ranking">{{ $t('ranking.title') }}</h1>
+        <h1 class="title title-ranking">
+            {{ $t('ranking.title') }}
+        </h1>
 
         <p>{{ $t('ranking.text') }}</p>
         <p>{{ $t('ranking.rankBy') }}</p>
@@ -8,39 +10,58 @@
         <div class="clearfix">
             <div class="col-lg-6">
                 <ul class="list-dots">
-                    <template v-for="data, w in rankingList">
-                        <li :class="{'active': w === what}">
-                            <a :href="buildUrl(w, type)">{{ $t(data.label) }}</a>
-                            <template v-if="data.description">
-                                ({{ $t(data.description) }})
-                            </template>
-                        </li>
-                    </template>
+                    <li
+                        v-for="(data, w) in rankingList"
+                        :key="data.label"
+                        :class="{'active': w === what}"
+                    >
+                        <a :href="buildUrl(w, type)">{{ $t(data.label) }}</a>
+                        <template v-if="data.description">
+                            ({{ $t(data.description) }})
+                        </template>
+                    </li>
                 </ul>
             </div>
             <div class="col-lg-6">
                 <p>{{ $t('ranking.playerSearch') }}</p>
 
-                <Input v-model="who">
-                    <Button slot="append" icon="ios-search" @click.prevent="searchPlayer()"></Button>
-                </Input>
+                <Input v-model="who" />
+                <Button
+                    slot="append"
+                    icon="ios-search"
+                    @click.prevent="searchPlayer()"
+                />
             </div>
         </div>
 
         <div id="ranking">
             <ul>
-                <li v-for="player, position in ranking">
+                <li
+                    v-for="(player, position) in ranking"
+                    :key="position"
+                >
                     {{ ((current - 1) * limit) + position + 1 }} -
-                    <router-link :to="`/player/info/${getPlayer(player[0]).id}`" :class="{active: who === getPlayer(player[0]).name}">
-                        <img :src="getPlayer(player[0]).getImagePath()" />
+                    <router-link
+                        :to="`/player/info/${getPlayer(player[0]).id}`"
+                        :class="{active: who === getPlayer(player[0]).name}"
+                    >
+                        <img :src="getPlayer(player[0]).getImagePath()">
                         {{ getPlayer(player[0]).getDisplayName() }}
                     </router-link>
                 </li>
             </ul>
         </div>
 
-        <div class="text-center" v-if="(count / limit) > 1">
-            <Page :page-size="limit" :total="count" size="small" @on-change="setCurrentPage"></Page>
+        <div
+            class="text-center"
+            v-if="(count / limit) > 1"
+        >
+            <Page
+                :page-size="limit"
+                :total="count"
+                size="small"
+                @on-change="setCurrentPage"
+            />
         </div>
     </div>
 </template>
@@ -99,7 +120,7 @@
             },
         },
         asyncData({query, error}) {
-            return api.getRankingData(query.what, query.type).then(res => ({
+            return api.getRankingData(query.what, query.type).then((res) => ({
                 ranking: res.data.result.ranking,
                 rankingList: res.data.result.rankingList,
                 count: res.data.count,

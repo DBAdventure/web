@@ -1,10 +1,18 @@
 <template>
     <div class="event">
         <template v-if="player.isPlayer() && event.event_type.name === 'player'">
-            <router-link class="pull-left" :to="`/player/info/${player.id}`"><img :src="player.getImagePath()" /></router-link>
+            <router-link
+                class="pull-left"
+                :to="`/player/info/${player.id}`"
+            >
+                <img :src="player.getImagePath()">
+            </router-link>
         </template>
         <template v-else-if="player && !player.isPlayer()">
-            <img class="pull-left" :src="player.getImagePath()"/>
+            <img
+                class="pull-left"
+                :src="player.getImagePath()"
+            >
         </template>
 
         <div class="event-body">
@@ -38,6 +46,7 @@
             target: {
                 type: Object,
                 required: false,
+                default: () => {},
             },
             isReceived: {
                 type: Boolean,

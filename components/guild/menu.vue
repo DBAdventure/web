@@ -35,10 +35,15 @@
                 :title="$t('modal.confirm.guild.leave')"
                 @on-ok="leaveGuild()"
             >
-                <a href="#" @click.prevent="">{{ $t('guild.leave') }}</a>
+                <a
+                    href="#"
+                    @click.prevent=""
+                >{{ $t('guild.leave') }}</a>
             </Poptip>
-             -
-            <router-link to="/guild/list">{{ $t('guild.viewOthers') }}</router-link>
+            -
+            <router-link to="/guild/list">
+                {{ $t('guild.viewOthers') }}
+            </router-link>
         </div>
     </div>
 </template>
@@ -67,7 +72,7 @@
             async leaveGuild() {
                 this.$Loading.start();
                 await api.leaveGuild().then((res) => {
-                    const messages = res.data.messages.map(e => this.$t(e));
+                    const messages = res.data.messages.map((e) => this.$t(e));
                     this.$Notice.success({
                         title: this.$t('notice.success'),
                         desc: messages.join('\n'),

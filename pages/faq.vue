@@ -1,14 +1,20 @@
 <template>
     <div class="faq">
-        <h1 class="title title-faq">{{ $t('menu.faq') }}</h1>
+        <h1 class="title title-faq">
+            {{ $t('menu.faq') }}
+        </h1>
 
         <Collapse>
-            <template v-for="n in questionsList" :value="0">
-                <Panel>
-                    {{ $t(`faq.questions[${n}].title`) }}
-                    <p slot="content" v-html="$t(`faq.questions[${n}].content`)"></p>
-                </Panel>
-            </template>
+            <Panel
+                v-for="n in questionsList"
+                :key="n"
+            >
+                {{ $t(`faq.questions[${n}].title`) }}
+                <p
+                    slot="content"
+                    v-html="$t(`faq.questions[${n}].content`)"
+                />
+            </Panel>
         </Collapse>
     </div>
 </template>

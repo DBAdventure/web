@@ -1,11 +1,18 @@
 <template>
     <div id="guild">
-        <h1 class="title title-default">{{ currentPlayer.getGuild().name }}</h1>
+        <h1 class="title title-default">
+            {{ currentPlayer.getGuild().name }}
+        </h1>
 
         <guild-menu />
 
-        <h1 class="subtitle text-center">{{ $t('guild.title.members') }}</h1>
-        <Table :columns="membersColumns()" :data="guildPlayers"></Table>
+        <h1 class="subtitle text-center">
+            {{ $t('guild.title.members') }}
+        </h1>
+        <Table
+            :columns="membersColumns()"
+            :data="guildPlayers"
+        />
     </div>
 </template>
 

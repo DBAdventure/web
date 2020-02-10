@@ -1,10 +1,15 @@
 <template>
     <div class="account">
-        <h1 class="title title-magic">{{ $t('magic.title') }}</h1>
+        <h1 class="title title-magic">
+            {{ $t('magic.title') }}
+        </h1>
         <div>
-            <p v-html="$t('magic.presentation.intro', {name: currentPlayer.name})"></p>
-            <p v-html="$t('magic.presentation.text')"></p>
-            <Table :columns="spellColumns()" :data="spells"></Table>
+            <p v-html="$t('magic.presentation.intro', {name: currentPlayer.name})" />
+            <p v-html="$t('magic.presentation.text')" />
+            <Table
+                :columns="spellColumns()"
+                :data="spells"
+            />
         </div>
     </div>
 </template>
@@ -36,7 +41,7 @@
                 return {};
             }
 
-            return api.getSpells().then(res => ({
+            return api.getSpells().then((res) => ({
                 spells: res.data,
             })).catch(() => {});
         },

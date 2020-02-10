@@ -1,27 +1,55 @@
 <template>
     <div>
-        <h1 class="title title-register">{{ $t('register.text') }}</h1>
+        <h1 class="title title-register">
+            {{ $t('register.text') }}
+        </h1>
         <p>{{ $t('register.welcome') }}</p>
         <p>{{ $t('register.intro') }}</p>
 
-        <Form ref="registerForm" id="register-form" class="form-horizontal" :rules="registerRules" :model="player">
+        <Form
+            ref="registerForm"
+            id="register-form"
+            class="form-horizontal"
+            :rules="registerRules"
+            :model="player"
+        >
             <h2>{{ $t('register.personalinfo') }}</h2>
 
-            <Form-item :label="$t('form.login')" :label-width="150" prop="username" required>
-                <Input name="username"
-                       :placeholder="$t('form.login')"
-                       v-model="player.username"
-                       type="text" />
+            <Form-item
+                :label="$t('form.login')"
+                :label-width="150"
+                prop="username"
+                required
+            >
+                <Input
+                    name="username"
+                    :placeholder="$t('form.login')"
+                    v-model="player.username"
+                    type="text"
+                />
             </Form-item>
-            <Form-item :label="$t('form.email')" :label-width="150" prop="email" required>
-                <Input name="email"
-                       :placeholder="$t('form.email')"
-                       v-model="player.email"
-                       type="text" />
+            <Form-item
+                :label="$t('form.email')"
+                :label-width="150"
+                prop="email"
+                required
+            >
+                <Input
+                    name="email"
+                    :placeholder="$t('form.email')"
+                    v-model="player.email"
+                    type="text"
+                />
             </Form-item>
             <div>
                 <div class="col-sm-offset-2 col-sm-10">
-                    <Button type="primary" @click.prevent="handleSubmit()" long>{{ $t('register.text') }}</Button>
+                    <Button
+                        type="primary"
+                        @click.prevent="handleSubmit()"
+                        long
+                    >
+                        {{ $t('register.text') }}
+                    </Button>
                 </div>
             </div>
         </Form>

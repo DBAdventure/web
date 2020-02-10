@@ -23,7 +23,7 @@ const actions = {
 };
 
 const getters = {
-    activeLocale: state => state.locale,
+    activeLocale: (state) => state.locale,
 };
 
 const mutations = {

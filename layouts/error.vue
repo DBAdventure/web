@@ -1,12 +1,21 @@
 <template>
     <div class="error-page">
         <div>
-            <h1 class="error-code">{{ error.statusCode }}</h1>
+            <h1 class="error-code">
+                {{ error.statusCode }}
+            </h1>
             <div class="error-wrapper-message">
-                <h2 class="error-message">{{ $t(error.message) }}</h2>
+                <h2 class="error-message">
+                    {{ $t(error.message) }}
+                </h2>
             </div>
             <p v-if="error.statusCode === 404">
-                <nuxt-link class="error-link" to="/">{{ $t('error.home') }}</nuxt-link>
+                <nuxt-link
+                    class="error-link"
+                    to="/"
+                >
+                    {{ $t('error.home') }}
+                </nuxt-link>
             </p>
         </div>
     </div>
@@ -15,15 +24,20 @@
 <script type="text/ecmascript-6">
     export default {
         layout: 'error',
-        name: 'nuxt-error',
-        props: ['error'],
+        name: 'NuxtError',
+        props: {
+            error: {
+                type: Object,
+                required: true,
+            },
+        },
         head() {
             return {
                 title: this.$t(this.error.message) || 'An error occured',
             };
         },
         mounted() {
-            this.$store.watch(state => state.player.connected, (value) => {
+            this.$store.watch((state) => state.player.connected, (value) => {
                 if (value) {
                     this.$router.go(this.$router.currentRoute);
                 }

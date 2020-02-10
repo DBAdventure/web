@@ -1,5 +1,7 @@
 <template>
     <footer id="footer">
-        <p class="text-muted">©DBAdventure.</p>
+        <p className="text-muted">
+            ©DBAdventure.
+        </p>
     </footer>
 </template>

@@ -1,31 +1,76 @@
 <template>
     <div class="account">
-        <h1 class="title title-information">{{ $t('header.settings') }}</h1>
-        <Form ref="settingsForm" id="settings-form" :rules="settingsRules" :model="player" :label-width="150">
-            <FormItem :label="$t('form.email')" prop="email">
-                <Input v-model="player.email"></Input>
+        <h1 class="title title-information">
+            {{ $t('header.settings') }}
+        </h1>
+        <Form
+            ref="settingsForm"
+            id="settings-form"
+            :rules="settingsRules"
+            :model="player"
+            :label-width="150"
+        >
+            <FormItem
+                :label="$t('form.email')"
+                prop="email"
+            >
+                <Input v-model="player.email" /></Input>
             </FormItem>
 
-            <FormItem :label="$t('form.login')" prop="username">
-                <Input v-model="player.username"></Input>
+            <FormItem
+                :label="$t('form.login')"
+                prop="username"
+            >
+                <Input v-model="player.username" /></Input>
             </FormItem>
 
-            <FormItem :label="$t('form.history')" prop="history">
-                <Input v-model="player.history" type="textarea" :autosize="{minRows: 2,maxRows: 8}"></Input>
+            <FormItem
+                :label="$t('form.history')"
+                prop="history"
+            >
+                <Input
+                    v-model="player.history"
+                    type="textarea"
+                    :autosize="{minRows: 2,maxRows: 8}"
+                /></Input>
             </FormItem>
 
-            <FormItem :label="$t('form.password')" prop="password">
-                <Input type="password" v-model="player.password">
-                <Icon type="ios-locked-outline" slot="prepend"></Icon>
+            <FormItem
+                :label="$t('form.password')"
+                prop="password"
+            >
+                <Input
+                    type="password"
+                    v-model="player.password"
+                />
+                <Icon
+                    type="ios-locked-outline"
+                    slot="prepend"
+                />
                 </Input>
             </FormItem>
-            <FormItem :label="$t('form.passwordConfirm')" prop="password_confirm">
-                <Input type="password" v-model="player.password_confirm">
-                <Icon type="ios-locked-outline" slot="prepend"></Icon>
+            <FormItem
+                :label="$t('form.passwordConfirm')"
+                prop="password_confirm"
+            >
+                <Input
+                    type="password"
+                    v-model="player.password_confirm"
+                />
+                <Icon
+                    type="ios-locked-outline"
+                    slot="prepend"
+                />
                 </Input>
             </FormItem>
 
-            <Button type="primary" @click.prevent="handleSubmit()" long>{{ $t('save') }}</Button>
+            <Button
+                type="primary"
+                @click.prevent="handleSubmit()"
+                long
+            >
+                {{ $t('save') }}
+            </Button>
         </Form>
     </div>
 </template>

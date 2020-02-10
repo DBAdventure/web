@@ -1,6 +1,6 @@
 /* eslint-env es6 */
-import {isEmpty} from '~/lib/utils';
 import axios from 'axios';
+import {isEmpty} from '~/lib/utils';
 import settings from '~/config/general.config';
 
 let baseUrl = '';
@@ -49,12 +49,13 @@ const makeDeleteRequest = (path, params = {}) => new Promise((resolve, reject) =
  * @returns {Promise}
  */
 const makePostRequest = (path, postData, config = {}) => new Promise((resolve, reject) => {
-    const newConfig = Object.assign({
+    const newConfig = {
         headers: {
             Accept: 'application/json',
         },
         withCredentials: true,
-    }, config);
+        ...config,
+    };
     axios.post(`${baseUrl}/api${path}`, postData, newConfig).then((result) => {
         resolve(result);
     }).catch((error) => {

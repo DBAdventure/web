@@ -2,11 +2,17 @@
     <div>
         {{ object.description }}
 
-        <div v-if="hasData(object.bonus)" class="details">
+        <div
+            v-if="hasData(object.bonus)"
+            class="details"
+        >
             <strong>{{ $t('bonus.name') }}</strong>
             <stats :data="object.bonus" />
         </div>
-        <div v-if="hasData(object.requirements)" class="details">
+        <div
+            v-if="hasData(object.requirements)"
+            class="details"
+        >
             <strong>{{ $t('requirements.name') }}</strong>
             <requirements :data="object.requirements" />
         </div>

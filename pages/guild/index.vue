@@ -1,7 +1,9 @@
 <template>
     <div id="guild">
         <template v-if="!currentPlayer.guild_player">
-            <h1 class="title title-default">{{ $t('guilds') }}</h1>
+            <h1 class="title title-default">
+                {{ $t('guilds') }}
+            </h1>
 
             <p class="text-center">
                 {{ $t('guild.not.guilded') }}
@@ -21,7 +23,9 @@
             </ul>
         </template>
         <template v-else>
-            <h1 class="title title-default">{{ currentPlayer.getGuild().name }}</h1>
+            <h1 class="title title-default">
+                {{ currentPlayer.getGuild().name }}
+            </h1>
             <template v-if="!currentPlayer.getGuild().enabled">
                 <p>{{ $t('guild.not.enabled') }}</p>
                 <Poptip
@@ -29,7 +33,10 @@
                     :title="$t('modal.confirm.guild.cancel')"
                     @on-ok="leaveGuild()"
                 >
-                    <a href="#" @click.prevent="">{{ $t('guild.cancel') }}</a>
+                    <a
+                        href="#"
+                        @click.prevent=""
+                    >{{ $t('guild.cancel') }}</a>
                 </Poptip>
             </template>
             <template v-else-if="!currentPlayer.guild_player.enabled">
@@ -39,16 +46,24 @@
                     :title="$t('modal.confirm.guild.request.leave')"
                     @on-ok="leaveGuild()"
                 >
-                    <a href="#" @click.prevent="">{{ $t('guild.request.cancel') }}</a>
+                    <a
+                        href="#"
+                        @click.prevent=""
+                    >{{ $t('guild.request.cancel') }}</a>
                 </Poptip>
             </template>
             <template v-else>
                 <guild-menu />
 
                 <template v-if="currentPlayer.getGuild().message">
-                    <h1 class="title title-guild-message">{{ $t('guild.message') }}</h1>
+                    <h1 class="title title-guild-message">
+                        {{ $t('guild.message') }}
+                    </h1>
                     <p>
-                        <template v-for="line in currentPlayer.getGuild().message.split('\n')">{{ line }}<br></template>
+                        <template v-for="(line, index) in currentPlayer.getGuild().message.split('\n')">
+                            {{ line }}
+                            <br :key="index">
+                        </template>
                     </p>
                 </template>
             </template>
@@ -88,7 +103,7 @@
             async leaveGuild() {
                 this.$Loading.start();
                 await api.leaveGuild().then((res) => {
-                    const messages = res.data.messages.map(e => this.$t(e));
+                    const messages = res.data.messages.map((e) => this.$t(e));
                     this.$Notice.success({
                         title: this.$t('notice.success'),
                         desc: messages.join('\n'),

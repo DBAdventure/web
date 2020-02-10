@@ -1,8 +1,8 @@
 /* eslint-disable no-shadow, no-param-reassign */
+import axios from 'axios';
 import settings from '~/config/general.config';
 import {isEmpty} from '~/lib/utils';
 import Player from '~/lib/player';
-import axios from 'axios';
 import api from '~/services/api';
 import * as types from '../mutation-types';
 
@@ -53,7 +53,7 @@ const actions = {
 };
 
 const getters = {
-    currentPlayer: state => new Player(state.auth),
+    currentPlayer: (state) => new Player(state.auth),
 };
 
 const mutations = {

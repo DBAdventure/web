@@ -1,12 +1,12 @@
 const bodyParser = require('body-parser');
 const express = require('express');
-const generalConfig = require('./config/general.config');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const nuxtConfig = require('./config/nuxt.config');
 const proxy = require('http-proxy-middleware');
 const session = require('express-session');
 const {Nuxt, Builder} = require('nuxt');
+const nuxtConfig = require('./config/nuxt.config');
+const generalConfig = require('./config/general.config');
 
 const app = express();
 const isDev = generalConfig.NODE_ENV === 'local';

@@ -1,15 +1,28 @@
 <template>
-    <div id="guild" class="events">
-        <h1 class="title title-default">{{ currentPlayer.getGuild().name }}</h1>
+    <div
+        id="guild"
+        class="events"
+    >
+        <h1 class="title title-default">
+            {{ currentPlayer.getGuild().name }}
+        </h1>
 
         <guild-menu />
 
-        <h1 class="subtitle text-center">{{ $t('guild.title.events') }}</h1>
+        <h1 class="subtitle text-center">
+            {{ $t('guild.title.events') }}
+        </h1>
         <table class="table table-filter">
             <tbody>
-                <tr v-for="event in events">
+                <tr
+                    v-for="event in events"
+                    :key="event.id"
+                >
                     <td>
-                        <guild-event :event="event" :target="event.player" />
+                        <guild-event
+                            :event="event"
+                            :target="event.player"
+                        />
                     </td>
                 </tr>
             </tbody>
@@ -52,7 +65,7 @@
                 return {};
             }
 
-            return api.getGuildEvents().then(res => ({
+            return api.getGuildEvents().then((res) => ({
                 events: res.data,
             })).catch(() => {});
         },

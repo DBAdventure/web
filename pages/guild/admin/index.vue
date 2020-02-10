@@ -1,61 +1,144 @@
 <template>
     <div id="guild">
-        <h1 class="title title-default">{{ currentPlayer.getGuild().name }}</h1>
+        <h1 class="title title-default">
+            {{ currentPlayer.getGuild().name }}
+        </h1>
 
         <guild-menu />
 
-        <h1 class="subtitle text-center">{{ $t('guild.admin.title') }}</h1>
+        <h1 class="subtitle text-center">
+            {{ $t('guild.admin.title') }}
+        </h1>
         <ul>
             <li>
-                <a href="#" @click.prevent="getRequesters()">{{ $t('guild.admin.menu.requester') }}</a>
+                <a
+                    href="#"
+                    @click.prevent="getRequesters()"
+                >{{ $t('guild.admin.menu.requester') }}</a>
             </li>
             <li>
-                <a href="#" @click.prevent="getMembers()">{{ $t('guild.admin.menu.fired') }}</a>
+                <a
+                    href="#"
+                    @click.prevent="getMembers()"
+                >{{ $t('guild.admin.menu.fired') }}</a>
             </li>
             <li>
-                <a href="#" @click.prevent="manageSettings()">{{ $t('guild.admin.menu.settings') }}</a>
+                <a
+                    href="#"
+                    @click.prevent="manageSettings()"
+                >{{ $t('guild.admin.menu.settings') }}</a>
             </li>
 
             <template v-if="currentPlayer.getGuildRank() === settings.guild.ROLE_ADMIN">
                 <li>
-                    <a href="#" @click.prevent="manageRanks()">{{ $t('guild.admin.menu.rank') }}</a>
+                    <a
+                        href="#"
+                        @click.prevent="manageRanks()"
+                    >{{ $t('guild.admin.menu.rank') }}</a>
                 </li>
                 <li>
-                    <a href="#" @click.prevent="manageGenerals()">{{ $t('guild.admin.menu.general') }}</a>
+                    <a
+                        href="#"
+                        @click.prevent="manageGenerals()"
+                    >{{ $t('guild.admin.menu.general') }}</a>
                 </li>
             </template>
         </ul>
 
-        <h1 v-if="page" class="subtitle text-center">{{ $t(`guild.admin.titles.pages.${page}`) }}</h1>
+        <h1
+            v-if="page"
+            class="subtitle text-center"
+        >
+            {{ $t(`guild.admin.titles.pages.${page}`) }}
+        </h1>
 
         <template v-if="page === pages.requesters || page === pages.members || page === pages.general">
-            <Table :columns="guildPlayersColumns()" :data="guildPlayers"></Table>
+            <Table
+                :columns="guildPlayersColumns()"
+                :data="guildPlayers"
+            />
         </template>
 
         <template v-if="page === pages.settings">
-            <Form ref="settingsForm" id="settings-form" :rules="settingsRules" :model="guild" :label-width="150">
-                <FormItem :label="$t('form.history')" prop="history">
-                    <Input v-model="guild.history" type="textarea" :autosize="{minRows: 2,maxRows: 8}"></Input>
+            <Form
+                ref="settingsForm"
+                id="settings-form"
+                :rules="settingsRules"
+                :model="guild"
+                :label-width="150"
+            >
+                <FormItem
+                    :label="$t('form.history')"
+                    prop="history"
+                >
+                    <Input
+                        v-model="guild.history"
+                        type="textarea"
+                        :autosize="{minRows: 2,maxRows: 8}"
+                    /></Input>
                 </FormItem>
-                <FormItem :label="$t('form.message')" prop="message">
-                    <Input v-model="guild.message" type="textarea" :autosize="{minRows: 2,maxRows: 8}"></Input>
+                <FormItem
+                    :label="$t('form.message')"
+                    prop="message"
+                >
+                    <Input
+                        v-model="guild.message"
+                        type="textarea"
+                        :autosize="{minRows: 2,maxRows: 8}"
+                    /></Input>
                 </FormItem>
-                <Button type="primary" @click.prevent="handleSettingsSubmit()" long>{{ $t('save') }}</Button>
+                <Button
+                    type="primary"
+                    @click.prevent="handleSettingsSubmit()"
+                    long
+                >
+                    {{ $t('save') }}
+                </Button>
             </Form>
         </template>
 
         <template v-if="page === pages.ranks">
-            <Form ref="ranksForm" id="ranks-form" :rules="ranksRules" :model="ranks" :label-width="150">
-                <FormItem :label="$t('form.ranks.player')" prop="ROLE_PLAYER">
-                    <Input v-model="ranks.ROLE_PLAYER" type="text"></Input>
+            <Form
+                ref="ranksForm"
+                id="ranks-form"
+                :rules="ranksRules"
+                :model="ranks"
+                :label-width="150"
+            >
+                <FormItem
+                    :label="$t('form.ranks.player')"
+                    prop="ROLE_PLAYER"
+                >
+                    <Input
+                        v-model="ranks.ROLE_PLAYER"
+                        type="text"
+                    /></Input>
                 </FormItem>
-                <FormItem :label="$t('form.ranks.modo')" prop="ROLE_MODO">
-                    <Input v-model="ranks.ROLE_MODO" type="text"></Input>
+                <FormItem
+                    :label="$t('form.ranks.modo')"
+                    prop="ROLE_MODO"
+                >
+                    <Input
+                        v-model="ranks.ROLE_MODO"
+                        type="text"
+                    /></Input>
                 </FormItem>
-                <FormItem :label="$t('form.ranks.admin')" prop="ROLE_ADMIN">
-                    <Input v-model="ranks.ROLE_ADMIN" type="text"></Input>
+                <FormItem
+                    :label="$t('form.ranks.admin')"
+                    prop="ROLE_ADMIN"
+                >
+                    <Input
+                        v-model="ranks.ROLE_ADMIN"
+                        type="text"
+                    /></Input>
                 </FormItem>
-                <Button type="primary" @click.prevent="handleRanksSubmit()" long>{{ $t('save') }}</Button>
+                <Button
+                    type="primary"
+                    @click.prevent="handleRanksSubmit()"
+                    long
+                >
+                    {{ $t('save') }}
+                </Button>
             </Form>
         </template>
     </div>
@@ -99,9 +182,9 @@
             const uniqueRankName = (rule, value, callback) => {
                 if (_.trim(value) === '') {
                     callback(new Error('field.empty'));
-                } else if ((value === this.ranks.ROLE_PLAYER && rule.field !== 'ROLE_PLAYER') ||
-                           (value === this.ranks.ROLE_MODO && rule.field !== 'ROLE_MODO') ||
-                           (value === this.ranks.ROLE_ADMIN && rule.field !== 'ROLE_ADMIN')
+                } else if ((value === this.ranks.ROLE_PLAYER && rule.field !== 'ROLE_PLAYER')
+                    || (value === this.ranks.ROLE_MODO && rule.field !== 'ROLE_MODO')
+                    || (value === this.ranks.ROLE_ADMIN && rule.field !== 'ROLE_ADMIN')
                 ) {
                     callback(new Error(this.$t('field.match')));
                 } else {
@@ -294,8 +377,8 @@
                                                 props: {
                                                     type: 'info',
                                                     size: 'small',
-                                                    disabled: params.row.rank.role ===
-                                                        this.settings.guild.ROLE_PLAYER,
+                                                    disabled: params.row.rank.role
+                                                        === this.settings.guild.ROLE_PLAYER,
                                                 },
                                             },
                                             this.ranks[this.settings.guild.ROLE_PLAYER],
@@ -327,8 +410,8 @@
                                                 props: {
                                                     type: 'warning',
                                                     size: 'small',
-                                                    disabled: params.row.rank.role ===
-                                                        this.settings.guild.ROLE_MODO,
+                                                    disabled: params.row.rank.role
+                                                        === this.settings.guild.ROLE_MODO,
                                                 },
                                             },
                                             this.ranks[this.settings.guild.ROLE_MODO],
@@ -360,8 +443,8 @@
                                                 props: {
                                                     type: 'error',
                                                     size: 'small',
-                                                    disabled: params.row.rank.role ===
-                                                        this.settings.guild.ROLE_ADMIN,
+                                                    disabled: params.row.rank.role
+                                                        === this.settings.guild.ROLE_ADMIN,
                                                 },
                                             },
                                             this.ranks[this.settings.guild.ROLE_ADMIN],
@@ -482,38 +565,38 @@
                 let errorMessage;
                 let successMessage;
                 switch (what) {
-                    case 'decline':
-                    case 'accept':
-                        await api.adminRequest(player.guild_player, what === 'accept').then((res) => {
-                            successMessage = this.handleMessages(res.data);
-                            this.$store.dispatch('fetchPlayer');
-                            this.getRequesters();
-                        }).catch((err) => {
-                            errorMessage = this.$t(err.response.data.error);
-                        });
-                        break;
-                    case 'fired':
-                        await api.adminFired(player.guild_player).then((res) => {
-                            successMessage = this.handleMessages(res.data);
-                            this.$store.dispatch('fetchPlayer');
-                            this.getMembers();
-                        }).catch((err) => {
-                            errorMessage = this.$t(err.response.data.error);
-                        });
-                        break;
-                    case this.settings.guild.ROLE_PLAYER:
-                    case this.settings.guild.ROLE_MODO:
-                    case this.settings.guild.ROLE_ADMIN:
-                        await api.adminGeneral(player.guild_player, {what}).then(() => {
-                            successMessage = this.$t('guild.admin.saved');
-                            this.$store.dispatch('fetchPlayer');
-                            this.manageGenerals();
-                        }).catch((err) => {
-                            errorMessage = this.$t(err.response.data.error);
-                        });
-                        break;
-                    default:
-                        return;
+                case 'decline':
+                case 'accept':
+                    await api.adminRequest(player.guild_player, what === 'accept').then((res) => {
+                        successMessage = this.handleMessages(res.data);
+                        this.$store.dispatch('fetchPlayer');
+                        this.getRequesters();
+                    }).catch((err) => {
+                        errorMessage = this.$t(err.response.data.error);
+                    });
+                    break;
+                case 'fired':
+                    await api.adminFired(player.guild_player).then((res) => {
+                        successMessage = this.handleMessages(res.data);
+                        this.$store.dispatch('fetchPlayer');
+                        this.getMembers();
+                    }).catch((err) => {
+                        errorMessage = this.$t(err.response.data.error);
+                    });
+                    break;
+                case this.settings.guild.ROLE_PLAYER:
+                case this.settings.guild.ROLE_MODO:
+                case this.settings.guild.ROLE_ADMIN:
+                    await api.adminGeneral(player.guild_player, {what}).then(() => {
+                        successMessage = this.$t('guild.admin.saved');
+                        this.$store.dispatch('fetchPlayer');
+                        this.manageGenerals();
+                    }).catch((err) => {
+                        errorMessage = this.$t(err.response.data.error);
+                    });
+                    break;
+                default:
+                    return;
                 }
 
                 if (successMessage) {

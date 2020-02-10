@@ -18,7 +18,7 @@ export default ({app, store}) => {
         },
     });
 
-    store.watch(state => state.locale.locale, (value) => {
+    store.watch((state) => state.locale.locale, (value) => {
         app.i18n.locale = value;
     });
 };

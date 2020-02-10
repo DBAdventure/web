@@ -1,27 +1,38 @@
 <template>
     <div class="account">
-        <h1 class="title title-profile">{{ $t('header.profile') }}</h1>
-        <table width="600" class="profile-table">
+        <h1 class="title title-profile">
+            {{ $t('header.profile') }}
+        </h1>
+        <table
+            width="600"
+            class="profile-table"
+        >
             <tbody>
                 <tr>
-                    <td width="100" height="100" align="center" valign="middle" :background="`/media/${currentPlayer.case.file}`">
-                        <img :src="currentPlayer.getImagePath()"/>
+                    <td
+                        width="100"
+                        height="100"
+                        align="center"
+                        valign="middle"
+                        :background="`/media/${currentPlayer.case.file}`"
+                    >
+                        <img :src="currentPlayer.getImagePath()">
                     </td>
                     <td class="spacing">
-                        {{ $t('profile.you') }} <strong>{{ currentPlayer.name }}</strong><br/>
-                        {{ $t('profile.level') }} <strong>{{ currentPlayer.level }}</strong><br/>
-                        {{ $t('profile.position') }} <strong>{{ currentPlayer.x }} / {{ currentPlayer.y }}</strong><br/>
-                        {{ $t('profile.side') }} <strong>{{ $t(currentPlayer.side.name) }}</strong><br/>
+                        {{ $t('profile.you') }} <strong>{{ currentPlayer.name }}</strong><br>
+                        {{ $t('profile.level') }} <strong>{{ currentPlayer.level }}</strong><br>
+                        {{ $t('profile.position') }} <strong>{{ currentPlayer.x }} / {{ currentPlayer.y }}</strong><br>
+                        {{ $t('profile.side') }} <strong>{{ $t(currentPlayer.side.name) }}</strong><br>
                     </td>
                     <td class="spacing">
-                        {{ $t('profile.race') }} <strong>{{ $t(currentPlayer.race.name) }}</strong><br/>
-                        {{ $t('profile.rank') }} <strong>{{ $t(currentPlayer.rank.name) }}</strong><br/>
-                        {{ $t('profile.class') }} <strong>{{ currentPlayer.class }}</strong><br/>
+                        {{ $t('profile.race') }} <strong>{{ $t(currentPlayer.race.name) }}</strong><br>
+                        {{ $t('profile.rank') }} <strong>{{ $t(currentPlayer.rank.name) }}</strong><br>
+                        {{ $t('profile.class') }} <strong>{{ currentPlayer.class }}</strong><br>
                         <template v-if="currentPlayer.target">
-                            {{ $t('profile.class') }} <strong>{{ currentPlayer.target.displayName }}</strong><br/>
+                            {{ $t('profile.class') }} <strong>{{ currentPlayer.target.displayName }}</strong><br>
                         </template>
 
-                        {{ $t('profile.headPrice') }} <strong>{{ currentPlayer.head_price }}</strong><br/>
+                        {{ $t('profile.headPrice') }} <strong>{{ currentPlayer.head_price }}</strong><br>
                     </td>
                 </tr>
             </tbody>
@@ -30,134 +41,151 @@
         <div class="profile-data">
             {{ $t('profile.player.health', {"h": currentPlayer.health, "maxH": currentPlayer.total_max_health}) }}
             <div class="progress">
-                <div class="progress-bar progress-bar-danger"
-                     role="progressbar"
-                     :aria-valuenow="hPercent"
-                     aria-valuemin="0"
-                     aria-valuemax="100"
-                     :style="`width: ${hPercent}%`">
-                </div>
+                <div
+                    class="progress-bar progress-bar-danger"
+                    role="progressbar"
+                    :aria-valuenow="hPercent"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    :style="`width: ${hPercent}%`"
+                />
             </div>
 
             {{ $t('profile.player.ki', {"ki": currentPlayer.ki, "maxKi": currentPlayer.total_max_ki}) }}
             <div class="progress">
-                <div class="progress-bar progress-bar-info"
-                     role="progressbar"
-                     :aria-valuenow="kiPercent"
-                     aria-valuemin="0"
-                     aria-valuemax="100"
-                     :style="`width: ${kiPercent}%`">
-                </div>
+                <div
+                    class="progress-bar progress-bar-info"
+                    role="progressbar"
+                    :aria-valuenow="kiPercent"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    :style="`width: ${kiPercent}%`"
+                />
             </div>
 
             {{ $t('profile.player.ap', {"ap": currentPlayer.action_points, "maxAp": currentPlayer.max_action_points}) }}
             <div class="progress">
-                <div class="progress-bar progress-bar-warning"
-                     role="progressbar"
-                     :aria-valuenow="apPercent"
-                     aria-valuemin="0"
-                     aria-valuemax="100"
-                     :style="`width: ${apPercent}%`">
-                </div>
+                <div
+                    class="progress-bar progress-bar-warning"
+                    role="progressbar"
+                    :aria-valuenow="apPercent"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    :style="`width: ${apPercent}%`"
+                />
             </div>
 
             {{ $t('profile.player.mp', {"mp": currentPlayer.movement_points, "maxMp": currentPlayer.max_movement_points}) }}
             <div class="progress">
-                <div class="progress-bar progress-bar-success"
-                     role="progressbar"
-                     :aria-valuenow="mpPercent"
-                     aria-valuemin="0"
-                     aria-valuemax="100"
-                     :style="`width: ${mpPercent}%`">
-                </div>
+                <div
+                    class="progress-bar progress-bar-success"
+                    role="progressbar"
+                    :aria-valuenow="mpPercent"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    :style="`width: ${mpPercent}%`"
+                />
             </div>
 
             {{ $t('profile.player.fp', {"fp": currentPlayer.fatigue_points, "maxFp": currentPlayer.max_fatigue_points}) }}
             <div class="progress">
-                <div class="progress-bar"
-                     role="progressbar"
-                     :aria-valuenow="fpPercent"
-                     aria-valuemin="0"
-                     aria-valuemax="100"
-                     :style="`width: ${fpPercent}%`">
-                </div>
+                <div
+                    class="progress-bar"
+                    role="progressbar"
+                    :aria-valuenow="fpPercent"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    :style="`width: ${fpPercent}%`"
+                />
             </div>
 
             {{ $t('profile.player.bp', {"bp": currentPlayer.battle_points - currentPlayer.battle_points_remaining_start, "maxBp": currentPlayer.battle_points_remaining_end}) }}
             <div class="progress">
-                <div class="progress-bar"
-                     role="progressbar"
-                     :aria-valuenow="bpPercent"
-                     aria-valuemin="0"
-                     aria-valuemax="100"
-                     :style="`width: ${bpPercent}%`">
-                </div>
+                <div
+                    class="progress-bar"
+                    role="progressbar"
+                    :aria-valuenow="bpPercent"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    :style="`width: ${bpPercent}%`"
+                />
             </div>
         </div>
 
-        <Table :columns="statsColumns" :data="statsData" stripped size="small" width="625" border></Table>
+        <Table
+            :columns="statsColumns"
+            :data="statsData"
+            stripped
+            size="small"
+            width="625"
+            border
+        />
 
         <div class="profile-data">
             <p>
-                <span v-html="$t('profile.stats.zeni', {value: currentPlayer.zeni})"></span></br>
-                <span v-html="$t('profile.stats.stolenZeni', {value: currentPlayer.stats.nb_stolen_zeni})"></span></br>
-                <span v-html="$t('profile.stats.avgStolenZeni', {value: calculateAvg(currentPlayer.stats.nb_stolen_zeni, currentPlayer.stats.nb_action_stolen_zeni)})"></span></br>
-                <span v-html="$t('profile.stats.nbActionStolenZeni', {value: currentPlayer.stats.nb_action_stolen_zeni})"></span>
+                <span v-html="$t('profile.stats.zeni', {value: currentPlayer.zeni})" /></br>
+                <span v-html="$t('profile.stats.stolenZeni', {value: currentPlayer.stats.nb_stolen_zeni})" /></br>
+                <span v-html="$t('profile.stats.avgStolenZeni', {value: calculateAvg(currentPlayer.stats.nb_stolen_zeni, currentPlayer.stats.nb_action_stolen_zeni)})" /></br>
+                <span v-html="$t('profile.stats.nbActionStolenZeni', {value: currentPlayer.stats.nb_action_stolen_zeni})" />
             </p>
 
             <p>
-                <span v-html="$t('profile.stats.betrayals', {value: currentPlayer.stats.betrayals})"></span></br>
-                <span v-html="$t('profile.stats.sidePoints', {value: currentPlayer.side_points})"></span></br></br>
-                <span v-html="$t('profile.stats.bountyHunter', {value: currentPlayer.stats.nb_wanted})"></span></br>
-                <span v-html="$t('profile.stats.nbAnalysis', {value: currentPlayer.stats.nb_analysis})"></span></br>
-                <span v-html="$t('profile.stats.nbDodge', {value: currentPlayer.stats.nb_dodge})"></span></br>
-            </p>
-
-
-            <p>
-                <span v-html="$t('profile.stats.healthGiven', {value: currentPlayer.stats.nb_total_health_given})"></span></br>
-                <span v-html="$t('profile.stats.nbHealthGiven', {value: currentPlayer.stats.nb_health_given})"></span></br>
-                <span v-html="$t('profile.stats.avgHealthGiven', {value: calculateAvg(currentPlayer.stats.nb_total_health_given, currentPlayer.stats.nb_health_given)})"></span></br>
-            </p>
-
-            <p>
-                <span v-html="$t('profile.stats.nbSpell', {value: currentPlayer.stats.nb_spell})"></span></br>
-                <span v-html="$t('profile.stats.nbSlapGiven', {value: currentPlayer.stats.nb_slap_given})"></span></br>
-                <span v-html="$t('profile.stats.nbSlapTaken', {value: currentPlayer.stats.nb_slap_taken})"></span></br>
-            </p>
-
-            <p>
-                <span v-html="$t('profile.stats.nbDamageHq', {value: currentPlayer.stats.nb_damage_hq})"></span></br>
-                <span v-html="$t('profile.stats.nbHitHq', {value: currentPlayer.stats.nb_hit_hq})"></span></br>
-                <span v-html="$t('profile.stats.avgDamageHq', {value: calculateAvg(currentPlayer.stats.nb_damage_hq, currentPlayer.stats.nb_hit_hq)})"></span></br>
-                <span v-html="$t('profile.stats.nbKillHq', {value: currentPlayer.stats.nb_kill_hq})"></span></br>
-            </p>
-
-            <p>
-                <span v-html="$t('profile.stats.nbDamageGood', {value: currentPlayer.stats.nb_damage_good})"></span></br>
-                <span v-html="$t('profile.stats.nbHitGood', {value: currentPlayer.stats.nb_hit_good})"></span></br>
-                <span v-html="$t('profile.stats.avgDamageGood', {value: calculateAvg(currentPlayer.stats.nb_damage_good, currentPlayer.stats.nb_hit_good)})"></span></br>
-                <span v-html="$t('profile.stats.nbKillGood', {value: currentPlayer.stats.nb_kill_good})"></span></br>
-            </p>
-
-            <p>
-                <span v-html="$t('profile.stats.nbDamageBad', {value: currentPlayer.stats.nb_damage_bad})"></span></br>
-                <span v-html="$t('profile.stats.nbHitBad', {value: currentPlayer.stats.nb_hit_bad})"></span></br>
-                <span v-html="$t('profile.stats.avgDamageBad', {value: calculateAvg(currentPlayer.stats.nb_damage_bad, currentPlayer.stats.nb_hit_bad)})"></span></br>
-                <span v-html="$t('profile.stats.nbKillBad', {value: currentPlayer.stats.nb_kill_bad})"></span></br>
-            </p>
-
-            <p>
-                <span v-html="$t('profile.stats.nbDamageNpc', {value: currentPlayer.stats.nb_damage_npc})"></span></br>
-                <span v-html="$t('profile.stats.nbHitNpc', {value: currentPlayer.stats.nb_hit_npc})"></span></br>
-                <span v-html="$t('profile.stats.avgDamageNpc', {value: calculateAvg(currentPlayer.stats.nb_damage_npc, currentPlayer.stats.nb_hit_npc)})"></span></br>
-                <span v-html="$t('profile.stats.nbKillNpc', {value: currentPlayer.stats.nb_kill_npc})"></span></br>
+                <span v-html="$t('profile.stats.betrayals', {value: currentPlayer.stats.betrayals})" /></br>
+                <span v-html="$t('profile.stats.sidePoints', {value: currentPlayer.side_points})" /></br></br>
+                <span v-html="$t('profile.stats.bountyHunter', {value: currentPlayer.stats.nb_wanted})" /></br>
+                <span v-html="$t('profile.stats.nbAnalysis', {value: currentPlayer.stats.nb_analysis})" /></br>
+                <span v-html="$t('profile.stats.nbDodge', {value: currentPlayer.stats.nb_dodge})" /></br>
             </p>
 
 
             <p>
-                <span v-html="$t('profile.stats.nbTotalKill', {value: currentPlayer.stats.nb_kill_good + currentPlayer.stats.nb_kill_bad + currentPlayer.stats.nb_kill_npc})"></span></br>
-                <span v-html="$t('profile.stats.nbDeahtCount', {value: currentPlayer.stats.death_count})"></span></br>
+                <span v-html="$t('profile.stats.healthGiven', {value: currentPlayer.stats.nb_total_health_given})" /></br>
+                <span v-html="$t('profile.stats.nbHealthGiven', {value: currentPlayer.stats.nb_health_given})" /></br>
+                <span v-html="$t('profile.stats.avgHealthGiven', {value: calculateAvg(currentPlayer.stats.nb_total_health_given, currentPlayer.stats.nb_health_given)})" /></br>
+            </p>
+
+            <p>
+                <span v-html="$t('profile.stats.nbSpell', {value: currentPlayer.stats.nb_spell})" /></br>
+                <span v-html="$t('profile.stats.nbSlapGiven', {value: currentPlayer.stats.nb_slap_given})" /></br>
+                <span v-html="$t('profile.stats.nbSlapTaken', {value: currentPlayer.stats.nb_slap_taken})" /></br>
+            </p>
+
+            <p>
+                <span v-html="$t('profile.stats.nbDamageHq', {value: currentPlayer.stats.nb_damage_hq})" /></br>
+                <span v-html="$t('profile.stats.nbHitHq', {value: currentPlayer.stats.nb_hit_hq})" /></br>
+                <span v-html="$t('profile.stats.avgDamageHq', {value: calculateAvg(currentPlayer.stats.nb_damage_hq, currentPlayer.stats.nb_hit_hq)})" /></br>
+                <span v-html="$t('profile.stats.nbKillHq', {value: currentPlayer.stats.nb_kill_hq})" /></br>
+            </p>
+
+            <p>
+                <span v-html="$t('profile.stats.nbDamageGood', {value: currentPlayer.stats.nb_damage_good})" /></br>
+                <span v-html="$t('profile.stats.nbHitGood', {value: currentPlayer.stats.nb_hit_good})" /></br>
+                <span v-html="$t('profile.stats.avgDamageGood', {value: calculateAvg(currentPlayer.stats.nb_damage_good, currentPlayer.stats.nb_hit_good)})" /></br>
+                <span v-html="$t('profile.stats.nbKillGood', {value: currentPlayer.stats.nb_kill_good})" /></br>
+            </p>
+
+            <p>
+                <span v-html="$t('profile.stats.nbDamageBad', {value: currentPlayer.stats.nb_damage_bad})" /></br>
+                <span v-html="$t('profile.stats.nbHitBad', {value: currentPlayer.stats.nb_hit_bad})" /></br>
+                <span v-html="$t('profile.stats.avgDamageBad', {value: calculateAvg(currentPlayer.stats.nb_damage_bad, currentPlayer.stats.nb_hit_bad)})" /></br>
+                <span v-html="$t('profile.stats.nbKillBad', {value: currentPlayer.stats.nb_kill_bad})" /></br>
+            </p>
+
+            <p>
+                <span v-html="$t('profile.stats.nbDamageNpc', {value: currentPlayer.stats.nb_damage_npc})" /></br>
+                <span v-html="$t('profile.stats.nbHitNpc', {value: currentPlayer.stats.nb_hit_npc})" /></br>
+                <span v-html="$t('profile.stats.avgDamageNpc', {value: calculateAvg(currentPlayer.stats.nb_damage_npc, currentPlayer.stats.nb_hit_npc)})" /></br>
+                <span v-html="$t('profile.stats.nbKillNpc', {value: currentPlayer.stats.nb_kill_npc})" /></br>
+            </p>
+
+
+            <p>
+                <span
+                    v-html="$t('profile.stats.nbTotalKill', {value: currentPlayer.stats.nb_kill_good + currentPlayer.stats.nb_kill_bad + currentPlayer.stats.nb_kill_npc})"
+                />
+                </br>
+                <span v-html="$t('profile.stats.nbDeahtCount', {value: currentPlayer.stats.death_count})" />
+                </br>
             </p>
         </div>
     </div>
@@ -210,8 +238,8 @@
                 return Math.floor(
                     (
                         (
-                            this.currentPlayer.battle_points -
-                            this.currentPlayer.battle_points_remaining_start
+                            this.currentPlayer.battle_points
+                            - this.currentPlayer.battle_points_remaining_start
                         ) * 100
                     ) / this.currentPlayer.battle_points_remaining_end,
                 );
@@ -339,7 +367,7 @@
             rowClassName(row, index) {
                 if (index === 1) {
                     return 'table-objects-row';
-                } else if (index === 2) {
+                } if (index === 2) {
                     return 'table-total-row';
                 }
 

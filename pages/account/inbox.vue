@@ -1,33 +1,72 @@
 <template>
     <div>
-        <h1 class="title title-inbox">{{ $t('inbox.title') }}</h1>
+        <h1 class="title title-inbox">
+            {{ $t('inbox.title') }}
+        </h1>
         <div id="inbox">
             <div id="inbox-menu">
                 <ul class="list-dots clearfix">
                     <li>
-                        <a href="#" @click.prevent="writeMessage()">{{ $t('inbox.write') }}</a>
+                        <a
+                            href="#"
+                            @click.prevent="writeMessage()"
+                        >{{ $t('inbox.write') }}</a>
                     </li>
                 </ul>
                 <ul class="list-dots clearfix">
-                    <li><a href="#" @click.prevent="selectDirectory(type.inbox)">{{ $t('inbox.inbox') }}</a></li>
-                    <li><a href="#" @click.prevent="selectDirectory(type.outbox)">{{ $t('inbox.outbox') }}</a></li>
-                    <li><a href="#" @click.prevent="selectDirectory(type.archive)">{{ $t('inbox.archive') }}</a></li>
-
+                    <li>
+                        <a
+                            href="#"
+                            @click.prevent="selectDirectory(type.inbox)"
+                        >{{ $t('inbox.inbox') }}</a>
+                    </li>
+                    <li>
+                        <a
+                            href="#"
+                            @click.prevent="selectDirectory(type.outbox)"
+                        >{{ $t('inbox.outbox') }}</a>
+                    </li>
+                    <li>
+                        <a
+                            href="#"
+                            @click.prevent="selectDirectory(type.archive)"
+                        >{{ $t('inbox.archive') }}</a>
+                    </li>
                 </ul>
                 <ul class="list-dots clearfix">
-                    <li><a href="#" @click.prevent="clearMessages(type.inbox)">{{ $t('inbox.clear.inbox') }}</a></li>
-                    <li><a href="#" @click.prevent="clearMessages(type.outbox)">{{ $t('inbox.clear.outbox') }}</a></li>
-                    <li><a href="#" @click.prevent="clearMessages(type.archive)">{{ $t('inbox.clear.archive') }}</a></li>
+                    <li>
+                        <a
+                            href="#"
+                            @click.prevent="clearMessages(type.inbox)"
+                        >{{ $t('inbox.clear.inbox') }}</a>
+                    </li>
+                    <li>
+                        <a
+                            href="#"
+                            @click.prevent="clearMessages(type.outbox)"
+                        >{{ $t('inbox.clear.outbox') }}</a>
+                    </li>
+                    <li>
+                        <a
+                            href="#"
+                            @click.prevent="clearMessages(type.archive)"
+                        >{{ $t('inbox.clear.archive') }}</a>
+                    </li>
                 </ul>
 
                 <ul class="list-dots clearfix">
-                    <li><a href="#" @click.prevent="clearMessages(type.read)">{{ $t('inbox.clear.read') }}</a></li>
+                    <li>
+                        <a
+                            href="#"
+                            @click.prevent="clearMessages(type.read)"
+                        >{{ $t('inbox.clear.read') }}</a>
+                    </li>
                 </ul>
 
                 <p>
-                    <img src="/images/inbox/read.png" />{{ $t('inbox.info.read') }}<br/>
-                    <img src="/images/inbox/unread.png" />{{ $t('inbox.info.unread') }}<br/>
-                    <img src="/images/inbox/deleted.png" />{{ $t('inbox.info.deleted') }}<br/>
+                    <img src="/images/inbox/read.png">{{ $t('inbox.info.read') }}<br>
+                    <img src="/images/inbox/unread.png">{{ $t('inbox.info.unread') }}<br>
+                    <img src="/images/inbox/deleted.png">{{ $t('inbox.info.deleted') }}<br>
                 </p>
             </div>
 
@@ -48,7 +87,10 @@
                         </template>
                     </h2>
 
-                    <Table :columns="getTableColumns()" :data="messages"></Table>
+                    <Table
+                        :columns="getTableColumns()"
+                        :data="messages"
+                    />
                 </template>
                 <template v-else-if="page === type.read">
                     <h2 class="subtitle text-center">
@@ -70,8 +112,10 @@
                             <strong>{{ $t('inbox.info.subject') }}</strong>{{ currentMessage.subject }}
                         </p>
                         <p>
-                            <strong>{{ $t('inbox.info.message') }}</strong><br/>
-                            <template v-for="line in currentMessage.message.split('\n')">{{ line }}<br></template>
+                            <strong>{{ $t('inbox.info.message') }}</strong><br>
+                            <template v-for="(line, index) in currentMessage.message.split('\n')">
+                                {{ line }}<br :key="index">
+                            </template>
                         </p>
                     </div>
 
@@ -80,16 +124,25 @@
                             {{ $t('inbox.back') }}
                         </Button>
 
-                        <Button v-if="currentMessage.recipient.id === currentPlayer.id" @click.prevent="replyMessage()">
-                            <img src="/images/inbox/reply.png" alt="" /> {{ $t('inbox.reply') }}
+                        <Button
+                            v-if="currentMessage.recipient.id === currentPlayer.id"
+                            @click.prevent="replyMessage()"
+                        >
+                            <img
+                                src="/images/inbox/reply.png"
+                                alt=""
+                            > {{ $t('inbox.reply') }}
                         </Button>
 
                         <Button @click.prevent="deleteMessage()">
-                            <img src="/images/inbox/delete.png" /> {{ $t('inbox.delete') }}
+                            <img src="/images/inbox/delete.png"> {{ $t('inbox.delete') }}
                         </Button>
 
-                        <Button v-if="currentMessage.can_archive" @click.prevent="archiveMessage()">
-                            <img src="/images/inbox/archive.png" /> {{ $t('inbox.archive') }}
+                        <Button
+                            v-if="currentMessage.can_archive"
+                            @click.prevent="archiveMessage()"
+                        >
+                            <img src="/images/inbox/archive.png"> {{ $t('inbox.archive') }}
                         </Button>
                     </div>
                 </template>
@@ -98,46 +151,76 @@
                         {{ $t('inbox.write') }}
                     </h2>
 
-                    <Form ref="inboxForm" id="inbox-write-form">
+                    <Form
+                        ref="inboxForm"
+                        id="inbox-write-form"
+                    >
                         <template v-if="currentMessage === null">
                             <div class="text-center">
                                 <Button @click.prevent="addRecipient()">
                                     <Icon type="plus-round" />
                                     {{ $t('form.add.recipient') }}
                                 </Button>
-                                <div class="clearfix">&nbsp;</div>
+                                <div class="clearfix">
+&nbsp;
+                                </div>
                             </div>
 
                             <div id="recipients">
-                                <template v-for="value, key in message.recipients">
-                                    <Form-item :label="$t('form.recipient')" :label-width="150" required>
-                                        <Input :placeholder="$t('form.recipient')"
-                                               v-model="message.recipients[key]"
-                                               type="text">
-                                        <Button slot="append" icon="close-round" @click.prevent="removeRecipient(key)"/>
-                                        </Input>
-                                    </Form-item>
-                                </template>
+                                <Form-item
+                                    v-for="(value, key) in message.recipients"
+                                    :key="key"
+                                    :label="$t('form.recipient')"
+                                    :label-width="150"
+                                    required
+                                >
+                                    <Input
+                                        :placeholder="$t('form.recipient')"
+                                        v-model="message.recipients[key]"
+                                        type="text"
+                                    />
+                                    <Button
+                                        slot="append"
+                                        icon="close-round"
+                                        @click.prevent="removeRecipient(key)"
+                                    />
+                                    </Input>
+                                </Form-item>
                             </div>
                         </template>
 
-                        <Form-item :label="$t('form.subject')" :label-width="150" required v-if="currentMessage === null">
-                            <Input name="subject"
-                                   :placeholder="$t('form.subject')"
-                                   v-model="message.subject"
-                                   type="text" />
+                        <Form-item
+                            :label="$t('form.subject')"
+                            :label-width="150"
+                            required
+                            v-if="currentMessage === null"
+                        >
+                            <Input
+                                name="subject"
+                                :placeholder="$t('form.subject')"
+                                v-model="message.subject"
+                                type="text"
+                            />
                         </Form-item>
 
-                        <Form-item :label="$t('form.message')" :label-width="150" required>
-                            <Input name="message"
-                                   :rows="4"
-                                   :placeholder="$t('form.message')"
-                                   v-model="message.message"
-                                   type="textarea" />
+                        <Form-item
+                            :label="$t('form.message')"
+                            :label-width="150"
+                            required
+                        >
+                            <Input
+                                name="message"
+                                :rows="4"
+                                :placeholder="$t('form.message')"
+                                v-model="message.message"
+                                type="textarea"
+                            />
                         </Form-item>
 
                         <div class="text-right">
-                            <Button @click="submitMessage()">{{ $t('form.send') }}</Button>
+                            <Button @click="submitMessage()">
+                                {{ $t('form.send') }}
+                            </Button>
                         </div>
                     </Form>
                 </template>
@@ -333,17 +416,17 @@
             },
             submitMessage() {
                 this.$Loading.start();
-                const message = Object.assign({}, this.message);
+                const message = {...this.message};
                 const recipients = [];
                 _.uniq(message.recipients).forEach((r) => {
                     recipients.push({name: r});
                 });
                 message.recipients = recipients;
 
-                if (isEmpty(this.currentMessage) &&
-                    (message.recipients.length === 0 ||
-                     isEmpty(message.subject) ||
-                     isEmpty(message.message))) {
+                if (isEmpty(this.currentMessage)
+                    && (message.recipients.length === 0
+                        || isEmpty(message.subject)
+                        || isEmpty(message.message))) {
                     this.$Notice.error({
                         title: this.$t('notice.error'),
                         desc: this.$t('error.write'),
@@ -391,7 +474,7 @@
                 }).catch(() => {});
             }
 
-            return api.getInboxDirectory().then(res => ({
+            return api.getInboxDirectory().then((res) => ({
                 messages: res.data.messages,
                 writeTo,
             })).catch(() => {});

@@ -1,28 +1,51 @@
 <template>
     <div id="guild">
-        <h1 class="title title-default">{{ $t('guilds') }}</h1>
+        <h1 class="title title-default">
+            {{ $t('guilds') }}
+        </h1>
 
-        <Table :columns="guildsColumns()" :data="guildsData()"></Table>
+        <Table
+            :columns="guildsColumns()"
+            :data="guildsData()"
+        />
 
-        <div v-if="selectedGuild" class="guild-description">
-            <h1 class="subtitle text-center">{{ selectedGuild.shortName}} {{ selectedGuild.name }}</h1>
+        <div
+            v-if="selectedGuild"
+            class="guild-description"
+        >
+            <h1 class="subtitle text-center">
+                {{ selectedGuild.shortName }} {{ selectedGuild.name }}
+            </h1>
             <div class="creator">
-                <p>{{ $t('guild.createdBy')}}
+                <p>
+                    {{ $t('guild.createdBy') }}
                     <router-link :to="`/player/info/${getPlayer(selectedGuild.created_by).id}`">
-                        <img :src="getPlayer(selectedGuild.created_by).getImagePath()" />
+                        <img :src="getPlayer(selectedGuild.created_by).getImagePath()">
                         {{ selectedGuild.created_by.name }}
                     </router-link>
                 </p>
             </div>
 
-            <h2 class="little-title">{{ $t('guild.history') }}</h2>
-            <template v-for="line in selectedGuild.history.split('\n')">{{ line }}<br></template>
+            <h2 class="little-title">
+                {{ $t('guild.history') }}
+            </h2>
+            <template v-for="(line, index) in selectedGuild.history.split('\n')">
+                {{ line }}
+                <br :key="index">
+            </template>
 
             <div v-if="!currentPlayer.guild_player">
-                <Button @click.prevent="join(selectedGuild.id)">{{ $t('guild.join') }}</Button>
+                <Button @click.prevent="join(selectedGuild.id)">
+                    {{ $t('guild.join') }}
+                </Button>
             </div>
-            <h2 class="little-title">{{ $t('guild.membersList') }}</h2>
-            <Table :columns="guildPlayersColumns()" :data="selectedGuildPlayers"></Table>
+            <h2 class="little-title">
+                {{ $t('guild.membersList') }}
+            </h2>
+            <Table
+                :columns="guildPlayersColumns()"
+                :data="selectedGuildPlayers"
+            />
         </div>
     </div>
 </template>
@@ -31,16 +54,12 @@
     import {mapGetters} from 'vuex';
     import api from '~/services/api';
     import PlayersMixin from '~/components/mixins/players';
-    import GuildMenu from '~/components/guild/menu';
 
     export default {
         middleware: 'auth',
         mixins: [
             PlayersMixin,
         ],
-        components: {
-            GuildMenu,
-        },
         head() {
             return {
                 title: this.$t('guild.join'),
@@ -181,7 +200,7 @@
                 return {};
             }
 
-            return api.getGuilds().then(res => (
+            return api.getGuilds().then((res) => (
                 {
                     guilds: res.data.guilds,
                 }

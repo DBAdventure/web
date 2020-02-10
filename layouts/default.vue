@@ -1,22 +1,31 @@
 
 <template>
     <div id="main">
-        <dba-header></dba-header>
+        <dba-header />
 
-        <div class="middle container-fluid" :class="$store.state.game.style">
-            <dba-menu></dba-menu>
+        <div
+            class="middle container-fluid"
+            :class="$store.state.game.style"
+        >
+            <dba-menu />
 
             <div id="content">
-                <div class="border-top">&nbsp;</div>
-                <div class="body">
-                    <nuxt/>
+                <div class="border-top">
+&nbsp;
                 </div>
-                <div class="border-bottom">&nbsp;</div>
+                <div class="body">
+                    <nuxt />
+                </div>
+                <div class="border-bottom">
+&nbsp;
+                </div>
             </div>
-            <div class="clearfix">&nbsp;</div>
+            <div class="clearfix">
+&nbsp;
+            </div>
         </div>
 
-        <dba-footer></dba-footer>
+        <dba-footer />
     </div>
 </template>
 
@@ -38,7 +47,7 @@
         },
         mounted() {
             this.$store.dispatch('fetchGameData');
-            this.$store.watch(state => state.player.connected, (value) => {
+            this.$store.watch((state) => state.player.connected, (value) => {
                 if (value) {
                     this.interval = setInterval(() => {
                         this.$store.dispatch('fetchPlayer');

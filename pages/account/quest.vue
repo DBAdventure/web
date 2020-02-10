@@ -1,11 +1,17 @@
 <template>
     <div class="account">
-        <h1 class="title title-quest">{{ $t('account.quest.title') }}</h1>
+        <h1 class="title title-quest">
+            {{ $t('account.quest.title') }}
+        </h1>
 
         <div v-if="playerQuests.length">
-            <template v-for="playerQuest in playerQuests">
-                <quest-display :quest="playerQuest.quest" :playerQuest="playerQuest" :playerObjects="playerObjects" />
-            </template>
+            <quest-display
+                v-for="playerQuest in playerQuests"
+                :key="playerQuest.id"
+                :quest="playerQuest.quest"
+                :player-quest="playerQuest"
+                :player-objects="playerObjects"
+            />
         </div>
         <div v-else>
             {{ $t('game.quest.empty') }}
@@ -44,7 +50,7 @@
                 return {};
             }
 
-            return api.getQuests().then(res => ({
+            return api.getQuests().then((res) => ({
                 playerQuests: res.data.player_quests,
                 playerObjects: res.data.player_objects,
             }));

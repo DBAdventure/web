@@ -1,28 +1,52 @@
 <template>
-    <div :class="{'inventory-modal': modal}" class="text-center">
+    <div
+        :class="{'inventory-modal': modal}"
+        class="text-center"
+    >
         <template v-if="modal">
             <template v-if="objects[type]">
                 <div v-if="isOneEquipped">
-                    <div class="equiped" v-for="playerObject in objects[type]" v-if="playerObject.equipped">
+                    <div
+                        class="equiped"
+                        v-for="playerObject in objects[type]"
+                        :key="playerObject.id"
+                        v-if="playerObject.equipped"
+                    >
                         <div class="inventory-box">
-                            <Poptip :title="playerObject.object.name"
-                                    placement="top"
-                                    width="300"
-                                    trigger="hover">
+                            <Poptip
+                                :title="playerObject.object.name"
+                                placement="top"
+                                width="300"
+                                trigger="hover"
+                            >
                                 <div slot="content">
                                     <object-description :object="playerObject.object" />
                                 </div>
 
-                                <img :src="`/images/objects/${playerObject.object.image}`" @click.prevent="choose()" /><br/>
+                                <img
+                                    :src="`/images/objects/${playerObject.object.image}`"
+                                    @click.prevent="choose()"
+                                ><br>
                             </Poptip>
                         </div>
-                        <Button size="small" type="primary" @click.prevent="unequip(playerObject.object.id)">
+                        <Button
+                            size="small"
+                            type="primary"
+                            @click.prevent="unequip(playerObject.object.id)"
+                        >
                             {{ $t('inventory.unequip') }}
                         </Button>
                     </div>
                 </div>
-                <div class="inventory-box" v-else>
-                    <Button size="small" type="primary" @click.prevent="choose()">
+                <div
+                    class="inventory-box"
+                    v-else
+                >
+                    <Button
+                        size="small"
+                        type="primary"
+                        @click.prevent="choose()"
+                    >
                         {{ $t('inventory.choose') }}
                     </Button>
                 </div>
@@ -33,23 +57,39 @@
                 </div>
             </template>
 
-            <Modal v-model="displayModal" effect="fade" :width="500">
-                <div class="inventory clearfix" v-if="objects[type]">
-                    <div v-for="playerObject in getNotEquippedObjects()">
-                        <Poptip :title="playerObject.object.name"
-                                placement="top"
-                                width="300"
-                                trigger="hover"
-                                class="image-block">
+            <Modal
+                v-model="displayModal"
+                effect="fade"
+                :width="500"
+            >
+                <div
+                    class="inventory clearfix"
+                    v-if="objects[type]"
+                >
+                    <div
+                        v-for="playerObject in getNotEquippedObjects()"
+                        :key="playerObject.id"
+                    >
+                        <Poptip
+                            :title="playerObject.object.name"
+                            placement="top"
+                            width="300"
+                            trigger="hover"
+                            class="image-block"
+                        >
                             <div slot="content">
                                 <object-description :object="playerObject.object" />
                             </div>
-                            <img :src="`/images/objects/${playerObject.object.image}`" />
+                            <img :src="`/images/objects/${playerObject.object.image}`">
                         </Poptip>
-                        <br/>
+                        <br>
                         <div class="btn-group btn-group-xs">
-                            <Button size="small" @click.prevent="equip(playerObject.object.id)" v-if="playerObject.can_be_equipped">
-                                {{ $t('inventory.equip')}}
+                            <Button
+                                size="small"
+                                @click.prevent="equip(playerObject.object.id)"
+                                v-if="playerObject.can_be_equipped"
+                            >
+                                {{ $t('inventory.equip') }}
                             </Button>
 
                             <Poptip
@@ -57,42 +97,64 @@
                                 :title="$t('modal.confirm.drop')"
                                 @on-ok="drop(playerObject.object.id)"
                             >
-                                <Button type="error" size="small" v-if="playerObject.can_be_dropped">
-                                    {{ $t('inventory.drop')}}
+                                <Button
+                                    type="error"
+                                    size="small"
+                                    v-if="playerObject.can_be_dropped"
+                                >
+                                    {{ $t('inventory.drop') }}
                                 </Button>
                             </Poptip>
                         </div>
                     </div>
                 </div>
-                <div slot="footer"></div>
+                <div slot="footer" />
             </Modal>
         </template>
         <template v-else>
-            <div class="inventory list clearfix" v-if="objects[type]">
-                <div v-for="playerObject in objects[type]" v-if="!playerObject.equipped">
-                    <Poptip :title="playerObject.object.name"
-                            placement="top"
-                            width="300"
-                            trigger="hover">
+            <div
+                class="inventory list clearfix"
+                v-if="objects[type]"
+            >
+                <div
+                    v-for="playerObject in objects[type]"
+                    :key="playerObject.id"
+                    v-if="!playerObject.equipped"
+                >
+                    <Poptip
+                        :title="playerObject.object.name"
+                        placement="top"
+                        width="300"
+                        trigger="hover"
+                    >
                         <div slot="content">
                             <object-description :object="playerObject.object" />
                         </div>
-                        <img :src="`/images/objects/${playerObject.object.image}`" />
+                        <img :src="`/images/objects/${playerObject.object.image}`">
                     </Poptip>
-                    <br/>
+                    <br>
                     <div class="btn-group btn-group-xs">
                         <template v-if="playerObject.can_be_used">
-                            <Select v-model="selectedObjects[playerObject.object.id]" v-if="playerObject.can_use_many && playerObject.number > 1">
-                                <template v-for="nb in playerObject.number">
-                                    <Option :value="nb">{{ nb }}</Option>
-                                </template>
+                            <Select
+                                v-model="selectedObjects[playerObject.object.id]"
+                                v-if="playerObject.can_use_many && playerObject.number > 1"
+                            >
+                                <Option
+                                    :value="nb"
+                                    v-for="nb in playerObject.number"
+                                    :key="nb"
+                                >
+                                    {{ nb }}
+                                </Option>
                             </Select>
                             <Poptip
                                 confirm
                                 :title="$t('modal.confirm.use')"
                                 @on-ok="use(playerObject.object.id)"
                             >
-                                <Button size="small">{{ $t('inventory.use')}}</Button>
+                                <Button size="small">
+                                    {{ $t('inventory.use') }}
+                                </Button>
                             </Poptip>
                         </template>
 
@@ -101,8 +163,12 @@
                             :title="$t('modal.confirm.drop')"
                             @on-ok="drop(playerObject.object.id)"
                         >
-                            <Button type="error" size="small" v-if="playerObject.can_be_dropped">
-                                {{ $t('inventory.drop')}}
+                            <Button
+                                type="error"
+                                size="small"
+                                v-if="playerObject.can_be_dropped"
+                            >
+                                {{ $t('inventory.drop') }}
                             </Button>
                         </Poptip>
                     </div>

@@ -1,10 +1,12 @@
 <template>
     <div class="account">
-        <h1 class="title title-training-room">{{ $t('training.room') }}</h1>
+        <h1 class="title title-training-room">
+            {{ $t('training.room') }}
+        </h1>
 
         <div class="text-center">
-            <img :src="currentPlayer.getImagePath()"/>
-            <p v-html="$t('training.text')"></p>
+            <img :src="currentPlayer.getImagePath()">
+            <p v-html="$t('training.text')" />
         </div>
         <div class="text-left">
             <p>{{ $t('training.you.have') }}</p>
@@ -16,7 +18,10 @@
             {{ $t('training.info') }}
         </div>
 
-        <Table :columns="columns" :data="skills" />
+        <Table
+            :columns="columns"
+            :data="skills"
+        />
     </div>
 </template>
 
@@ -64,8 +69,8 @@
                         align: 'right',
                         render: (h, params) => {
                             let button;
-                            if (this.currentPlayer.skill_points > 0 &&
-                                this.currentPlayer.action_points >= 5
+                            if (this.currentPlayer.skill_points > 0
+                                && this.currentPlayer.action_points >= 5
                             ) {
                                 button = h(
                                     'Button',

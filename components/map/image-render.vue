@@ -1,10 +1,11 @@
 <template>
-    <Poptip :title="title"
-            :content="`${x}, ${y}`"
-            placement="top"
-            trigger="hover"
+    <Poptip
+        :title="title"
+        :content="`${x}, ${y}`"
+        placement="top"
+        trigger="hover"
     >
-        <img :src="image"/>
+        <img :src="image">
     </Poptip>
 </template>
 
