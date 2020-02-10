@@ -6,4 +6,4 @@ export const nuxtServerInit = ({commit, dispatch}, {req}) => {
     dispatch('setStyle');
     dispatch('fetchGameData');
 };
-/* eslint-enable prefer-default-export */
+/* eslint-enable import/prefer-default-export */
