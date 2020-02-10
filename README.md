@@ -6,11 +6,10 @@ DBAdventure, the fronted for web app build with [Nuxt](https://github.com/nuxt/n
 
 ### Installation
 
-The target node version is `lts/carbon`. Once you have it with `yarn` installed, you can install all
-dependencies:
+You can install all dependencies:
 
 ```bash
-yarn
+npm install
 ```
 
 ### Development
@@ -18,7 +17,16 @@ yarn
 The development server will automatically build everything and reload it as you go.
 
 ```bash
-yarn run dev
+npm run dev
 ```
 
 You can check `http://localhost:3000`.
+
+### Production
+
+The development server will automatically build everything and reload it as you go.
+
+```bash
+npm run build
+npm run start
+```
