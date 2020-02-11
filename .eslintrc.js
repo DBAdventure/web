@@ -26,7 +26,7 @@ module.exports = {
     'html',
   ],
   rules: {
-    'indent': ['error', 4, {'SwitchCase': 1}],
+    'indent': ['error', 2, {'SwitchCase': 1}],
     'max-len': ['error', {code: 180}],
     'import/no-unresolved': 0,
     'function-paren-newline': ['off', 'never'],

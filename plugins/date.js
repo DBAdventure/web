@@ -5,7 +5,7 @@ import moment from 'moment';
 const MomentPlugin = {};
 
 MomentPlugin.install = (Vue) => {
-    Vue.prototype.$moment = (...args) => moment(...args);
+  Vue.prototype.$moment = (...args) => moment(...args);
 };
 
 Vue.use(MomentPlugin);

@@ -6,10 +6,10 @@
  */
 
 module.exports = {
-    styles: [
-        {
-            src: 'assets/scss/global.scss',
-            lang: 'scss',
-        },
-    ],
+  styles: [
+    {
+      src: 'assets/scss/global.scss',
+      lang: 'scss',
+    },
+  ],
 };

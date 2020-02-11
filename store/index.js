@@ -11,13 +11,13 @@ Vue.use(Vuex);
 const debug = settings.NODE_ENV === 'local';
 
 const createStore = () => new Vuex.Store({
-    actions,
-    modules: {
-        game,
-        locale,
-        player,
-    },
-    strict: debug,
+  actions,
+  modules: {
+    game,
+    locale,
+    player,
+  },
+  strict: debug,
 });
 
 export default createStore;
