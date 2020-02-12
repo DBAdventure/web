@@ -40,28 +40,33 @@
         {{ $t('game.wanted.not.enough.zeni') }}
       </p>
       <form
-        class="form-inline"
-        @submit.prevent="wanted()"
+        @submit.prevent="wanted(wantedTarget, wantedBounty)"
         v-else
       >
-        <div class="form-group">
-          <label for="amount">{{ $t('game.wanted.amount') }}</label>
-          <input
-            type="text"
-            class="form-control"
-            id="amount"
-            placeholder="0"
-            name="amount"
-          >
+        <div class="form-group row">
+          <label for="amount" class="col-sm-4 col-form-label">{{ $t('game.wanted.amount') }}</label>
+          <div class="col-sm-10">
+            <input
+              type="text"
+              class="form-control"
+              id="amount"
+              placeholder="0"
+              name="amount"
+              v-model="wantedBounty"
+            >
+          </div>
         </div>
-        <div class="form-group">
-          <label for="amount">{{ $t('game.wanted.target') }}</label>
-          <input
-            type="text"
-            class="form-control"
-            id="target"
-            name="target"
-          >
+        <div class="form-group row">
+          <label for="target" class="col-sm-4 col-form-label">{{ $t('game.wanted.target') }}</label>
+          <div class="col-sm-10">
+            <input
+              type="text"
+              class="form-control"
+              id="target"
+              name="target"
+              v-model="wantedTarget"
+            >
+          </div>
         </div>
         <button
           type="submit"
@@ -122,6 +127,7 @@
 <script type="text/ecmascript-6">
   import {EventBus} from '~/lib/bus';
   import {isEmpty} from '~/lib/utils';
+  import Wanted from '~/lib/wanted';
   import Requirements from '~/components/utils/requirements';
   import ObjectDescription from '~/components/object/description';
   import MessagesMixin from '~/components/mixins/messages';
@@ -156,6 +162,8 @@
         withdrawAmount: 0,
         depositAmount: 0,
         goldBank: this.objects.zeni,
+        wantedTarget: '',
+        wantedBounty: 0,
       };
     },
     computed: {
@@ -359,6 +367,17 @@
             ),
           },
         ];
+      },
+
+      wanted(wantedTarget, wantedBounty){
+        const bounty = new Wanted(wantedTarget, wantedBounty);
+
+        api.wanted(this.building.id, bounty).then((res) => {
+            successMessage = this.handleMessages(res.data);
+            this.$store.dispatch('fetchPlayer');
+          }).catch((err) => {
+            errorMessage = this.$t(err.response.data.error);
+          });
       },
     },
   };

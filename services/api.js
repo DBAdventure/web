@@ -89,6 +89,9 @@ const api = {
   getOnlinePlayers() {
     return makeGetRequest('/data/online/players');
   },
+  getActivePlayers() {
+    return makeGetRequest('/data/active/players');
+  },
   getPlayerInfo(id) {
     return makeGetRequest(`/data/player/${id}`);
   },
@@ -159,6 +162,9 @@ const api = {
   },
   withdraw(buildingId, withdraw) {
     return makePostRequest(`/building/bank/${buildingId}/withdraw`, {withdraw});
+  },
+  wanted(buildingId, wanted) {
+    return makePostRequest(`/building/wanted/${buildingId}`, {wanted});
   },
   teleport(buildingId, where) {
     return makePostRequest(`/building/teleport/${buildingId}`, {where});
