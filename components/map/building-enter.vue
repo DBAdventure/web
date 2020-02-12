@@ -44,7 +44,12 @@
         v-else
       >
         <div class="form-group row">
-          <label for="amount" class="col-sm-4 col-form-label">{{ $t('game.wanted.amount') }}</label>
+          <label 
+            for="amount" 
+            class="col-sm-4 col-form-label"
+          >
+          {{ $t('game.wanted.amount') }}
+          </label>
           <div class="col-sm-10">
             <input
               type="text"
@@ -57,7 +62,12 @@
           </div>
         </div>
         <div class="form-group row">
-          <label for="target" class="col-sm-4 col-form-label">{{ $t('game.wanted.target') }}</label>
+          <label 
+            for="target" 
+            class="col-sm-4 col-form-label"
+          >
+          {{ $t('game.wanted.target') }}
+          </label>
           <div class="col-sm-10">
             <input
               type="text"
@@ -223,20 +233,26 @@
         }
 
         if (successMessage) {
-          this.$Notice.success({
-            title: this.$t('notice.success'),
-            desc: successMessage,
-          });
+          noticeSuccess(successMessage);
         }
 
         if (errorMessage) {
-          this.$Notice.error({
-            title: this.$t('notice.error'),
-            desc: errorMessage,
-          });
+          noticeError(errorMessage);
         }
       },
 
+      noticeSuccess(successMessage) {
+        this.$Notice.error({
+          title: this.$t('notice.error'),
+          desc: errorMessage,
+        });
+      },
+      noticeError(errorMessage) {
+        this.$Notice.error({
+          title: this.$t('notice.error'),
+          desc: errorMessage,
+        });
+      },
       shopColumns() {
         return [
           {
@@ -369,15 +385,19 @@
         ];
       },
 
-      wanted(wantedTarget, wantedBounty){
+      wanted(wantedTarget, wantedBounty) {
         const bounty = new Wanted(wantedTarget, wantedBounty);
 
         api.wanted(this.building.id, bounty).then((res) => {
-            successMessage = this.handleMessages(res.data);
-            this.$store.dispatch('fetchPlayer');
-          }).catch((err) => {
-            errorMessage = this.$t(err.response.data.error);
-          });
+          const successMessage = this.handleMessages(res.data);
+          this.$store.dispatch('fetchPlayer');
+
+          noticeSuccess(successMessage);
+        }).catch((err) => {
+          const errorMessage = this.$t(err.response.data.error);
+
+          noticeError(errorMessage);
+        });
       },
     },
   };
