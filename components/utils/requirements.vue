@@ -26,8 +26,6 @@
     },
     methods: {
       hasData(data) {
-        console.log(data);
-
         return Object.keys(data).length > 0;
       },
     },
