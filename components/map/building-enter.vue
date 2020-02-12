@@ -44,11 +44,11 @@
         v-else
       >
         <div class="form-group row">
-          <label 
-            for="amount" 
+          <label
+            for="amount"
             class="col-sm-4 col-form-label"
           >
-          {{ $t('game.wanted.amount') }}
+            {{ $t('game.wanted.amount') }}
           </label>
           <div class="col-sm-10">
             <input
@@ -62,11 +62,11 @@
           </div>
         </div>
         <div class="form-group row">
-          <label 
-            for="target" 
+          <label
+            for="target"
             class="col-sm-4 col-form-label"
           >
-          {{ $t('game.wanted.target') }}
+            {{ $t('game.wanted.target') }}
           </label>
           <div class="col-sm-10">
             <input
@@ -233,18 +233,18 @@
         }
 
         if (successMessage) {
-          noticeSuccess(successMessage);
+          this.noticeSuccess(successMessage);
         }
 
         if (errorMessage) {
-          noticeError(errorMessage);
+          this.noticeError(errorMessage);
         }
       },
 
       noticeSuccess(successMessage) {
         this.$Notice.error({
           title: this.$t('notice.error'),
-          desc: errorMessage,
+          desc: successMessage,
         });
       },
       noticeError(errorMessage) {
@@ -392,11 +392,11 @@
           const successMessage = this.handleMessages(res.data);
           this.$store.dispatch('fetchPlayer');
 
-          noticeSuccess(successMessage);
+          this.noticeSuccess(successMessage);
         }).catch((err) => {
           const errorMessage = this.$t(err.response.data.error);
 
-          noticeError(errorMessage);
+          this.noticeError(errorMessage);
         });
       },
     },
