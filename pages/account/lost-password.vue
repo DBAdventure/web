@@ -18,11 +18,9 @@
       <b-form-group
         :label="$t('form.login')"
         :label-cols-lg="3"
-        prop="username"
         required
       >
         <b-input
-          name="username"
           :placeholder="$t('form.login')"
           v-model="player.username"
           type="text"
@@ -31,11 +29,9 @@
       <b-form-group
         :label="$t('form.email')"
         :label-cols-lg="3"
-        prop="email"
         required
       >
         <b-input
-          name="email"
           :placeholder="$t('form.email')"
           v-model="player.email"
           type="text"

@@ -81,8 +81,9 @@ module.exports = {
   plugins: [
     '~plugins/date',
     '~plugins/vue-cookie',
-    '~plugins/vue-translate',
     '~plugins/vue-notification',
+    '~plugins/vue-translate',
+    '~plugins/vuelidate',
   ],
   modules: [
     'bootstrap-vue/nuxt',

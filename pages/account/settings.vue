@@ -3,81 +3,101 @@
     <h1 class="title title-information">
       {{ $t('header.settings') }}
     </h1>
-    <Form
-      ref="settingsForm"
-      id="settings-form"
-      :rules="settingsRules"
+    <b-form
       :model="player"
       :label-width="150"
     >
-      <FormItem
+      <b-form-group
         :label="$t('form.email')"
-        prop="email"
+        :label-cols-lg="3"
+        required
       >
-        <Input v-model="player.email" /></Input>
-      </FormItem>
+        <b-input
+          v-model="player.email"
+          type="text"
+          :class="{ 'is-invalid': submitted && $v.player.email.$error }"
+        />
+        <div v-if="submitted && $v.player.email.$error" class="invalid-feedback">
+          <span v-if="!$v.player.email.required">Email is required</span>
+          <span v-if="!$v.player.email.email">Email is invalid</span>
+        </div>
+      </b-form-group>
 
-      <FormItem
+      <b-form-group
         :label="$t('form.login')"
-        prop="username"
+        :label-cols-lg="3"
       >
-        <Input v-model="player.username" /></Input>
-      </FormItem>
+        <b-input
+          v-model="player.username"
+          :class="{ 'is-invalid': submitted && $v.player.username.$error }"
+        />
+        <div v-if="submitted && !$v.player.username.required" class="invalid-feedback">Username is required</div>
+      </b-form-group>
 
-      <FormItem
+      <b-form-group
         :label="$t('form.history')"
-        prop="history"
+        :label-cols-lg="3"
       >
-        <Input
+        <b-form-textarea
           v-model="player.history"
-          type="textarea"
           :autosize="{minRows: 2,maxRows: 8}"
-        /></Input>
-      </FormItem>
+        />
+      </b-form-group>
 
-      <FormItem
+      <b-form-group
         :label="$t('form.password')"
-        prop="password"
+        :label-cols-lg="3"
       >
-        <Input
+        <b-form-input
+          id="password"
           type="password"
           v-model="player.password"
+          :class="{ 'is-invalid': submitted && $v.player.password.$error }"
         />
-        <Icon
-          type="ios-locked-outline"
-          slot="prepend"
-        />
-        </Input>
-      </FormItem>
-      <FormItem
+        <div
+          v-if="submitted && $v.player.password.$error"
+          class="invalid-feedback"
+        >
+          <span v-if="!$v.player.password.minLength">Password must be at least 6 characters</span>
+        </div>
+      </b-form-group>
+
+      <b-form-group
         :label="$t('form.passwordConfirm')"
-        prop="password_confirm"
+        :label-cols-lg="3"
       >
-        <Input
+        <b-form-input
           type="password"
           v-model="player.password_confirm"
+          :class="{ 'is-invalid': submitted && $v.player.password_confirm.$error }"
         />
-        <Icon
-          type="ios-locked-outline"
-          slot="prepend"
-        />
-        </Input>
-      </FormItem>
+        <div
+          v-if="submitted && $v.player.password_confirm.$error"
+          class="invalid-feedback"
+        >
+          <span if="!$v.player.password_confirm.sameAsPassword">Passwords must match</span>
+        </div>
+      </b-form-group>
 
-      <Button
-        type="primary"
+      <b-button
+        variant="primary"
         @click.prevent="handleSubmit()"
-        long
+        block
       >
         {{ $t('save') }}
-      </Button>
-    </Form>
+      </b-button>
+    </b-form>
   </div>
 </template>
 
 <script>
-  import _ from 'lodash';
   import {mapGetters} from 'vuex';
+  import {
+    required,
+    minLength,
+    sameAs,
+    email,
+  } from 'vuelidate/lib/validators';
   import api from '~/services/api';
   import ErrorMixin from '~/components/mixins/error';
   import MessagesMixin from '~/components/mixins/messages';
@@ -98,47 +118,32 @@
         'currentPlayer',
       ]),
     },
+    validations: {
+      player: {
+        email: {
+          required,
+          email,
+        },
+        username: {
+          required,
+        },
+        password: {
+          minLength: minLength(6),
+        },
+        password_confirm: {
+          sameAsPassword: sameAs('password'),
+        },
+      },
+    },
     data() {
-      const validatePass = (rule, value, callback) => {
-        if (_.trim(this.player.password_confirm) !== '') {
-          this.$refs.settingsForm.validateField('password_confirm');
-        }
-        callback();
-      };
-      const validatePassCheck = (rule, value, callback) => {
-        if (_.trim(this.player.password) !== '' && _.trim(value) !== this.player.password) {
-          callback(new Error(this.$t('field.nomatch')));
-        } else {
-          callback();
-        }
-      };
-
       return {
+        submitted: false,
         player: {
           email: '',
           username: '',
           history: '',
           password: '',
           password_confirm: '',
-        },
-        settingsRules: {
-          email: [
-            {type: 'email', required: true},
-          ],
-          username: [
-            {type: 'string', required: true},
-          ],
-          history: [
-            {type: 'string', required: false},
-          ],
-          password: [
-            {type: 'string', required: false},
-            {validator: validatePass},
-          ],
-          password_confirm: [
-            {type: 'string', required: false},
-            {validator: validatePassCheck},
-          ],
         },
       };
     },
@@ -147,35 +152,43 @@
         email: this.currentPlayer.email,
         username: this.currentPlayer.username,
         history: this.currentPlayer.history,
+        password: '',
+        password_confirm: '',
       };
     },
     methods: {
       handleSubmit() {
-        this.$refs.settingsForm.validate((valid) => {
-          if (valid) {
-            this.$Loading.start();
-            api.saveSettings({player_settings: this.player}).then(() => {
-              this.$Notice.success({
-                title: this.$t('notice.success'),
-                desc: this.$t('account.saved'),
-              });
-              this.$store.dispatch('fetchPlayer');
-            }).catch((err) => {
-              if (err.response.data.error) {
-                this.$Notice.error({
-                  title: this.$t('notice.error'),
-                  desc: err.response.data.error,
-                });
-              } else {
-                this.$Notice.error({
-                  title: this.$t('notice.error'),
-                  desc: this.$t('notice.generic'),
-                });
-              }
+        this.submitted = true;
+        this.$v.$touch();
+        if (this.$v.$invalid) {
+          return;
+        }
+
+        this.$nuxt.$loading.start();
+        api.saveSettings({player_settings: this.player}).then(() => {
+          this.$notify({
+            group: 'success',
+            title: this.$t('notice.success'),
+            text: this.$t('account.saved'),
+          });
+          this.$store.dispatch('fetchPlayer');
+        }).catch((err) => {
+          if (err.response.data.error) {
+            this.$notify({
+              group: 'error',
+              title: this.$t('notice.error'),
+              text: err.response.data.error,
             });
-            this.$Loading.finish();
+          } else {
+            this.$notify({
+              group: 'error',
+              title: this.$t('notice.error'),
+              text: this.$t('notice.generic'),
+            });
           }
         });
+        this.$nuxt.$loading.finish();
+        this.submitted = false;
       },
     },
   };
