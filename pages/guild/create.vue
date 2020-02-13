@@ -67,7 +67,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import {mapGetters} from 'vuex';
   import api from '~/services/api';
   import ErrorMixin from '~/components/mixins/error';

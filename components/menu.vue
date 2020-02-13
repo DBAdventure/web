@@ -14,71 +14,46 @@
             </ul>
             <div class="bars">
               <span v-html="$t('menu.player.health', {h: currentPlayer.health, maxH: currentPlayer.total_max_health})" />
-              <div class="progress">
-                <div
-                  class="progress-bar progress-bar-danger"
-                  role="progressbar"
-                  :aria-valuenow="hPercent"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                  :style="`width: ${hPercent}%`"
-                />
-              </div>
+              <b-progress
+                :value="hPercent"
+                variant="danger"
+                max="100"
+              />
 
               <span v-html="$t('menu.player.ki', {ki: currentPlayer.ki, maxKi: currentPlayer.total_max_ki})" />
               {{ $t('menu.player.plus', {"time": currentPlayer.getTimeRemaining('ki_points')}) }}
-              <div class="progress">
-                <div
-                  class="progress-bar progress-bar-info"
-                  role="progressbar"
-                  :aria-valuenow="kiPercent"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                  :style="`width: ${kiPercent}%`"
-                />
-              </div>
+              <b-progress
+                variant="info"
+                :value="kiPercent"
+                max="100"
+              />
 
               <span v-html="$t('menu.player.ap', {ap: currentPlayer.action_points, maxAp: currentPlayer.max_action_points})" />
               {{ $t('menu.player.plus', {"time": currentPlayer.getTimeRemaining('action_points')}) }}
-              <div class="progress">
-                <div
-                  class="progress-bar progress-bar-warning"
-                  role="progressbar"
-                  :aria-valuenow="apPercent"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                  :style="`width: ${apPercent}%`"
-                />
-              </div>
+              <b-progress
+                variant="warning"
+                :value="apPercent"
+                max="100"
+              />
 
               <span v-html="$t('menu.player.mp', {mp: currentPlayer.movement_points, maxMp: currentPlayer.max_movement_points})" />
               {{ $t('menu.player.plus', {"time": currentPlayer.getTimeRemaining('movement_points')}) }}
-              <div class="progress">
-                <div
-                  class="progress-bar progress-bar-success"
-                  role="progressbar"
-                  :aria-valuenow="mpPercent"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                  :style="`width: ${mpPercent}%`"
-                />
-              </div>
+              <b-progress
+                variant="success"
+                :value="mpPercent"
+                max="100"
+              />
 
               <span v-html="$t('menu.player.fp', {fp: currentPlayer.fatigue_points, maxFp: currentPlayer.max_fatigue_points})" />
               {{ $t('menu.player.minus', {"time": currentPlayer.getTimeRemaining('fatigue_points')}) }}
-              <div class="progress">
-                <div
-                  class="progress-bar"
-                  role="progressbar"
-                  :aria-valuenow="fpPercent"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                  :style="`width: ${fpPercent}%`"
-                />
-              </div>
+              <b-progress
+                :value="fpPercent"
+                max="100"
+              />
             </div>
           </div>
         </div>
+
         <ul class="list-group">
           <li class="list-group-item">
             <router-link to="/map">
@@ -248,17 +223,19 @@
       >
         <div class="text-center">
           <label for="login">{{ $t('login.text') }}</label>
-          <Input
+          <b-form-input
             name="username"
             v-model="username"
+            id="login"
             :placeholder="$t('login.text')"
             required
             type="text"
           />
           <label for="password">{{ $t('password') }}</label>
-          <Input
+          <b-form-input
             name="password"
             v-model="password"
+            id="password"
             :placeholder="$t('password')"
             required
             type="password"
@@ -351,7 +328,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import {mapGetters} from 'vuex';
   import api from '~/services/api';
   import {EventBus} from '~/lib/bus';

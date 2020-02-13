@@ -229,7 +229,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import {mapGetters} from 'vuex';
   import _ from 'lodash';
   import {isEmpty} from '~/lib/utils';

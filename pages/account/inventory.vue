@@ -114,7 +114,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import {mapGetters} from 'vuex';
   import settings from '~/config/general.config';
   import api from '~/services/api';

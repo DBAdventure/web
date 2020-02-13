@@ -1,6 +1,6 @@
 @import 'variables';
-@import '../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
-@import '../../node_modules/iview/dist/styles/iview.css';
+@import 'bootstrap/scss/bootstrap.scss';
+@import 'bootstrap-vue/src/index.scss';
 @import 'main';
 @import 'custom/building';
 @import 'custom/colors';
@@ -10,9 +10,9 @@
 @import 'custom/inbox';
 @import 'custom/info';
 @import 'custom/inventory';
-@import 'custom/iview';
 @import 'custom/map';
 @import 'custom/menu';
+@import 'custom/notification';
 @import 'custom/quest';
 @import 'custom/ranking';
 @import 'custom/register';

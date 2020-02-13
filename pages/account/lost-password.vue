@@ -6,7 +6,7 @@
     <p>{{ $t('register.welcome') }}</p>
     <p>{{ $t('register.intro') }}</p>
 
-    <Form
+    <b-form
       ref="registerForm"
       id="register-form"
       class="form-horizontal"
@@ -15,48 +15,49 @@
     >
       <h2>{{ $t('register.personalinfo') }}</h2>
 
-      <Form-item
+      <b-form-group
         :label="$t('form.login')"
-        :label-width="150"
+        :label-cols-lg="3"
         prop="username"
         required
       >
-        <Input
+        <b-input
           name="username"
           :placeholder="$t('form.login')"
           v-model="player.username"
           type="text"
         />
-      </Form-item>
-      <Form-item
+      </b-form-group>
+      <b-form-group
         :label="$t('form.email')"
-        :label-width="150"
+        :label-cols-lg="3"
         prop="email"
         required
       >
-        <Input
+        <b-input
           name="email"
           :placeholder="$t('form.email')"
           v-model="player.email"
           type="text"
         />
-      </Form-item>
+      </b-form-group>
+
       <div>
         <div class="col-sm-offset-2 col-sm-10">
-          <Button
-            type="primary"
+          <b-button
+            variant="primary"
             @click.prevent="handleSubmit()"
             long
           >
             {{ $t('register.text') }}
-          </Button>
+          </b-button>
         </div>
       </div>
-    </Form>
+    </b-form>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import api from '~/services/api';
   import {isEmpty, entries} from '~/lib/utils';
 

@@ -21,13 +21,33 @@
         class="text-left"
         v-html="$t('game.shop.text', {player: me.name, name: building.name})"
       />
-      <Table
-        :columns="shopColumns()"
-        :data="objects"
+      <b-table
+        :fields="shopColumns()"
+        :items="objects"
         width="630"
-        stripe
-        border
-      />
+        striped
+        bordered
+        dark
+      >
+        <template v-slot:cell(index)="data">
+          <img :src="`/images/objects/${data.item.image}`" />
+        </template>
+
+        <template v-slot:cell(description)="data">
+          <p><strong>{{ data.value }}</strong></p>
+          <object-description :object="data.item" />
+        </template>
+
+        <template v-slot:cell(action)="data">
+          <b-button
+            variant="primary"
+            size="sm"
+            @click="runAction('buy', data.item.id)"
+          >
+            {{ $t('building.shop.buy') }}
+          </b-button>
+        </template>
+      </b-table>
     </template>
 
     <template v-if="type === 'wanted'">
@@ -100,7 +120,7 @@
         icon="upload"
         @click.prevent="runAction('withdraw', withdrawAmount)"
       />
-      </Input>
+          </Input>
     </template>
     <template v-if="type ==='magic'">
       <div
@@ -119,7 +139,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import {EventBus} from '~/lib/bus';
   import {isEmpty} from '~/lib/utils';
   import Requirements from '~/components/utils/requirements';
@@ -131,6 +151,9 @@
     mixins: [
       MessagesMixin,
     ],
+    components: {
+      ObjectDescription,
+    },
     props: {
       building: {
         type: Object,
@@ -215,92 +238,30 @@
         }
 
         if (successMessage) {
-          this.$Notice.success({
+          console.log(successMessage);
+          this.$notify({
+            group: 'success',
             title: this.$t('notice.success'),
-            desc: successMessage,
+            text: successMessage,
           });
         }
 
         if (errorMessage) {
-          this.$Notice.error({
+          this.$notify({
+            group: 'error',
             title: this.$t('notice.error'),
-            desc: errorMessage,
+            text: errorMessage,
           });
         }
       },
 
       shopColumns() {
         return [
-          {
-            align: 'center',
-            width: 90,
-            render: (h, params) => h(
-              'div',
-              {
-                domProps: {
-                  innerHTML: `<img src="/images/objects/${params.row.image}"/>`,
-                },
-              },
-            ),
-          },
-          {
-            title: this.$t('object.description'),
-            key: 'description',
-            render: (h, params) => h(
-              'div',
-              [
-                h(
-                  'p',
-                  [
-                    h(
-                      'strong',
-                      params.row.name,
-                    ),
-                  ],
-                ),
-                h(
-                  ObjectDescription,
-                  {
-                    props: {
-                      object: params.row,
-                    },
-                  },
-                ),
-              ],
-            ),
-          },
-          {
-            title: this.$t('object.price'),
-            width: 80,
-            key: 'price',
-            align: 'center',
-          },
-          {
-            title: this.$t('object.weight'),
-            width: 65,
-            key: 'weight',
-            align: 'center',
-          },
-          {
-            title: this.$t('object.action'),
-            width: 90,
-            align: 'center',
-            render: (h, params) => h(
-              'Button',
-              {
-                props: {
-                  type: 'primary',
-                  size: 'small',
-                },
-                on: {
-                  click: () => {
-                    this.runAction('buy', params.row.id);
-                  },
-                },
-              },
-              this.$t('building.shop.buy'),
-            ),
-          },
+          'index',
+          {key: 'description', label: this.$t('object.description')},
+          {key: 'price', label: this.$t('object.price')},
+          {key: 'weight', label: this.$t('object.weight')},
+          {key: 'action', label: this.$t('object.action')},
         ];
       },
       shopSpellColumns() {

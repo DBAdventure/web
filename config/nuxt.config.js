@@ -80,8 +80,16 @@ module.exports = {
   },
   plugins: [
     '~plugins/date',
-    '~plugins/iview',
     '~plugins/vue-cookie',
     '~plugins/vue-translate',
+    '~plugins/vue-notification',
   ],
+  modules: [
+    'bootstrap-vue/nuxt',
+  ],
+  bootstrapVue: {
+    bootstrapCSS: false, // Or `css: false`
+    bootstrapVueCSS: false, // Or `bvCSS: false`
+    icons: true,
+  },
 };

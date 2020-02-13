@@ -29,13 +29,13 @@
                 ><br>
               </Poptip>
             </div>
-            <Button
-              size="small"
-              type="primary"
+            <b-button
+              size="sm"
+              variant="primary"
               @click.prevent="unequip(playerObject.object.id)"
             >
               {{ $t('inventory.unequip') }}
-            </Button>
+            </b-button>
           </div>
         </div>
         <div
@@ -178,7 +178,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import api from '~/services/api';
   import ErrorMixin from '~/components/mixins/error';
   import MessagesMixin from '~/components/mixins/messages';

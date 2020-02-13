@@ -12,6 +12,7 @@ a {
 }
 
 body {
+  color: $text-color;
   background-image: url($images-path + '/background.jpg');
 }
 
@@ -120,20 +121,25 @@ body {
     color:$default-color;
     background-color: $background-rgba;
   }
-  .nav li {
-    color: $default-color;
-    a {
-      color: $default-color;
-      background-color: $background-rgba;
-      &:hover,
-      &:focus,
-      &:active {
-        border: 1px solid $default-color;
-      }
-    }
-    &.dropdown {
-      li a {
-        color: $text-color;
+  .navbar {
+    .navbar-nav {
+      li {
+        color: $default-color;
+        a {
+          color: $default-color;
+          background-color: $background-rgba;
+          &:hover,
+          &:focus,
+          &:active {
+            color: $default-color;
+            border: 1px solid $default-color;
+          }
+        }
+        &.dropdown {
+          li a {
+            color: $text-color;
+          }
+        }
       }
     }
   }

@@ -3,112 +3,68 @@
     class="header"
     :class="$store.state.game.style"
   >
-    <ul class="nav navbar-nav">
-      <li
-        class="dropdown"
-        v-if="this.$store.state.player.connected"
-        :class="{'open': menuOpened}"
-        v-click-outside="closeMenu"
-      >
-        <a
-          href="#"
-          class="dropdown-toggle"
-          @click.prevent="toggleMenu"
-        >
-          <img
-            :src="currentPlayer.getImagePath()"
-            :alt="currentPlayer.getDisplayName()"
-          > {{ currentPlayer.getDisplayName() }} <b class="caret" />
-        </a>
-
-        <ul class="dropdown-menu">
-          <li>
-            <router-link to="/account/profile">
-              <Icon type="android-person" />
-              {{ $t('header.profile') }}
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/account/settings">
-              <Icon type="ios-game-controller-a-outline" />
-              {{ $t('header.settings') }}
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/account/training-room">
-              <Icon type="ios-flask-outline" /> {{ $t('header.training.room') }}
-              <span
-                class="badge"
-                v-if="currentPlayer.skillPoints > 0"
-              >{{ currentPlayer.skillPoints }}</span>
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/account/appearance">
-              <Icon type="android-create" />
-              {{ $t('header.appearance') }}
-            </router-link>
-          </li>
-          <li class="divider" />
-          <template v-if="currentPlayer.is_admin">
-            <li>
-              <a
-                href="/admin/"
-                target="_blank"
-              >
-                <Icon type="nuclear" />
-                {{ $t('header.admin') }}
-              </a>
-            </li>
-            <li class="divider" />
+    <b-navbar>
+      <b-navbar-nav>
+        <b-nav-item-dropdown v-if="this.$store.state.player.connected">
+          <template v-slot:button-content>
+            <img
+              :src="currentPlayer.getImagePath()"
+              :alt="currentPlayer.getDisplayName()"
+            > {{ currentPlayer.getDisplayName() }} <b class="caret" />
           </template>
 
-          <li>
-            <a
-              href="#"
-              @click.prevent="logout()"
-            >
-              <Icon type="log-out" />
-              {{ $t('header.logout') }}
-            </a>
-          </li>
-        </ul>
-      </li>
+          <b-dropdown-item to="/account/profile">
+            <b-icon icon="person" />
+            {{ $t('header.profile') }}
+          </b-dropdown-item>
+          <b-dropdown-item to="/account/settings">
+            <b-icon icon="controller" />
+            {{ $t('header.settings') }}
+          </b-dropdown-item>
+          <b-dropdown-item to="/account/training-room">
+            <b-icon icon="building" /> {{ $t('header.training.room') }}
+            <span
+              class="badge"
+              v-if="currentPlayer.skillPoints > 0"
+            >{{ currentPlayer.skillPoints }}</span>
+          </b-dropdown-item>
+          <b-dropdown-item to="/account/appearance">
+            <b-icon icon="image" />
+            {{ $t('header.appearance') }}
+          </b-dropdown-item>
+          <b-dropdown-divider></b-dropdown-divider>
 
-      <li>
-        <router-link to="/">
+          <template v-if="currentPlayer.is_admin">
+            <b-dropdown-item href="/admin" target="_blank">
+              <b-icon icon="gear" />
+              {{ $t('header.admin') }}
+            </b-dropdown-item>
+            <b-dropdown-divider></b-dropdown-divider>
+          </template>
+
+          <b-dropdown-item href="#" @click.prevent="logout()">
+            <b-icon icon="log-out" />
+            {{ $t('header.logout') }}
+          </b-dropdown-item>
+        </b-nav-item-dropdown>
+
+        <b-nav-item to="/">
           {{ $t('menu.home') }}
-        </router-link>
-      </li>
-      <li>
-        <a
-          href="http://forum.rpg-dbadventure.com"
-          target="_blank"
-        >{{ $t('menu.forum') }}</a>
-      </li>
-      <li>
-        <router-link to="/ranking">
+        </b-nav-item>
+        <b-nav-item to="/ranking">
           {{ $t('menu.ranking') }}
-        </router-link>
-      </li>
-      <li>
-        <router-link to="/history">
+        </b-nav-item>
+        <b-nav-item to="/history">
           {{ $t('menu.history') }}
-        </router-link>
-      </li>
-      <li>
-        <router-link to="/faq">
+        </b-nav-item>
+        <b-nav-item to="/faq">
           {{ $t('menu.faq') }}
-        </router-link>
-      </li>
-      <li>
-        <router-link to="/rules">
+        </b-nav-item>
+        <b-nav-item to="/rules">
           {{ $t('menu.rules.supports') }}
-        </router-link>
-      </li>
-      <!-- <li><router-link to="/contact">{{ $t('menu.contact') }}</router-link></li>
-                 <li><router-link to="/team">{{ $t('menu.team') }}</router-link></li> -->
-    </ul>
+        </b-nav-item>
+      </b-navbar-nav>
+    </b-navbar>
 
     <div
       class="online-players"
@@ -117,7 +73,7 @@
   </header>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import {mapGetters} from 'vuex';
   import api from '~/services/api';
   import ClickOutside from '~/directives/click-outside';

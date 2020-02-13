@@ -105,7 +105,7 @@
     </div>
 
     <div v-if="!action">
-      <Button
+      <b-button
         @click.prevent="runAction('heal', currentPlayer.id)"
         v-if="currentPlayer.health < currentPlayer.total_max_health && currentPlayer.action_points >= settings.player.HEAL_ACTION"
       >
@@ -115,8 +115,8 @@
           :title="$t('map.action.heal', {'AP': settings.player.HEAL_ACTION})"
         >
         {{ $t('map.action.self.heal', {'AP': settings.player.HEAL_ACTION}) }}
-      </Button>
-      <Button
+      </b-button>
+      <b-button
         @click.prevent="runAction('spell', currentPlayer.id)"
         v-if="currentPlayer.action_points >= settings.player.SPELL_ACTION"
       >
@@ -126,7 +126,7 @@
           :title="$t('map.action.spell', {'AP': settings.player.SPELL_ACTION})"
         >
         {{ $t('map.action.self.spell', {'AP': settings.player.SPELL_ACTION}) }}
-      </Button>
+      </b-button>
     </div>
 
     <div class="search-container container-fluid">
@@ -163,13 +163,13 @@
                 />
               </FormItem>
               <FormItem>
-                <Button
+                <b-button
                   type="primary"
                   @click="giveZenis()"
                   :disabled="this.give.zenis === 0"
                 >
                   {{ $t('action.give.text') }}
-                </Button>
+                </b-button>
               </FormItem>
             </Form>
 
@@ -190,7 +190,7 @@
                 ({{ playerSpell.spell.requirements.ki }} KI)
               </Option>
             </Select>
-            <Button
+            <b-button
               @click.prevent="runAction('spell', target.id)"
               :disabled="!canCastSpell()"
             >
@@ -199,7 +199,7 @@
                 :alt="$t('map.action.spell', {'AP': settings.player.SPELL_ACTION})"
                 :title="$t('map.action.spell', {'AP': settings.player.SPELL_ACTION})"
               >                            {{ $t('map.action.spell', {'AP': settings.player.SPELL_ACTION}) }}
-            </Button>
+            </b-button>
           </template>
 
           <template v-if="action === 'heal' && target.can_be_healed && currentPlayer.action_points >= settings.player.HEAL_ACTION">
@@ -266,9 +266,9 @@
           </template>
 
           <div class="text-center buttons">
-            <Button @click.prevent="back()">
+            <b-button @click.prevent="back()">
               {{ $t('action.back.map') }}
-            </Button>
+            </b-button>
           </div>
         </div>
       </template>
@@ -397,7 +397,7 @@
                 class="actions"
                 v-if="distance == 0"
               >
-                <Button
+                <b-button
                   size="small"
                   @click.prevent="runAction('building-enter', building.id)"
                 >
@@ -410,7 +410,7 @@
                   <template v-else>
                     {{ $t('map.building.enter') }}
                   </template>
-                </Button>
+                </b-button>
               </div>
             </div>
           </div>
@@ -550,7 +550,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import _ from 'lodash';
   import {mapGetters} from 'vuex';
   import settings from '~/config/general.config';
@@ -591,8 +591,8 @@
       isAttackAction() {
         return (
           this.action === 'attack'
-          || this.action === 'attack-betray'
-          || this.action === 'attack-revenge'
+            || this.action === 'attack-betray'
+            || this.action === 'attack-revenge'
         )
           && this.currentPlayer.action_points >= this.settings.player.ATTACK_ACTION
           && !this.parameters.isDead;
@@ -617,7 +617,10 @@
       };
     },
     async mounted() {
-      await this.loadMap();
+      this.$nextTick(async () => {
+        await this.loadMap();
+      });
+
       EventBus.$on('reload-map', () => {
         this.back();
       });
@@ -634,7 +637,7 @@
         this.target = null;
       },
       async loadMap() {
-        this.$Loading.start();
+        this.$nuxt.$loading.start();
         this.players = {};
         await api.getMap().then((res) => {
           this.map = res.data.map;
@@ -642,7 +645,7 @@
           this.items = res.data.items;
           this.borderYRange = _.range(this.borders.yStart, this.borders.yEnd + 1);
           this.borderXRange = _.range(this.borders.xStart, this.borders.xEnd + 1);
-          this.$Loading.finish();
+          this.$nuxt.$loading.finish();
           this.centerMap();
         });
       },
@@ -757,7 +760,7 @@
             width: 70,
             align: 'center',
             render: (h, params) => h(
-              'Button',
+              'b-button',
               {
                 props: {
                   type: 'primary',
@@ -778,7 +781,7 @@
         return this.parameters.playerObjects;
       },
       giveZenis() {
-        this.$Loading.start();
+        this.$nuxt.$loading.start();
         api.give(this.target.id, null, this.give.zenis).then(async (res) => {
           await this.$store.dispatch('fetchPlayer');
           this.$Notice.success({
@@ -786,13 +789,13 @@
             desc: this.$t('action.give.success.zenis', {zenis: this.give.zenis}),
           });
           this.handleResult(res, this.target.id);
-          this.$Loading.finish();
+          this.$nuxt.$loading.finish();
         }).catch(() => {
           this.raiseError();
         });
       },
       giveObject(playerObject) {
-        this.$Loading.start();
+        this.$nuxt.$loading.start();
         api.give(this.target.id, playerObject.object.id).then(async (res) => {
           await this.$store.dispatch('fetchPlayer');
           this.$Notice.success({
@@ -800,7 +803,7 @@
             desc: this.$t('action.give.success.object', {name: playerObject.object.name}),
           });
           this.handleResult(res, this.target.id);
-          this.$Loading.finish();
+          this.$nuxt.$loading.finish();
         }).catch(() => {
           this.raiseError();
         });
@@ -810,7 +813,7 @@
        * Generic actions
        */
       async runAction(what, id) {
-        this.$Loading.start();
+        this.$nuxt.$loading.start();
         let prom;
         switch (what) {
         case 'attack':
@@ -843,7 +846,7 @@
           prom = api.enterBuilding(id).then((res) => {
             this.action = what;
             this.parameters = res.data;
-            this.$Loading.finish();
+            this.$nuxt.$loading.finish();
           }).catch(() => {
             this.raiseError();
           });
@@ -852,7 +855,7 @@
           prom = api.talkToNpc(id).then((res) => {
             this.action = what;
             this.parameters = res.data;
-            this.$Loading.finish();
+            this.$nuxt.$loading.finish();
           }).catch(() => {
             this.raiseError();
           });
@@ -868,7 +871,7 @@
           }
           this.action = what;
           this.handleResult(res, id);
-          this.$Loading.finish();
+          this.$nuxt.$loading.finish();
         }).catch((res) => {
           if (res.response.data.error) {
             this.$Notice.error({

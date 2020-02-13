@@ -1,0 +1,102 @@
+.vue-notification-group {
+  display: block;
+  position: fixed;
+  z-index: 5000;
+
+  .vue-notification-wrapper {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+
+.vue-notification {
+  margin-bottom: 10px;
+  padding: 16px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 6px rgba(0,0,0,.2);
+  box-shadow: 0 1px 6px rgba(0,0,0,.2);
+  background: #fff;
+  line-height: 1;
+  position: relative;
+  overflow: hidden;
+  top: 11px;
+  display: block;
+  box-sizing: border-box;
+  text-align: left;
+  font-size: 12px;
+  margin: 0 5px 5px;
+  color: #000;
+  border-left: 5px solid #187FE7;
+
+  &.warn {
+    border-left-color: #f48a06;
+
+    .vue-notification-title,
+    .vue-notification-icon {
+      color: #ffb648;
+    }
+  }
+
+  &.error {
+    border-left-color: #B82E24;
+
+    .vue-notification-title,
+    .vue-notification-icon {
+      color: #E54D42;
+    }
+  }
+
+  &.success {
+    border-left-color: #42A85F;
+
+    .vue-notification-title,
+    .vue-notification-icon {
+      color: #68CD86;
+    }
+  }
+
+  .vue-notification-notice-content {
+    position: relative;
+  }
+
+  .vue-notification-icon {
+    font-size: 36px;
+    top: -6px;
+    position: absolute;
+  }
+
+  .vue-notification-title {
+    margin-left: 51px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 17px;
+    color: #17233d;
+    padding-right: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .vue-notification-desc {
+    margin-left: 51px;
+    font-size: 12px;
+    color: #515a6e;
+    text-align: justify;
+    line-height: 1.5;
+  }
+  .vue-notification-notice-close {
+    top: 11px;
+    position: absolute;
+    Right: 8px;
+    color: #999;
+    outline: 0;
+    cursor: pointer;
+  }
+  .vue-notification-title {
+    font-weight: 600;
+  }
+}

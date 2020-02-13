@@ -75,7 +75,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import _ from 'lodash';
   import {mapGetters} from 'vuex';
   import api from '~/services/api';

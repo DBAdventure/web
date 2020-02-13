@@ -14,12 +14,14 @@
       class="details"
     >
       <strong>{{ $t('requirements.name') }}</strong>
-      <requirements :data="object.requirements" />
+      <requirements
+        :data="object.requirements"
+      />
     </div>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import Stats from '~/components/utils/stats';
   import Requirements from '~/components/utils/requirements';
 

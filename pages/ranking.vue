@@ -66,7 +66,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import api from '~/services/api';
   import {isEmpty} from '~/lib/utils';
   import PlayersMixin from '~/components/mixins/players';

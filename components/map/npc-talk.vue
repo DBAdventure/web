@@ -28,7 +28,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import {EventBus} from '~/lib/bus';
   import api from '~/services/api';
   import MessagesMixin from '~/components/mixins/messages';
