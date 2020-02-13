@@ -1,11 +1,20 @@
 <template>
-  <ul class="stats">
-    <li
-      v-for="(value, key) in data"
-      :key="key"
-      v-html="$t(`objects.details.${key}`, {value: getValue(key, value)})"
-    />
-  </ul>
+  <div
+    v-if="Object.keys(data).length > 0"
+    class="details"
+  >
+    <p>
+      <strong>{{ $t('bonus.name') }}</strong>
+    </p>
+
+    <ul class="stats">
+      <li
+        v-for="(value, key) in data"
+        :key="key"
+        v-html="$t(`objects.details.${key}`, {value: getValue(key, value)})"
+      />
+    </ul>
+  </div>
 </template>
 
 <script type="text/ecmascript-6">

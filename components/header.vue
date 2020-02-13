@@ -43,7 +43,7 @@
           </template>
 
           <b-dropdown-item href="#" @click.prevent="logout()">
-            <b-icon icon="log-out" />
+            <b-icon icon="unlock" />
             {{ $t('header.logout') }}
           </b-dropdown-item>
         </b-nav-item-dropdown>

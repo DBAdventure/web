@@ -34,7 +34,7 @@
         </template>
 
         <template v-slot:cell(description)="data">
-          <p><strong>{{ data.value }}</strong></p>
+          <p><strong>{{ data.item.name }}</strong></p>
           <object-description :object="data.item" />
         </template>
 
@@ -99,42 +99,81 @@
       />
 
       <p v-html="$t('game.bank.deposit')" />
-      <Input
-        v-model="depositAmount"
-        number
-      >
-      <Button
-        slot="append"
-        icon="archive"
-        @click.prevent="runAction('deposit', depositAmount)"
-      />
-      </Input>
+      <b-form inline>
+        <b-input-group>
+          <b-form-input
+            v-model="depositAmount"
+            type="number"
+          />
+        </b-input-group>
+
+        <b-input-group-append>
+          <b-button
+            variant="primary"
+            @click.prevent="runAction('deposit', depositAmount)"
+          >
+            <b-icon
+              icon="archive"
+            />
+          </b-button>
+        </b-input-group-append>
+      </b-form>
 
       <p v-html="$t('game.bank.withdraw')" />
-      <Input
-        v-model="withdrawAmount"
-        number
-      />
-      <Button
-        slot="append"
-        icon="upload"
-        @click.prevent="runAction('withdraw', withdrawAmount)"
-      />
-          </Input>
+      <b-form inline text-center>
+        <b-input-group>
+          <b-form-input
+            v-model="withdrawAmount"
+            type="number"
+          />
+
+          <b-input-group-append>
+            <b-button
+              variant="primary"
+              @click.prevent="runAction('withdraw', withdrawAmount)"
+            >
+              <b-icon
+                icon="upload"
+              />
+            </b-button>
+          </b-input-group-append>
+        </b-input-group>
+      </b-form>
     </template>
+
     <template v-if="type ==='magic'">
       <div
         class="text-left"
         v-html="$t('game.magic.text', {player: me.name, name: building.name})"
       />
 
-      <Table
-        :columns="shopSpellColumns()"
-        :data="objects"
+      <b-table
+        :fields="shopSpellColumns()"
+        :items="objects"
         width="630"
-        stripe
-        border
-      />
+        striped
+        bordered
+        dark
+      >
+        <template v-slot:cell(name)="data">
+          <strong>{{ $t(`spells.${data.value}.name`) }}</strong>
+        </template>
+
+        <template v-slot:cell(description)="data">
+          <p>{{ $t(`spells.${data.item.name}.descriptionRp`) }}</p>
+          <requirements :data="data.item.requirements" />
+        </template>
+
+        <template v-slot:cell(action)="data">
+          <b-button
+            variant="primary"
+            size="sm"
+            @click="runAction('buySpell', data.item.id)"
+          >
+            {{ $t('building.shop.buy') }}
+          </b-button>
+        </template>
+      </b-table>
     </template>
   </div>
 </template>
@@ -153,6 +192,7 @@
     ],
     components: {
       ObjectDescription,
+      Requirements,
     },
     props: {
       building: {
@@ -266,59 +306,10 @@
       },
       shopSpellColumns() {
         return [
-          {
-            title: this.$t('object.name'),
-            align: 'center',
-            width: 150,
-            render: (h, params) => h(
-              'strong',
-              this.$t(`spells.${params.row.name}.name`),
-            ),
-          },
-          {
-            title: this.$t('object.description'),
-            key: 'description',
-            render: (h, params) => h(
-              'div',
-              [
-                this.$t(`spells.${params.row.name}.descriptionRp`),
-                h(
-                  Requirements,
-                  {
-                    props: {
-                      data: params.row.requirements,
-                    },
-                  },
-                ),
-              ],
-            ),
-          },
-          {
-            title: this.$t('object.price'),
-            width: 70,
-            key: 'price',
-            align: 'center',
-          },
-          {
-            title: this.$t('object.action'),
-            width: 90,
-            align: 'center',
-            render: (h, params) => h(
-              'Button',
-              {
-                props: {
-                  type: 'primary',
-                  size: 'small',
-                },
-                on: {
-                  click: () => {
-                    this.runAction('buySpell', params.row.id);
-                  },
-                },
-              },
-              this.$t('building.shop.buy'),
-            ),
-          },
+          {key: 'name', label: this.$t('object.name')},
+          {key: 'description', label: this.$t('object.description')},
+          {key: 'price', label: this.$t('object.price')},
+          {key: 'action', label: this.$t('object.action')},
         ];
       },
     },

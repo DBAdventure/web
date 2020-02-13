@@ -2,22 +2,9 @@
   <div>
     {{ object.description }}
 
-    <div
-      v-if="hasData(object.bonus)"
-      class="details"
-    >
-      <strong>{{ $t('bonus.name') }}</strong>
-      <stats :data="object.bonus" />
-    </div>
-    <div
-      v-if="hasData(object.requirements)"
-      class="details"
-    >
-      <strong>{{ $t('requirements.name') }}</strong>
-      <requirements
-        :data="object.requirements"
-      />
-    </div>
+
+    <stats :data="object.bonus" />
+    <requirements :data="object.requirements" />
   </div>
 </template>
 
@@ -34,11 +21,6 @@
       object: {
         type: Object,
         required: true,
-      },
-    },
-    methods: {
-      hasData(data) {
-        return Object.keys(data).length > 0;
       },
     },
   };

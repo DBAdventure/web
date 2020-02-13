@@ -3,23 +3,25 @@
     <h1 class="title title-information">
       {{ $t('header.settings') }}
     </h1>
+
     <b-form
-      :model="player"
       :label-width="150"
     >
       <b-form-group
         :label="$t('form.email')"
         :label-cols-lg="3"
-        required
       >
         <b-input
           v-model="player.email"
           type="text"
           :class="{ 'is-invalid': submitted && $v.player.email.$error }"
         />
-        <div v-if="submitted && $v.player.email.$error" class="invalid-feedback">
-          <span v-if="!$v.player.email.required">Email is required</span>
-          <span v-if="!$v.player.email.email">Email is invalid</span>
+        <div
+          v-if="submitted && $v.player.email.$error"
+          class="invalid-feedback"
+        >
+          <span v-if="!$v.player.email.required">{{ $t('form.required') }}</span>
+          <span v-if="!$v.player.email.email">{{ $t('form.invalidEmail') }}</span>
         </div>
       </b-form-group>
 
@@ -31,7 +33,12 @@
           v-model="player.username"
           :class="{ 'is-invalid': submitted && $v.player.username.$error }"
         />
-        <div v-if="submitted && !$v.player.username.required" class="invalid-feedback">Username is required</div>
+        <div
+          v-if="submitted && !$v.player.username.required"
+          class="invalid-feedback"
+        >
+          {{ $t('form.required') }}
+        </div>
       </b-form-group>
 
       <b-form-group
@@ -58,7 +65,9 @@
           v-if="submitted && $v.player.password.$error"
           class="invalid-feedback"
         >
-          <span v-if="!$v.player.password.minLength">Password must be at least 6 characters</span>
+          <span v-if="!$v.player.password.minLength">
+            {{ $t('form.passwordLength') }}
+          </span>
         </div>
       </b-form-group>
 
@@ -75,7 +84,9 @@
           v-if="submitted && $v.player.password_confirm.$error"
           class="invalid-feedback"
         >
-          <span if="!$v.player.password_confirm.sameAsPassword">Passwords must match</span>
+          <span if="!$v.player.password_confirm.sameAsPassword">
+            {{ $t('form.passwordMatch') }}
+          </span>
         </div>
       </b-form-group>
 
@@ -187,6 +198,7 @@
             });
           }
         });
+
         this.$nuxt.$loading.finish();
         this.submitted = false;
       },

@@ -7,96 +7,129 @@
     <p>{{ $t('register.intro') }}</p>
 
     <b-form
-      ref="registerForm"
-      id="register-form"
       class="form-horizontal"
-      :rules="registerRules"
-      :model="player"
     >
       <h2>{{ $t('register.personalinfo') }}</h2>
 
       <b-form-group
         :label="$t('form.pseudo')"
         :label-cols-lg="3"
-        prop="name"
-        required
       >
         <b-input
-          name="name"
           :placeholder="$t('form.pseudo')"
           v-model="player.name"
-          type="text"
+          required
+          :class="{ 'is-invalid': submitted && $v.player.name.$error }"
         />
+        <div
+          v-if="submitted && !$v.player.name.required"
+          class="invalid-feedback"
+        >
+          {{ $t('form.required') }}
+        </div>
       </b-form-group>
+
       <b-form-group
         :label="$t('form.login')"
         :label-cols-lg="3"
-        prop="username"
-        required
       >
         <b-input
-          name="username"
           :placeholder="$t('form.login')"
           v-model="player.username"
-          type="text"
+          required
+          :class="{ 'is-invalid': submitted && $v.player.username.$error }"
         />
+        <div
+          v-if="submitted && !$v.player.username.required"
+          class="invalid-feedback"
+        >
+          {{ $t('form.required') }}
+        </div>
       </b-form-group>
+
       <b-form-group
         :label="$t('form.password')"
         :label-cols-lg="3"
-        prop="password"
-        required
       >
         <b-input
-          name="password"
           :placeholder="$t('form.password')"
           v-model="player.password"
           type="password"
+          required
+          :class="{ 'is-invalid': submitted && $v.player.password.$error }"
         />
+        <div
+          v-if="submitted && $v.player.password.$error"
+          class="invalid-feedback"
+        >
+          <span v-if="!$v.player.password.minLength">
+            {{ $t('form.passwordLength') }}
+          </span>
+        </div>
       </b-form-group>
+
       <b-form-group
         :label="$t('form.passwordConfirm')"
         :label-cols-lg="3"
-        prop="password_confirm"
-        required
       >
         <b-input
-          name="password_confirm"
           :placeholder="$t('form.passwordConfirm')"
           v-model="player.password_confirm"
           type="password"
+          required
+          :class="{ 'is-invalid': submitted && $v.player.password_confirm.$error }"
         />
+        <div
+          v-if="submitted && $v.player.password_confirm.$error"
+          class="invalid-feedback"
+        >
+          <span if="!$v.player.password_confirm.sameAsPassword">
+            {{ $t('form.passwordMatch') }}
+          </span>
+        </div>
       </b-form-group>
+
       <b-form-group
         :label="$t('form.email')"
         :label-cols-lg="3"
-        prop="email"
-        required
       >
         <b-input
-          name="email"
           :placeholder="$t('form.email')"
           v-model="player.email"
-          type="text"
+          required
+          :class="{ 'is-invalid': submitted && $v.player.email.$error }"
         />
+        <div
+          v-if="submitted && $v.player.email.$error"
+          class="invalid-feedback"
+        >
+          <span v-if="!$v.player.email.required">{{ $t('form.required') }}</span>
+          <span v-if="!$v.player.email.email">{{ $t('form.invalidEmail') }}</span>
+        </div>
       </b-form-group>
+
       <b-form-group
         :label="$t('form.emailConfirm')"
         :label-cols-lg="3"
-        prop="email_confirm"
-        required
       >
         <b-input
-          name="email_confirm"
           :placeholder="$t('form.emailConfirm')"
           v-model="player.email_confirm"
-          type="text"
+          required
+          :class="{ 'is-invalid': submitted && $v.player.email_confirm.$error }"
         />
+        <div
+          v-if="submitted && $v.player.email_confirm.$error"
+          class="invalid-feedback"
+        >
+          <span if="!$v.player.email_confirm.sameAsPassword">
+            {{ $t('form.emailMatch') }}
+          </span>
+        </div>
       </b-form-group>
 
       <h2>{{ $t('register.speciality') }}</h2>
       <p>{{ $t('register.specialityIntro') }}</p>
-
       <b-form-group>
         <label class="col-sm-2 control-label required">{{ $t('class') }}</label>
         <div class="col-sm-10">
@@ -712,6 +745,12 @@
   import api from '~/services/api';
   import ErrorMixin from '~/components/mixins/error';
   import {isEmpty, entries} from '~/lib/utils';
+  import {
+    required,
+    minLength,
+    sameAs,
+    email,
+  } from 'vuelidate/lib/validators';
 
   export default {
     mixins: [
@@ -724,46 +763,8 @@
       };
     },
     data() {
-      const validatePass = (rule, value, callback) => {
-        if (trim(value) === '') {
-          callback(new Error(this.$t('field.empty')));
-        } else {
-          if (this.player.password_confirm !== '') {
-            this.$refs.registerForm.validateField('password_confirm');
-          }
-          callback();
-        }
-      };
-      const validatePassCheck = (rule, value, callback) => {
-        if (trim(value) === '') {
-          callback(new Error(this.$t('field.empty')));
-        } else if (value !== this.player.password) {
-          callback(new Error(this.$t('field.nomatch')));
-        } else {
-          callback();
-        }
-      };
-      const validateEmail = (rule, value, callback) => {
-        if (trim(value) === '') {
-          callback(new Error('field.empty'));
-        } else {
-          if (this.player.email_confirm !== '') {
-            this.$refs.registerForm.validateField('email_confirm');
-          }
-          callback();
-        }
-      };
-      const validateEmailCheck = (rule, value, callback) => {
-        if (trim(value) === '') {
-          callback(new Error('field.empty'));
-        } else if (value !== this.player.email) {
-          callback(new Error(this.$t('field.nomatch')));
-        } else {
-          callback();
-        }
-      };
-
       return {
+        submitted: false,
         races: [],
         sides: [],
         classes: [],
@@ -783,31 +784,29 @@
             image: null,
           },
         },
-        registerRules: {
-          name: [
-            {type: 'string', required: true},
-          ],
-          username: [
-            {type: 'string', required: true},
-          ],
-          password: [
-            {type: 'string', required: true},
-            {validator: validatePass},
-          ],
-          password_confirm: [
-            {type: 'string', required: true},
-            {validator: validatePassCheck},
-          ],
-          email: [
-            {type: 'email', required: true},
-            {validator: validateEmail},
-          ],
-          email_confirm: [
-            {type: 'email', required: true},
-            {validator: validateEmailCheck},
-          ],
-        },
       };
+    },
+    validations: {
+      player: {
+        name: {required},
+        username: {required},
+        password: {
+          required,
+          minLength: minLength(6),
+        },
+        password_confirm: {
+          required,
+          sameAsPassword: sameAs('password'),
+        },
+        email: {
+          required,
+          email,
+        },
+        email_confirm: {
+          required,
+          sameAsPassword: sameAs('email'),
+        },
+      },
     },
     computed: {
       selectedImage() {
@@ -848,33 +847,37 @@
     },
     methods: {
       handleSubmit() {
-        this.$refs.registerForm.validate((valid) => {
-          if (valid) {
-            api.register({player_registration: this.player}).then(() => {
-              this.$Notice.success({
-                title: this.$t('account.created.title'),
-                desc: this.$t('account.created.description'),
+        this.submitted = true;
+        this.$v.$touch();
+        if (this.$v.$invalid) {
+          this.$notify({
+            group: 'error',
+            title: this.$t('notice.error'),
+            text: this.$t('form.invalid'),
+          });
+          return;
+        }
+
+        api.register({player_registration: this.player}).then(() => {
+          this.$notify({
+            group: 'success',
+            title: this.$t('account.created.title'),
+            text: this.$t('account.created.description'),
+          });
+          this.$router.push('/');
+        }).catch((e) => {
+          if (!isEmpty(e.response.data.error)) {
+            /* eslint-disable no-restricted-syntax */
+            for (const [key, messages] of entries(e.response.data.error)) {
+              this.$notify({
+                group: 'error',
+                title: this.$t(key),
+                text: messages.join('.\n'),
               });
-              this.$router.push('/');
-            }).catch((e) => {
-              if (!isEmpty(e.response.data.error)) {
-                /* eslint-disable no-restricted-syntax */
-                for (const [key, messages] of entries(e.response.data.error)) {
-                  this.$Notice.error({
-                    title: this.$t(key),
-                    desc: messages.join('.\n'),
-                  });
-                }
-                /* eslint-enable no-restricted-syntax */
-              } else {
-                this.raiseError();
-              }
-            });
+            }
+            /* eslint-enable no-restricted-syntax */
           } else {
-            this.$Notice.error({
-              title: this.$t('notice.error'),
-              desc: this.$t('form.invalid'),
-            });
+            this.raiseError();
           }
         });
       },

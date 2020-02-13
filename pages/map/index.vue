@@ -266,7 +266,10 @@
           </template>
 
           <div class="text-center buttons">
-            <b-button @click.prevent="back()">
+            <b-button
+              @click.prevent="back()"
+              variant="primary"
+            >
               {{ $t('action.back.map') }}
             </b-button>
           </div>

@@ -60,43 +60,44 @@
     </table>
 
     <div>
-      <Select
+      <b-form-select
         v-if="player_race !== null"
         v-model="player_appearance.type"
         :placeholder="$t('choice.character')"
         clearable
         required
       >
-        <Option
+        <b-form-select-option
           v-for="(value, key) in appearances[player_race]"
           :key="key"
           :value="key"
         >
           {{ value.label }}
-        </Option>
-      </Select>
+        </b-form-select-option>
+      </b-form-select>
 
-      <Select
+      <b-form-select
         v-if="player_appearance.type !== null && appearances[player_race]"
         v-model="player_appearance.image"
         required
       >
-        <Option
+        <b-form-select-option
           v-for="(value, key) in appearances[player_race][player_appearance.type].value"
           :key="key"
           :value="value"
         >
           {{ key }}
-        </Option>
-      </Select>
+        </b-form-select-option>
 
-      <Button
-        type="primary"
+      </b-form-select>
+
+      <b-button
+        variant="primary"
         @click.prevent="handleSubmit()"
-        long
+        block
       >
         {{ $t('save') }}
-      </Button>
+      </b-button>
     </div>
   </div>
 </template>
@@ -159,15 +160,17 @@
         };
 
         api.updateAppearance(data).then(() => {
-          this.$Notice.success({
+          this.$notify({
+            group: 'success',
             title: this.$t('notice.success'),
-            desc: this.$t('account.appearance.success'),
+            text: this.$t('account.appearance.success'),
           });
           this.$store.dispatch('fetchPlayer');
         }).catch(() => {
-          this.$Notice.error({
+          this.$notify({
+            group: 'error',
             title: this.$t('notice.error'),
-            desc: this.$t('account.appearance.failed'),
+            text: this.$t('account.appearance.failed'),
           });
         });
       },
