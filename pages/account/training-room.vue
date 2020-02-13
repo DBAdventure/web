@@ -113,15 +113,17 @@
     methods: {
       train(what) {
         api.useTrainingPoint(what).then(() => {
-          this.$Notice.success({
+          this.$notify({
+            group: 'success',
             title: this.$t('notice.success'),
-            desc: this.$t('training.success'),
+            text: this.$t('training.success'),
           });
           this.$store.dispatch('fetchPlayer');
         }).catch(() => {
-          this.$Notice.error({
+          this.$notify({
+            group: 'error',
             title: this.$t('notice.error'),
-            desc: this.$t('training.error'),
+            text: this.$t('training.error'),
           });
         });
       },

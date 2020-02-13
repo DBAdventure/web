@@ -97,32 +97,36 @@
         this.$refs.registerForm.validate((valid) => {
           if (valid) {
             api.lostPassword({player_registration: this.player}).then(() => {
-              this.$Notice.success({
+              this.$notify({
+                group: 'success',
                 title: this.$t('notice.success'),
-                desc: this.$t('account.lost.description'),
+                text: this.$t('account.lost.description'),
               });
               this.$router.push('/');
             }).catch((e) => {
               if (!isEmpty(e.response.data.error)) {
                 /* eslint-disable no-restricted-syntax */
                 for (const [key, messages] of entries(e.response.data.error)) {
-                  this.$Notice.error({
+                  this.$notify({
+                    group: 'error',
                     title: this.$t(key),
-                    desc: messages.join('.\n'),
+                    text: messages.join('.\n'),
                   });
                 }
                 /* eslint-enable no-restricted-syntax */
               } else {
-                this.$Notice.error({
+                this.$notify({
+                  group: 'error',
                   title: this.$t('notice.error'),
-                  desc: this.$t('error.generic'),
+                  text: this.$t('error.generic'),
                 });
               }
             });
           } else {
-            this.$Notice.error({
+            this.$notify({
+              group: 'error',
               title: this.$t('notice.error'),
-              desc: this.$t('form.invalid'),
+              text: this.$t('form.invalid'),
             });
           }
         });

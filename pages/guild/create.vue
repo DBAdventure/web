@@ -118,18 +118,19 @@
         this.$refs.createGuildForm.validate((valid) => {
           if (valid) {
             api.createGuild({guild_create: this.guild}).then(() => {
-              this.$Notice.success({
+              this.$notify({
+                group: 'success',
                 title: this.$t('notice.success'),
-                desc: this.$t('guild.created'),
+                text: this.$t('guild.created'),
               });
               this.$router.push('/guild');
             }).catch(() => {
               this.raiseError();
             });
           } else {
-            this.$Notice.error({
+            this.$notify({
               title: this.$t('notice.error'),
-              desc: this.$t('form.invalid'),
+              text: this.$t('form.invalid'),
             });
           }
         });

@@ -101,14 +101,15 @@
     },
     methods: {
       async leaveGuild() {
-        this.$Loading.start();
+        this.$nuxt.$loading.start();
         await api.leaveGuild().then((res) => {
           const messages = res.data.messages.map((e) => this.$t(e));
-          this.$Notice.success({
+          this.$notify({
+            group: 'success',
             title: this.$t('notice.success'),
-            desc: messages.join('\n'),
+            text: messages.join('\n'),
           });
-          this.$Loading.finish();
+          this.$nuxt.$loading.finish();
         }).catch(() => {
           this.raiseError();
         });

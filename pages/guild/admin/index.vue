@@ -378,7 +378,7 @@
                           type: 'info',
                           size: 'small',
                           disabled: params.row.rank.role
-                            === this.settings.guild.ROLE_PLAYER,
+                          === this.settings.guild.ROLE_PLAYER,
                         },
                       },
                       this.ranks[this.settings.guild.ROLE_PLAYER],
@@ -411,7 +411,7 @@
                           type: 'warning',
                           size: 'small',
                           disabled: params.row.rank.role
-                            === this.settings.guild.ROLE_MODO,
+                          === this.settings.guild.ROLE_MODO,
                         },
                       },
                       this.ranks[this.settings.guild.ROLE_MODO],
@@ -443,8 +443,7 @@
                         props: {
                           type: 'error',
                           size: 'small',
-                          disabled: params.row.rank.role
-                            === this.settings.guild.ROLE_ADMIN,
+                          disabled: params.row.rank.role === this.settings.guild.ROLE_ADMIN,
                         },
                       },
                       this.ranks[this.settings.guild.ROLE_ADMIN],
@@ -561,7 +560,7 @@
       },
 
       async runAction(what, player) {
-        this.$Loading.start();
+        this.$nuxt.$loading.start();
         let errorMessage;
         let successMessage;
         switch (what) {
@@ -600,46 +599,51 @@
         }
 
         if (successMessage) {
-          this.$Notice.success({
+          this.$notify({
+            group: 'success',
             title: this.$t('notice.success'),
-            desc: successMessage,
+            text: successMessage,
           });
-          this.$Loading.finish();
+          this.$nuxt.$loading.finish();
         }
 
         if (errorMessage) {
-          this.$Notice.error({
+          this.$notify({
+            group: 'error',
             title: this.$t('notice.error'),
-            desc: errorMessage,
+            text: errorMessage,
           });
-          this.$Loading.error();
+          this.$nuxt.$loading.error();
         }
       },
 
       handleSettingsSubmit() {
         this.$refs.settingsForm.validate((valid) => {
           if (valid) {
-            this.$Loading.start();
+            this.$nuxt.$loading.start();
             api.adminSettings({guild_settings: this.guild}).then(() => {
-              this.$Notice.success({
+              this.$notify({
+                group: 'success',
                 title: this.$t('notice.success'),
-                desc: this.$t('guild.admin.saved'),
+                text: this.$t('guild.admin.saved'),
               });
               this.$store.dispatch('fetchPlayer');
             }).catch((err) => {
               if (err.response.data.error) {
-                this.$Notice.error({
+                this.$notify({
+                  group: 'error',
                   title: this.$t('notice.error'),
-                  desc: err.response.data.error,
+                  text: err.response.data.error,
                 });
               } else {
-                this.$Notice.error({
+                this.$notify({
+                  group: 'error',
                   title: this.$t('notice.error'),
-                  desc: this.$t('notice.generic'),
+                  text: this.$t('notice.generic'),
                 });
               }
             });
-            this.$Loading.finish();
+            this.$nuxt.$loading.finish();
           }
         });
       },
@@ -647,27 +651,30 @@
       handleRanksSubmit() {
         this.$refs.ranksForm.validate((valid) => {
           if (valid) {
-            this.$Loading.start();
+            this.$nuxt.$loading.start();
             api.adminRanks({guild_ranks: this.ranks}).then(() => {
-              this.$Notice.success({
+              this.$notify({
+                group: 'success',
                 title: this.$t('notice.success'),
-                desc: this.$t('guild.admin.saved'),
+                text: this.$t('guild.admin.saved'),
               });
               this.$store.dispatch('fetchPlayer');
             }).catch((err) => {
               if (err.response.data.error) {
-                this.$Notice.error({
+                this.$notify({
+                  group: 'error',
                   title: this.$t('notice.error'),
-                  desc: err.response.data.error,
+                  text: err.response.data.error,
                 });
               } else {
-                this.$Notice.error({
+                this.$notify({
+                  group: 'error',
                   title: this.$t('notice.error'),
-                  desc: this.$t('notice.generic'),
+                  text: this.$t('notice.generic'),
                 });
               }
             });
-            this.$Loading.finish();
+            this.$nuxt.$loading.finish();
           }
         });
       },

@@ -787,9 +787,10 @@
         this.$nuxt.$loading.start();
         api.give(this.target.id, null, this.give.zenis).then(async (res) => {
           await this.$store.dispatch('fetchPlayer');
-          this.$Notice.success({
+          this.$notify({
+            group: 'success',
             title: this.$t('notice.success'),
-            desc: this.$t('action.give.success.zenis', {zenis: this.give.zenis}),
+            text: this.$t('action.give.success.zenis', {zenis: this.give.zenis}),
           });
           this.handleResult(res, this.target.id);
           this.$nuxt.$loading.finish();
@@ -801,9 +802,10 @@
         this.$nuxt.$loading.start();
         api.give(this.target.id, playerObject.object.id).then(async (res) => {
           await this.$store.dispatch('fetchPlayer');
-          this.$Notice.success({
+          this.$notify({
+            group: 'success',
             title: this.$t('notice.success'),
-            desc: this.$t('action.give.success.object', {name: playerObject.object.name}),
+            text: this.$t('action.give.success.object', {name: playerObject.object.name}),
           });
           this.handleResult(res, this.target.id);
           this.$nuxt.$loading.finish();
@@ -877,9 +879,10 @@
           this.$nuxt.$loading.finish();
         }).catch((res) => {
           if (res.response.data.error) {
-            this.$Notice.error({
+            this.$notify({
+              group: 'error',
               title: this.$t('notice.error'),
-              desc: this.$t(res.response.data.error),
+              text: this.$t(res.response.data.error),
             });
           } else {
             this.raiseError();

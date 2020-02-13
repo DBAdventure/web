@@ -182,15 +182,17 @@
       },
       joinGuild(id) {
         api.joinGuild(id).then(() => {
-          this.$Notice.success({
+          this.$notify({
+            group: 'success',
             title: this.$t('notice.success'),
-            desc: this.$t('guild.request.created'),
+            text: this.$t('guild.request.created'),
           });
           this.$router.push('/guild');
         }).catch(() => {
-          this.$Notice.error({
+          this.$notify({
+            group: 'error',
             title: this.$t('notice.error'),
-            desc: this.$t('notice.generic'),
+            text: this.$t('notice.generic'),
           });
         });
       },

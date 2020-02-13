@@ -342,9 +342,10 @@
         }).then(() => {
           this.$router.push('/account');
         }).catch((err) => {
-          this.$Notice.error({
+          this.$notify({
+            group: 'error',
             title: this.$t('notice.error'),
-            desc: this.$t(err.message),
+            text: this.$t(err.message),
           });
           this.password = '';
         });
@@ -354,9 +355,10 @@
           EventBus.$emit('reload-map');
           this.$store.dispatch('fetchPlayer');
         }).catch((err) => {
-          this.$Notice.error({
+          this.$notify({
+            group: 'error',
             title: this.$t('notice.error'),
-            desc: this.$t(err.response.data.error),
+            text: this.$t(err.response.data.error),
           });
         });
       },
@@ -365,9 +367,10 @@
         api.convert().then(() => {
           this.$store.dispatch('fetchPlayer');
         }).catch(() => {
-          this.$Notice.error({
+          this.$notify({
+            group: 'error',
             title: this.$t('notice.error'),
-            desc: this.$t('error.convert.forbidden'),
+            text: this.$t('error.convert.forbidden'),
           });
         }).finally(() => {
           this.loadingConvert = false;

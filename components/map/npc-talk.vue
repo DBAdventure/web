@@ -68,16 +68,18 @@
         case 'talk':
           await api.askQuest(this.quest.id).then((res) => {
             res.data.messages.forEach((msg) => {
-              this.$Notice.success({
+              this.$notify({
+                group: 'success',
                 title: this.$t('notice.success'),
-                desc: this.handleMessages(msg),
+                text: this.handleMessages(msg),
               });
             });
             EventBus.$emit('reload-map');
           }).catch((err) => {
-            this.$Notice.error({
+            this.$notify({
+              group: 'error',
               title: this.$t('notice.error'),
-              desc: this.$t(err.response.data.error),
+              text: this.$t(err.response.data.error),
             });
           });
           break;
