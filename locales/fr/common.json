@@ -1058,7 +1058,8 @@
       "outbox": "Message envoyés aux membres de la guilde"
     },
     "message": {
-      "sent": "Message envoyé à {names}"
+      "sent": "Message envoyé à {names}",
+      "unsent": "Message non envoyé"
     }
   },
   "home": {
@@ -1087,7 +1088,7 @@
   },
   "choice": {
     "character": "-> Choix du personnage",
-    "group": "-> Choix du gorupe",
+    "group": "-> Choix du groupe",
     "clothes": "-> Choix des vêtements"
   },
   "profile": {

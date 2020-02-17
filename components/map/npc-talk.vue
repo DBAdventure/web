@@ -7,24 +7,24 @@
       v-model="questResult"
     />
 
-    <Button
-      type="primary"
-      size="small"
+    <b-button
+      variant="primary"
+      size="sm"
       v-if="playerQuest === null"
       @click.prevent="runAction('talk')"
     >
       {{ $t('game.quest.accept') }}
-    </Button>
+    </b-button>
 
 
-    <Button
-      type="primary"
-      size="small"
+    <b-button
+      variant="primary"
+      size="sm"
       v-if="playerQuest !== null && playerQuest.is_in_progress && questResult"
       @click.prevent="runAction('talk')"
     >
       {{ $t('game.quest.return') }}
-    </Button>
+    </b-button>
   </div>
 </template>
 

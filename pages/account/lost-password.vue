@@ -43,7 +43,7 @@
           <b-button
             variant="primary"
             @click.prevent="handleSubmit()"
-            long
+            block
           >
             {{ $t('register.text') }}
           </b-button>

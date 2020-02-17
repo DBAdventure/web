@@ -409,7 +409,10 @@
             v-model="player.race"
             required
           >
-            <b-form-select-option :value="null">{{ $t('form.choice.appearance') }}</b-form-select-option>
+            <b-form-select-option :value="null">
+              {{ $t('form.choice.appearance') }}
+            </b-form-select-option>
+
             <b-form-select-option
               v-for="race in races"
               :key="race.value"
@@ -425,7 +428,9 @@
             clearable
             required
           >
-            <b-form-select-option :value="null">{{ $t('choice.character') }}</b-form-select-option>
+            <b-form-select-option :value="null">
+              {{ $t('choice.character') }}
+            </b-form-select-option>
             <b-form-select-option
               v-for="(value, key) in appearances[player.race]"
               :key="key"
@@ -740,17 +745,17 @@
 </template>
 
 <script>
-  import {random, trim} from 'lodash';
-  import settings from '~/config/general.config';
-  import api from '~/services/api';
-  import ErrorMixin from '~/components/mixins/error';
-  import {isEmpty, entries} from '~/lib/utils';
+  import {random} from 'lodash';
   import {
     required,
     minLength,
     sameAs,
     email,
   } from 'vuelidate/lib/validators';
+  import settings from '~/config/general.config';
+  import api from '~/services/api';
+  import ErrorMixin from '~/components/mixins/error';
+  import {isEmpty, entries} from '~/lib/utils';
 
   export default {
     mixins: [

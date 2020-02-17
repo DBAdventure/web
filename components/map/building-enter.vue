@@ -22,7 +22,7 @@
         v-html="$t('game.shop.text', {player: me.name, name: building.name})"
       />
       <b-table
-        :fields="shopColumns()"
+        :fields="getShopColumns()"
         :items="objects"
         width="630"
         striped
@@ -154,7 +154,7 @@
       />
 
       <b-table
-        :fields="shopSpellColumns()"
+        :fields="getShopSpellColumns()"
         :items="objects"
         width="630"
         striped
@@ -301,7 +301,7 @@
         }
       },
 
-      shopColumns() {
+      getShopColumns() {
         return [
           'index',
           {key: 'description', label: this.$t('object.description')},
@@ -310,7 +310,7 @@
           {key: 'action', label: this.$t('object.action')},
         ];
       },
-      shopSpellColumns() {
+      getShopSpellColumns() {
         return [
           {key: 'name', label: this.$t('object.name')},
           {key: 'description', label: this.$t('object.description')},
