@@ -28,29 +28,31 @@
       </h1>
       <template v-if="!currentPlayer.getGuild().enabled">
         <p>{{ $t('guild.not.enabled') }}</p>
-        <Poptip
-          confirm
+        <b-modal
           :title="$t('modal.confirm.guild.cancel')"
-          @on-ok="leaveGuild()"
+          @ok="leaveGuild()"
+          id="guild-cancel"
+        />
+        <a
+          href="#"
+          @click.prevent=""
+          v-b-modal.guild-cancel
         >
-          <a
-            href="#"
-            @click.prevent=""
-          >{{ $t('guild.cancel') }}</a>
-        </Poptip>
+          {{ $t('guild.cancel') }}
+        </a>
       </template>
       <template v-else-if="!currentPlayer.guild_player.enabled">
         <p>{{ $t('guild.player.not.enabled') }}</p>
-        <Poptip
-          confirm
+        <b-modal
           :title="$t('modal.confirm.guild.request.leave')"
-          @on-ok="leaveGuild()"
-        >
-          <a
-            href="#"
-            @click.prevent=""
-          >{{ $t('guild.request.cancel') }}</a>
-        </Poptip>
+          id="guild-leave"
+          @ok="leaveGuild()"
+        />
+        <a
+          href="#"
+          @click.prevent=""
+          v-b-modal.guild-leave
+        >{{ $t('guild.request.cancel') }}</a>
       </template>
       <template v-else>
         <guild-menu />

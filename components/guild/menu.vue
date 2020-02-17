@@ -30,16 +30,18 @@
     </ul>
 
     <div class="bottom">
-      <Poptip
-        confirm
+      <b-modal
         :title="$t('modal.confirm.guild.leave')"
-        @on-ok="leaveGuild()"
+        @ok="leaveGuild()"
+        id="guild-leave"
+      />
+      <a
+        href="#"
+        @click.prevent=""
+        v-b-modal.guild-leave
       >
-        <a
-          href="#"
-          @click.prevent=""
-        >{{ $t('guild.leave') }}</a>
-      </Poptip>
+        {{ $t('guild.leave') }}
+      </a>
       -
       <router-link to="/guild/list">
         {{ $t('guild.viewOthers') }}
