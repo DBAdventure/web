@@ -99,28 +99,34 @@
       />
 
       <p v-html="$t('game.bank.deposit')" />
-      <b-form inline>
+      <b-form
+        inline
+        class="justify-content-md-center"
+      >
         <b-input-group>
           <b-form-input
             v-model="depositAmount"
             type="number"
           />
-        </b-input-group>
 
-        <b-input-group-append>
-          <b-button
-            variant="primary"
-            @click.prevent="runAction('deposit', depositAmount)"
-          >
-            <b-icon
-              icon="archive"
-            />
-          </b-button>
-        </b-input-group-append>
+          <b-input-group-append>
+            <b-button
+              variant="primary"
+              @click.prevent="runAction('deposit', depositAmount)"
+            >
+              <b-icon
+                icon="archive"
+              />
+            </b-button>
+          </b-input-group-append>
+        </b-input-group>
       </b-form>
 
       <p v-html="$t('game.bank.withdraw')" />
-      <b-form inline text-center>
+      <b-form
+        inline
+        class="justify-content-md-center"
+      >
         <b-input-group>
           <b-form-input
             v-model="withdrawAmount"

@@ -18,7 +18,7 @@
                 placement="auto"
                 width="300"
                 triggers="hover"
-                :target="`object-${index}-${playerObject.object.id}`"
+                :id="`object-${index}-${playerObject.object.id}`"
               >
                 <object-description :object="playerObject.object" />
               </b-popover>
@@ -71,7 +71,7 @@
           v-if="objects[type]"
         >
           <div
-            v-for="playerObject in getNotEquippedObjects()"
+            v-for="(playerObject, index) in getNotEquippedObjects()"
             :key="playerObject.id"
           >
             <b-popover
@@ -102,16 +102,16 @@
                 {{ $t('inventory.equip') }}
               </b-button>
 
-              <b-popover
+              <b-modal
                 confirm
                 :title="$t('modal.confirm.drop')"
-                @on-ok="drop(playerObject.object.id)"
-                :target="`object-drop-${index}-${playerObject.object.id}`"
+                @ok="drop(playerObject.object.id)"
+                :id="`object-drop-${index}-${playerObject.object.id}`"
               />
               <b-button
                 variant="danger"
                 size="sm"
-                :id="`object-drop-${index}-${playerObject.object.id}`"
+                v-b-modal="`object-drop-${index}-${playerObject.object.id}`"
                 v-if="playerObject.can_be_dropped"
               >
                 {{ $t('inventory.drop') }}
@@ -127,7 +127,7 @@
         v-if="objects[type]"
       >
         <div
-          v-for="playerObject in objects[type]"
+          v-for="(playerObject, index) in objects[type]"
           :key="playerObject.id"
           v-if="!playerObject.equipped"
         >
@@ -151,6 +151,7 @@
           <div class="btn-group btn-group-xs">
             <template v-if="playerObject.can_be_used">
               <b-form-select
+                size="sm"
                 v-model="selectedObjects[playerObject.object.id]"
                 v-if="playerObject.can_use_many && playerObject.number > 1"
               >
@@ -163,31 +164,32 @@
                 </b-form-select-option>
               </b-form-select>
 
-              <b-popover
+              <b-modal
                 confirm
                 :title="$t('modal.confirm.use')"
-                @on-ok="use(playerObject.object.id)"
-                :target="`button-use-${index}-${playerObject.object.id}`"
+                @ok="use(playerObject.object.id)"
+                :id="`button-use-${index}-${playerObject.object.id}`"
               >
-              </b-popover>
+              </b-modal>
+
               <b-button
                 size="sm"
-                :id="`button-use-${index}-${playerObject.object.id}`"
+                v-b-modal="`button-use-${index}-${playerObject.object.id}`"
               >
                 {{ $t('inventory.use') }}
               </b-button>
             </template>
 
-            <b-popover
+            <b-modal
               confirm
               :title="$t('modal.confirm.drop')"
-              @on-ok="drop(playerObject.object.id)"
-              :target="`button-drop-${index}-${playerObject.object.id}`"
+              @ok="drop(playerObject.object.id)"
+              :id="`button-drop-${index}-${playerObject.object.id}`"
             />
             <b-button
               variant="danger"
               size="sm"
-              :id="`button-drop-${index}-${playerObject.object.id}`"
+              v-b-modal="`button-drop-${index}-${playerObject.object.id}`"
               v-if="playerObject.can_be_dropped"
             >
               {{ $t('inventory.drop') }}

@@ -106,6 +106,8 @@
 
     <div v-if="!action">
       <b-button
+        size="sm"
+        variant="primary"
         @click.prevent="runAction('heal', currentPlayer.id)"
         v-if="currentPlayer.health < currentPlayer.total_max_health && currentPlayer.action_points >= settings.player.HEAL_ACTION"
       >
@@ -117,6 +119,8 @@
         {{ $t('map.action.self.heal', {'AP': settings.player.HEAL_ACTION}) }}
       </b-button>
       <b-button
+        size="sm"
+        variant="primary"
         @click.prevent="runAction('spell', currentPlayer.id)"
         v-if="currentPlayer.action_points >= settings.player.SPELL_ACTION"
       >
@@ -164,7 +168,7 @@
               </FormItem>
               <FormItem>
                 <b-button
-                  type="primary"
+                  variant="primary"
                   @click="giveZenis()"
                   :disabled="this.give.zenis === 0"
                 >
@@ -401,7 +405,8 @@
                 v-if="distance == 0"
               >
                 <b-button
-                  size="small"
+                  size="sm"
+                  variant="primary"
                   @click.prevent="runAction('building-enter', building.id)"
                 >
                   <template v-if="building.type == 1">

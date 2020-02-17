@@ -25,12 +25,22 @@
       <div class="col-lg-6">
         <p>{{ $t('ranking.playerSearch') }}</p>
 
-        <Input v-model="who" />
-        <Button
-          slot="append"
-          icon="ios-search"
-          @click.prevent="searchPlayer()"
-        />
+        <b-input-group>
+          <b-form-input
+            v-model="who"
+            size="sm"
+            @on:keyup.enter="searchPlayer()"
+          />
+          <b-input-group-append>
+            <b-button
+              size="sm"
+              variant="primary"
+              @click.prevent="searchPlayer()"
+            >
+              <b-icon icon="search" />
+            </b-button>
+          </b-input-group-append>
+        </b-input-group>
       </div>
     </div>
 
