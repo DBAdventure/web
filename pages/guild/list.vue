@@ -4,10 +4,30 @@
       {{ $t('guilds') }}
     </h1>
 
-    <Table
-      :columns="guildsColumns()"
-      :data="guildsData()"
-    />
+    <b-table
+      :fields="getGuildsColumns()"
+      :items="guildsData()"
+    >
+      <template v-slot:cell(view)="data">
+        <b-button
+          variant="primary"
+          size="sm"
+          @click="selectGuild(data.item)"
+        >
+          {{ $t('guild.buttons.view') }}
+        </b-button>
+      </template>
+
+      <template v-slot:cell(join)="data">
+        <b-button
+          variant="primary"
+          size="sm"
+          @click="joinGuild(data.item.id)"
+        >
+          {{ $t('guild.buttons.join') }}
+        </b-button>
+      </template>
+    </b-table>
 
     <div
       v-if="selectedGuild"
@@ -39,13 +59,24 @@
           {{ $t('guild.join') }}
         </Button>
       </div>
+
       <h2 class="little-title">
         {{ $t('guild.membersList') }}
       </h2>
-      <Table
-        :columns="guildPlayersColumns()"
-        :data="selectedGuildPlayers"
-      />
+
+      <b-table
+        :fields="getGuildPlayersColumns()"
+        :items="selectedGuildPlayers"
+      >
+        <template v-slot:cell(name)="data">
+          <router-link
+            :to="`/player/info/${data.item.id}`"
+          >
+            <img :src="`${data.item.image_path}`" />
+            {{ data.value }}
+          </router-link>
+        </template>
+      </b-table>
     </div>
   </div>
 </template>
@@ -78,55 +109,26 @@
       };
     },
     methods: {
-      guildsColumns() {
+      getGuildsColumns() {
         const columns = [
           {
-            title: this.$t('name'),
+            label: this.$t('name'),
             key: 'name',
           },
           {
-            title: this.$t('guild.shortName'),
+            label: this.$t('guild.shortName'),
             key: 'short_name',
           },
           {
-            title: this.$t('guild.buttons.view'),
-            width: 75,
-            render: (h, params) => h(
-              'Button',
-              {
-                props: {
-                  type: 'primary',
-                  size: 'small',
-                },
-                on: {
-                  click: () => {
-                    this.selectGuild(params.row);
-                  },
-                },
-              },
-              this.$t('guild.buttons.view'),
-            ),
+            label: this.$t('guild.buttons.view'),
+            key: 'view',
           },
         ];
 
         if (!this.currentPlayer.guild_player) {
           columns.push({
-            title: this.$t('guild.buttons.join'),
-            render: (h, params) => h(
-              'Button',
-              {
-                props: {
-                  type: 'primary',
-                  size: 'small',
-                },
-                on: {
-                  click: () => {
-                    this.joinGuild(params.row.id);
-                  },
-                },
-              },
-              this.$t('guild.buttons.join'),
-            ),
+            label: this.$t('guild.buttons.join'),
+            key: 'join',
           });
         }
 
@@ -135,27 +137,15 @@
       guildsData() {
         return this.guilds;
       },
-      guildPlayersColumns() {
+      getGuildPlayersColumns() {
         return [
           {
-            title: this.$t('name'),
-            render: (h, params) => h(
-              'router-link',
-              {
-                props: {
-                  to: `/player/info/${params.row.id}`,
-                },
-                domProps: {
-                  innerHTML: `<img src="${params.row.image_path}"/> ${params.row.name}`,
-                },
-              },
-            ),
+            label: this.$t('name'),
+            key: 'name',
           },
           {
-            title: this.$t('level'),
+            label: this.$t('level'),
             key: 'level',
-            width: 70,
-            align: 'center',
           },
         ];
       },
