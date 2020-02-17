@@ -35,7 +35,7 @@
           <b-dropdown-divider></b-dropdown-divider>
 
           <template v-if="currentPlayer.is_admin">
-            <b-dropdown-item href="/admin" target="_blank">
+            <b-dropdown-item href="/admin/" target="_blank">
               <b-icon icon="gear" />
               {{ $t('header.admin') }}
             </b-dropdown-item>
