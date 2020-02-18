@@ -8,7 +8,10 @@
       slot="body"
       slot-scope="props"
     >
-      <div class="vue-notification" :class="group">
+      <div
+        class="vue-notification"
+        :class="group"
+      >
         <div class="vue-notification-notice-content">
           <span class="vue-notification-icon vue-notification-icon-info">
             <b-icon icon="check-circle" />

@@ -80,13 +80,14 @@
       />
     </div>
 
-    <Table
-      :columns="statsColumns"
-      :data="statsData"
-      stripped
-      size="small"
-      width="625"
-      border
+    <b-table
+      :fields="getStatsColumns"
+      :items="statsData"
+      width="150"
+      striped
+      small
+      dark
+      bordered
     />
 
     <div class="profile-data">
@@ -262,7 +263,7 @@
     },
     data() {
       return {
-        statsColumns: [
+        getStatsColumns: [
           {
             key: 'type',
             width: 100,

@@ -599,8 +599,8 @@
       isAttackAction() {
         return (
           this.action === 'attack'
-            || this.action === 'attack-betray'
-            || this.action === 'attack-revenge'
+          || this.action === 'attack-betray'
+          || this.action === 'attack-revenge'
         )
           && this.currentPlayer.action_points >= this.settings.player.ATTACK_ACTION
           && !this.parameters.isDead;

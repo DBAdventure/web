@@ -1,5 +1,9 @@
 <template>
-  <img v-b-popover.hover.top="`${x}, ${y}`" :title="title" :src="image">
+  <img
+    v-b-popover.hover.top="`${x}, ${y}`"
+    :title="title"
+    :src="image"
+  >
 </template>
 
 <script>

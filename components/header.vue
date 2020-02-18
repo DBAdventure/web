@@ -35,14 +35,20 @@
           <b-dropdown-divider></b-dropdown-divider>
 
           <template v-if="currentPlayer.is_admin">
-            <b-dropdown-item href="/admin/" target="_blank">
+            <b-dropdown-item
+              href="/admin/"
+              target="_blank"
+            >
               <b-icon icon="gear" />
               {{ $t('header.admin') }}
             </b-dropdown-item>
             <b-dropdown-divider></b-dropdown-divider>
           </template>
 
-          <b-dropdown-item href="#" @click.prevent="logout()">
+          <b-dropdown-item
+            href="#"
+            @click.prevent="logout()"
+          >
             <b-icon icon="unlock" />
             {{ $t('header.logout') }}
           </b-dropdown-item>

@@ -378,7 +378,7 @@
                           type: 'info',
                           size: 'small',
                           disabled: params.row.rank.role
-                          === this.settings.guild.ROLE_PLAYER,
+                            === this.settings.guild.ROLE_PLAYER,
                         },
                       },
                       this.ranks[this.settings.guild.ROLE_PLAYER],
@@ -411,7 +411,7 @@
                           type: 'warning',
                           size: 'small',
                           disabled: params.row.rank.role
-                          === this.settings.guild.ROLE_MODO,
+                            === this.settings.guild.ROLE_MODO,
                         },
                       },
                       this.ranks[this.settings.guild.ROLE_MODO],
