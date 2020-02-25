@@ -8,6 +8,7 @@
         "dev": "rm -rf .cache && node server.js",
         "build": "nuxt build",
         "lint": "eslint -c .eslintrc.js --ext .js,.vue .",
+        "fix-lint": "eslint -c .eslintrc.js --ext .js,.vue . --fix",
         "test": "npm run lint"
     },
     "dependencies": {

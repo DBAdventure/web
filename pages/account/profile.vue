@@ -152,9 +152,9 @@
         <span
           v-html="$t('profile.stats.nbTotalKill', {value: currentPlayer.stats.nb_kill_good + currentPlayer.stats.nb_kill_bad + currentPlayer.stats.nb_kill_npc})"
         />
-            </br>
-            <span v-html="$t('profile.stats.nbDeahtCount', {value: currentPlayer.stats.death_count})" />
-            </br>
+        </br>
+        <span v-html="$t('profile.stats.nbDeahtCount', {value: currentPlayer.stats.death_count})" />
+        </br>
       </p>
     </div>
   </div>
@@ -206,7 +206,7 @@
           (
             (
               this.currentPlayer.battle_points
-                - this.currentPlayer.battle_points_remaining_start
+              - this.currentPlayer.battle_points_remaining_start
             ) * 100
           ) / this.currentPlayer.battle_points_remaining_end,
         );

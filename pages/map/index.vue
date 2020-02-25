@@ -472,11 +472,11 @@
 
               <span
                 v-html="$t('map.player.info', {
-                        sideClass: enemy.side.name,
-                        raceClass: enemy.race.name,
-                        side: $t(enemy.side.name),
-                        race: $t(enemy.race.name),
-                        class: $t(enemy.class)})"
+                  sideClass: enemy.side.name,
+                  raceClass: enemy.race.name,
+                  side: $t(enemy.side.name),
+                  race: $t(enemy.race.name),
+                  class: $t(enemy.class)})"
               />
 
               <template v-if="distance == 0">
@@ -618,8 +618,8 @@
       isAttackAction() {
         return (
           this.action === 'attack'
-            || this.action === 'attack-betray'
-            || this.action === 'attack-revenge'
+          || this.action === 'attack-betray'
+          || this.action === 'attack-revenge'
         )
           && this.currentPlayer.action_points >= this.settings.player.ATTACK_ACTION
           && !this.parameters.isDead;

@@ -15,7 +15,7 @@
     >
       <template v-slot:cell(name)="data">
         <router-link :to="`/player/info/${data.item.id}`">
-          <img :src="data.item.image_path"/>
+          <img :src="data.item.image_path" />
           {{ data.value }}
         </router-link>
       </template>
