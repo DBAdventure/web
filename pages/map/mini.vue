@@ -94,9 +94,7 @@
       };
     },
     computed: {
-      ...mapGetters([
-        'currentPlayer',
-      ]),
+      ...mapGetters('player', ['currentPlayer']),
     },
     asyncData({error}) {
       return api.getMiniMap().then((res) => (

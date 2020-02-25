@@ -144,9 +144,7 @@
       /* eslint-enable no-restricted-syntax */
     },
     computed: {
-      ...mapGetters([
-        'currentPlayer',
-      ]),
+      ...mapGetters('player', ['currentPlayer']),
       selectedImage() {
         return `/images/avatars/players/${this.player_appearance.image}`;
       },
@@ -164,7 +162,7 @@
             title: this.$t('notice.success'),
             text: this.$t('account.appearance.success'),
           });
-          this.$store.dispatch('fetchPlayer');
+          this.$store.dispatch('player/fetch');
         }).catch(() => {
           this.$notify({
             group: 'error',

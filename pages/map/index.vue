@@ -614,9 +614,7 @@
       NpcTalk,
     },
     computed: {
-      ...mapGetters([
-        'currentPlayer',
-      ]),
+      ...mapGetters('player', ['currentPlayer']),
       isAttackAction() {
         return (
           this.action === 'attack'
@@ -775,7 +773,7 @@
       giveZenis() {
         this.$nuxt.$loading.start();
         api.give(this.target.id, null, this.give.zenis).then(async (res) => {
-          await this.$store.dispatch('fetchPlayer');
+          await this.$store.dispatch('player/fetch');
           this.$notify({
             group: 'success',
             title: this.$t('notice.success'),
@@ -790,7 +788,7 @@
       giveObject(playerObject) {
         this.$nuxt.$loading.start();
         api.give(this.target.id, playerObject.object.id).then(async (res) => {
-          await this.$store.dispatch('fetchPlayer');
+          await this.$store.dispatch('player/fetch');
           this.$notify({
             group: 'success',
             title: this.$t('notice.success'),
@@ -859,7 +857,7 @@
         }
 
         await prom.then(async (res) => {
-          await this.$store.dispatch('fetchPlayer');
+          await this.$store.dispatch('player/fetch');
           if (what !== 'spell') {
             this.selectedSpell = null;
           }

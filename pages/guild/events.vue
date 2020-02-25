@@ -46,9 +46,7 @@
       GuildEvent,
     },
     computed: {
-      ...mapGetters([
-        'currentPlayer',
-      ]),
+      ...mapGetters('player', ['currentPlayer']),
     },
     head() {
       return {

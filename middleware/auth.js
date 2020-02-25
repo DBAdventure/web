@@ -1,6 +1,6 @@
 export default async ({store, error}) => {
-  await store.dispatch('fetchPlayer');
-  await store.dispatch('fetchGameData');
+  await store.dispatch('player/fetch');
+  await store.dispatch('game/fetch');
 
   if (!store.state.player.connected) {
     error({

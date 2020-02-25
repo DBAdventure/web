@@ -240,7 +240,7 @@
         case 'buy':
           await api.buyObject(this.building.id, data).then((res) => {
             successMessage = this.handleMessages(res.data);
-            this.$store.dispatch('fetchPlayer');
+            this.$store.dispatch('player/fetch');
           }).catch((err) => {
             errorMessage = this.$t(err.response.data.error);
           });
@@ -248,7 +248,7 @@
         case 'buySpell':
           await api.buySpell(this.building.id, data).then((res) => {
             successMessage = this.handleMessages(res.data);
-            this.$store.dispatch('fetchPlayer');
+            this.$store.dispatch('player/fetch');
           }).catch((err) => {
             errorMessage = this.$t(err.response.data.error);
           });
@@ -256,7 +256,7 @@
         case 'teleport':
           await api.teleport(this.building.id, data).then(() => {
             EventBus.$emit('reload-map');
-            this.$store.dispatch('fetchPlayer');
+            this.$store.dispatch('player/fetch');
           }).catch(() => {
             errorMessage = this.$t('error.teleport.forbidden');
           });
@@ -264,7 +264,7 @@
         case 'deposit':
           await api.deposit(this.building.id, data).then((res) => {
             successMessage = this.handleMessages(res.data);
-            this.$store.dispatch('fetchPlayer');
+            this.$store.dispatch('player/fetch');
             this.goldBank = res.data.parameters.goldBank;
           }).catch((err) => {
             errorMessage = this.$t(err.response.data.error);
@@ -273,7 +273,7 @@
         case 'withdraw':
           await api.withdraw(this.building.id, data).then((res) => {
             successMessage = this.handleMessages(res.data);
-            this.$store.dispatch('fetchPlayer');
+            this.$store.dispatch('player/fetch');
             this.goldBank = res.data.parameters.goldBank;
           }).catch((err) => {
             errorMessage = this.$t(err.response.data.error);

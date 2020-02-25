@@ -97,9 +97,7 @@
       };
     },
     computed: {
-      ...mapGetters([
-        'currentPlayer',
-      ]),
+      ...mapGetters('player', ['currentPlayer']),
     },
     methods: {
       async leaveGuild() {
@@ -116,7 +114,7 @@
           this.raiseError();
         });
 
-        this.$store.dispatch('fetchPlayer');
+        this.$store.dispatch('player/fetch');
       },
     },
   };

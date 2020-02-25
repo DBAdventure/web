@@ -58,9 +58,7 @@
 
   export default {
     computed: {
-      ...mapGetters([
-        'currentPlayer',
-      ]),
+      ...mapGetters('player', ['currentPlayer']),
     },
     mixins: [
       ErrorMixin,
@@ -86,7 +84,7 @@
           this.raiseError();
         });
 
-        this.$store.dispatch('fetchPlayer');
+        this.$store.dispatch('player/fetch');
       },
     },
   };

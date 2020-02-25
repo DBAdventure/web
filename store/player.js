@@ -4,7 +4,7 @@ import settings from '~/config/general.config';
 import {isEmpty} from '~/lib/utils';
 import Player from '~/lib/player';
 import api from '~/services/api';
-import * as types from '../mutation-types';
+import * as types from './mutation-types';
 
 const state = () => ({
   auth: {},
@@ -19,14 +19,14 @@ if (!process.browser && !process.env.SOCKET_PATH && settings.PORT) {
 }
 
 const actions = {
-  async fetchPlayer({commit, dispatch}) {
+  async fetch({commit, dispatch}) {
     await api.getPlayer().then((res) => {
       commit(types.PLAYER, res.data);
       instance.post('/session/save', {
         data: res.data,
       });
     }).catch(() => {
-      dispatch('logout');
+      dispatch('player/logout');
     });
   },
 
@@ -35,7 +35,7 @@ const actions = {
       username,
       password,
     }).then(
-      () => dispatch('fetchPlayer'),
+      () => dispatch('player/fetch'),
     ).catch((error) => {
       if (error.response.status === 401) {
         throw new Error('error.bad.credentials');
@@ -49,6 +49,10 @@ const actions = {
     api.logout().then(() => {}).catch(() => {});
     instance.post('/session/clear').then(() => {}).catch(() => {});
     commit(types.PLAYER, null);
+  },
+
+  nuxtServerInit({commit}, {req}) {
+    commit(types.PLAYER, req.session.authPlayer);
   },
 };
 

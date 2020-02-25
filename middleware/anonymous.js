@@ -1,6 +1,6 @@
 export default async ({store, redirect}) => {
-  await store.dispatch('fetchGameData');
-  await store.dispatch('fetchPlayer');
+  await store.dispatch('game/fetch');
+  await store.dispatch('player/fetch');
 
   if (store.state.player.connected) {
     redirect('/account');

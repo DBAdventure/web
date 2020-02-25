@@ -59,11 +59,11 @@
       };
     },
     mounted() {
-      this.$store.dispatch('fetchGameData');
+      this.$store.dispatch('game/fetch');
       this.$store.watch((state) => state.player.connected, (value) => {
         if (value) {
           this.interval = setInterval(() => {
-            this.$store.dispatch('fetchPlayer');
+            this.$store.dispatch('player/fetch');
           }, 60000);
         } else {
           clearInterval(this.interval);

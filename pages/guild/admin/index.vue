@@ -285,9 +285,7 @@
       };
     },
     computed: {
-      ...mapGetters([
-        'currentPlayer',
-      ]),
+      ...mapGetters('player', ['currentPlayer']),
     },
     data() {
       return {
@@ -494,7 +492,7 @@
         case 'accept':
           await api.adminRequest(player.guild_player, what === 'accept').then((res) => {
             successMessage = this.handleMessages(res.data);
-            this.$store.dispatch('fetchPlayer');
+            this.$store.dispatch('player/fetch');
             this.getRequesters();
           }).catch((err) => {
             errorMessage = this.$t(err.response.data.error);
@@ -503,7 +501,7 @@
         case 'fired':
           await api.adminFired(player.guild_player).then((res) => {
             successMessage = this.handleMessages(res.data);
-            this.$store.dispatch('fetchPlayer');
+            this.$store.dispatch('player/fetch');
             this.getMembers();
           }).catch((err) => {
             errorMessage = this.$t(err.response.data.error);
@@ -514,7 +512,7 @@
         case this.settings.guild.ROLE_ADMIN:
           await api.adminGeneral(player.guild_player, {what}).then(() => {
             successMessage = this.$t('guild.admin.saved');
-            this.$store.dispatch('fetchPlayer');
+            this.$store.dispatch('player/fetch');
             this.manageGenerals();
           }).catch((err) => {
             errorMessage = this.$t(err.response.data.error);
@@ -557,7 +555,7 @@
             title: this.$t('notice.success'),
             text: this.$t('guild.admin.saved'),
           });
-          this.$store.dispatch('fetchPlayer');
+          this.$store.dispatch('player/fetch');
         }).catch((err) => {
           if (err.response.data.error) {
             this.$notify({
@@ -591,7 +589,7 @@
             title: this.$t('notice.success'),
             text: this.$t('guild.admin.saved'),
           });
-          this.$store.dispatch('fetchPlayer');
+          this.$store.dispatch('player/fetch');
         }).catch((err) => {
           if (err.response.data.error) {
             this.$notify({

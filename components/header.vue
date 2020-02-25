@@ -89,13 +89,11 @@
       ClickOutside,
     },
     computed: {
-      ...mapGetters([
-        'currentPlayer',
-      ]),
+      ...mapGetters('player', ['currentPlayer']),
     },
     methods: {
       logout() {
-        this.$store.dispatch('logout');
+        this.$store.dispatch('player/logout');
         this.$router.push('/');
         this.closeMenu();
       },

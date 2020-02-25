@@ -137,15 +137,13 @@
       };
     },
     computed: {
-      ...mapGetters([
-        'currentPlayer',
-      ]),
+      ...mapGetters('player', ['currentPlayer']),
     },
     methods: {
       async reloadObjects() {
         await api.getInventoryObjects().then((res) => {
           this.objects = res.data;
-          this.$store.dispatch('fetchPlayer');
+          this.$store.dispatch('player/fetch');
         });
       },
     },

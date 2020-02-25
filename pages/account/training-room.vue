@@ -64,9 +64,7 @@
       };
     },
     computed: {
-      ...mapGetters([
-        'currentPlayer',
-      ]),
+      ...mapGetters('player', ['currentPlayer']),
     },
     data() {
       return {
@@ -102,7 +100,7 @@
             title: this.$t('notice.success'),
             text: this.$t('training.success'),
           });
-          this.$store.dispatch('fetchPlayer');
+          this.$store.dispatch('player/fetch');
         }).catch(() => {
           this.$notify({
             group: 'error',

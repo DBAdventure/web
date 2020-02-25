@@ -123,9 +123,7 @@
       };
     },
     computed: {
-      ...mapGetters([
-        'currentPlayer',
-      ]),
+      ...mapGetters('player', ['currentPlayer']),
     },
     validations: {
       player: {
@@ -180,7 +178,7 @@
             title: this.$t('notice.success'),
             text: this.$t('account.saved'),
           });
-          this.$store.dispatch('fetchPlayer');
+          this.$store.dispatch('player/fetch');
         }).catch((err) => {
           if (err.response.data.error) {
             this.$notify({

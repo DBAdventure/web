@@ -336,7 +336,7 @@
   export default {
     methods: {
       login() {
-        this.$store.dispatch('login', {
+        this.$store.dispatch('player/login', {
           username: this.username,
           password: this.password,
         }).then(() => {
@@ -353,7 +353,7 @@
       move(where) {
         api.move(where).then(() => {
           EventBus.$emit('reload-map');
-          this.$store.dispatch('fetchPlayer');
+          this.$store.dispatch('player/fetch');
         }).catch((err) => {
           this.$notify({
             group: 'error',
@@ -365,7 +365,7 @@
       convert() {
         this.loadingConvert = true;
         api.convert().then(() => {
-          this.$store.dispatch('fetchPlayer');
+          this.$store.dispatch('player/fetch');
         }).catch(() => {
           this.$notify({
             group: 'error',
@@ -385,9 +385,7 @@
       };
     },
     computed: {
-      ...mapGetters([
-        'currentPlayer',
-      ]),
+      ...mapGetters('player', ['currentPlayer']),
       hPercent() {
         return Math.floor(
           (this.currentPlayer.health * 100) / this.currentPlayer.total_max_health,
