@@ -114,7 +114,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import {mapGetters} from 'vuex';
   import settings from '~/config/general.config';
   import api from '~/services/api';
@@ -137,15 +137,13 @@
       };
     },
     computed: {
-      ...mapGetters([
-        'currentPlayer',
-      ]),
+      ...mapGetters('player', ['currentPlayer']),
     },
     methods: {
       async reloadObjects() {
         await api.getInventoryObjects().then((res) => {
           this.objects = res.data;
-          this.$store.dispatch('fetchPlayer');
+          this.$store.dispatch('player/fetch');
         });
       },
     },

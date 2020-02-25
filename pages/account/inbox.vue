@@ -87,10 +87,49 @@
             </template>
           </h2>
 
-          <Table
-            :columns="getTableColumns()"
-            :data="messages"
-          />
+          <b-table
+            :fields="getTableColumns()"
+            :items="messages"
+            select-mode="multi"
+            selectable
+          >
+            <template v-slot:cell(selected)="{rowSelected}">
+              <template v-if="rowSelected">
+                <span aria-hidden="true">&check;</span>
+                <span class="sr-only">Selected</span>
+              </template>
+              <template v-else>
+                <span aria-hidden="true">&nbsp;</span>
+                <span class="sr-only">Not selected</span>
+              </template>
+            </template>
+
+            <template v-slot:cell(status)="data">
+              <img :src="`/images/inbox/${data.value === status.unread ? 'unread' : 'read'}.png`" />
+            </template>
+
+            <template v-slot:cell(created_at)="data">
+              {{ $moment(data.value).fromNow() }}
+            </template>
+
+            <template v-slot:cell(sender)="data">
+              {{ getPlayer(data.value).getDisplayName() }}
+            </template>
+
+            <template v-slot:cell(recipient)="data">
+              {{ getPlayer(data.value).getDisplayName() }}
+            </template>
+
+            <template v-slot:cell(action)="data">
+              <b-button
+                variant="primary"
+                size="sm"
+                @click="readMessage(data.item.id)"
+              >
+                {{ $t('inbox.read') }}
+              </b-button>
+            </template>
+          </b-table>
         </template>
         <template v-else-if="page === type.read">
           <h2 class="subtitle text-center">
@@ -120,30 +159,30 @@
           </div>
 
           <div>
-            <Button @click.prevent="back(directory)">
+            <b-button @click.prevent="back(directory)">
               {{ $t('inbox.back') }}
-            </Button>
+            </b-button>
 
-            <Button
+            <b-button
               v-if="currentMessage.recipient.id === currentPlayer.id"
               @click.prevent="replyMessage()"
             >
               <img
                 src="/images/inbox/reply.png"
                 alt=""
-              > {{ $t('inbox.reply') }}
-            </Button>
+              /> {{ $t('inbox.reply') }}
+            </b-button>
 
-            <Button @click.prevent="deleteMessage()">
-              <img src="/images/inbox/delete.png"> {{ $t('inbox.delete') }}
-            </Button>
+            <b-button @click.prevent="deleteMessage()">
+              <img src="/images/inbox/delete.png" /> {{ $t('inbox.delete') }}
+            </b-button>
 
-            <Button
+            <b-button
               v-if="currentMessage.can_archive"
               @click.prevent="archiveMessage()"
             >
-              <img src="/images/inbox/archive.png"> {{ $t('inbox.archive') }}
-            </Button>
+              <img src="/images/inbox/archive.png" /> {{ $t('inbox.archive') }}
+            </b-button>
           </div>
         </template>
         <template v-else-if="page === type.write">
@@ -151,85 +190,79 @@
             {{ $t('inbox.write') }}
           </h2>
 
-          <Form
-            ref="inboxForm"
-            id="inbox-write-form"
-          >
+          <b-form>
             <template v-if="currentMessage === null">
               <div class="text-center">
-                <Button @click.prevent="addRecipient()">
-                  <Icon type="plus-round" />
+                <b-button @click.prevent="addRecipient()">
+                  <b-icon icon="plus" />
                   {{ $t('form.add.recipient') }}
-                </Button>
+                </b-button>
+
                 <div class="clearfix">
-&nbsp;
+                  &nbsp;
                 </div>
               </div>
 
               <div id="recipients">
-                <Form-item
+                <b-form-group
                   v-for="(value, key) in message.recipients"
                   :key="key"
                   :label="$t('form.recipient')"
-                  :label-width="150"
+                  :label-cols-lg="3"
                   required
                 >
-                  <Input
+                  <b-form-input
                     :placeholder="$t('form.recipient')"
                     v-model="message.recipients[key]"
-                    type="text"
                   />
-                  <Button
+                  <b-button
                     slot="append"
                     icon="close-round"
                     @click.prevent="removeRecipient(key)"
                   />
-                  </Input>
-                </Form-item>
+                </b-form-group>
               </div>
             </template>
 
-            <Form-item
+            <b-form-group
               :label="$t('form.subject')"
-              :label-width="150"
+              :label-cols-lg="3"
               required
               v-if="currentMessage === null"
             >
-              <Input
+              <b-form-input
                 name="subject"
                 :placeholder="$t('form.subject')"
                 v-model="message.subject"
-                type="text"
               />
-            </Form-item>
+            </b-form-group>
 
-            <Form-item
+            <b-form-group
               :label="$t('form.message')"
-              :label-width="150"
+              :label-cols-lg="3"
               required
             >
-              <Input
+              <b-form-textarea
                 name="message"
                 :rows="4"
                 :placeholder="$t('form.message')"
                 v-model="message.message"
-                type="textarea"
               />
-            </Form-item>
+            </b-form-group>
 
             <div class="text-right">
-              <Button @click="submitMessage()">
+              <b-button @click="submitMessage()">
                 {{ $t('form.send') }}
-              </Button>
+              </b-button>
             </div>
-          </Form>
+          </b-form>
         </template>
       </div>
     </div>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import {mapGetters} from 'vuex';
   import _ from 'lodash';
   import {isEmpty} from '~/lib/utils';
@@ -247,9 +280,7 @@
       };
     },
     computed: {
-      ...mapGetters([
-        'currentPlayer',
-      ]),
+      ...mapGetters('player', ['currentPlayer']),
     },
     data() {
       return {
@@ -282,81 +313,48 @@
     methods: {
       getTableColumns() {
         const columns = [
+          'selected',
           {
-            type: 'selection',
-            width: 30,
-            align: 'center',
-          },
-          {
-            title: this.$t('inbox.status'),
-            align: 'center',
+            label: this.$t('inbox.status'),
             key: 'status',
-            render: (h, params) => {
-              const status = params.row.status === this.status.unread ? 'unread' : 'read';
-              return h(
-                'div',
-                {
-                  domProps: {
-                    innerHTML: `<img src="/images/inbox/${status}.png"/>`,
-                  },
-                },
-              );
-            },
           },
           {
-            title: this.$t('inbox.date'),
+            label: this.$t('inbox.date'),
             key: 'created_at',
-            render: (h, params) => this.$moment(params.row.created_at).fromNow(),
           },
         ];
 
         if (this.directory === this.type.inbox || this.directory === this.type.archive) {
           columns.push({
-            title: this.$t('inbox.sender'),
+            label: this.$t('inbox.sender'),
             key: 'sender',
-            render: (h, params) => this.getPlayer(params.row.sender).getDisplayName(),
           });
         }
 
         if (this.directory !== this.type.inbox || this.directory === this.type.archive) {
           columns.push({
-            title: this.$t('inbox.recipient'),
+            label: this.$t('inbox.recipient'),
             key: 'recipient',
-            render: (h, params) => this.getPlayer(params.row.recipient).getDisplayName(),
           });
         }
 
         columns.push({
-          title: this.$t('inbox.subject'),
+          label: this.$t('inbox.subject'),
           key: 'subject',
         });
+
         columns.push({
-          title: this.$t('inbox.actions'),
+          label: this.$t('inbox.actions'),
           key: 'action',
-          render: (h, params) => h(
-            'Button',
-            {
-              props: {
-                type: 'primary',
-                size: 'small',
-              },
-              on: {
-                click: () => {
-                  this.readMessage(params.row.id);
-                },
-              },
-            },
-            this.$t('inbox.read'),
-          ),
         });
 
         return columns;
       },
       selectDirectory(directory) {
         this.page = this.type.loading;
-        this.$Loading.start();
+        this.$nuxt.$loading.start();
         api.getInboxDirectory(directory).then((res) => {
-          this.$Loading.finish();
+          this.$nuxt.$loading.finish();
           this.page = this.type.list;
           this.directory = directory;
           this.messages = res.data.messages;
@@ -376,33 +374,33 @@
       },
       deleteMessage() {
         this.page = this.type.loading;
-        this.$Loading.start();
+        this.$nuxt.$loading.start();
         api.deleteMessage(this.currentMessage.id).then(() => {
           this.selectDirectory(this.directory);
-          this.$Loading.finish();
+          this.$nuxt.$loading.finish();
         });
       },
       clearMessages(type) {
         this.page = this.type.loading;
-        this.$Loading.start();
+        this.$nuxt.$loading.start();
         api.clearMessages(type).then(() => {
           this.selectDirectory(this.directory);
         });
       },
       archiveMessage() {
         this.page = this.type.loading;
-        this.$Loading.start();
+        this.$nuxt.$loading.start();
         api.archiveMessage(this.currentMessage.id).then(() => {
           this.selectDirectory(this.type.archive);
         });
       },
       readMessage(id) {
         this.page = this.type.loading;
-        this.$Loading.start();
+        this.$nuxt.$loading.start();
         api.readMessage(id).then((res) => {
           this.page = this.type.read;
           this.currentMessage = res.data.message;
-          this.$Loading.finish();
+          this.$nuxt.$loading.finish();
         });
       },
       back(directory) {
@@ -415,7 +413,7 @@
         this.message.recipients.splice(index, 1);
       },
       submitMessage() {
-        this.$Loading.start();
+        this.$nuxt.$loading.start();
         const message = {...this.message};
         const recipients = [];
         _.uniq(message.recipients).forEach((r) => {
@@ -427,9 +425,10 @@
           && (message.recipients.length === 0
             || isEmpty(message.subject)
             || isEmpty(message.message))) {
-          this.$Notice.error({
+          this.$notify({
+            group: 'error',
             title: this.$t('notice.error'),
-            desc: this.$t('error.write'),
+            text: this.$t('error.write'),
           });
         } else {
           this.page = this.type.loading;
@@ -441,9 +440,18 @@
           }
 
           prom.then((res) => {
-            this.$Notice.success({
-              title: this.$t('inbox.message.sent', {names: res.data.recipients.join(', ')}),
-            });
+            if (res.data.recipients.length === 0) {
+              this.$notify({
+                group: 'error',
+                title: this.$t('inbox.message.unsent'),
+              });
+            } else {
+              this.$notify({
+                group: 'success',
+                title: this.$t('inbox.message.sent', {names: res.data.recipients.join(', ')}),
+              });
+            }
+
             this.message.subject = '';
             this.message.message = '';
             this.message.recipients = [''];

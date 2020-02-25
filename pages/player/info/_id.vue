@@ -66,7 +66,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import Player from '~/lib/player';
   import api from '~/services/api';
 

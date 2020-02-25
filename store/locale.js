@@ -1,6 +1,6 @@
 /* eslint-disable no-shadow, no-param-reassign */
 import settings from '~/config/general.config';
-import * as types from '../mutation-types';
+import * as types from './mutation-types';
 
 export const state = () => ({
   locales: ['en', 'fr'],

@@ -30,7 +30,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import {mapGetters} from 'vuex';
   import api from '~/services/api';
   import GuildEvent from '~/components/guild/event';
@@ -46,9 +46,7 @@
       GuildEvent,
     },
     computed: {
-      ...mapGetters([
-        'currentPlayer',
-      ]),
+      ...mapGetters('player', ['currentPlayer']),
     },
     head() {
       return {

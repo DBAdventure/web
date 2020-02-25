@@ -8,47 +8,49 @@
         <div v-if="isOneEquipped">
           <div
             class="equiped"
-            v-for="playerObject in objects[type]"
+            v-for="(playerObject, index) in objects[type]"
             :key="playerObject.id"
             v-if="playerObject.equipped"
           >
             <div class="inventory-box">
-              <Poptip
+              <b-popover
                 :title="playerObject.object.name"
-                placement="top"
+                placement="auto"
                 width="300"
-                trigger="hover"
+                triggers="hover"
+                :id="`object-${index}-${playerObject.object.id}`"
               >
-                <div slot="content">
-                  <object-description :object="playerObject.object" />
-                </div>
+                <object-description :object="playerObject.object" />
+              </b-popover>
 
-                <img
-                  :src="`/images/objects/${playerObject.object.image}`"
-                  @click.prevent="choose()"
-                ><br>
-              </Poptip>
+              <img
+                :id="`object-${index}-${playerObject.object.id}`"
+                :src="`/images/objects/${playerObject.object.image}`"
+                @click.prevent="choose()"
+              >
+              <br>
             </div>
-            <Button
-              size="small"
-              type="primary"
+
+            <b-button
+              size="sm"
+              variant="primary"
               @click.prevent="unequip(playerObject.object.id)"
             >
               {{ $t('inventory.unequip') }}
-            </Button>
+            </b-button>
           </div>
         </div>
         <div
           class="inventory-box"
           v-else
         >
-          <Button
-            size="small"
-            type="primary"
+          <b-button
+            size="sm"
+            variant="primary"
             @click.prevent="choose()"
           >
             {{ $t('inventory.choose') }}
-          </Button>
+          </b-button>
         </div>
       </template>
       <template v-else>
@@ -57,59 +59,67 @@
         </div>
       </template>
 
-      <Modal
+      <b-modal
         v-model="displayModal"
         effect="fade"
         :width="500"
+        hide-footer
+        hide-header
       >
         <div
           class="inventory clearfix"
           v-if="objects[type]"
         >
           <div
-            v-for="playerObject in getNotEquippedObjects()"
+            v-for="(playerObject, index) in getNotEquippedObjects()"
             :key="playerObject.id"
           >
-            <Poptip
+            <b-popover
               :title="playerObject.object.name"
               placement="top"
               width="300"
-              trigger="hover"
+              triggers="hover"
               class="image-block"
+              :target="`object-${index}-${playerObject.object.id}`"
             >
               <div slot="content">
                 <object-description :object="playerObject.object" />
               </div>
-              <img :src="`/images/objects/${playerObject.object.image}`">
-            </Poptip>
+            </b-popover>
+            <img
+              :id="`object-${index}-${playerObject.object.id}`"
+              :src="`/images/objects/${playerObject.object.image}`"
+            />
             <br>
+
             <div class="btn-group btn-group-xs">
-              <Button
-                size="small"
+              <b-button
+                size="sm"
+                variant="success"
                 @click.prevent="equip(playerObject.object.id)"
                 v-if="playerObject.can_be_equipped"
               >
                 {{ $t('inventory.equip') }}
-              </Button>
+              </b-button>
 
-              <Poptip
+              <b-modal
                 confirm
                 :title="$t('modal.confirm.drop')"
-                @on-ok="drop(playerObject.object.id)"
+                @ok="drop(playerObject.object.id)"
+                :id="`object-drop-${index}-${playerObject.object.id}`"
+              />
+              <b-button
+                variant="danger"
+                size="sm"
+                v-b-modal="`object-drop-${index}-${playerObject.object.id}`"
+                v-if="playerObject.can_be_dropped"
               >
-                <Button
-                  type="error"
-                  size="small"
-                  v-if="playerObject.can_be_dropped"
-                >
-                  {{ $t('inventory.drop') }}
-                </Button>
-              </Poptip>
+                {{ $t('inventory.drop') }}
+              </b-button>
             </div>
           </div>
         </div>
-        <div slot="footer" />
-      </Modal>
+      </b-modal>
     </template>
     <template v-else>
       <div
@@ -117,60 +127,73 @@
         v-if="objects[type]"
       >
         <div
-          v-for="playerObject in objects[type]"
+          v-for="(playerObject, index) in objects[type]"
           :key="playerObject.id"
           v-if="!playerObject.equipped"
         >
-          <Poptip
+          <b-popover
             :title="playerObject.object.name"
             placement="top"
             width="300"
-            trigger="hover"
+            triggers="hover"
+            :target="`object-${index}-${playerObject.object.id}`"
           >
             <div slot="content">
               <object-description :object="playerObject.object" />
             </div>
-            <img :src="`/images/objects/${playerObject.object.image}`">
-          </Poptip>
+          </b-popover>
+          <img
+            :id="`object-${index}-${playerObject.object.id}`"
+            :src="`/images/objects/${playerObject.object.image}`"
+          />
+
           <br>
           <div class="btn-group btn-group-xs">
             <template v-if="playerObject.can_be_used">
-              <Select
+              <b-form-select
+                size="sm"
                 v-model="selectedObjects[playerObject.object.id]"
                 v-if="playerObject.can_use_many && playerObject.number > 1"
               >
-                <Option
+                <b-form-select-option
                   :value="nb"
                   v-for="nb in playerObject.number"
                   :key="nb"
                 >
                   {{ nb }}
-                </Option>
-              </Select>
-              <Poptip
+                </b-form-select-option>
+              </b-form-select>
+
+              <b-modal
                 confirm
                 :title="$t('modal.confirm.use')"
-                @on-ok="use(playerObject.object.id)"
+                @ok="use(playerObject.object.id)"
+                :id="`button-use-${index}-${playerObject.object.id}`"
               >
-                <Button size="small">
-                  {{ $t('inventory.use') }}
-                </Button>
-              </Poptip>
+              </b-modal>
+
+              <b-button
+                size="sm"
+                v-b-modal="`button-use-${index}-${playerObject.object.id}`"
+              >
+                {{ $t('inventory.use') }}
+              </b-button>
             </template>
 
-            <Poptip
+            <b-modal
               confirm
               :title="$t('modal.confirm.drop')"
-              @on-ok="drop(playerObject.object.id)"
+              @ok="drop(playerObject.object.id)"
+              :id="`button-drop-${index}-${playerObject.object.id}`"
+            />
+            <b-button
+              variant="danger"
+              size="sm"
+              v-b-modal="`button-drop-${index}-${playerObject.object.id}`"
+              v-if="playerObject.can_be_dropped"
             >
-              <Button
-                type="error"
-                size="small"
-                v-if="playerObject.can_be_dropped"
-              >
-                {{ $t('inventory.drop') }}
-              </Button>
-            </Poptip>
+              {{ $t('inventory.drop') }}
+            </b-button>
           </div>
         </div>
       </div>
@@ -178,7 +201,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import api from '~/services/api';
   import ErrorMixin from '~/components/mixins/error';
   import MessagesMixin from '~/components/mixins/messages';
@@ -253,9 +276,10 @@
       },
       async unequip(objectId) {
         await api.unequipObject(objectId).then((res) => {
-          this.$Notice.success({
+          this.$notify({
+            group: 'success',
             title: this.$t('notice.success'),
-            desc: this.handleMessages(res.data),
+            text: this.handleMessages(res.data),
           });
         }).catch(() => {
           this.raiseError();
@@ -265,22 +289,25 @@
       async equip(objectId) {
         await api.equipObject(objectId).then(async (res) => {
           res.data.messages.forEach((msg) => {
-            this.$Notice.success({
+            this.$notify({
+              group: 'success',
               title: this.$t('notice.success'),
-              desc: this.handleMessages(msg),
+              text: this.handleMessages(msg),
             });
           });
           await this.$emit('reload');
         }).catch((err) => {
           if (err.response.data.error) {
-            this.$Notice.error({
+            this.$notify({
+              group: 'error',
               title: this.$t('notice.error'),
-              desc: err.response.data.error,
+              text: err.response.data.error,
             });
           } else {
-            this.$Notice.error({
+            this.$notify({
+              group: 'error',
               title: this.$t('notice.error'),
-              desc: this.$t('notice.generic'),
+              text: this.$t('notice.generic'),
             });
           }
         });
@@ -292,9 +319,10 @@
         }
 
         await api.dropObject(objectId, nb).then((res) => {
-          this.$Notice.success({
+          this.$notify({
+            group: 'success',
             title: this.$t('notice.success'),
-            desc: this.handleMessages(res.data),
+            text: this.handleMessages(res.data),
           });
         }).catch(() => {
           this.raiseError();
@@ -308,9 +336,10 @@
         }
 
         await api.useObject(objectId, nb).then((res) => {
-          this.$Notice.success({
+          this.$notify({
+            group: 'success',
             title: this.$t('notice.success'),
-            desc: this.handleMessages(res.data),
+            text: this.handleMessages(res.data),
           });
         }).catch(() => {
           this.raiseError();

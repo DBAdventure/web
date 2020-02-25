@@ -28,29 +28,31 @@
       </h1>
       <template v-if="!currentPlayer.getGuild().enabled">
         <p>{{ $t('guild.not.enabled') }}</p>
-        <Poptip
-          confirm
+        <b-modal
           :title="$t('modal.confirm.guild.cancel')"
-          @on-ok="leaveGuild()"
+          @ok="leaveGuild()"
+          id="guild-cancel"
+        />
+        <a
+          href="#"
+          @click.prevent=""
+          v-b-modal.guild-cancel
         >
-          <a
-            href="#"
-            @click.prevent=""
-          >{{ $t('guild.cancel') }}</a>
-        </Poptip>
+          {{ $t('guild.cancel') }}
+        </a>
       </template>
       <template v-else-if="!currentPlayer.guild_player.enabled">
         <p>{{ $t('guild.player.not.enabled') }}</p>
-        <Poptip
-          confirm
+        <b-modal
           :title="$t('modal.confirm.guild.request.leave')"
-          @on-ok="leaveGuild()"
-        >
-          <a
-            href="#"
-            @click.prevent=""
-          >{{ $t('guild.request.cancel') }}</a>
-        </Poptip>
+          id="guild-leave"
+          @ok="leaveGuild()"
+        />
+        <a
+          href="#"
+          @click.prevent=""
+          v-b-modal.guild-leave
+        >{{ $t('guild.request.cancel') }}</a>
       </template>
       <template v-else>
         <guild-menu />
@@ -71,7 +73,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import {mapGetters} from 'vuex';
   import api from '~/services/api';
   import GuildMenu from '~/components/guild/menu';
@@ -95,25 +97,24 @@
       };
     },
     computed: {
-      ...mapGetters([
-        'currentPlayer',
-      ]),
+      ...mapGetters('player', ['currentPlayer']),
     },
     methods: {
       async leaveGuild() {
-        this.$Loading.start();
+        this.$nuxt.$loading.start();
         await api.leaveGuild().then((res) => {
           const messages = res.data.messages.map((e) => this.$t(e));
-          this.$Notice.success({
+          this.$notify({
+            group: 'success',
             title: this.$t('notice.success'),
-            desc: messages.join('\n'),
+            text: messages.join('\n'),
           });
-          this.$Loading.finish();
+          this.$nuxt.$loading.finish();
         }).catch(() => {
           this.raiseError();
         });
 
-        this.$store.dispatch('fetchPlayer');
+        this.$store.dispatch('player/fetch');
       },
     },
   };

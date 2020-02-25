@@ -1,15 +1,12 @@
 <template>
-  <Poptip
+  <img
+    v-b-popover.hover.top="`${x}, ${y}`"
     :title="title"
-    :content="`${x}, ${y}`"
-    placement="top"
-    trigger="hover"
+    :src="image"
   >
-    <img :src="image">
-  </Poptip>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   export default {
     props: {
       x: {

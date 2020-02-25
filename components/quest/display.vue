@@ -67,9 +67,6 @@
         </template>
       </dl>
 
-      <p v-if="quest.requirements.length > 0">
-        <strong>{{ $t('requirements.name') }}</strong>
-      </p>
       <requirements :data="quest.requirements" />
 
       <p

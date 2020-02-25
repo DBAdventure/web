@@ -6,57 +6,65 @@
     <p>{{ $t('register.welcome') }}</p>
     <p>{{ $t('register.intro') }}</p>
 
-    <Form
-      ref="registerForm"
-      id="register-form"
-      class="form-horizontal"
-      :rules="registerRules"
-      :model="player"
-    >
+    <b-form>
       <h2>{{ $t('register.personalinfo') }}</h2>
 
-      <Form-item
+      <b-form-group
         :label="$t('form.login')"
-        :label-width="150"
-        prop="username"
+        :label-cols-lg="3"
         required
       >
-        <Input
-          name="username"
+        <b-input
           :placeholder="$t('form.login')"
           v-model="player.username"
-          type="text"
+          :class="{ 'is-invalid': submitted && $v.player.username.$error }"
         />
-      </Form-item>
-      <Form-item
+        <div
+          v-if="submitted && $v.player.username.$error"
+          class="invalid-feedback"
+        >
+          <span v-if="!$v.player.email.required">{{ $t('form.required') }}</span>
+        </div>
+      </b-form-group>
+      <b-form-group
         :label="$t('form.email')"
-        :label-width="150"
-        prop="email"
+        :label-cols-lg="3"
         required
       >
-        <Input
-          name="email"
+        <b-input
           :placeholder="$t('form.email')"
           v-model="player.email"
-          type="text"
+          :class="{ 'is-invalid': submitted && $v.player.email.$error }"
         />
-      </Form-item>
+        <div
+          v-if="submitted && $v.player.email.$error"
+          class="invalid-feedback"
+        >
+          <span v-if="!$v.player.email.required">{{ $t('form.required') }}</span>
+          <span v-if="!$v.player.email.email">{{ $t('form.invalidEmail') }}</span>
+        </div>
+      </b-form-group>
+
       <div>
         <div class="col-sm-offset-2 col-sm-10">
-          <Button
-            type="primary"
+          <b-button
+            variant="primary"
             @click.prevent="handleSubmit()"
-            long
+            block
           >
             {{ $t('register.text') }}
-          </Button>
+          </b-button>
         </div>
       </div>
-    </Form>
+    </b-form>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
+  import {
+    required,
+    email,
+  } from 'vuelidate/lib/validators';
   import api from '~/services/api';
   import {isEmpty, entries} from '~/lib/utils';
 
@@ -68,67 +76,64 @@
       };
     },
     data() {
-      const validateEmail = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('field.empty'));
-        } else {
-          if (this.player.email_confirm !== '') {
-            this.$refs.registerForm.validateField('email_confirm');
-          }
-          callback();
-        }
-      };
-
       return {
+        submitted: false,
         player: {
           username: '',
           email: '',
         },
-        registerRules: {
-          username: [
-            {type: 'string', required: true},
-          ],
-          email: [
-            {type: 'email', required: true},
-            {validator: validateEmail},
-          ],
-        },
       };
+    },
+    validations: {
+      player: {
+        username: {required},
+        email: {
+          required,
+          email,
+        },
+      },
     },
     methods: {
       handleSubmit() {
-        this.$refs.registerForm.validate((valid) => {
-          if (valid) {
-            api.lostPassword({player_registration: this.player}).then(() => {
-              this.$Notice.success({
-                title: this.$t('notice.success'),
-                desc: this.$t('account.lost.description'),
+        this.submitted = true;
+        this.$v.$touch();
+        if (this.$v.$invalid) {
+          this.$notify({
+            group: 'error',
+            title: this.$t('notice.error'),
+            text: this.$t('form.invalid'),
+          });
+          return;
+        }
+
+        api.lostPassword({player_registration: this.player}).then(() => {
+          this.$notify({
+            group: 'success',
+            title: this.$t('notice.success'),
+            text: this.$t('account.lost.description'),
+          });
+          this.$router.push('/');
+        }).catch((e) => {
+          if (!isEmpty(e.response.data.error)) {
+            /* eslint-disable no-restricted-syntax */
+            for (const [key, messages] of entries(e.response.data.error)) {
+              this.$notify({
+                group: 'error',
+                title: this.$t(key),
+                text: messages.join('.\n'),
               });
-              this.$router.push('/');
-            }).catch((e) => {
-              if (!isEmpty(e.response.data.error)) {
-                /* eslint-disable no-restricted-syntax */
-                for (const [key, messages] of entries(e.response.data.error)) {
-                  this.$Notice.error({
-                    title: this.$t(key),
-                    desc: messages.join('.\n'),
-                  });
-                }
-                /* eslint-enable no-restricted-syntax */
-              } else {
-                this.$Notice.error({
-                  title: this.$t('notice.error'),
-                  desc: this.$t('error.generic'),
-                });
-              }
-            });
+            }
+            /* eslint-enable no-restricted-syntax */
           } else {
-            this.$Notice.error({
+            this.$notify({
+              group: 'error',
               title: this.$t('notice.error'),
-              desc: this.$t('form.invalid'),
+              text: this.$t('error.generic'),
             });
           }
         });
+
+        this.submitted = false;
       },
     },
   };

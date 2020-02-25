@@ -1,6 +1,6 @@
 /* eslint-disable no-shadow, no-param-reassign */
 import api from '~/services/api';
-import * as types from '../mutation-types';
+import * as types from './mutation-types';
 
 const state = () => ({
   style: null,
@@ -8,7 +8,7 @@ const state = () => ({
 });
 
 const actions = {
-  fetchGameData({commit}) {
+  fetch({commit}) {
     return api.getGameData().then((res) => {
       commit(types.GAME_DATA, res.data);
     }).catch((res) => {
@@ -20,6 +20,10 @@ const actions = {
       types.GAME_STYLE,
       Math.floor(Math.random() * 20) + 1,
     );
+  },
+  nuxtServerInit({dispatch}) {
+    dispatch('game/setStyle');
+    dispatch('game/fetch');
   },
 };
 

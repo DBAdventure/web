@@ -4,71 +4,85 @@
       {{ $t('guild.create') }}
     </h1>
 
-    <Form
-      ref="createGuildForm"
-      id="guild-create-form"
-      class="form-horizontal"
-      :rules="guildRules"
-      :model="guild"
-    >
-      <Form-item
+    <b-form>
+      <b-form-group
         :label="$t('form.name')"
-        :label-width="150"
-        prop="name"
-        required
+        :label-cols-lg="3"
       >
-        <Input
-          name="name"
+        <b-form-input
           :placeholder="$t('form.name')"
           v-model="guild.name"
-          type="text"
+          required
+          :class="{ 'is-invalid': submitted && $v.guild.name.$error }"
         />
-      </Form-item>
-      <Form-item
+        <div
+          v-if="submitted && !$v.guild.name.required"
+          class="invalid-feedback"
+        >
+          {{ $t('form.required') }}
+        </div>
+      </b-form-group>
+
+      <b-form-group
         :label="$t('form.shortName')"
-        :label-width="150"
-        prop="shortName"
-        required
+        :label-cols-lg="3"
       >
-        <Input
-          name="shortName"
+        <b-form-input
           :maxlength="5"
           :placeholder="$t('form.shortName')"
           v-model="guild.shortName"
-          type="text"
+          required
+          :class="{ 'is-invalid': submitted && $v.guild.shortName.$error }"
         />
-      </Form-item>
-      <Form-item
+        <div
+          v-if="submitted && !$v.guild.shortName.required"
+          class="invalid-feedback"
+        >
+          {{ $t('form.required') }}
+        </div>
+      </b-form-group>
+
+      <b-form-group
         :label="$t('form.history')"
-        :label-width="150"
-        prop="history"
-        required
+        :label-cols-lg="3"
       >
-        <Input
-          name="history"
+        <b-form-textarea
           :placeholder="$t('form.history')"
           v-model="guild.history"
           :rows="4"
-          type="textarea"
+          required
+          :class="{ 'is-invalid': submitted && $v.guild.history.$error }"
         />
-      </Form-item>
+        <div
+          v-if="submitted && !$v.guild.history.required"
+          class="invalid-feedback"
+        >
+          {{ $t('form.required') }}
+        </div>
+      </b-form-group>
+
       <div>
         <div class="text-right">
-          <Button
-            type="primary"
+          <b-button
+            variant="primary"
             @click.prevent="handleSubmit()"
-            long
+            block
           >
             {{ $t('form.create') }}
-          </Button>
+          </b-button>
         </div>
       </div>
-    </Form>
+    </b-form>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import {mapGetters} from 'vuex';
+  import {
+    required,
+    minLength,
+    maxLength,
+  } from 'vuelidate/lib/validators';
   import api from '~/services/api';
   import ErrorMixin from '~/components/mixins/error';
 
@@ -83,55 +97,54 @@
       };
     },
     computed: {
-      ...mapGetters([
-        'currentPlayer',
-      ]),
+      ...mapGetters('player', ['currentPlayer']),
     },
     data() {
       return {
+        submitted: false,
         guild: {
           name: '',
           shortName: '',
           history: '',
         },
-        guildRules: {
-          name: [
-            {type: 'string', required: true, message: this.$t('field.required.name')},
-          ],
-          shortName: [
-            {
-              type: 'string',
-              required: true,
-              min: 3,
-              max: 5,
-              message: this.$t('field.required.shortName'),
-            },
-          ],
-          history: [
-            {type: 'string', required: true, message: this.$t('field.required.history')},
-          ],
-        },
       };
     },
+    validations: {
+      guild: {
+        name: {required},
+        shortName: {
+          required,
+          minLength: minLength(3),
+          maxLength: maxLength(5),
+        },
+        history: {
+          required,
+        },
+      },
+    },
+
     methods: {
       handleSubmit() {
-        this.$refs.createGuildForm.validate((valid) => {
-          if (valid) {
-            api.createGuild({guild_create: this.guild}).then(() => {
-              this.$Notice.success({
-                title: this.$t('notice.success'),
-                desc: this.$t('guild.created'),
-              });
-              this.$router.push('/guild');
-            }).catch(() => {
-              this.raiseError();
-            });
-          } else {
-            this.$Notice.error({
-              title: this.$t('notice.error'),
-              desc: this.$t('form.invalid'),
-            });
-          }
+        this.submitted = true;
+        this.$v.$touch();
+        if (this.$v.$invalid) {
+          this.$notify({
+            group: 'error',
+            title: this.$t('notice.error'),
+            text: this.$t('form.invalid'),
+          });
+          return;
+        }
+
+        api.createGuild({guild_create: this.guild}).then(() => {
+          this.$notify({
+            group: 'success',
+            title: this.$t('notice.success'),
+            text: this.$t('guild.created'),
+          });
+          this.$router.push('/guild');
+        }).catch(() => {
+          this.raiseError();
         });
       },
     },

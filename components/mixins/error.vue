@@ -1,11 +1,12 @@
-<script type="text/ecmascript-6">
+<script>
   export default {
     methods: {
       raiseError() {
-        this.$Loading.error();
-        this.$Notice.error({
+        this.$nuxt.$loading.error();
+        this.$notify({
+          group: 'error',
           title: this.$t('notice.error'),
-          desc: this.$t('notice.generic'),
+          text: this.$t('notice.generic'),
         });
       },
     },

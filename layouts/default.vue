@@ -1,6 +1,17 @@
 
 <template>
   <div id="main">
+    <dba-notification
+      group="success"
+      position="top right"
+      :duration="10000000000000"
+    />
+    <dba-notification
+      group="error"
+      position="top right"
+      :duration="10000000000000"
+    />
+
     <dba-header />
 
     <div
@@ -11,17 +22,17 @@
 
       <div id="content">
         <div class="border-top">
-&nbsp;
+          &nbsp;
         </div>
         <div class="body">
           <nuxt />
         </div>
         <div class="border-bottom">
-&nbsp;
+          &nbsp;
         </div>
       </div>
       <div class="clearfix">
-&nbsp;
+        &nbsp;
       </div>
     </div>
 
@@ -29,16 +40,18 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import DbaHeader from '~/components/header';
   import DbaMenu from '~/components/menu';
   import DbaFooter from '~/components/footer';
+  import DbaNotification from '~/components/utils/notification';
 
   export default {
     components: {
+      DbaFooter,
       DbaHeader,
       DbaMenu,
-      DbaFooter,
+      DbaNotification,
     },
     data() {
       return {
@@ -46,11 +59,11 @@
       };
     },
     mounted() {
-      this.$store.dispatch('fetchGameData');
+      this.$store.dispatch('game/fetch');
       this.$store.watch((state) => state.player.connected, (value) => {
         if (value) {
           this.interval = setInterval(() => {
-            this.$store.dispatch('fetchPlayer');
+            this.$store.dispatch('player/fetch');
           }, 60000);
         } else {
           clearInterval(this.interval);

@@ -63,7 +63,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import api from '~/services/api';
   import PlayerEvent from '~/components/account/event';
 

@@ -7,28 +7,28 @@
       v-model="questResult"
     />
 
-    <Button
-      type="primary"
-      size="small"
+    <b-button
+      variant="primary"
+      size="sm"
       v-if="playerQuest === null"
       @click.prevent="runAction('talk')"
     >
       {{ $t('game.quest.accept') }}
-    </Button>
+    </b-button>
 
 
-    <Button
-      type="primary"
-      size="small"
+    <b-button
+      variant="primary"
+      size="sm"
       v-if="playerQuest !== null && playerQuest.is_in_progress && questResult"
       @click.prevent="runAction('talk')"
     >
       {{ $t('game.quest.return') }}
-    </Button>
+    </b-button>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import {EventBus} from '~/lib/bus';
   import api from '~/services/api';
   import MessagesMixin from '~/components/mixins/messages';
@@ -68,16 +68,18 @@
         case 'talk':
           await api.askQuest(this.quest.id).then((res) => {
             res.data.messages.forEach((msg) => {
-              this.$Notice.success({
+              this.$notify({
+                group: 'success',
                 title: this.$t('notice.success'),
-                desc: this.handleMessages(msg),
+                text: this.handleMessages(msg),
               });
             });
             EventBus.$emit('reload-map');
           }).catch((err) => {
-            this.$Notice.error({
+            this.$notify({
+              group: 'error',
               title: this.$t('notice.error'),
-              desc: this.$t(err.response.data.error),
+              text: this.$t(err.response.data.error),
             });
           });
           break;

@@ -6,13 +6,13 @@
         v-if="me.forbidden_teleport !== move"
       >
         <a
-          :key="move"
+          :key="`link-${move}`"
           href="#"
           @click.prevent="runAction('teleport', move)"
         >
           {{ $t('game.teleport.link', {where: $t(`game.teleport.where.${move}`)}) }}
         </a>
-        <br :key="move" />
+        <br :key="`break-${move}`" />
       </template>
     </template>
 
@@ -21,13 +21,33 @@
         class="text-left"
         v-html="$t('game.shop.text', {player: me.name, name: building.name})"
       />
-      <Table
-        :columns="shopColumns()"
-        :data="objects"
+      <b-table
+        :fields="getShopColumns()"
+        :items="objects"
         width="630"
-        stripe
-        border
-      />
+        striped
+        bordered
+        dark
+      >
+        <template v-slot:cell(index)="data">
+          <img :src="`/images/objects/${data.item.image}`" />
+        </template>
+
+        <template v-slot:cell(description)="data">
+          <p><strong>{{ data.item.name }}</strong></p>
+          <object-description :object="data.item" />
+        </template>
+
+        <template v-slot:cell(action)="data">
+          <b-button
+            variant="primary"
+            size="sm"
+            @click="runAction('buy', data.item.id)"
+          >
+            {{ $t('building.shop.buy') }}
+          </b-button>
+        </template>
+      </b-table>
     </template>
 
     <template v-if="type === 'wanted'">
@@ -79,47 +99,92 @@
       />
 
       <p v-html="$t('game.bank.deposit')" />
-      <Input
-        v-model="depositAmount"
-        number
+      <b-form
+        inline
+        class="justify-content-md-center"
       >
-      <Button
-        slot="append"
-        icon="archive"
-        @click.prevent="runAction('deposit', depositAmount)"
-      />
-      </Input>
+        <b-input-group>
+          <b-form-input
+            v-model="depositAmount"
+            type="number"
+          />
+
+          <b-input-group-append>
+            <b-button
+              variant="primary"
+              @click.prevent="runAction('deposit', depositAmount)"
+            >
+              <b-icon
+                icon="archive"
+              />
+            </b-button>
+          </b-input-group-append>
+        </b-input-group>
+      </b-form>
 
       <p v-html="$t('game.bank.withdraw')" />
-      <Input
-        v-model="withdrawAmount"
-        number
-      />
-      <Button
-        slot="append"
-        icon="upload"
-        @click.prevent="runAction('withdraw', withdrawAmount)"
-      />
-      </Input>
+      <b-form
+        inline
+        class="justify-content-md-center"
+      >
+        <b-input-group>
+          <b-form-input
+            v-model="withdrawAmount"
+            type="number"
+          />
+
+          <b-input-group-append>
+            <b-button
+              variant="primary"
+              @click.prevent="runAction('withdraw', withdrawAmount)"
+            >
+              <b-icon
+                icon="upload"
+              />
+            </b-button>
+          </b-input-group-append>
+        </b-input-group>
+      </b-form>
     </template>
+
     <template v-if="type ==='magic'">
       <div
         class="text-left"
         v-html="$t('game.magic.text', {player: me.name, name: building.name})"
       />
 
-      <Table
-        :columns="shopSpellColumns()"
-        :data="objects"
+      <b-table
+        :fields="getShopSpellColumns()"
+        :items="objects"
         width="630"
-        stripe
-        border
-      />
+        striped
+        bordered
+        dark
+      >
+        <template v-slot:cell(name)="data">
+          <strong>{{ $t(`spells.${data.value}.name`) }}</strong>
+        </template>
+
+        <template v-slot:cell(description)="data">
+          <p>{{ $t(`spells.${data.item.name}.descriptionRp`) }}</p>
+          <requirements :data="data.item.requirements" />
+        </template>
+
+        <template v-slot:cell(action)="data">
+          <b-button
+            variant="primary"
+            size="sm"
+            @click="runAction('buySpell', data.item.id)"
+          >
+            {{ $t('building.shop.buy') }}
+          </b-button>
+        </template>
+      </b-table>
     </template>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import {EventBus} from '~/lib/bus';
   import {isEmpty} from '~/lib/utils';
   import Requirements from '~/components/utils/requirements';
@@ -131,6 +196,10 @@
     mixins: [
       MessagesMixin,
     ],
+    components: {
+      ObjectDescription,
+      Requirements,
+    },
     props: {
       building: {
         type: Object,
@@ -171,7 +240,7 @@
         case 'buy':
           await api.buyObject(this.building.id, data).then((res) => {
             successMessage = this.handleMessages(res.data);
-            this.$store.dispatch('fetchPlayer');
+            this.$store.dispatch('player/fetch');
           }).catch((err) => {
             errorMessage = this.$t(err.response.data.error);
           });
@@ -179,7 +248,7 @@
         case 'buySpell':
           await api.buySpell(this.building.id, data).then((res) => {
             successMessage = this.handleMessages(res.data);
-            this.$store.dispatch('fetchPlayer');
+            this.$store.dispatch('player/fetch');
           }).catch((err) => {
             errorMessage = this.$t(err.response.data.error);
           });
@@ -187,7 +256,7 @@
         case 'teleport':
           await api.teleport(this.building.id, data).then(() => {
             EventBus.$emit('reload-map');
-            this.$store.dispatch('fetchPlayer');
+            this.$store.dispatch('player/fetch');
           }).catch(() => {
             errorMessage = this.$t('error.teleport.forbidden');
           });
@@ -195,7 +264,7 @@
         case 'deposit':
           await api.deposit(this.building.id, data).then((res) => {
             successMessage = this.handleMessages(res.data);
-            this.$store.dispatch('fetchPlayer');
+            this.$store.dispatch('player/fetch');
             this.goldBank = res.data.parameters.goldBank;
           }).catch((err) => {
             errorMessage = this.$t(err.response.data.error);
@@ -204,7 +273,7 @@
         case 'withdraw':
           await api.withdraw(this.building.id, data).then((res) => {
             successMessage = this.handleMessages(res.data);
-            this.$store.dispatch('fetchPlayer');
+            this.$store.dispatch('player/fetch');
             this.goldBank = res.data.parameters.goldBank;
           }).catch((err) => {
             errorMessage = this.$t(err.response.data.error);
@@ -215,149 +284,38 @@
         }
 
         if (successMessage) {
-          this.$Notice.success({
+          console.log(successMessage);
+          this.$notify({
+            group: 'success',
             title: this.$t('notice.success'),
-            desc: successMessage,
+            text: successMessage,
           });
         }
 
         if (errorMessage) {
-          this.$Notice.error({
+          this.$notify({
+            group: 'error',
             title: this.$t('notice.error'),
-            desc: errorMessage,
+            text: errorMessage,
           });
         }
       },
 
-      shopColumns() {
+      getShopColumns() {
         return [
-          {
-            align: 'center',
-            width: 90,
-            render: (h, params) => h(
-              'div',
-              {
-                domProps: {
-                  innerHTML: `<img src="/images/objects/${params.row.image}"/>`,
-                },
-              },
-            ),
-          },
-          {
-            title: this.$t('object.description'),
-            key: 'description',
-            render: (h, params) => h(
-              'div',
-              [
-                h(
-                  'p',
-                  [
-                    h(
-                      'strong',
-                      params.row.name,
-                    ),
-                  ],
-                ),
-                h(
-                  ObjectDescription,
-                  {
-                    props: {
-                      object: params.row,
-                    },
-                  },
-                ),
-              ],
-            ),
-          },
-          {
-            title: this.$t('object.price'),
-            width: 80,
-            key: 'price',
-            align: 'center',
-          },
-          {
-            title: this.$t('object.weight'),
-            width: 65,
-            key: 'weight',
-            align: 'center',
-          },
-          {
-            title: this.$t('object.action'),
-            width: 90,
-            align: 'center',
-            render: (h, params) => h(
-              'Button',
-              {
-                props: {
-                  type: 'primary',
-                  size: 'small',
-                },
-                on: {
-                  click: () => {
-                    this.runAction('buy', params.row.id);
-                  },
-                },
-              },
-              this.$t('building.shop.buy'),
-            ),
-          },
+          'index',
+          {key: 'description', label: this.$t('object.description')},
+          {key: 'price', label: this.$t('object.price')},
+          {key: 'weight', label: this.$t('object.weight')},
+          {key: 'action', label: this.$t('object.action')},
         ];
       },
-      shopSpellColumns() {
+      getShopSpellColumns() {
         return [
-          {
-            title: this.$t('object.name'),
-            align: 'center',
-            width: 150,
-            render: (h, params) => h(
-              'strong',
-              this.$t(`spells.${params.row.name}.name`),
-            ),
-          },
-          {
-            title: this.$t('object.description'),
-            key: 'description',
-            render: (h, params) => h(
-              'div',
-              [
-                this.$t(`spells.${params.row.name}.descriptionRp`),
-                h(
-                  Requirements,
-                  {
-                    props: {
-                      data: params.row.requirements,
-                    },
-                  },
-                ),
-              ],
-            ),
-          },
-          {
-            title: this.$t('object.price'),
-            width: 70,
-            key: 'price',
-            align: 'center',
-          },
-          {
-            title: this.$t('object.action'),
-            width: 90,
-            align: 'center',
-            render: (h, params) => h(
-              'Button',
-              {
-                props: {
-                  type: 'primary',
-                  size: 'small',
-                },
-                on: {
-                  click: () => {
-                    this.runAction('buySpell', params.row.id);
-                  },
-                },
-              },
-              this.$t('building.shop.buy'),
-            ),
-          },
+          {key: 'name', label: this.$t('object.name')},
+          {key: 'description', label: this.$t('object.description')},
+          {key: 'price', label: this.$t('object.price')},
+          {key: 'action', label: this.$t('object.action')},
         ];
       },
     },

@@ -91,6 +91,11 @@
     "connected": "<strong>{nb}</strong> joueur(s) en ligne"
   },
   "form": {
+    "required": "Ce champ est obligatoire",
+    "invalidEmail": "Cet email n'est pas valide",
+    "passwordLength": "Le mot de passe doit contenir au moins 6 caractères",
+    "passwordMatch": "Le mot de passe doit correspondre",
+    "emailMatch": "L'email doit correspondre",
     "invalid": "Ce formulaire n'est pas valide",
     "add": {
       "recipient": "Ajouter un destinataire",
@@ -905,6 +910,7 @@
     },
     "join": "Rejoindre cette guilde",
     "createdBy": "Crée par",
+    "cancel": "Annuler la création",
     "request": {
       "cancel": "Annuler votre demande ?",
       "deleted": "Votre précédente requête a été supprimée !",
@@ -1053,7 +1059,8 @@
       "outbox": "Message envoyés aux membres de la guilde"
     },
     "message": {
-      "sent": "Message envoyé à {names}"
+      "sent": "Message envoyé à {names}",
+      "unsent": "Message non envoyé"
     }
   },
   "home": {
@@ -1082,7 +1089,7 @@
   },
   "choice": {
     "character": "-> Choix du personnage",
-    "group": "-> Choix du gorupe",
+    "group": "-> Choix du groupe",
     "clothes": "-> Choix des vêtements"
   },
   "profile": {

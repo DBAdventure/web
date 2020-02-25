@@ -9,14 +9,22 @@
     <h1 class="subtitle text-center">
       {{ $t('guild.title.requesters') }}
     </h1>
-    <Table
-      :columns="requestersColumns()"
-      :data="guildPlayers"
-    />
+
+    <b-table
+      :fields="getRequestersColumns()"
+      :items="guildPlayers"
+    >
+      <template v-slot:cell(name)="data">
+        <router-link :to="`/player/info/${data.item.id}`">
+          <img :src="data.item.image_path" />
+          {{ data.value }}
+        </router-link>
+      </template>
+    </b-table>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import {mapGetters} from 'vuex';
   import api from '~/services/api';
   import PlayerMixin from '~/components/mixins/players';
@@ -34,9 +42,7 @@
       GuildMenu,
     },
     computed: {
-      ...mapGetters([
-        'currentPlayer',
-      ]),
+      ...mapGetters('player', ['currentPlayer']),
     },
     head() {
       return {
@@ -64,31 +70,17 @@
       });
     },
     methods: {
-      requestersColumns() {
-        const columns = [
+      getRequestersColumns() {
+        return [
           {
-            title: this.$t('name'),
-            render: (h, params) => h(
-              'router-link',
-              {
-                props: {
-                  to: `/player/info/${params.row.id}`,
-                },
-                domProps: {
-                  innerHTML: `<img src="${params.row.image_path}"/> ${params.row.name}`,
-                },
-              },
-            ),
+            label: this.$t('name'),
+            key: 'name',
           },
           {
             title: this.$t('level'),
             key: 'level',
-            width: 70,
-            align: 'center',
           },
         ];
-
-        return columns;
       },
     },
   };

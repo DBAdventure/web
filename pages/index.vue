@@ -50,7 +50,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import api from '~/services/api';
 
   export default {
@@ -71,9 +71,10 @@
     mounted() {
       this.totalPages = this.loadedNews.length;
       if (this.enabled) {
-        this.$Notice.success({
+        this.$notify({
+          group: 'success',
           title: this.$t('notice.success'),
-          desc: this.$t('account.enabled'),
+          text: this.$t('account.enabled'),
         });
         this.enabled = false;
       }

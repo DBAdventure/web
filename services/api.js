@@ -73,10 +73,13 @@ const api = {
   logout() {
     return makeGetRequest('/logout');
   },
+  lostPassword(postData) {
+    return makePostRequest('/lost-password', postData);
+  },
 
   /**
-     * Data
-     */
+   * Data
+   */
   getGameData() {
     return makeGetRequest('/data/game');
   },
@@ -102,8 +105,8 @@ const api = {
   },
 
   /**
-     * Account
-     */
+   * Account
+   */
   getPlayer() {
     return makeGetRequest('/account/player');
   },
@@ -124,8 +127,8 @@ const api = {
   },
 
   /**
-     * Inventory
-     */
+   * Inventory
+   */
   getInventoryObjects() {
     return makeGetRequest('/inventory/objects');
   },
@@ -143,8 +146,8 @@ const api = {
   },
 
   /**
-     * Map
-     */
+   * Map
+   */
   getMap() {
     return makeGetRequest('/map/');
   },
@@ -171,8 +174,8 @@ const api = {
   },
 
   /**
-     * Inbox
-     */
+   * Inbox
+   */
   getInboxDirectory(directory = 'inbox') {
     return makeGetRequest(`/inbox/${directory}`);
   },
@@ -196,8 +199,8 @@ const api = {
   },
 
   /**
-     * Action
-     */
+   * Action
+   */
   convert() {
     return makePostRequest('/action/convert');
   },
@@ -258,8 +261,8 @@ const api = {
   },
 
   /**
-     * Guild
-     */
+   * Guild
+   */
   getGuilds() {
     return makeGetRequest('/guild/list');
   },
@@ -298,15 +301,15 @@ const api = {
   },
 
   /**
-     * Magic
-     */
+   * Magic
+   */
   getSpells() {
     return makeGetRequest('/magic/spells');
   },
 
   /**
-     * Quests
-     */
+   * Quests
+   */
   getQuests() {
     return makeGetRequest('/quest/player');
   },

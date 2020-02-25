@@ -33,12 +33,13 @@ body {
   height: 300px;
   width: 900px;
   position: relative;
-  .nav {
+  .navbar {
     left: 15px;
     list-style: outside none none;
     position: absolute;
     top: 220px;
     text-transform: uppercase;
+    padding: 0;
     li {
       a {
         display: inline-block;

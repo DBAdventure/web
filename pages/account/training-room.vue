@@ -18,14 +18,41 @@
       {{ $t('training.info') }}
     </div>
 
-    <Table
-      :columns="columns"
-      :data="skills"
-    />
+    <b-table
+      :fields="columns"
+      :items="skills"
+      dark
+      striped
+      hovered
+    >
+      <template v-slot:cell(name)="data">
+        <p>
+          <strong>
+            {{ $t(`training.${data.value}.title`, {value: currentPlayer[data.item.comp]}) }}
+          </strong>
+        </p>
+        <p>
+          {{ $t(`training.${data.value}.description`) }}
+        </p>
+      </template>
+
+      <template v-slot:cell(action)="data">
+        <p>{{ $t('training.increase.require') }}</p>
+        <template v-if="currentPlayer.skill_points > 0 && currentPlayer.action_points >= 5">
+          <b-button
+            variant="primary"
+            size="sm"
+            @click="train(data.item.name)"
+          >
+            {{ $t(`training.${data.item.name}.increase`) }}
+          </b-button>
+        </template>
+      </template>
+    </b-table>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import {mapGetters} from 'vuex';
   import api from '~/services/api';
 
@@ -37,63 +64,18 @@
       };
     },
     computed: {
-      ...mapGetters([
-        'currentPlayer',
-      ]),
+      ...mapGetters('player', ['currentPlayer']),
     },
     data() {
       return {
         columns: [
           {
-            title: this.$t('training.capacity'),
+            label: this.$t('training.capacity'),
             key: 'name',
-            render: (h, params) => h('div', [
-              h(
-                'p',
-                [
-                  h(
-                    'strong',
-                    this.$t(`training.${params.row.name}.title`, {value: this.currentPlayer[params.row.comp]}),
-                  ),
-                ],
-              ),
-              h(
-                'p',
-                this.$t(`training.${params.row.name}.description`),
-              ),
-            ]),
           },
           {
             title: this.$t('training.action'),
             key: 'action',
-            align: 'right',
-            render: (h, params) => {
-              let button;
-              if (this.currentPlayer.skill_points > 0
-                && this.currentPlayer.action_points >= 5
-              ) {
-                button = h(
-                  'Button',
-                  {
-                    props: {
-                      type: 'primary',
-                      size: 'small',
-                    },
-                    on: {
-                      click: () => {
-                        this.train(params.row.name);
-                      },
-                    },
-                  },
-                  this.$t(`training.${params.row.name}.increase`),
-                );
-              }
-
-              return h('div', [
-                h('p', this.$t('training.increase.require')),
-                button,
-              ]);
-            },
           },
         ],
         skills: [
@@ -113,15 +95,17 @@
     methods: {
       train(what) {
         api.useTrainingPoint(what).then(() => {
-          this.$Notice.success({
+          this.$notify({
+            group: 'success',
             title: this.$t('notice.success'),
-            desc: this.$t('training.success'),
+            text: this.$t('training.success'),
           });
-          this.$store.dispatch('fetchPlayer');
+          this.$store.dispatch('player/fetch');
         }).catch(() => {
-          this.$Notice.error({
+          this.$notify({
+            group: 'error',
             title: this.$t('notice.error'),
-            desc: this.$t('training.error'),
+            text: this.$t('training.error'),
           });
         });
       },

@@ -6,121 +6,154 @@
     <p>{{ $t('register.welcome') }}</p>
     <p>{{ $t('register.intro') }}</p>
 
-    <Form
-      ref="registerForm"
-      id="register-form"
+    <b-form
       class="form-horizontal"
-      :rules="registerRules"
-      :model="player"
     >
       <h2>{{ $t('register.personalinfo') }}</h2>
 
-      <Form-item
+      <b-form-group
         :label="$t('form.pseudo')"
-        :label-width="150"
-        prop="name"
-        required
+        :label-cols-lg="3"
       >
-        <Input
-          name="name"
+        <b-input
           :placeholder="$t('form.pseudo')"
           v-model="player.name"
-          type="text"
+          required
+          :class="{ 'is-invalid': submitted && $v.player.name.$error }"
         />
-      </Form-item>
-      <Form-item
+        <div
+          v-if="submitted && !$v.player.name.required"
+          class="invalid-feedback"
+        >
+          {{ $t('form.required') }}
+        </div>
+      </b-form-group>
+
+      <b-form-group
         :label="$t('form.login')"
-        :label-width="150"
-        prop="username"
-        required
+        :label-cols-lg="3"
       >
-        <Input
-          name="username"
+        <b-input
           :placeholder="$t('form.login')"
           v-model="player.username"
-          type="text"
+          required
+          :class="{ 'is-invalid': submitted && $v.player.username.$error }"
         />
-      </Form-item>
-      <Form-item
+        <div
+          v-if="submitted && !$v.player.username.required"
+          class="invalid-feedback"
+        >
+          {{ $t('form.required') }}
+        </div>
+      </b-form-group>
+
+      <b-form-group
         :label="$t('form.password')"
-        :label-width="150"
-        prop="password"
-        required
+        :label-cols-lg="3"
       >
-        <Input
-          name="password"
+        <b-input
           :placeholder="$t('form.password')"
           v-model="player.password"
           type="password"
+          required
+          :class="{ 'is-invalid': submitted && $v.player.password.$error }"
         />
-      </Form-item>
-      <Form-item
+        <div
+          v-if="submitted && $v.player.password.$error"
+          class="invalid-feedback"
+        >
+          <span v-if="!$v.player.password.minLength">
+            {{ $t('form.passwordLength') }}
+          </span>
+        </div>
+      </b-form-group>
+
+      <b-form-group
         :label="$t('form.passwordConfirm')"
-        :label-width="150"
-        prop="password_confirm"
-        required
+        :label-cols-lg="3"
       >
-        <Input
-          name="password_confirm"
+        <b-input
           :placeholder="$t('form.passwordConfirm')"
           v-model="player.password_confirm"
           type="password"
+          required
+          :class="{ 'is-invalid': submitted && $v.player.password_confirm.$error }"
         />
-      </Form-item>
-      <Form-item
+        <div
+          v-if="submitted && $v.player.password_confirm.$error"
+          class="invalid-feedback"
+        >
+          <span if="!$v.player.password_confirm.sameAsPassword">
+            {{ $t('form.passwordMatch') }}
+          </span>
+        </div>
+      </b-form-group>
+
+      <b-form-group
         :label="$t('form.email')"
-        :label-width="150"
-        prop="email"
-        required
+        :label-cols-lg="3"
       >
-        <Input
-          name="email"
+        <b-input
           :placeholder="$t('form.email')"
           v-model="player.email"
-          type="text"
+          required
+          :class="{ 'is-invalid': submitted && $v.player.email.$error }"
         />
-      </Form-item>
-      <Form-item
+        <div
+          v-if="submitted && $v.player.email.$error"
+          class="invalid-feedback"
+        >
+          <span v-if="!$v.player.email.required">{{ $t('form.required') }}</span>
+          <span v-if="!$v.player.email.email">{{ $t('form.invalidEmail') }}</span>
+        </div>
+      </b-form-group>
+
+      <b-form-group
         :label="$t('form.emailConfirm')"
-        :label-width="150"
-        prop="email_confirm"
-        required
+        :label-cols-lg="3"
       >
-        <Input
-          name="email_confirm"
+        <b-input
           :placeholder="$t('form.emailConfirm')"
           v-model="player.email_confirm"
-          type="text"
+          required
+          :class="{ 'is-invalid': submitted && $v.player.email_confirm.$error }"
         />
-      </Form-item>
+        <div
+          v-if="submitted && $v.player.email_confirm.$error"
+          class="invalid-feedback"
+        >
+          <span if="!$v.player.email_confirm.sameAsPassword">
+            {{ $t('form.emailMatch') }}
+          </span>
+        </div>
+      </b-form-group>
 
       <h2>{{ $t('register.speciality') }}</h2>
       <p>{{ $t('register.specialityIntro') }}</p>
-
-      <div class="form-group">
+      <b-form-group>
         <label class="col-sm-2 control-label required">{{ $t('class') }}</label>
         <div class="col-sm-10">
-          <Select
+          <b-form-select
             v-model="player.class"
             required
           >
-            <Option
+            <b-form-select-option
               v-for="klass in classes"
               :key="klass.label"
               :value="klass.value"
             >
               {{ $t(klass.label) }}
-            </Option>
-          </select>
+            </b-form-select-option>
+          </b-form-select>
         </div>
-      </div>
+      </b-form-group>
 
       <transition
         name="fade"
         mode="out-in"
       >
         <div
-          class="class-list"
+          class="class-list row"
           v-if="player.class === 1"
           key="1"
         >
@@ -152,7 +185,7 @@
         </div>
 
         <div
-          class="class-list"
+          class="class-list row"
           v-if="player.class === 2"
           key="2"
         >
@@ -182,7 +215,7 @@
         </div>
 
         <div
-          class="class-list"
+          class="class-list row"
           v-if="player.class === 3"
           key="3"
         >
@@ -213,7 +246,7 @@
         </div>
 
         <div
-          class="class-list"
+          class="class-list row"
           v-if="player.class === 4"
           key="4"
         >
@@ -244,7 +277,7 @@
         </div>
 
         <div
-          class="class-list"
+          class="class-list row"
           v-if="player.class === 5"
           key="5"
         >
@@ -276,7 +309,7 @@
         </div>
 
         <div
-          class="class-list"
+          class="class-list row"
           v-if="player.class === 6"
           key="6"
         >
@@ -372,53 +405,58 @@
         </table>
 
         <div>
-          <Select
+          <b-form-select
             v-model="player.race"
-            :placeholder="$t('form.choice.appearance')"
             required
           >
-            <Option
+            <b-form-select-option :value="null">
+              {{ $t('form.choice.appearance') }}
+            </b-form-select-option>
+
+            <b-form-select-option
               v-for="race in races"
               :key="race.value"
               :value="race.value"
             >
               {{ $t(race.label) }}
-            </Option>
-          </Select>
+            </b-form-select-option>
+          </b-form-select>
 
-          <Select
+          <b-form-select
             v-if="player.race !== null"
             v-model="player.appearance.type"
-            :placeholder="$t('choice.character')"
             clearable
             required
           >
-            <Option
+            <b-form-select-option :value="null">
+              {{ $t('choice.character') }}
+            </b-form-select-option>
+            <b-form-select-option
               v-for="(value, key) in appearances[player.race]"
               :key="key"
               :value="key"
             >
               {{ value.label }}
-            </Option>
-          </Select>
+            </b-form-select-option>
+          </b-form-select>
 
-          <Select
+          <b-form-select
             v-if="player.appearance.type !== null && appearances[player.race]"
             v-model="player.appearance.image"
             required
           >
-            <Option
+            <b-form-select-option
               v-for="(value, key) in appearances[player.race][player.appearance.type].value"
               :key="key"
               :value="value"
             >
               {{ key }}
-            </Option>
-          </Select>
+            </b-form-select-option>
+          </b-form-select>
         </div>
 
         <div
-          class="race-list"
+          class="race-list row"
           v-if="player.race === 1"
         >
           <div class="col-md-3 text-center">
@@ -449,7 +487,7 @@
         </div>
 
         <div
-          class="race-list"
+          class="race-list row"
           v-if="player.race === 2"
         >
           <div class="col-md-3 text-center">
@@ -478,7 +516,7 @@
         </div>
 
         <div
-          class="race-list"
+          class="race-list row"
           v-if="player.race === 3"
         >
           <div class="col-md-3 text-center">
@@ -509,7 +547,7 @@
         </div>
 
         <div
-          class="race-list"
+          class="race-list row"
           v-if="player.race === 4"
         >
           <div class="col-md-3 text-center">
@@ -539,7 +577,7 @@
         </div>
 
         <div
-          class="race-list"
+          class="race-list row"
           v-if="player.race === 5"
         >
           <div class="col-md-3 text-center">
@@ -569,7 +607,7 @@
         </div>
 
         <div
-          class="race-list"
+          class="race-list row"
           v-if="player.race === 6"
         >
           <div class="col-md-3 text-center">
@@ -600,7 +638,7 @@
         </div>
 
         <div
-          class="race-list"
+          class="race-list row"
           v-if="player.race === 7"
         >
           <div class="col-md-3 text-center">
@@ -632,7 +670,7 @@
         </div>
 
         <div
-          class="race-list"
+          class="race-list row"
           v-if="player.race === 8"
         >
           <div class="col-md-3 text-center">
@@ -665,23 +703,23 @@
 
       <div>
         <h2>{{ $t('register.various') }}</h2>
-        <div class="form-group">
+        <b-form-group>
           <label class="col-sm-2 control-label required">{{ $t('side') }}</label>
           <div class="col-sm-10">
-            <Select
+            <b-form-select
               v-model="player.side"
               required
             >
-              <Option
+              <b-form-select-option
                 v-for="side in sides"
                 :key="side.label"
                 :value="side.value"
               >
                 {{ $t(side.label) }}
-              </Option>
-            </Select>
+              </b-form-select-option>
+            </b-form-select>
           </div>
-        </div>
+        </b-form-group>
 
         <div class="col-md-12">
           <p>{{ $t('register.objects.title') }}</p>
@@ -692,22 +730,28 @@
           </ul>
         </div>
 
-        <div class="col-sm-offset-2 col-sm-10">
-          <Button
-            type="primary"
+        <div class="col-sm-12">
+          <b-button
+            variant="primary"
             @click.prevent="handleSubmit()"
-            long
+            block
           >
             {{ $t('register.text') }}
-          </Button>
+          </b-button>
         </div>
       </div>
-    </Form>
+    </b-form>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
-  import {random, trim} from 'lodash';
+<script>
+  import {random} from 'lodash';
+  import {
+    required,
+    minLength,
+    sameAs,
+    email,
+  } from 'vuelidate/lib/validators';
   import settings from '~/config/general.config';
   import api from '~/services/api';
   import ErrorMixin from '~/components/mixins/error';
@@ -724,46 +768,8 @@
       };
     },
     data() {
-      const validatePass = (rule, value, callback) => {
-        if (trim(value) === '') {
-          callback(new Error(this.$t('field.empty')));
-        } else {
-          if (this.player.password_confirm !== '') {
-            this.$refs.registerForm.validateField('password_confirm');
-          }
-          callback();
-        }
-      };
-      const validatePassCheck = (rule, value, callback) => {
-        if (trim(value) === '') {
-          callback(new Error(this.$t('field.empty')));
-        } else if (value !== this.player.password) {
-          callback(new Error(this.$t('field.nomatch')));
-        } else {
-          callback();
-        }
-      };
-      const validateEmail = (rule, value, callback) => {
-        if (trim(value) === '') {
-          callback(new Error('field.empty'));
-        } else {
-          if (this.player.email_confirm !== '') {
-            this.$refs.registerForm.validateField('email_confirm');
-          }
-          callback();
-        }
-      };
-      const validateEmailCheck = (rule, value, callback) => {
-        if (trim(value) === '') {
-          callback(new Error('field.empty'));
-        } else if (value !== this.player.email) {
-          callback(new Error(this.$t('field.nomatch')));
-        } else {
-          callback();
-        }
-      };
-
       return {
+        submitted: false,
         races: [],
         sides: [],
         classes: [],
@@ -783,31 +789,29 @@
             image: null,
           },
         },
-        registerRules: {
-          name: [
-            {type: 'string', required: true},
-          ],
-          username: [
-            {type: 'string', required: true},
-          ],
-          password: [
-            {type: 'string', required: true},
-            {validator: validatePass},
-          ],
-          password_confirm: [
-            {type: 'string', required: true},
-            {validator: validatePassCheck},
-          ],
-          email: [
-            {type: 'email', required: true},
-            {validator: validateEmail},
-          ],
-          email_confirm: [
-            {type: 'email', required: true},
-            {validator: validateEmailCheck},
-          ],
-        },
       };
+    },
+    validations: {
+      player: {
+        name: {required},
+        username: {required},
+        password: {
+          required,
+          minLength: minLength(6),
+        },
+        password_confirm: {
+          required,
+          sameAsPassword: sameAs('password'),
+        },
+        email: {
+          required,
+          email,
+        },
+        email_confirm: {
+          required,
+          sameAsPassword: sameAs('email'),
+        },
+      },
     },
     computed: {
       selectedImage() {
@@ -848,33 +852,37 @@
     },
     methods: {
       handleSubmit() {
-        this.$refs.registerForm.validate((valid) => {
-          if (valid) {
-            api.register({player_registration: this.player}).then(() => {
-              this.$Notice.success({
-                title: this.$t('account.created.title'),
-                desc: this.$t('account.created.description'),
+        this.submitted = true;
+        this.$v.$touch();
+        if (this.$v.$invalid) {
+          this.$notify({
+            group: 'error',
+            title: this.$t('notice.error'),
+            text: this.$t('form.invalid'),
+          });
+          return;
+        }
+
+        api.register({player_registration: this.player}).then(() => {
+          this.$notify({
+            group: 'success',
+            title: this.$t('account.created.title'),
+            text: this.$t('account.created.description'),
+          });
+          this.$router.push('/');
+        }).catch((e) => {
+          if (!isEmpty(e.response.data.error)) {
+            /* eslint-disable no-restricted-syntax */
+            for (const [key, messages] of entries(e.response.data.error)) {
+              this.$notify({
+                group: 'error',
+                title: this.$t(key),
+                text: messages.join('.\n'),
               });
-              this.$router.push('/');
-            }).catch((e) => {
-              if (!isEmpty(e.response.data.error)) {
-                /* eslint-disable no-restricted-syntax */
-                for (const [key, messages] of entries(e.response.data.error)) {
-                  this.$Notice.error({
-                    title: this.$t(key),
-                    desc: messages.join('.\n'),
-                  });
-                }
-                /* eslint-enable no-restricted-syntax */
-              } else {
-                this.raiseError();
-              }
-            });
+            }
+            /* eslint-enable no-restricted-syntax */
           } else {
-            this.$Notice.error({
-              title: this.$t('notice.error'),
-              desc: this.$t('form.invalid'),
-            });
+            this.raiseError();
           }
         });
       },

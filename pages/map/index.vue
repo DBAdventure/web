@@ -105,7 +105,9 @@
     </div>
 
     <div v-if="!action">
-      <Button
+      <b-button
+        size="sm"
+        variant="primary"
         @click.prevent="runAction('heal', currentPlayer.id)"
         v-if="currentPlayer.health < currentPlayer.total_max_health && currentPlayer.action_points >= settings.player.HEAL_ACTION"
       >
@@ -115,8 +117,10 @@
           :title="$t('map.action.heal', {'AP': settings.player.HEAL_ACTION})"
         >
         {{ $t('map.action.self.heal', {'AP': settings.player.HEAL_ACTION}) }}
-      </Button>
-      <Button
+      </b-button>
+      <b-button
+        size="sm"
+        variant="primary"
         @click.prevent="runAction('spell', currentPlayer.id)"
         v-if="currentPlayer.action_points >= settings.player.SPELL_ACTION"
       >
@@ -126,7 +130,7 @@
           :title="$t('map.action.spell', {'AP': settings.player.SPELL_ACTION})"
         >
         {{ $t('map.action.self.spell', {'AP': settings.player.SPELL_ACTION}) }}
-      </Button>
+      </b-button>
     </div>
 
     <div class="search-container container-fluid">
@@ -140,10 +144,18 @@
           </p>
 
           <template v-if="action === 'analysis'">
-            <Table
-              :columns="analysisColumns()"
-              :data="analysisData()"
-            />
+            <b-table
+              :fields="getAnalysisColumns()"
+              :items="getAnalysisData()"
+              dark
+              hovered
+              striped
+            >
+              <template v-slot:cell(name)="data">
+                <strong>{{ $t(`action.analysis.${data.value}`) }}</strong>
+              </template>
+            </b-table>
+
             <action-link
               :player="target"
               :me="currentPlayer"
@@ -163,20 +175,33 @@
                 />
               </FormItem>
               <FormItem>
-                <Button
-                  type="primary"
+                <b-button
+                  variant="primary"
                   @click="giveZenis()"
                   :disabled="this.give.zenis === 0"
                 >
                   {{ $t('action.give.text') }}
-                </Button>
+                </b-button>
               </FormItem>
             </Form>
 
-            <Table
-              :columns="giveColumns()"
-              :data="giveData()"
-            />
+            <b-table
+              :fields="getGiveColumns()"
+              :items="getGiveData()"
+            >
+              <template v-slot:cell(index)="data">
+                <img :src="`/images/objects/${data.item.object.image}`" />
+              </template>
+              <template v-slot:cell(give)="data">
+                <b-button
+                  size="sm"
+                  variant="primary"
+                  @click="giveObject(data.item)"
+                >
+                  {{ $t('action.give.textObject') }}
+                </b-button>
+              </template>
+            </b-table>
           </template>
 
           <template v-if="action === 'spell'">
@@ -190,7 +215,7 @@
                 ({{ playerSpell.spell.requirements.ki }} KI)
               </Option>
             </Select>
-            <Button
+            <b-button
               @click.prevent="runAction('spell', target.id)"
               :disabled="!canCastSpell()"
             >
@@ -199,7 +224,7 @@
                 :alt="$t('map.action.spell', {'AP': settings.player.SPELL_ACTION})"
                 :title="$t('map.action.spell', {'AP': settings.player.SPELL_ACTION})"
               >                            {{ $t('map.action.spell', {'AP': settings.player.SPELL_ACTION}) }}
-            </Button>
+            </b-button>
           </template>
 
           <template v-if="action === 'heal' && target.can_be_healed && currentPlayer.action_points >= settings.player.HEAL_ACTION">
@@ -266,9 +291,12 @@
           </template>
 
           <div class="text-center buttons">
-            <Button @click.prevent="back()">
+            <b-button
+              @click.prevent="back()"
+              variant="primary"
+            >
               {{ $t('action.back.map') }}
-            </Button>
+            </b-button>
           </div>
         </div>
       </template>
@@ -397,8 +425,9 @@
                 class="actions"
                 v-if="distance == 0"
               >
-                <Button
-                  size="small"
+                <b-button
+                  size="sm"
+                  variant="primary"
                   @click.prevent="runAction('building-enter', building.id)"
                 >
                   <template v-if="building.type == 1">
@@ -410,7 +439,7 @@
                   <template v-else>
                     {{ $t('map.building.enter') }}
                   </template>
-                </Button>
+                </b-button>
               </div>
             </div>
           </div>
@@ -443,11 +472,11 @@
 
               <span
                 v-html="$t('map.player.info', {
-                  sideClass: enemy.side.name,
-                  raceClass: enemy.race.name,
-                  side: $t(enemy.side.name),
-                  race: $t(enemy.race.name),
-                  class: $t(enemy.class)})"
+                        sideClass: enemy.side.name,
+                        raceClass: enemy.race.name,
+                        side: $t(enemy.side.name),
+                        race: $t(enemy.race.name),
+                        class: $t(enemy.class)})"
               />
 
               <template v-if="distance == 0">
@@ -550,7 +579,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import _ from 'lodash';
   import {mapGetters} from 'vuex';
   import settings from '~/config/general.config';
@@ -585,14 +614,12 @@
       NpcTalk,
     },
     computed: {
-      ...mapGetters([
-        'currentPlayer',
-      ]),
+      ...mapGetters('player', ['currentPlayer']),
       isAttackAction() {
         return (
           this.action === 'attack'
-          || this.action === 'attack-betray'
-          || this.action === 'attack-revenge'
+            || this.action === 'attack-betray'
+            || this.action === 'attack-revenge'
         )
           && this.currentPlayer.action_points >= this.settings.player.ATTACK_ACTION
           && !this.parameters.isDead;
@@ -617,7 +644,10 @@
       };
     },
     async mounted() {
-      await this.loadMap();
+      this.$nextTick(async () => {
+        await this.loadMap();
+      });
+
       EventBus.$on('reload-map', () => {
         this.back();
       });
@@ -634,7 +664,7 @@
         this.target = null;
       },
       async loadMap() {
-        this.$Loading.start();
+        this.$nuxt.$loading.start();
         this.players = {};
         await api.getMap().then((res) => {
           this.map = res.data.map;
@@ -642,7 +672,7 @@
           this.items = res.data.items;
           this.borderYRange = _.range(this.borders.yStart, this.borders.yEnd + 1);
           this.borderXRange = _.range(this.borders.xStart, this.borders.xEnd + 1);
-          this.$Loading.finish();
+          this.$nuxt.$loading.finish();
           this.centerMap();
         });
       },
@@ -692,24 +722,19 @@
       /**
        * Analysis action
        */
-      analysisColumns() {
+      getAnalysisColumns() {
         return [
           {
-            title: this.$t('skill'),
+            label: this.$t('skill'),
             key: 'name',
-            render: (h, params) => h(
-              'strong',
-              this.$t(`action.analysis.${params.row.name}`),
-            ),
           },
           {
-            title: this.$t('value'),
+            label: this.$t('value'),
             key: 'value',
-            align: 'center',
           },
         ];
       },
-      analysisData() {
+      getAnalysisData() {
         const result = [];
         /* eslint-disable no-restricted-syntax */
         for (const [key, value] of entries(this.parameters.competences)) {
@@ -725,82 +750,52 @@
       /**
        * Give action
        */
-      giveColumns() {
+      getGiveColumns() {
         return [
+          'index',
           {
-            width: 100,
-            render: (h, params) => h(
-              'div',
-              {
-                domProps: {
-                  innerHTML: `<img src="/images/objects/${params.row.object.image}"/>`,
-                },
-              },
-            ),
+            label: this.$t('object.name'),
+            key: 'name',
           },
           {
-            title: this.$t('object.name'),
-            align: 'center',
-            render: (h, params) => h(
-              'strong',
-              params.row.object.name,
-            ),
-          },
-          {
-            title: this.$t('object.quantity'),
+            label: this.$t('object.quantity'),
             key: 'quantity',
-            align: 'center',
           },
           {
-            title: this.$t('object.give'),
+            label: this.$t('object.give'),
             key: 'give',
-            width: 70,
-            align: 'center',
-            render: (h, params) => h(
-              'Button',
-              {
-                props: {
-                  type: 'primary',
-                  size: 'small',
-                },
-                on: {
-                  click: () => {
-                    this.giveObject(params.row);
-                  },
-                },
-              },
-              this.$t('action.give.textObject'),
-            ),
           },
         ];
       },
-      giveData() {
+      getGiveData() {
         return this.parameters.playerObjects;
       },
       giveZenis() {
-        this.$Loading.start();
+        this.$nuxt.$loading.start();
         api.give(this.target.id, null, this.give.zenis).then(async (res) => {
-          await this.$store.dispatch('fetchPlayer');
-          this.$Notice.success({
+          await this.$store.dispatch('player/fetch');
+          this.$notify({
+            group: 'success',
             title: this.$t('notice.success'),
-            desc: this.$t('action.give.success.zenis', {zenis: this.give.zenis}),
+            text: this.$t('action.give.success.zenis', {zenis: this.give.zenis}),
           });
           this.handleResult(res, this.target.id);
-          this.$Loading.finish();
+          this.$nuxt.$loading.finish();
         }).catch(() => {
           this.raiseError();
         });
       },
       giveObject(playerObject) {
-        this.$Loading.start();
+        this.$nuxt.$loading.start();
         api.give(this.target.id, playerObject.object.id).then(async (res) => {
-          await this.$store.dispatch('fetchPlayer');
-          this.$Notice.success({
+          await this.$store.dispatch('player/fetch');
+          this.$notify({
+            group: 'success',
             title: this.$t('notice.success'),
-            desc: this.$t('action.give.success.object', {name: playerObject.object.name}),
+            text: this.$t('action.give.success.object', {name: playerObject.object.name}),
           });
           this.handleResult(res, this.target.id);
-          this.$Loading.finish();
+          this.$nuxt.$loading.finish();
         }).catch(() => {
           this.raiseError();
         });
@@ -810,7 +805,7 @@
        * Generic actions
        */
       async runAction(what, id) {
-        this.$Loading.start();
+        this.$nuxt.$loading.start();
         let prom;
         switch (what) {
         case 'attack':
@@ -843,7 +838,7 @@
           prom = api.enterBuilding(id).then((res) => {
             this.action = what;
             this.parameters = res.data;
-            this.$Loading.finish();
+            this.$nuxt.$loading.finish();
           }).catch(() => {
             this.raiseError();
           });
@@ -852,7 +847,7 @@
           prom = api.talkToNpc(id).then((res) => {
             this.action = what;
             this.parameters = res.data;
-            this.$Loading.finish();
+            this.$nuxt.$loading.finish();
           }).catch(() => {
             this.raiseError();
           });
@@ -862,18 +857,19 @@
         }
 
         await prom.then(async (res) => {
-          await this.$store.dispatch('fetchPlayer');
+          await this.$store.dispatch('player/fetch');
           if (what !== 'spell') {
             this.selectedSpell = null;
           }
           this.action = what;
           this.handleResult(res, id);
-          this.$Loading.finish();
+          this.$nuxt.$loading.finish();
         }).catch((res) => {
           if (res.response.data.error) {
-            this.$Notice.error({
+            this.$notify({
+              group: 'error',
               title: this.$t('notice.error'),
-              desc: this.$t(res.response.data.error),
+              text: this.$t(res.response.data.error),
             });
           } else {
             this.raiseError();

@@ -14,7 +14,7 @@
   </a>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import settings from '~/config/general.config';
 
   export default {

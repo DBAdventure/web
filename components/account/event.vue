@@ -45,7 +45,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import Players from '~/components/mixins/players';
 
   export default {

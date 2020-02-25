@@ -60,48 +60,48 @@
     </table>
 
     <div>
-      <Select
+      <b-form-select
         v-if="player_race !== null"
         v-model="player_appearance.type"
         :placeholder="$t('choice.character')"
         clearable
         required
       >
-        <Option
+        <b-form-select-option
           v-for="(value, key) in appearances[player_race]"
           :key="key"
           :value="key"
         >
           {{ value.label }}
-        </Option>
-      </Select>
+        </b-form-select-option>
+      </b-form-select>
 
-      <Select
+      <b-form-select
         v-if="player_appearance.type !== null && appearances[player_race]"
         v-model="player_appearance.image"
         required
       >
-        <Option
+        <b-form-select-option
           v-for="(value, key) in appearances[player_race][player_appearance.type].value"
           :key="key"
           :value="value"
         >
           {{ key }}
-        </Option>
-      </Select>
+        </b-form-select-option>
+      </b-form-select>
 
-      <Button
-        type="primary"
+      <b-button
+        variant="primary"
         @click.prevent="handleSubmit()"
-        long
+        block
       >
         {{ $t('save') }}
-      </Button>
+      </b-button>
     </div>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import {mapGetters} from 'vuex';
   import {entries} from '~/lib/utils';
   import api from '~/services/api';
@@ -144,9 +144,7 @@
       /* eslint-enable no-restricted-syntax */
     },
     computed: {
-      ...mapGetters([
-        'currentPlayer',
-      ]),
+      ...mapGetters('player', ['currentPlayer']),
       selectedImage() {
         return `/images/avatars/players/${this.player_appearance.image}`;
       },
@@ -159,15 +157,17 @@
         };
 
         api.updateAppearance(data).then(() => {
-          this.$Notice.success({
+          this.$notify({
+            group: 'success',
             title: this.$t('notice.success'),
-            desc: this.$t('account.appearance.success'),
+            text: this.$t('account.appearance.success'),
           });
-          this.$store.dispatch('fetchPlayer');
+          this.$store.dispatch('player/fetch');
         }).catch(() => {
-          this.$Notice.error({
+          this.$notify({
+            group: 'error',
             title: this.$t('notice.error'),
-            desc: this.$t('account.appearance.failed'),
+            text: this.$t('account.appearance.failed'),
           });
         });
       },

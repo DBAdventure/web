@@ -16,7 +16,7 @@
             valign="middle"
             :background="`/media/${currentPlayer.case.file}`"
           >
-            <img :src="currentPlayer.getImagePath()">
+            <img :src="currentPlayer.getImagePath()" />
           </td>
           <td class="spacing">
             {{ $t('profile.you') }} <strong>{{ currentPlayer.name }}</strong><br>
@@ -40,85 +40,54 @@
 
     <div class="profile-data">
       {{ $t('profile.player.health', {"h": currentPlayer.health, "maxH": currentPlayer.total_max_health}) }}
-      <div class="progress">
-        <div
-          class="progress-bar progress-bar-danger"
-          role="progressbar"
-          :aria-valuenow="hPercent"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          :style="`width: ${hPercent}%`"
-        />
-      </div>
+      <b-progress
+        :value="hPercent"
+        variant="danger"
+        max="100"
+      />
 
       {{ $t('profile.player.ki', {"ki": currentPlayer.ki, "maxKi": currentPlayer.total_max_ki}) }}
-      <div class="progress">
-        <div
-          class="progress-bar progress-bar-info"
-          role="progressbar"
-          :aria-valuenow="kiPercent"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          :style="`width: ${kiPercent}%`"
-        />
-      </div>
+      <b-progress
+        variant="info"
+        :value="kiPercent"
+        max="100"
+      />
 
       {{ $t('profile.player.ap', {"ap": currentPlayer.action_points, "maxAp": currentPlayer.max_action_points}) }}
-      <div class="progress">
-        <div
-          class="progress-bar progress-bar-warning"
-          role="progressbar"
-          :aria-valuenow="apPercent"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          :style="`width: ${apPercent}%`"
-        />
-      </div>
+      <b-progress
+        variant="warning"
+        :value="apPercent"
+        max="100"
+      />
 
       {{ $t('profile.player.mp', {"mp": currentPlayer.movement_points, "maxMp": currentPlayer.max_movement_points}) }}
-      <div class="progress">
-        <div
-          class="progress-bar progress-bar-success"
-          role="progressbar"
-          :aria-valuenow="mpPercent"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          :style="`width: ${mpPercent}%`"
-        />
-      </div>
+      <b-progress
+        variant="success"
+        :value="mpPercent"
+        max="100"
+      />
 
       {{ $t('profile.player.fp', {"fp": currentPlayer.fatigue_points, "maxFp": currentPlayer.max_fatigue_points}) }}
-      <div class="progress">
-        <div
-          class="progress-bar"
-          role="progressbar"
-          :aria-valuenow="fpPercent"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          :style="`width: ${fpPercent}%`"
-        />
-      </div>
+      <b-progress
+        :value="fpPercent"
+        max="100"
+      />
 
       {{ $t('profile.player.bp', {"bp": currentPlayer.battle_points - currentPlayer.battle_points_remaining_start, "maxBp": currentPlayer.battle_points_remaining_end}) }}
-      <div class="progress">
-        <div
-          class="progress-bar"
-          role="progressbar"
-          :aria-valuenow="bpPercent"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          :style="`width: ${bpPercent}%`"
-        />
-      </div>
+      <b-progress
+        :value="bpPercent"
+        max="100"
+      />
     </div>
 
-    <Table
-      :columns="statsColumns"
-      :data="statsData"
-      stripped
-      size="small"
-      width="625"
-      border
+    <b-table
+      :fields="getStatsColumns"
+      :items="statsData"
+      width="150"
+      striped
+      small
+      dark
+      bordered
     />
 
     <div class="profile-data">
@@ -183,15 +152,15 @@
         <span
           v-html="$t('profile.stats.nbTotalKill', {value: currentPlayer.stats.nb_kill_good + currentPlayer.stats.nb_kill_bad + currentPlayer.stats.nb_kill_npc})"
         />
-        </br>
-        <span v-html="$t('profile.stats.nbDeahtCount', {value: currentPlayer.stats.death_count})" />
-        </br>
+            </br>
+            <span v-html="$t('profile.stats.nbDeahtCount', {value: currentPlayer.stats.death_count})" />
+            </br>
       </p>
     </div>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import {mapGetters} from 'vuex';
 
   export default {
@@ -202,9 +171,7 @@
       };
     },
     computed: {
-      ...mapGetters([
-        'currentPlayer',
-      ]),
+      ...mapGetters('player', ['currentPlayer']),
       hPercent() {
         return Math.floor(
           (this.currentPlayer.health * 100) / this.currentPlayer.total_max_health,
@@ -239,7 +206,7 @@
           (
             (
               this.currentPlayer.battle_points
-              - this.currentPlayer.battle_points_remaining_start
+                - this.currentPlayer.battle_points_remaining_start
             ) * 100
           ) / this.currentPlayer.battle_points_remaining_end,
         );
@@ -294,7 +261,7 @@
     },
     data() {
       return {
-        statsColumns: [
+        getStatsColumns: [
           {
             key: 'type',
             width: 100,

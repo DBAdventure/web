@@ -6,30 +6,40 @@
     <div>
       <p v-html="$t('magic.presentation.intro', {name: currentPlayer.name})" />
       <p v-html="$t('magic.presentation.text')" />
-      <Table
-        :columns="spellColumns()"
-        :data="spells"
-      />
+
+      <b-table
+        :fields="getSpellColumns()"
+        :items="spells"
+        hovered
+        dark
+        striped
+      >
+        <template v-slot:cell(description)="data">
+          <p>{{ $t(`spells.${data.item.name}.descriptionRp`) }}</p>
+          <requirements :data="data.item.requirements" />
+        </template>
+      </b-table>
     </div>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import {mapGetters} from 'vuex';
   import api from '~/services/api';
   import Requirements from '~/components/utils/requirements';
 
   export default {
     middleware: 'auth',
+    components: {
+      Requirements,
+    },
     head() {
       return {
         title: this.$t('account.magic.title'),
       };
     },
     computed: {
-      ...mapGetters([
-        'currentPlayer',
-      ]),
+      ...mapGetters('player', ['currentPlayer']),
     },
     data() {
       return {
@@ -46,34 +56,15 @@
       })).catch(() => {});
     },
     methods: {
-      spellColumns() {
+      getSpellColumns() {
         return [
           {
             title: this.$t('object.name'),
-            align: 'center',
-            width: 150,
-            render: (h, params) => h(
-              'strong',
-              this.$t(`spells.${params.row.spell.name}.name`),
-            ),
+            key: 'name',
           },
           {
             title: this.$t('object.description'),
             key: 'description',
-            render: (h, params) => h(
-              'div',
-              [
-                this.$t(`spells.${params.row.spell.name}.descriptionRp`),
-                h(
-                  Requirements,
-                  {
-                    props: {
-                      data: params.row.spell.requirements,
-                    },
-                  },
-                ),
-              ],
-            ),
           },
         ];
       },

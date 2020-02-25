@@ -30,16 +30,18 @@
     </ul>
 
     <div class="bottom">
-      <Poptip
-        confirm
+      <b-modal
         :title="$t('modal.confirm.guild.leave')"
-        @on-ok="leaveGuild()"
+        @ok="leaveGuild()"
+        id="guild-leave"
+      />
+      <a
+        href="#"
+        @click.prevent=""
+        v-b-modal.guild-leave
       >
-        <a
-          href="#"
-          @click.prevent=""
-        >{{ $t('guild.leave') }}</a>
-      </Poptip>
+        {{ $t('guild.leave') }}
+      </a>
       -
       <router-link to="/guild/list">
         {{ $t('guild.viewOthers') }}
@@ -48,7 +50,7 @@
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   import {mapGetters} from 'vuex';
   import settings from '~/config/general.config';
   import api from '~/services/api';
@@ -56,9 +58,7 @@
 
   export default {
     computed: {
-      ...mapGetters([
-        'currentPlayer',
-      ]),
+      ...mapGetters('player', ['currentPlayer']),
     },
     mixins: [
       ErrorMixin,
@@ -70,20 +70,21 @@
     },
     methods: {
       async leaveGuild() {
-        this.$Loading.start();
+        this.$nuxt.$loading.start();
         await api.leaveGuild().then((res) => {
           const messages = res.data.messages.map((e) => this.$t(e));
-          this.$Notice.success({
+          this.$notify({
+            group: 'success',
             title: this.$t('notice.success'),
-            desc: messages.join('\n'),
+            text: messages.join('\n'),
           });
-          this.$Loading.finish();
+          this.$nuxt.$loading.finish();
           this.$router.push('/guild', {force: true});
         }).catch(() => {
           this.raiseError();
         });
 
-        this.$store.dispatch('fetchPlayer');
+        this.$store.dispatch('player/fetch');
       },
     },
   };

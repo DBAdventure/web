@@ -1,4 +1,4 @@
-<script type="text/ecmascript-6">
+<script>
   import Player from '~/lib/player';
   import {isEmpty} from '~/lib/utils';
 
