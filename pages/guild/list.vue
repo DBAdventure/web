@@ -55,9 +55,13 @@
       </template>
 
       <div v-if="!currentPlayer.guild_player">
-        <Button @click.prevent="join(selectedGuild.id)">
+        <b-button
+          variant="primary"
+          size="sm"
+          @click.prevent="joinGuild(selectedGuild.id)"
+        >
           {{ $t('guild.join') }}
-        </Button>
+        </b-button>
       </div>
 
       <h2 class="little-title">

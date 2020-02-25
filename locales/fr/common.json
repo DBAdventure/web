@@ -910,6 +910,7 @@
     },
     "join": "Rejoindre cette guilde",
     "createdBy": "Crée par",
+    "cancel": "Annuler la création",
     "request": {
       "cancel": "Annuler votre demande ?",
       "deleted": "Votre précédente requête a été supprimée !",

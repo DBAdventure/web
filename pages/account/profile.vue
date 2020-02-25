@@ -16,7 +16,7 @@
             valign="middle"
             :background="`/media/${currentPlayer.case.file}`"
           >
-            <img :src="currentPlayer.getImagePath()">
+            <img :src="currentPlayer.getImagePath()" />
           </td>
           <td class="spacing">
             {{ $t('profile.you') }} <strong>{{ currentPlayer.name }}</strong><br>

@@ -4,9 +4,7 @@
       {{ $t('header.settings') }}
     </h1>
 
-    <b-form
-      :label-width="150"
-    >
+    <b-form>
       <b-form-group
         :label="$t('form.email')"
         :label-cols-lg="3"

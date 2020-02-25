@@ -9,10 +9,17 @@
     <h1 class="subtitle text-center">
       {{ $t('guild.title.members') }}
     </h1>
-    <Table
-      :columns="membersColumns()"
-      :data="guildPlayers"
-    />
+    <b-table
+      :fields="getMembersColumns()"
+      :items="getGuildPlayers"
+    >
+      <template v-slot:cell(name)="data">
+        <router-link :to="`/player/info/${data.item.id}`">
+          <img :src="data.item.image_path"/>
+          {{ data.value }}
+        </router-link>
+      </template>
+    </b-table>
   </div>
 </template>
 
@@ -45,7 +52,7 @@
     },
     data() {
       return {
-        guildPlayers: [],
+        getGuildPlayers: [],
       };
     },
     async mounted() {
@@ -62,44 +69,31 @@
             location: `${guildPlayer.player.map.name} ( ${guildPlayer.player.x} / ${guildPlayer.player.y})`,
           };
 
-          this.guildPlayers.push(result);
+          this.getGuildPlayers.push(result);
         });
       });
     },
     methods: {
-      membersColumns() {
+      getMembersColumns() {
         return [
           {
-            title: this.$t('name'),
-            render: (h, params) => h(
-              'router-link',
-              {
-                props: {
-                  to: `/player/info/${params.row.id}`,
-                },
-                domProps: {
-                  innerHTML: `<img src="${params.row.image_path}"/> ${params.row.name}`,
-                },
-              },
-            ),
+            label: this.$t('name'),
+            key: 'name',
           },
           {
-            title: this.$t('level'),
+            label: this.$t('level'),
             key: 'level',
-            width: 70,
-            align: 'center',
           },
           {
-            title: this.$t('guild.rank'),
+            label: this.$t('guild.rank'),
             key: 'rank_name',
           },
           {
-            title: this.$t('guild.stats.zeni'),
+            label: this.$t('guild.stats.zeni'),
             key: 'zeni',
-            align: 'center',
           },
           {
-            title: this.$t('guild.stats.location'),
+            label: this.$t('guild.stats.location'),
             key: 'location',
           },
         ];

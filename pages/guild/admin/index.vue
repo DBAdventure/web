@@ -53,93 +53,199 @@
     </h1>
 
     <template v-if="page === pages.requesters || page === pages.members || page === pages.general">
-      <Table
-        :columns="guildPlayersColumns()"
-        :data="guildPlayers"
-      />
+      <b-table
+        :fields="getGuildPlayersColumns()"
+        :items="guildPlayers"
+      >
+        <template v-slot:cell(name)="data">
+          <router-link :to="`/player/info/${data.item.id}`">
+            <img :src="data.item.image_path" />
+            {{ data.value }}
+          </router-link>
+        </template>
+
+        <template v-slot:cell(action-accept)="data">
+          <b-button
+            variant="primary"
+            size="sm"
+            @click="runAction('accept', data.item)"
+          >
+            {{ $t('guild.admin.player.request.accept') }}
+          </b-button>
+          <b-button
+            variant="danger"
+            size="sm"
+            @click="runAction('decline', data.item)"
+          >
+            {{ $t('guild.admin.player.request.decline') }}
+          </b-button>
+        </template>
+
+        <template v-slot:cell(action-fired)="data">
+          <b-button
+            variant="danger"
+            size="sm"
+            @click="runAction('fired', data.item)"
+          >
+            {{ $t('guild.admin.player.fired') }}
+          </b-button>
+        </template>
+
+        <template v-slot:cell(action)="data">
+          <b-button-group>
+            <b-modal
+              hide-header
+              @ok="runAction(settings.guild.ROLE_PLAYER, data.item)"
+              :id="`role-player-${data.item.id}`"
+            >
+              {{ $t('modal.confirm.title') }}
+            </b-modal>
+
+            <b-button
+              variant="info"
+              size="sm"
+              :disabled="data.item.rank.role === settings.guild.ROLE_PLAYER"
+              v-b-modal="`role-player-${data.item.id}`"
+            >
+              {{ ranks[settings.guild.ROLE_PLAYER] }}
+            </b-button>
+
+            <b-modal
+              @ok="runAction(settings.guild.ROLE_MODO, data.item)"
+              :id="`role-modo-${data.item.id}`"
+            >
+              {{ $t('modal.confirm.title') }}
+            </b-modal>
+
+            <b-button
+              variant="warning"
+              size="sm"
+              :disabled="data.item.rank.role === settings.guild.ROLE_MODO"
+              v-b-modal="`role-modo-${data.item.id}`"
+            >
+              {{ ranks[settings.guild.ROLE_MODO] }}
+            </b-button>
+
+            <b-modal
+              @ok="runAction(settings.guild.ROLE_ADMIN, data.item)"
+              :id="`role-admin-${data.item.id}`"
+            >
+              {{ $t('modal.confirm.title') }}
+            </b-modal>
+
+            <b-button
+              variant="danger"
+              size="sm"
+              :disabled="data.item.rank.role === settings.guild.ROLE_ADMIN"
+              v-b-modal="`role-admin-${data.item.id}`"
+            >
+              {{ ranks[settings.guild.ROLE_ADMIN] }}
+            </b-button>
+          </b-button-group>
+        </template>
+      </b-table>
     </template>
 
     <template v-if="page === pages.settings">
-      <Form
-        ref="settingsForm"
-        id="settings-form"
-        :rules="settingsRules"
-        :model="guild"
-        :label-width="150"
-      >
-        <FormItem
+      <b-form>
+        <b-form-group
           :label="$t('form.history')"
-          prop="history"
+          :label-cols-lg="3"
         >
-          <Input
+          <b-form-textarea
             v-model="guild.history"
-            type="textarea"
             :autosize="{minRows: 2,maxRows: 8}"
-          /></Input>
-        </FormItem>
-        <FormItem
+            :class="{ 'is-invalid': submitted && $v.guild.history.$error }"
+          />
+          <div
+            v-if="submitted && !$v.guild.history.required"
+            class="invalid-feedback"
+          >
+            {{ $t('form.required') }}
+          </div>
+        </b-form-group>
+        <b-form-group
           :label="$t('form.message')"
-          prop="message"
+          :label-cols-lg="3"
         >
-          <Input
+          <b-form-textarea
             v-model="guild.message"
-            type="textarea"
             :autosize="{minRows: 2,maxRows: 8}"
-          /></Input>
-        </FormItem>
-        <Button
-          type="primary"
+          />
+        </b-form-group>
+        <b-button
+          variant="primary"
           @click.prevent="handleSettingsSubmit()"
-          long
+          block
         >
           {{ $t('save') }}
-        </Button>
-      </Form>
+        </b-button>
+      </b-form>
     </template>
 
     <template v-if="page === pages.ranks">
-      <Form
-        ref="ranksForm"
-        id="ranks-form"
-        :rules="ranksRules"
-        :model="ranks"
-        :label-width="150"
-      >
-        <FormItem
+      <b-form>
+        <b-form-group
           :label="$t('form.ranks.player')"
-          prop="ROLE_PLAYER"
+          :label-cols-lg="3"
         >
-          <Input
+          <b-form-input
             v-model="ranks.ROLE_PLAYER"
-            type="text"
-          /></Input>
-        </FormItem>
-        <FormItem
+            :class="{ 'is-invalid': submitted && $v.guild.history.$error }"
+          />
+          <div
+            v-if="submitted && !$v.guild.history.required"
+            class="invalid-feedback"
+          >
+            {{ $t('form.required') }}
+          </div>
+          <div
+            v-if="submitted && !$v.guild.history.isUniq"
+            class="invalid-feedback"
+          >
+            {{ $t('form.mustBeUniq') }}
+          </div>
+        </b-form-group>
+        <b-form-group
           :label="$t('form.ranks.modo')"
-          prop="ROLE_MODO"
+          :label-cols-lg="3"
         >
-          <Input
+          <b-form-input
             v-model="ranks.ROLE_MODO"
-            type="text"
-          /></Input>
-        </FormItem>
-        <FormItem
+            :class="{ 'is-invalid': submitted && $v.guild.history.$error }"
+          />
+          <div
+            v-if="submitted && !$v.guild.history.required"
+            class="invalid-feedback"
+          >
+            <span v-if="!$v.player.email.required">{{ $t('form.required') }}</span>
+            <span v-if="!$v.player.email.email">{{ $t('form.invalidEmail') }}</span>
+          </div>
+        </b-form-group>
+        <b-form-group
           :label="$t('form.ranks.admin')"
-          prop="ROLE_ADMIN"
+          :label-cols-lg="3"
         >
-          <Input
+          <b-form-input
             v-model="ranks.ROLE_ADMIN"
-            type="text"
-          /></Input>
-        </FormItem>
-        <Button
-          type="primary"
+            :class="{ 'is-invalid': submitted && $v.guild.history.$error }"
+          />
+          <div
+            v-if="submitted && !$v.guild.history.required"
+            class="invalid-feedback"
+          >
+            <span v-if="!$v.player.email.required">{{ $t('form.required') }}</span>
+            <span v-if="!$v.player.email.email">{{ $t('form.invalidEmail') }}</span>
+          </div>
+        </b-form-group>
+        <b-button
+          variant="primary"
           @click.prevent="handleRanksSubmit()"
-          long
+          block
         >
           {{ $t('save') }}
-        </Button>
-      </Form>
+        </b-button>
+      </b-form>
     </template>
   </div>
 </template>
@@ -147,6 +253,11 @@
 <script>
   import _ from 'lodash';
   import {mapGetters} from 'vuex';
+  import {
+    not,
+    required,
+    sameAs,
+  } from 'vuelidate/lib/validators';
   import settings from '~/config/general.config';
   import api from '~/services/api';
   import MessagesMixin from '~/components/mixins/messages';
@@ -179,21 +290,9 @@
       ]),
     },
     data() {
-      const uniqueRankName = (rule, value, callback) => {
-        if (_.trim(value) === '') {
-          callback(new Error('field.empty'));
-        } else if ((value === this.ranks.ROLE_PLAYER && rule.field !== 'ROLE_PLAYER')
-          || (value === this.ranks.ROLE_MODO && rule.field !== 'ROLE_MODO')
-          || (value === this.ranks.ROLE_ADMIN && rule.field !== 'ROLE_ADMIN')
-        ) {
-          callback(new Error(this.$t('field.match')));
-        } else {
-          callback();
-        }
-      };
-
       return {
         settings,
+        submitted: false,
         guildPlayers: [],
         page: null,
         pages: {
@@ -212,246 +311,73 @@
           ROLE_MODO: '',
           ROLE_ADMIN: '',
         },
-        settingsRules: {
-          history: [
-            {type: 'string', required: true, fullField: this.$t('form.history')},
-          ],
-          message: [
-            {type: 'string', required: false},
-          ],
-        },
-        ranksRules: {
-          ROLE_PLAYER: [
-            {type: 'string', required: true, fullField: this.$t('form.ranks.player')},
-            {validator: uniqueRankName},
-          ],
-          ROLE_MODO: [
-            {type: 'string', required: true, fullField: this.$t('form.ranks.modo')},
-            {validator: uniqueRankName},
-          ],
-          ROLE_ADMIN: [
-            {type: 'string', required: true, fullField: this.$t('form.ranks.admin')},
-            {validator: uniqueRankName},
-          ],
-        },
       };
     },
+    validations: {
+      guild: {
+        history: {required},
+      },
+      ranks: {
+        ROLE_PLAYER: {
+          required,
+          isUniq: not(sameAs('ROLE_MODO')) && not(sameAs('ROLE_ADMIN')),
+        },
+        ROLE_MODO: {
+          required,
+          isUniq: not(sameAs('ROLE_PLAYER')) && not(sameAs('ROLE_ADMIN')),
+        },
+        ROLE_ADMIN: {
+          required,
+          isUniq: not(sameAs('ROLE_PLAYER')) && not(sameAs('ROLE_MODO')),
+        },
+      },
+    },
     methods: {
-      guildPlayersColumns() {
+      getGuildPlayersColumns() {
         const columns = [
           {
-            title: this.$t('name'),
-            render: (h, params) => h(
-              'router-link',
-              {
-                props: {
-                  to: `/player/info/${params.row.id}`,
-                },
-                domProps: {
-                  innerHTML: `<img src="${params.row.image_path}"/> ${params.row.name}`,
-                },
-              },
-            ),
+            label: this.$t('name'),
+            key: 'name',
           },
           {
-            title: this.$t('level'),
+            label: this.$t('level'),
             key: 'level',
-            width: 70,
-            align: 'center',
           },
         ];
 
         if (this.page === this.pages.requesters) {
           columns.push({
-            title: this.$t('guild.action'),
-            align: 'center',
-            render: (h, params) => h(
-              'div',
-              [
-                h(
-                  'Button',
-                  {
-                    props: {
-                      type: 'primary',
-                      size: 'small',
-                    },
-                    on: {
-                      click: () => {
-                        this.runAction('accept', params.row);
-                      },
-                    },
-                  },
-                  this.$t('guild.admin.player.request.accept'),
-                ),
-                h(
-                  'Button',
-                  {
-                    props: {
-                      type: 'error',
-                      size: 'small',
-                    },
-                    on: {
-                      click: () => {
-                        this.runAction('decline', params.row);
-                      },
-                    },
-                  },
-                  this.$t('guild.admin.player.request.decline'),
-                ),
-              ],
-            ),
+            label: this.$t('guild.action'),
+            key: 'action-accept',
           });
         }
 
         if (this.page === this.pages.members || this.page === this.pages.general) {
           columns.push({
-            title: this.$t('guild.rank'),
+            label: this.$t('guild.rank'),
             key: 'rank_name',
           });
           columns.push({
-            title: this.$t('guild.stats.zeni'),
+            label: this.$t('guild.stats.zeni'),
             key: 'zeni',
-            align: 'center',
           });
           columns.push({
-            title: this.$t('guild.stats.location'),
+            label: this.$t('guild.stats.location'),
             key: 'location',
           });
         }
+
         if (this.page === this.pages.members) {
           columns.push({
-            title: this.$t('guild.action'),
-            align: 'center',
-            render: (h, params) => h(
-              'div',
-              [
-                h(
-                  'Button',
-                  {
-                    props: {
-                      type: 'error',
-                      size: 'small',
-                    },
-                    on: {
-                      click: () => {
-                        this.runAction('fired', params.row);
-                      },
-                    },
-                  },
-                  this.$t('guild.admin.player.fired'),
-                ),
-              ],
-            ),
+            label: this.$t('guild.action'),
+            key: 'action-fired',
           });
         }
 
         if (this.page === this.pages.general) {
           columns.push({
-            title: this.$t('guild.action'),
-            align: 'center',
-            render: (h, params) => h(
-              'div',
-              [
-                h(
-                  'Poptip',
-                  {
-                    props: {
-                      confirm: true,
-                      title: this.$t('modal.confirm.title'),
-                      placement: 'top',
-                      width: 200,
-                    },
-                    on: {
-                      'on-ok': () => {
-                        this.runAction(
-                          this.settings.guild.ROLE_PLAYER,
-                          params.row,
-                        );
-                      },
-                    },
-                  },
-                  [
-                    h(
-                      'Button',
-                      {
-                        props: {
-                          type: 'info',
-                          size: 'small',
-                          disabled: params.row.rank.role
-                            === this.settings.guild.ROLE_PLAYER,
-                        },
-                      },
-                      this.ranks[this.settings.guild.ROLE_PLAYER],
-                    ),
-                  ],
-                ),
-                h(
-                  'Poptip',
-                  {
-                    props: {
-                      confirm: true,
-                      title: this.$t('modal.confirm.title'),
-                      placement: 'top',
-                      width: 200,
-                    },
-                    on: {
-                      'on-ok': () => {
-                        this.runAction(
-                          this.settings.guild.ROLE_MODO,
-                          params.row,
-                        );
-                      },
-                    },
-                  },
-                  [
-                    h(
-                      'Button',
-                      {
-                        props: {
-                          type: 'warning',
-                          size: 'small',
-                          disabled: params.row.rank.role
-                            === this.settings.guild.ROLE_MODO,
-                        },
-                      },
-                      this.ranks[this.settings.guild.ROLE_MODO],
-                    ),
-                  ],
-                ),
-                h(
-                  'Poptip',
-                  {
-                    props: {
-                      confirm: true,
-                      title: this.$t('modal.confirm.title'),
-                      placement: 'top',
-                      width: 200,
-                    },
-                    on: {
-                      'on-ok': () => {
-                        this.runAction(
-                          this.settings.guild.ROLE_ADMIN,
-                          params.row,
-                        );
-                      },
-                    },
-                  },
-                  [
-                    h(
-                      'Button',
-                      {
-                        props: {
-                          type: 'error',
-                          size: 'small',
-                          disabled: params.row.rank.role === this.settings.guild.ROLE_ADMIN,
-                        },
-                      },
-                      this.ranks[this.settings.guild.ROLE_ADMIN],
-                    ),
-                  ],
-                ),
-              ],
-            ),
+            label: this.$t('guild.action'),
+            key: 'action',
           });
         }
 
@@ -618,65 +544,71 @@
       },
 
       handleSettingsSubmit() {
-        this.$refs.settingsForm.validate((valid) => {
-          if (valid) {
-            this.$nuxt.$loading.start();
-            api.adminSettings({guild_settings: this.guild}).then(() => {
-              this.$notify({
-                group: 'success',
-                title: this.$t('notice.success'),
-                text: this.$t('guild.admin.saved'),
-              });
-              this.$store.dispatch('fetchPlayer');
-            }).catch((err) => {
-              if (err.response.data.error) {
-                this.$notify({
-                  group: 'error',
-                  title: this.$t('notice.error'),
-                  text: err.response.data.error,
-                });
-              } else {
-                this.$notify({
-                  group: 'error',
-                  title: this.$t('notice.error'),
-                  text: this.$t('notice.generic'),
-                });
-              }
+        this.submitted = true;
+        this.$v.guild.$touch();
+        if (this.$v.guild.$invalid) {
+          return;
+        }
+
+        this.$nuxt.$loading.start();
+        api.adminSettings({guild_settings: this.guild}).then(() => {
+          this.$notify({
+            group: 'success',
+            title: this.$t('notice.success'),
+            text: this.$t('guild.admin.saved'),
+          });
+          this.$store.dispatch('fetchPlayer');
+        }).catch((err) => {
+          if (err.response.data.error) {
+            this.$notify({
+              group: 'error',
+              title: this.$t('notice.error'),
+              text: err.response.data.error,
             });
-            this.$nuxt.$loading.finish();
+          } else {
+            this.$notify({
+              group: 'error',
+              title: this.$t('notice.error'),
+              text: this.$t('notice.generic'),
+            });
           }
         });
+        this.$nuxt.$loading.finish();
+        this.submitted = false;
       },
 
       handleRanksSubmit() {
-        this.$refs.ranksForm.validate((valid) => {
-          if (valid) {
-            this.$nuxt.$loading.start();
-            api.adminRanks({guild_ranks: this.ranks}).then(() => {
-              this.$notify({
-                group: 'success',
-                title: this.$t('notice.success'),
-                text: this.$t('guild.admin.saved'),
-              });
-              this.$store.dispatch('fetchPlayer');
-            }).catch((err) => {
-              if (err.response.data.error) {
-                this.$notify({
-                  group: 'error',
-                  title: this.$t('notice.error'),
-                  text: err.response.data.error,
-                });
-              } else {
-                this.$notify({
-                  group: 'error',
-                  title: this.$t('notice.error'),
-                  text: this.$t('notice.generic'),
-                });
-              }
+        this.submitted = true;
+        this.$v.ranks.$touch();
+        if (this.$v.ranks.$invalid) {
+          return;
+        }
+
+        this.$nuxt.$loading.start();
+        api.adminRanks({guild_ranks: this.ranks}).then(() => {
+          this.$notify({
+            group: 'success',
+            title: this.$t('notice.success'),
+            text: this.$t('guild.admin.saved'),
+          });
+          this.$store.dispatch('fetchPlayer');
+        }).catch((err) => {
+          if (err.response.data.error) {
+            this.$notify({
+              group: 'error',
+              title: this.$t('notice.error'),
+              text: err.response.data.error,
             });
-            this.$nuxt.$loading.finish();
+          } else {
+            this.$notify({
+              group: 'error',
+              title: this.$t('notice.error'),
+              text: this.$t('notice.generic'),
+            });
           }
         });
+        this.$nuxt.$loading.finish();
+        this.submitted = false;
       },
     },
   };

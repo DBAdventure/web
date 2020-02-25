@@ -40,7 +40,7 @@
         <p>{{ $t('training.increase.require') }}</p>
         <template v-if="currentPlayer.skill_points > 0 && currentPlayer.action_points >= 5">
           <b-button
-            variant="parimary"
+            variant="primary"
             size="sm"
             @click="train(data.item.name)"
           >

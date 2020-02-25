@@ -6,13 +6,13 @@
         v-if="me.forbidden_teleport !== move"
       >
         <a
-          :key="move"
+          :key="`link-${move}`"
           href="#"
           @click.prevent="runAction('teleport', move)"
         >
           {{ $t('game.teleport.link', {where: $t(`game.teleport.where.${move}`)}) }}
         </a>
-        <br :key="move" />
+        <br :key="`break-${move}`" />
       </template>
     </template>
 

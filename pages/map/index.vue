@@ -144,10 +144,18 @@
           </p>
 
           <template v-if="action === 'analysis'">
-            <Table
-              :columns="analysisColumns()"
-              :data="analysisData()"
-            />
+            <b-table
+              :fields="getAnalysisColumns()"
+              :items="getAnalysisData()"
+              dark
+              hovered
+              striped
+            >
+              <template v-slot:cell(name)="data">
+                <strong>{{ $t(`action.analysis.${data.value}`) }}</strong>
+              </template>
+            </b-table>
+
             <action-link
               :player="target"
               :me="currentPlayer"
@@ -177,10 +185,23 @@
               </FormItem>
             </Form>
 
-            <Table
-              :columns="giveColumns()"
-              :data="giveData()"
-            />
+            <b-table
+              :fields="getGiveColumns()"
+              :items="getGiveData()"
+            >
+              <template v-slot:cell(index)="data">
+                <img :src="`/images/objects/${data.item.object.image}`" />
+              </template>
+              <template v-slot:cell(give)="data">
+                <b-button
+                  size="sm"
+                  variant="primary"
+                  @click="giveObject(data.item)"
+                >
+                  {{ $t('action.give.textObject') }}
+                </b-button>
+              </template>
+            </b-table>
           </template>
 
           <template v-if="action === 'spell'">
@@ -451,11 +472,11 @@
 
               <span
                 v-html="$t('map.player.info', {
-                  sideClass: enemy.side.name,
-                  raceClass: enemy.race.name,
-                  side: $t(enemy.side.name),
-                  race: $t(enemy.race.name),
-                  class: $t(enemy.class)})"
+                        sideClass: enemy.side.name,
+                        raceClass: enemy.race.name,
+                        side: $t(enemy.side.name),
+                        race: $t(enemy.race.name),
+                        class: $t(enemy.class)})"
               />
 
               <template v-if="distance == 0">
@@ -599,8 +620,8 @@
       isAttackAction() {
         return (
           this.action === 'attack'
-          || this.action === 'attack-betray'
-          || this.action === 'attack-revenge'
+            || this.action === 'attack-betray'
+            || this.action === 'attack-revenge'
         )
           && this.currentPlayer.action_points >= this.settings.player.ATTACK_ACTION
           && !this.parameters.isDead;
@@ -703,24 +724,19 @@
       /**
        * Analysis action
        */
-      analysisColumns() {
+      getAnalysisColumns() {
         return [
           {
-            title: this.$t('skill'),
+            label: this.$t('skill'),
             key: 'name',
-            render: (h, params) => h(
-              'strong',
-              this.$t(`action.analysis.${params.row.name}`),
-            ),
           },
           {
-            title: this.$t('value'),
+            label: this.$t('value'),
             key: 'value',
-            align: 'center',
           },
         ];
       },
-      analysisData() {
+      getAnalysisData() {
         const result = [];
         /* eslint-disable no-restricted-syntax */
         for (const [key, value] of entries(this.parameters.competences)) {
@@ -736,56 +752,24 @@
       /**
        * Give action
        */
-      giveColumns() {
+      getGiveColumns() {
         return [
+          'index',
           {
-            width: 100,
-            render: (h, params) => h(
-              'div',
-              {
-                domProps: {
-                  innerHTML: `<img src="/images/objects/${params.row.object.image}"/>`,
-                },
-              },
-            ),
+            label: this.$t('object.name'),
+            key: 'name',
           },
           {
-            title: this.$t('object.name'),
-            align: 'center',
-            render: (h, params) => h(
-              'strong',
-              params.row.object.name,
-            ),
-          },
-          {
-            title: this.$t('object.quantity'),
+            label: this.$t('object.quantity'),
             key: 'quantity',
-            align: 'center',
           },
           {
-            title: this.$t('object.give'),
+            label: this.$t('object.give'),
             key: 'give',
-            width: 70,
-            align: 'center',
-            render: (h, params) => h(
-              'b-button',
-              {
-                props: {
-                  type: 'primary',
-                  size: 'small',
-                },
-                on: {
-                  click: () => {
-                    this.giveObject(params.row);
-                  },
-                },
-              },
-              this.$t('action.give.textObject'),
-            ),
           },
         ];
       },
-      giveData() {
+      getGiveData() {
         return this.parameters.playerObjects;
       },
       giveZenis() {
