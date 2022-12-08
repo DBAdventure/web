@@ -19,7 +19,7 @@
         "bootstrap-vue": "^2.4.0",
         "css-loader": "^3.4.2",
         "es6-promise": "^4.2.8",
-        "express": "^4.17.1",
+        "express": "^4.17.3",
         "express-session": "^1.17.0",
         "glob": "^7.1.6",
         "helmet": "^3.21.2",
